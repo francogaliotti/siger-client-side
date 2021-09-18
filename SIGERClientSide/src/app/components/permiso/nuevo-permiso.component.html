@@ -1,0 +1,22 @@
+<div class="container altaPermiso">
+    <form [formGroup]="permisoForm" (ngSubmit)="onCreate()">
+        
+    <div class="form-group">
+        <input formControlName="codigoPermiso" class="form-control login-inputs" maxlength="10"
+         [class.validfield]="this.permisoForm.get('codigoPermiso')?.valid"
+         [class.invalidfield]="this.permisoForm.get('codigoPermiso')?.invalid && this.permisoForm.get('codigoPermiso')?.touched" type="text" placeholder="Ingrese Codigo del Permiso"/>
+    </div>
+    <div class="form-group">
+        <input formControlName="nombrePermiso" class="form-control login-inputs"
+        [class.validfield]="this.permisoForm.get('nombrePermiso')?.valid"
+        [class.invalidfield]="this.permisoForm.get('nombrePermiso')?.invalid && this.permisoForm.get('nombrePermiso')?.touched" type="text" placeholder="Ingrese Nombre del Permiso"/>
+    </div>
+    <div class="form-group">
+        <div class="row justify-content-center mt-3">
+            <div class="col-12">
+                <button type="submit" class="btn btn-outline-success btn block" ><b>Crear</b></button>
+            </div>
+        </div>
+    </div>
+    </form>
+    </div>

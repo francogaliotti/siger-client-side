@@ -1,0 +1,35 @@
+<header>
+  <div class="row justify-content-center mt-3">
+    Estado de Boletas Existentes
+  </div>
+</header>
+<div class="searcher justify-content-center mt-3">
+  <form >
+    <input type="text">
+    <input type="submit" value="Buscar">
+  </form>
+</div>
+<div class="container mt-3">
+  <table class="table">
+    <thead> 
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Codigo del Estado Boleta</th>
+        <th scope="col">Nombre del Estado Boleta</th>
+        <th scope="col">Detalle</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Borrar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let estadosBoleta of estadoBoleta">
+        <td>{{estadosBoleta.id}}</td>
+        <td>{{estadosBoleta.codEstadoBoleta}}</td>
+        <td>{{estadosBoleta.nombreEstadoBoleta}}</td>
+        <td><button class="btn btn-outline-primary" routerLink="/estadoBoleta/detalle/{{estadosBoleta.id}}"><i class="fas fa-eye"></i> Detalle</button></td>
+        <td><button class="btn btn-outline-warning" routerLink="/estadoBoleta/editar/{{estadosBoleta.id}}"><i class="fas fa-edit"></i> Editar</button></td>
+        <td><button class="btn btn-outline-danger" (click)="borrarEstadoBoleta(estadosBoleta.id)"><i class="fas fa-trash-alt"></i> Eliminar</button></td>
+      </tr>
+    </tbody>
+</table>
+</div>

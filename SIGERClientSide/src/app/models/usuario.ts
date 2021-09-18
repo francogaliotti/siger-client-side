@@ -1,10 +1,26 @@
-export class Usuario {
+import { BaseEntity } from "./base-entity";
+import { Rol } from "./rol";
+
+export class Usuario extends BaseEntity{
+    
     username: string;
+    
     password: string;
+    
     correoInstitucional: string;
-    esPrimerInicio: boolean;
-    recordarme: boolean;
-    requiereAutorizacion: boolean;
+
     rolNecesario: string;
+    
+    esPrimerInicio: boolean;
+    
     enabled: boolean;
+
+    requiereAutorizacion: boolean;
+
+    recordarme: boolean;
+
+    //Relation
+
+    roles: Array<Rol>;
+
 }

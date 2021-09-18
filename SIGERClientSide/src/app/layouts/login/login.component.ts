@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Usuario } from 'src/app/models/usuario';
-import { AppService } from 'src/app/services/app.service';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -14,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private _loginForm: FormBuilder, private _loginService: LoginService, private _AppService: AppService, private router: Router) { 
+  constructor(private _loginForm: FormBuilder, private _loginService: LoginService) { 
     this.ChangeBody();
 
     //Login form
@@ -44,11 +42,15 @@ export class LoginComponent implements OnInit {
       esPrimerInicio: false,
       requiereAutorizacion: false,
       rolNecesario: "",
-      enabled: false
+      enabled: false,
+      roles: Array()
     }
 
-    this._AppService.authenticate(user, () => {
-      this.router.navigateByUrl("/")
+    this._loginService.SignIn().subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.log(error);
     });
+
   }
 }
