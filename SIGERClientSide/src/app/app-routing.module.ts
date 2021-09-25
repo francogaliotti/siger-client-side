@@ -20,10 +20,12 @@ import { DetalleRolComponent } from './components/rol/detalle-rol.component';
 import { EditarRolComponent } from './components/rol/editar-rol.component';
 import { ListaRolComponent } from './components/rol/lista-rol.component';
 import { NuevoRolComponent } from './components/rol/nuevo-rol.component';
+import { HomeComponent } from './layouts/home/home.component';
 import { LoginComponent } from './layouts/login/login.component';
 import { RecoveryPasswordComponent } from './layouts/recovery-password/recovery-password.component';
 
 const routes: Routes = [
+  {path: 'home', component: HomeComponent},
   {path: 'recoveryPassword', component: RecoveryPasswordComponent},
   {path: 'estadoBoleta', component: ListaEstadoBoletaComponent},
   {path: 'estadoBoleta/detalle/:id', component: DetalleEstadoBoletaComponent},
