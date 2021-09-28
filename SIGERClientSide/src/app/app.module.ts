@@ -16,9 +16,6 @@ import { DetallePermisoComponent } from './components/permiso/detalle-permiso.co
 import { NuevoPermisoComponent } from './components/permiso/nuevo-permiso.component';
 import { EditarPermisoComponent } from './components/permiso/editar-permiso.component';
 import { ListaEstadoLicenciaComponent } from './components/estadoLicencia/lista-estado-licencia.component';
-import { DetalleEstadoLicenciaComponent } from './components/estadoLicencia/detalle-estado-licencia.component';
-import { NuevoEstadoLicenciaComponent } from './components/estadoLicencia/nuevo-estado-licencia.component';
-import { EditarEstadoLicenciaComponent } from './components/estadoLicencia/editar-estado-licencia.component';
 import { ListaRolComponent } from './components/rol/lista-rol.component';
 import { DetalleRolComponent } from './components/rol/detalle-rol.component';
 import { EditarRolComponent } from './components/rol/editar-rol.component';
@@ -42,9 +39,6 @@ import { NuevoProvinciaComponent } from './components/provincia/nuevo-provincia.
     NuevoPermisoComponent,
     EditarPermisoComponent,
     ListaEstadoLicenciaComponent,
-    DetalleEstadoLicenciaComponent,
-    NuevoEstadoLicenciaComponent,
-    EditarEstadoLicenciaComponent,
     ListaRolComponent,
     DetalleRolComponent,
     EditarRolComponent,

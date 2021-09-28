@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { EstadoLicencia } from 'src/app/models/estado-licencia';
 import { EstadoLicenciaService } from 'src/app/services/estado-licencia.service';
+import {Modal} from 'bootstrap';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-lista-estado-licencia',
@@ -9,9 +13,26 @@ import { EstadoLicenciaService } from 'src/app/services/estado-licencia.service'
 })
 export class ListaEstadoLicenciaComponent implements OnInit {
 
-  estadoLicencia: EstadoLicencia[] = []
+  estadoLicencia: EstadoLicencia[] = [];
+  estadoLicenciaForm: FormGroup;
+  editEstadoLicenciaForm: FormGroup;
+  testModal: Modal | undefined;
+  newEstadoLicencia: EstadoLicencia = new EstadoLicencia('','');
+  
 
-  constructor(private _estadoLicenciaService: EstadoLicenciaService) { }
+  constructor(private _estadoLicencia: FormBuilder,private _estadoLicenciaService: EstadoLicenciaService,
+    private router: Router, private _editEstadoLicencia: FormBuilder) { 
+      this.estadoLicenciaForm = this._estadoLicencia.group({
+        codEstadoLicencia: ['', [Validators.required, Validators.maxLength(10)]],
+        nombreEstadoLicencia: ['', Validators.required]
+      });
+      this.editEstadoLicenciaForm = this._editEstadoLicencia.group({
+        id: ['',Validators.required],
+        codEstadoLicencia: ['', [Validators.required, Validators.maxLength(10)] ],
+        nombreEstadoLicencia: ['', Validators.required]
+      });
+    }
+
 
   ngOnInit(): void {
     this.cargarEstadoLicencia();
@@ -38,6 +59,64 @@ export class ListaEstadoLicenciaComponent implements OnInit {
         alert(err.error.mensaje);
       }
     );
+  }
+  onCreate():void{
+    const estadoLicencia = new EstadoLicencia(this.estadoLicenciaForm.get('codEstadoLicencia')?.value,
+    this.estadoLicenciaForm.get('nombreEstadoLicencia')?.value);
+    this._estadoLicenciaService.save(estadoLicencia).subscribe(
+      data => {
+        alert('Estado de Licencia creado Satisfactoriamente');
+        this.cargarEstadoLicencia();
+        this.router.navigate(['/estadoLicencia']);
+      },
+      err => {
+        alert(err.console.mensaje);
+        this.router.navigate(['/estadoLicencia']);
+      }
+    );
+  }
+ 
+  
+  open(id?: number): void{
+    this.testModal = new bootstrap.Modal(document.getElementById('exampleModal'),{
+      keyboard: false
+    })
+    this.cargarEstadoLicenciaForUpdate(id);
+    this.testModal?.show();
+  }
+ 
+
+  cargarEstadoLicenciaForUpdate(id?: number): void {
+    this._estadoLicenciaService.detail(id).subscribe(
+      data => {
+        this.newEstadoLicencia = data;
+        console.log(this.newEstadoLicencia);
+        this.editEstadoLicenciaForm = this._editEstadoLicencia.group({
+          id: [this.newEstadoLicencia.id,Validators.required],
+          codEstadoLicencia: [this.newEstadoLicencia.codEstadoLicencia, [Validators.required, Validators.maxLength(10)] ],
+          nombreEstadoLicencia: [this.newEstadoLicencia.nombreEstadoLicencia, Validators.required]
+        });
+      },
+      err => {
+        alert(err);
+      }
+    );
+  }
+
+  onUpdate(id?: number): void {
+    this.newEstadoLicencia.codEstadoLicencia = this.editEstadoLicenciaForm.get('codEstadoLicencia')?.value;
+    this.newEstadoLicencia.nombreEstadoLicencia = this.editEstadoLicenciaForm.get('nombreEstadoLicencia')?.value;
+    this._estadoLicenciaService.update(id, this.newEstadoLicencia).subscribe(
+      data => {
+        alert('Estado de Licencia actualizado Satisfactoriamente');
+        this.cargarEstadoLicencia();
+        this.testModal?.hide();
+      },
+      err => {
+        alert(err);
+      }
+    );
+
   }
 
 }

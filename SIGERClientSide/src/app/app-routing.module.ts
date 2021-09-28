@@ -4,10 +4,7 @@ import { DetalleEstadoBoletaComponent } from './components/estadoBoleta/detalle-
 import { EditarEstadoBoletaComponent } from './components/estadoBoleta/editar-estado-boleta.component';
 import { ListaEstadoBoletaComponent } from './components/estadoBoleta/lista-estado-boleta.component';
 import { NuevoEstadoBoletaComponent } from './components/estadoBoleta/nuevo-estado-boleta.component';
-import { DetalleEstadoLicenciaComponent } from './components/estadoLicencia/detalle-estado-licencia.component';
-import { EditarEstadoLicenciaComponent } from './components/estadoLicencia/editar-estado-licencia.component';
 import { ListaEstadoLicenciaComponent } from './components/estadoLicencia/lista-estado-licencia.component';
-import { NuevoEstadoLicenciaComponent } from './components/estadoLicencia/nuevo-estado-licencia.component';
 import { DetallePermisoComponent } from './components/permiso/detalle-permiso.component';
 import { EditarPermisoComponent } from './components/permiso/editar-permiso.component';
 import { ListaPermisoComponent } from './components/permiso/lista-permiso.component';
@@ -30,9 +27,6 @@ const routes: Routes = [
   {path: 'estadoBoleta/nuevo', component: NuevoEstadoBoletaComponent},
   {path: 'estadoBoleta/editar/:id', component: EditarEstadoBoletaComponent},
   {path: 'estadoLicencia', component: ListaEstadoLicenciaComponent},
-  {path: 'estadoLicencia/detalle/:id', component: DetalleEstadoLicenciaComponent},
-  {path: 'estadoLicencia/nuevo', component: NuevoEstadoLicenciaComponent},
-  {path: 'estadoLicencia/editar/:id', component: EditarEstadoLicenciaComponent},
   {path: 'permiso', component: ListaPermisoComponent},
   {path: 'permiso/detalle/:id', component:DetallePermisoComponent},
   {path: 'permiso/nuevo', component: NuevoPermisoComponent},

@@ -15,3 +15,86 @@
     height: 34px;
     width: 475px;
 }
+
+
+.altaEstadoLicencia{
+    background: #EBFFEC;
+    margin-top: 20px;
+    width: 600px;
+    height: 240px;
+    top: 2px; left: 380px;
+    border: 2px solid #333333;
+}
+.header{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    margin-top: 229px;
+    text-align: center;
+}
+.codigo{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    text-align: center;
+}
+
+.codEstadoLicencia-inputs{
+   
+    
+    width: 300px; 
+    height: 25px;
+    
+    top: 268px; left: 576px;
+}
+
+.nombreEstadoLicencia-inputs{
+
+    
+    width: 300px; 
+    height: 25px;
+    
+    top: 300px; left: 576px;
+}
+.btn-outline-success{
+    width: 140px; 
+    height: 30px;
+    border-radius: 10px;
+    background-color:  #169BD5;
+    color: white;
+    text-align: center;
+    float: right;
+    
+}
+.validfield{
+    border-style: solid 4px;
+    border-color: green;
+}
+
+.invalidfield{
+    border-style: solid 4px;
+    border-color: red;
+}
+.titulo{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    margin-top: 10px;
+    text-align: center;
+}
+.small{
+    margin-top: 1px;
+}
+
+.modal-content{
+    background: #EBFFEC;
+    margin-top: 20px;
+    width: 600px;
+    height: 250px;
+    top: 2px;
+    border: 2px solid #333333;
+}
+.modal-title{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    margin-left: 150px;
+}
+
+
