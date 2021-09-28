@@ -15,7 +15,6 @@ import { NuevoEstadoBoletaComponent } from './components/estadoBoleta/nuevo-esta
 import { EditarEstadoBoletaComponent } from './components/estadoBoleta/editar-estado-boleta.component';
 import { ListaPermisoComponent } from './components/permiso/lista-permiso.component';
 import { DetallePermisoComponent } from './components/permiso/detalle-permiso.component';
-import { NuevoPermisoComponent } from './components/permiso/nuevo-permiso.component';
 import { EditarPermisoComponent } from './components/permiso/editar-permiso.component';
 import { ListaEstadoLicenciaComponent } from './components/estadoLicencia/lista-estado-licencia.component';
 import { DetalleEstadoLicenciaComponent } from './components/estadoLicencia/detalle-estado-licencia.component';
@@ -33,6 +32,7 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { VerticalnavbarComponent } from './layouts/verticalnavbar/verticalnavbar.component';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { HomeComponent } from './layouts/home/home.component';
+import { ErrorsComponent } from './layouts/errors/errors.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,6 @@ import { HomeComponent } from './layouts/home/home.component';
     EditarEstadoBoletaComponent,
     ListaPermisoComponent,
     DetallePermisoComponent,
-    NuevoPermisoComponent,
     EditarPermisoComponent,
     ListaEstadoLicenciaComponent,
     DetalleEstadoLicenciaComponent,
@@ -63,6 +62,7 @@ import { HomeComponent } from './layouts/home/home.component';
     NavbarComponent,
     VerticalnavbarComponent,
     HomeComponent,
+    ErrorsComponent,
   ],
   imports: [
     BrowserModule,

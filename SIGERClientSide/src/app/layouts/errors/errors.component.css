@@ -1,0 +1,11 @@
+.error{
+    background: linear-gradient(to right,#fc4a1a, #f7b733);
+    width: 500px;
+    height: 200px;
+    margin-top: 200px;
+    border: 2px solid black;
+}
+
+h1 {
+    margin-top: 25px
+}
