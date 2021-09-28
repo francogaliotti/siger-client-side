@@ -12,7 +12,6 @@ import { NuevoEstadoLicenciaComponent } from './components/estadoLicencia/nuevo-
 import { DetallePermisoComponent } from './components/permiso/detalle-permiso.component';
 import { EditarPermisoComponent } from './components/permiso/editar-permiso.component';
 import { ListaPermisoComponent } from './components/permiso/lista-permiso.component';
-import { NuevoPermisoComponent } from './components/permiso/nuevo-permiso.component';
 import { DetalleProvinciaComponent } from './components/provincia/detalle-provincia.component';
 import { EditarProvinciaComponent } from './components/provincia/editar-provincia.component';
 import { ListaProvinciaComponent } from './components/provincia/lista-provincia.component';
@@ -21,10 +20,14 @@ import { DetalleRolComponent } from './components/rol/detalle-rol.component';
 import { EditarRolComponent } from './components/rol/editar-rol.component';
 import { ListaRolComponent } from './components/rol/lista-rol.component';
 import { NuevoRolComponent } from './components/rol/nuevo-rol.component';
+import { ErrorsComponent } from './layouts/errors/errors.component';
+import { HomeComponent } from './layouts/home/home.component';
 import { LoginComponent } from './layouts/login/login.component';
 import { RecoveryPasswordComponent } from './layouts/recovery-password/recovery-password.component';
 
 const routes: Routes = [
+  {path: 'home', component: HomeComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'recoveryPassword', component: RecoveryPasswordComponent},
   //{path: 'estadoBoleta', component: ListaEstadoBoletaComponent},
   {path: 'estadoBoleta', component: ViewMainEstadoBoletaComponent},
@@ -35,9 +38,8 @@ const routes: Routes = [
   {path: 'estadoLicencia/detalle/:id', component: DetalleEstadoLicenciaComponent},
   {path: 'estadoLicencia/nuevo', component: NuevoEstadoLicenciaComponent},
   {path: 'estadoLicencia/editar/:id', component: EditarEstadoLicenciaComponent},
-  {path: 'permiso', component: ListaPermisoComponent},
+  {path: 'permisos', component: ListaPermisoComponent},
   {path: 'permiso/detalle/:id', component:DetallePermisoComponent},
-  {path: 'permiso/nuevo', component: NuevoPermisoComponent},
   {path: 'permiso/editar/:id', component: EditarPermisoComponent},
   {path: 'rol', component: ListaRolComponent},
   {path: 'rol/detalle/:id', component:DetalleRolComponent},
@@ -47,7 +49,7 @@ const routes: Routes = [
   {path: 'provincia/detalle/:id', component:DetalleProvinciaComponent},
   {path: 'provincia/nuevo', component: NuevoProvinciaComponent},
   {path: 'provincia/editar/:id', component: EditarProvinciaComponent},
-  {path: '**', component: LoginComponent}
+  {path: '**', component: ErrorsComponent}
   
 ];
 

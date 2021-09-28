@@ -2,18 +2,15 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './layouts/login/login.component';
 import { RecoveryPasswordComponent } from './layouts/recovery-password/recovery-password.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ListaEstadoBoletaComponent } from './components/estadoBoleta/lista-estado-boleta.component';
-import { DetalleEstadoBoletaComponent } from './components/estadoBoleta/detalle-estado-boleta.component';
-import { NuevoEstadoBoletaComponent } from './components/estadoBoleta/nuevo-estado-boleta.component';
-import { EditarEstadoBoletaComponent } from './components/estadoBoleta/editar-estado-boleta.component';
 import { ListaPermisoComponent } from './components/permiso/lista-permiso.component';
 import { DetallePermisoComponent } from './components/permiso/detalle-permiso.component';
-import { NuevoPermisoComponent } from './components/permiso/nuevo-permiso.component';
 import { EditarPermisoComponent } from './components/permiso/editar-permiso.component';
 import { ListaEstadoLicenciaComponent } from './components/estadoLicencia/lista-estado-licencia.component';
 import { DetalleEstadoLicenciaComponent } from './components/estadoLicencia/detalle-estado-licencia.component';
@@ -29,19 +26,19 @@ import { EditarProvinciaComponent } from './components/provincia/editar-provinci
 import { NuevoProvinciaComponent } from './components/provincia/nuevo-provincia.component';
 import { ViewMainEstadoBoletaComponent } from './components/estadoBoleta/view-main-estado-boleta.component';
 
+import { FooterComponent } from './layouts/footer/footer.component';
+import { VerticalnavbarComponent } from './layouts/verticalnavbar/verticalnavbar.component';
+import { NavbarComponent } from './layouts/navbar/navbar.component';
+import { HomeComponent } from './layouts/home/home.component';
+import { ErrorsComponent } from './layouts/errors/errors.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RecoveryPasswordComponent,
-    ListaEstadoBoletaComponent,
-    DetalleEstadoBoletaComponent,
-    NuevoEstadoBoletaComponent,
-    EditarEstadoBoletaComponent,
     ListaPermisoComponent,
     DetallePermisoComponent,
-    NuevoPermisoComponent,
     EditarPermisoComponent,
     ListaEstadoLicenciaComponent,
     DetalleEstadoLicenciaComponent,
@@ -55,13 +52,19 @@ import { ViewMainEstadoBoletaComponent } from './components/estadoBoleta/view-ma
     DetalleProvinciaComponent,
     EditarProvinciaComponent,
     NuevoProvinciaComponent,
-    ViewMainEstadoBoletaComponent
+    ViewMainEstadoBoletaComponent,
+    FooterComponent,
+    NavbarComponent,
+    VerticalnavbarComponent,
+    HomeComponent,
+    ErrorsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
