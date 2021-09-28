@@ -27,6 +27,8 @@ import { ListaProvinciaComponent } from './components/provincia/lista-provincia.
 import { DetalleProvinciaComponent } from './components/provincia/detalle-provincia.component';
 import { EditarProvinciaComponent } from './components/provincia/editar-provincia.component';
 import { NuevoProvinciaComponent } from './components/provincia/nuevo-provincia.component';
+import { ViewMainEstadoBoletaComponent } from './components/estadoBoleta/view-main-estado-boleta.component';
+
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import { NuevoProvinciaComponent } from './components/provincia/nuevo-provincia.
     ListaProvinciaComponent,
     DetalleProvinciaComponent,
     EditarProvinciaComponent,
-    NuevoProvinciaComponent
+    NuevoProvinciaComponent,
+    ViewMainEstadoBoletaComponent
   ],
   imports: [
     BrowserModule,

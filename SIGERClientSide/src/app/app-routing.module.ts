@@ -4,6 +4,7 @@ import { DetalleEstadoBoletaComponent } from './components/estadoBoleta/detalle-
 import { EditarEstadoBoletaComponent } from './components/estadoBoleta/editar-estado-boleta.component';
 import { ListaEstadoBoletaComponent } from './components/estadoBoleta/lista-estado-boleta.component';
 import { NuevoEstadoBoletaComponent } from './components/estadoBoleta/nuevo-estado-boleta.component';
+import { ViewMainEstadoBoletaComponent } from './components/estadoBoleta/view-main-estado-boleta.component';
 import { DetalleEstadoLicenciaComponent } from './components/estadoLicencia/detalle-estado-licencia.component';
 import { EditarEstadoLicenciaComponent } from './components/estadoLicencia/editar-estado-licencia.component';
 import { ListaEstadoLicenciaComponent } from './components/estadoLicencia/lista-estado-licencia.component';
@@ -25,7 +26,8 @@ import { RecoveryPasswordComponent } from './layouts/recovery-password/recovery-
 
 const routes: Routes = [
   {path: 'recoveryPassword', component: RecoveryPasswordComponent},
-  {path: 'estadoBoleta', component: ListaEstadoBoletaComponent},
+  //{path: 'estadoBoleta', component: ListaEstadoBoletaComponent},
+  {path: 'estadoBoleta', component: ViewMainEstadoBoletaComponent},
   {path: 'estadoBoleta/detalle/:id', component: DetalleEstadoBoletaComponent},
   {path: 'estadoBoleta/nuevo', component: NuevoEstadoBoletaComponent},
   {path: 'estadoBoleta/editar/:id', component: EditarEstadoBoletaComponent},

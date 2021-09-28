@@ -36,7 +36,7 @@ export class EditarEstadoBoletaComponent implements OnInit {
       },
       err => {
         console.log(err);
-        //this.router.navigate(['/']);
+       
       }
     );
     
@@ -49,11 +49,11 @@ export class EditarEstadoBoletaComponent implements OnInit {
     this._estadoBoletaService.update(id, this.estadoBoleta).subscribe(
       data => {
         alert('Estado de Boleta actualizado Satisfactoriamente');
-        this.router.navigate(['/estadoBoleta']);
+       // this.router.navigate(['/estadoBoleta']);
       },
       err => {
         console.log(err);
-        this.router.navigate(['/estadoBoleta']);
+       // this.router.navigate(['/estadoBoleta']);
       }
     );
   }
