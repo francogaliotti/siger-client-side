@@ -14,7 +14,6 @@ import { DetalleEstadoBoletaComponent } from './components/estadoBoleta/detalle-
 import { NuevoEstadoBoletaComponent } from './components/estadoBoleta/nuevo-estado-boleta.component';
 import { EditarEstadoBoletaComponent } from './components/estadoBoleta/editar-estado-boleta.component';
 import { ListaPermisoComponent } from './components/permiso/lista-permiso.component';
-import { DetallePermisoComponent } from './components/permiso/detalle-permiso.component';
 import { EditarPermisoComponent } from './components/permiso/editar-permiso.component';
 import { ListaEstadoLicenciaComponent } from './components/estadoLicencia/lista-estado-licencia.component';
 import { DetalleEstadoLicenciaComponent } from './components/estadoLicencia/detalle-estado-licencia.component';
@@ -44,7 +43,6 @@ import { ErrorsComponent } from './layouts/errors/errors.component';
     NuevoEstadoBoletaComponent,
     EditarEstadoBoletaComponent,
     ListaPermisoComponent,
-    DetallePermisoComponent,
     EditarPermisoComponent,
     ListaEstadoLicenciaComponent,
     DetalleEstadoLicenciaComponent,

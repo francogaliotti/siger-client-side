@@ -8,7 +8,6 @@ import { DetalleEstadoLicenciaComponent } from './components/estadoLicencia/deta
 import { EditarEstadoLicenciaComponent } from './components/estadoLicencia/editar-estado-licencia.component';
 import { ListaEstadoLicenciaComponent } from './components/estadoLicencia/lista-estado-licencia.component';
 import { NuevoEstadoLicenciaComponent } from './components/estadoLicencia/nuevo-estado-licencia.component';
-import { DetallePermisoComponent } from './components/permiso/detalle-permiso.component';
 import { EditarPermisoComponent } from './components/permiso/editar-permiso.component';
 import { ListaPermisoComponent } from './components/permiso/lista-permiso.component';
 import { DetalleProvinciaComponent } from './components/provincia/detalle-provincia.component';
@@ -37,7 +36,6 @@ const routes: Routes = [
   {path: 'estadoLicencia/nuevo', component: NuevoEstadoLicenciaComponent},
   {path: 'estadoLicencia/editar/:id', component: EditarEstadoLicenciaComponent},
   {path: 'permisos', component: ListaPermisoComponent},
-  {path: 'permiso/detalle/:id', component:DetallePermisoComponent},
   {path: 'permiso/editar/:id', component: EditarPermisoComponent},
   {path: 'rol', component: ListaRolComponent},
   {path: 'rol/detalle/:id', component:DetalleRolComponent},
