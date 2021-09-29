@@ -9,10 +9,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './layouts/login/login.component';
 import { RecoveryPasswordComponent } from './layouts/recovery-password/recovery-password.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ListaEstadoBoletaComponent } from './components/estadoBoleta/lista-estado-boleta.component';
-import { DetalleEstadoBoletaComponent } from './components/estadoBoleta/detalle-estado-boleta.component';
-import { NuevoEstadoBoletaComponent } from './components/estadoBoleta/nuevo-estado-boleta.component';
-import { EditarEstadoBoletaComponent } from './components/estadoBoleta/editar-estado-boleta.component';
 import { ListaPermisoComponent } from './components/permiso/lista-permiso.component';
 import { EditarPermisoComponent } from './components/permiso/editar-permiso.component';
 import { ListaEstadoLicenciaComponent } from './components/estadoLicencia/lista-estado-licencia.component';
@@ -27,6 +23,8 @@ import { ListaProvinciaComponent } from './components/provincia/lista-provincia.
 import { DetalleProvinciaComponent } from './components/provincia/detalle-provincia.component';
 import { EditarProvinciaComponent } from './components/provincia/editar-provincia.component';
 import { NuevoProvinciaComponent } from './components/provincia/nuevo-provincia.component';
+import { ViewMainEstadoBoletaComponent } from './components/estadoBoleta/view-main-estado-boleta.component';
+
 import { FooterComponent } from './layouts/footer/footer.component';
 import { VerticalnavbarComponent } from './layouts/verticalnavbar/verticalnavbar.component';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
@@ -38,10 +36,6 @@ import { ErrorsComponent } from './layouts/errors/errors.component';
     AppComponent,
     LoginComponent,
     RecoveryPasswordComponent,
-    ListaEstadoBoletaComponent,
-    DetalleEstadoBoletaComponent,
-    NuevoEstadoBoletaComponent,
-    EditarEstadoBoletaComponent,
     ListaPermisoComponent,
     EditarPermisoComponent,
     ListaEstadoLicenciaComponent,
@@ -56,6 +50,7 @@ import { ErrorsComponent } from './layouts/errors/errors.component';
     DetalleProvinciaComponent,
     EditarProvinciaComponent,
     NuevoProvinciaComponent,
+    ViewMainEstadoBoletaComponent,
     FooterComponent,
     NavbarComponent,
     VerticalnavbarComponent,
