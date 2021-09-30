@@ -1,14 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DetalleEstadoBoletaComponent } from './components/estadoBoleta/detalle-estado-boleta.component';
-import { EditarEstadoBoletaComponent } from './components/estadoBoleta/editar-estado-boleta.component';
-import { ListaEstadoBoletaComponent } from './components/estadoBoleta/lista-estado-boleta.component';
-import { NuevoEstadoBoletaComponent } from './components/estadoBoleta/nuevo-estado-boleta.component';
 import { ViewMainEstadoBoletaComponent } from './components/estadoBoleta/view-main-estado-boleta.component';
-import { DetalleEstadoLicenciaComponent } from './components/estadoLicencia/detalle-estado-licencia.component';
-import { EditarEstadoLicenciaComponent } from './components/estadoLicencia/editar-estado-licencia.component';
 import { ListaEstadoLicenciaComponent } from './components/estadoLicencia/lista-estado-licencia.component';
-import { DetallePermisoComponent } from './components/permiso/detalle-permiso.component';
 import { EditarPermisoComponent } from './components/permiso/editar-permiso.component';
 import { ListaPermisoComponent } from './components/permiso/lista-permiso.component';
 import { DetalleProvinciaComponent } from './components/provincia/detalle-provincia.component';
