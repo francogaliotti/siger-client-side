@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EstadoBoleta } from 'src/app/models/estado-boleta';
 import { EstadoBoletasService } from 'src/app/services/estado-boletas.service';
 import { Modal } from 'bootstrap';
 import * as bootstrap from 'bootstrap';
+import { faEdit, faFileAlt, faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-view-main',
@@ -12,6 +13,11 @@ import * as bootstrap from 'bootstrap';
   styleUrls: ['./view-main-estado-boleta.component.css']
 })
 export class ViewMainEstadoBoletaComponent implements OnInit {
+
+  fapluscircle = faPlusCircle;
+  faEdit = faEdit;
+  faFileAlt = faFileAlt;
+  faTrash = faTrash;
 
   estadoBoleta: EstadoBoleta = new EstadoBoleta('','');
 
@@ -21,16 +27,21 @@ export class ViewMainEstadoBoletaComponent implements OnInit {
 
   editEstadoBoletaForm: FormGroup;
 
-  submitted: Boolean;
+  success: boolean;
 
   modal: Modal | undefined
+
+  @ViewChild("CreatePermission")CreatePermission: ElementRef;
+
+  @ViewChild("EditPermission")EditPermission: ElementRef;
 
   constructor(
     private _estadoBoleta: FormBuilder, 
     private _editEstadoBoleta: FormBuilder,
     private _estadoBoletaService: EstadoBoletasService, 
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private renderer: Renderer2
     ) {
       this.estadoBoletaForm = this._estadoBoleta.group({
         codEstadoBoleta: ['', [Validators.required, Validators.maxLength(10)] ],
@@ -72,23 +83,23 @@ export class ViewMainEstadoBoletaComponent implements OnInit {
     );
   }
 
-  onCreate():void{
-    this.submitted = true;
+  onCreate():boolean{
+    this.success = false;
     const estadoBoleta = new EstadoBoleta(this.estadoBoletaForm.get('codEstadoBoleta')?.value,
     this.estadoBoletaForm.get('nombreEstadoBoleta')?.value);
-    if(!this.estadoBoletaForm.valid){
-      return;
-    }
+    
+    if (this.estadoBoletaForm.valid == true) {
     this._estadoBoletaService.save(estadoBoleta).subscribe(
       data => {
-        alert('Estado de Boleta creado Satisfactoriamente');
+        this.success = true;
         this.cargarEstadoBoleta();
       },
       err => {
         alert(err.console.mensaje);
       }
     );
-    
+    }
+    return this.success;
   }
 
   open(id?: number): void{
@@ -155,6 +166,22 @@ export class ViewMainEstadoBoletaComponent implements OnInit {
   volver(): void {
     this.modal?.hide();
     this.router.navigate(['estadoBoleta']);
+  }
+
+  checkEstadoBoletaForm(): void{
+    if(this.estadoBoletaForm.get('codEstadoBoleta')?.valid && this.estadoBoletaForm.get('nombreEstadoBoleta')?.valid){
+      this.renderer.setProperty(this.CreatePermission.nativeElement, 'disabled', false);
+    }else{
+      this.renderer.setProperty(this.CreatePermission.nativeElement, 'disabled', true);
+    }
+  }
+
+  checkEditEstadoBoletaForm(): void{
+    if(this.editEstadoBoletaForm.get('codEstadoBoleta')?.valid && this.editEstadoBoletaForm.get('nombreEstadoBoleta')?.valid){
+      this.renderer.setProperty(this.EditPermission.nativeElement, 'disabled', false);
+    }else{
+      this.renderer.setProperty(this.EditPermission.nativeElement, 'disabled', true);
+    }
   }
 
 }
