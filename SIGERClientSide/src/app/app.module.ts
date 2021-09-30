@@ -13,9 +13,6 @@ import { ListaPermisoComponent } from './components/permiso/lista-permiso.compon
 import { DetallePermisoComponent } from './components/permiso/detalle-permiso.component';
 import { EditarPermisoComponent } from './components/permiso/editar-permiso.component';
 import { ListaEstadoLicenciaComponent } from './components/estadoLicencia/lista-estado-licencia.component';
-import { DetalleEstadoLicenciaComponent } from './components/estadoLicencia/detalle-estado-licencia.component';
-import { NuevoEstadoLicenciaComponent } from './components/estadoLicencia/nuevo-estado-licencia.component';
-import { EditarEstadoLicenciaComponent } from './components/estadoLicencia/editar-estado-licencia.component';
 import { ListaRolComponent } from './components/rol/lista-rol.component';
 import { DetalleRolComponent } from './components/rol/detalle-rol.component';
 import { EditarRolComponent } from './components/rol/editar-rol.component';
@@ -41,9 +38,6 @@ import { ErrorsComponent } from './layouts/errors/errors.component';
     DetallePermisoComponent,
     EditarPermisoComponent,
     ListaEstadoLicenciaComponent,
-    DetalleEstadoLicenciaComponent,
-    NuevoEstadoLicenciaComponent,
-    EditarEstadoLicenciaComponent,
     ListaRolComponent,
     DetalleRolComponent,
     EditarRolComponent,
