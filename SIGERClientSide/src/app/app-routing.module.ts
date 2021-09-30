@@ -31,9 +31,6 @@ const routes: Routes = [
   {path: 'estadoBoleta/editar/:id', component: EditarEstadoBoletaComponent},
   {path: 'estadoLicencia', component: ListaEstadoLicenciaComponent},
   {path: 'permiso', component: ListaPermisoComponent},
-
-  {path: 'permisos', component: ListaPermisoComponent},
-  {path: 'permiso/detalle/:id', component:DetallePermisoComponent},
   {path: 'permiso/editar/:id', component: EditarPermisoComponent},
   {path: 'rol', component: ListaRolComponent},
   {path: 'rol/detalle/:id', component:DetalleRolComponent},
