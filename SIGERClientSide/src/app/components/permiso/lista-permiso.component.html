@@ -1,24 +1,75 @@
-<div class="container mt-3">
-    <table class="table">
-      <thead>  
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Codigo</th>
-          <th scope="col">Nombre del permiso</th>
-          <th scope="col">Detalle</th>
-          <th scope="col">Editar</th>
-          <th scope="col">Borrar</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let permiso of permisos">
-          <td>{{permiso.id}}</td>
-          <td>{{permiso.codigoPermiso}}</td>
-          <td>{{permiso.nombrePermiso}}</td>
-          <td><button class="btn btn-outline-primary" routerLink="/permiso/detalle/{{permiso.id}}"><i class="fas fa-eye"></i> Detalle</button></td>
-          <td><button class="btn btn-outline-warning" routerLink="/permiso/editar/{{permiso.id}}"><i class="fas fa-edit"></i> Editar</button></td>
-          <td><button class="btn btn-outline-danger" (click)="borrarPermiso(permiso.id)"><i class="fas fa-trash-alt"></i> Eliminar</button></td>
-        </tr>
-      </tbody>
-  </table>
+<app-home></app-home>
+<div class="container initial-position">
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <form [formGroup]="formNewPermiso" (ngSubmit)="onCreate()" class="create-form">
+        <div class="form-group">
+          <div class="row">
+            <label class="col-md-3 offset-1 text-end mt-3">
+              <b>Código *</b>
+            </label>
+            <input formControlName="codigoPermiso" type="text" class="form-control mt-3" maxlength="10" style="width: 130px;"
+            [class.validfield]="this.formNewPermiso.get('codigoPermiso')?.valid"
+            [class.invalidfield]="this.formNewPermiso.get('codigoPermiso')?.invalid && this.formNewPermiso.get('codigoPermiso')?.touched"
+            (focusout)="checkForm()"> 
+            <small class="text-danger" *ngIf="this.formNewPermiso.get('codigoPermiso')?.touched && this.formNewPermiso.get('codigoPermiso')?.invalid">El campo es obligatorio</small>
+          </div>
+          <div class="row mt-1">
+            <label class="col-md-3 offset-1 text-end mt-3">
+              <b>Descripción *</b>  
+            </label>
+            <input formControlName="nombrePermiso" type="text" class="form-control mt-3" maxlength="30" style="width: 275px;"
+            [class.validfield]="this.formNewPermiso.get('nombrePermiso')?.valid"
+            [class.invalidfield]="this.formNewPermiso.get('nombrePermiso')?.invalid && this.formNewPermiso.get('nombrePermiso')?.touched"
+            (focusout)="checkForm()"> 
+            <small class="text-danger" *ngIf="this.formNewPermiso.get('nombrePermiso')?.touched && this.formNewPermiso.get('nombrePermiso')?.invalid">El campo es obligatorio</small>
+          </div>
+        </div>
+        <button class="btn text-white mt-4 btn-sm" #CreatePermission disabled>
+          <fa-icon [icon]="faTrash"></fa-icon> Crear permiso
+        </button>
+      </form>
+    </div>
   </div>
+  <div class="row mt-4 justify-content-center">
+    <div class="col-3">
+      <h3>Permisos Existentes</h3>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-2">
+    </div>
+    <div class="col-9">
+      <div class="table-responsive">
+        <table class="table text-center">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Codigo</th>
+              <th scope="col">Nombre del permiso</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let permiso of permisos">
+              <td>{{permiso.id}}</td>
+              <td>{{permiso.codigoPermiso}}</td>
+              <td>{{permiso.nombrePermiso}}</td>
+              <td>
+                <button class="btn bg-primary" routerLink="/permiso/detalle/{{permiso.id}}">
+                  <fa-icon [icon]="faFileAlt"></fa-icon> Detalles
+                </button>
+                <button class="btn bg-secondary" routerLink="/permiso/editar/{{permiso.id}}">
+                  <fa-icon [icon]="faEdit"></fa-icon> Editar
+                </button>
+                <button class="btn bg-danger" (click)="borrarPermiso(permiso.id)">
+                  <fa-icon [icon]="faTrash"></fa-icon> Eliminar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
