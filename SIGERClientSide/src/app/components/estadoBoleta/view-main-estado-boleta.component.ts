@@ -33,6 +33,8 @@ export class ViewMainEstadoBoletaComponent implements OnInit {
 
   @ViewChild("CreatePermission")CreatePermission: ElementRef;
 
+  @ViewChild("EditPermission")EditPermission: ElementRef;
+
   constructor(
     private _estadoBoleta: FormBuilder, 
     private _editEstadoBoleta: FormBuilder,
@@ -166,11 +168,19 @@ export class ViewMainEstadoBoletaComponent implements OnInit {
     this.router.navigate(['estadoBoleta']);
   }
 
-  checkForm(): void{
+  checkEstadoBoletaForm(): void{
     if(this.estadoBoletaForm.get('codEstadoBoleta')?.valid && this.estadoBoletaForm.get('nombreEstadoBoleta')?.valid){
       this.renderer.setProperty(this.CreatePermission.nativeElement, 'disabled', false);
     }else{
       this.renderer.setProperty(this.CreatePermission.nativeElement, 'disabled', true);
+    }
+  }
+
+  checkEditEstadoBoletaForm(): void{
+    if(this.editEstadoBoletaForm.get('codEstadoBoleta')?.valid && this.editEstadoBoletaForm.get('nombreEstadoBoleta')?.valid){
+      this.renderer.setProperty(this.EditPermission.nativeElement, 'disabled', false);
+    }else{
+      this.renderer.setProperty(this.EditPermission.nativeElement, 'disabled', true);
     }
   }
 

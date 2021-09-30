@@ -61,6 +61,41 @@ table > tbody > tr > td > button{
     padding: 0.5px;
 }
 
+small{
+    font-size: 11px;
+    margin-left: 220px;
+    margin-top: 55px;
+    position: absolute;
+    z-index: 1;
+}
+.modal-content{
+    background: #EBFFEC;
+    margin-top: 20px;
+    width: 600px;
+    height: 250px;
+    top: 2px;
+    border: 2px solid #333333;
+}
+.modal-title{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    margin-left: 150px;
+}
+.codEstadoBoleta-inputs{   
+    width: 300px; 
+    height: 25px;   
+    top: 268px; left: 576px;
+}
+
+.nombreEstadoBoleta-inputs{  
+    width: 300px; 
+    height: 25px;
+    top: 300px; left: 576px;
+}
+
+.small{
+    margin-top: 1px;
+}
 .validfield{
     border-style: solid 4px;
     border-color: green;
@@ -69,12 +104,4 @@ table > tbody > tr > td > button{
 .invalidfield{
     border-style: solid 4px;
     border-color: red;
-}
-
-small{
-    font-size: 11px;
-    margin-left: 220px;
-    margin-top: 55px;
-    position: absolute;
-    z-index: 1;
 }

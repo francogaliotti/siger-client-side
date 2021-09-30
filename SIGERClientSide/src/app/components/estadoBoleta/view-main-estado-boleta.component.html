@@ -8,20 +8,20 @@
           <label class="col-md-3 offset-1 text-end mt-3">
             <b>Código *</b>
           </label>
-          <input formControlName="codEstadoBoleta" type="text" class="form-control mt-3" maxlength="10" style="width: 130px;"
+          <input formControlName="codEstadoBoleta" class="form-control codEstadoBoleta-inputs mt-3" type="text" placeholder="Ingrese Codigo del Estado Boleta"
           [class.validfield]="this.estadoBoletaForm.get('codEstadoBoleta')?.valid"
           [class.invalidfield]="this.estadoBoletaForm.get('codEstadoBoleta')?.invalid && this.estadoBoletaForm.get('codEstadoBoleta')?.touched"
-          (focusout)="checkForm()"> 
+          (focusout)="checkEstadoBoletaForm()"> 
           <small class="text-danger" *ngIf="this.estadoBoletaForm.get('codEstadoBoleta')?.touched && this.estadoBoletaForm.get('codEstadoBoleta')?.invalid">El campo es obligatorio</small>
         </div>
         <div class="row mt-1">
           <label class="col-md-3 offset-1 text-end mt-3">
             <b>Descripción *</b>  
           </label>
-          <input formControlName="nombreEstadoBoleta" type="text" class="form-control mt-3" maxlength="30" style="width: 275px;"
+          <input formControlName="nombreEstadoBoleta" class="form-control nombreEstadoBoleta-inputs mt-3"  type="text" placeholder="Ingrese Nombre del Estado Boleta"
           [class.validfield]="this.estadoBoletaForm.get('nombreEstadoBoleta')?.valid"
           [class.invalidfield]="this.estadoBoletaForm.get('nombreEstadoBoleta')?.invalid && this.estadoBoletaForm.get('nombreEstadoBoleta')?.touched"
-          (focusout)="checkForm()"> 
+          (focusout)="checkEstadoBoletaForm()"> 
           <small class="text-danger" *ngIf="this.estadoBoletaForm.get('nombreEstadoBoleta')?.touched && this.estadoBoletaForm.get('nombreEstadoBoleta')?.invalid">El campo es obligatorio</small>
         </div>
       </div>
@@ -68,9 +68,7 @@
   
           <!-- The Modal -->
           <div class="modal" id="editarModal">
-  
             <div class="modal-dialog">
-  
               <div class="modal-content">
   
                 <!-- Modal Header -->
@@ -89,11 +87,11 @@
                           <label class="mt-3" for="Codigo"><b>Codigo Estado Boleta</b></label>
                         </div>
                         <div class="col-7">
-                          <input formControlName="codEstadoBoleta" class="form-control codEstadoBoleta-inputs mt-3"
-                            maxlength="10" [class.validfield]="this.estadoBoletaForm.get('codEstadoBoleta')?.valid"
-                            [class.invalidfield]="this.estadoBoletaForm.get('codEstadoBoleta')?.invalid && this.estadoBoletaForm.get('codEstadoBoleta')?.touched"
-                            type="text" placeholder="Ingrese Codigo del Estado Boleta" />
-                          <small *ngIf="!estadoBoletaForm.get('codEstadoBoleta').valid && success"> Por favor ingrese el
+                          <input formControlName="codEstadoBoleta" class="form-control codEstadoBoleta-inputs mt-3" type="text" placeholder="Ingrese Codigo del Estado Boleta"
+                            maxlength="10" [class.validfield]="this.editEstadoBoletaForm.get('codEstadoBoleta')?.valid"
+                            [class.invalidfield]="this.editEstadoBoletaForm.get('codEstadoBoleta')?.invalid && this.editEstadoBoletaForm.get('codEstadoBoleta')?.touched"
+                            (focusout)="checkEditEstadoBoletaForm()"/>
+                          <small *ngIf="!editEstadoBoletaForm.get('codEstadoBoleta').valid && success"> Por favor ingrese el
                             codigo de la boleta </small>
                         </div>
                       </div>
@@ -104,17 +102,17 @@
                           <label class="mt-3" for="Codigo"><b>Nombre Estado Boleta</b></label>
                         </div>
                         <div class="col-7">
-                          <input formControlName="nombreEstadoBoleta" class="form-control nombreEstadoBoleta-inputs mt-3"
-                            [class.validfield]="this.estadoBoletaForm.get('nombreEstadoBoleta')?.valid"
-                            [class.invalidfield]="this.estadoBoletaForm.get('nombreEstadoBoleta')?.invalid && this.estadoBoletaForm.get('nombreEstadoBoleta')?.touched"
-                            type="text" placeholder="Ingrese Nombre del Estado Boleta" />
-                          <small *ngIf="!estadoBoletaForm.get('nombreEstadoBoleta').valid && success"> Por favor ingrese
+                          <input formControlName="nombreEstadoBoleta" class="form-control nombreEstadoBoleta-inputs mt-3"  type="text" placeholder="Ingrese Nombre del Estado Boleta"
+                            [class.validfield]="this.editEstadoBoletaForm.get('nombreEstadoBoleta')?.valid"
+                            [class.invalidfield]="this.editEstadoBoletaForm.get('nombreEstadoBoleta')?.invalid && this.editEstadoBoletaForm.get('nombreEstadoBoleta')?.touched"
+                            (focusout)="checkEditEstadoBoletaForm()"/>
+                          <small *ngIf="!editEstadoBoletaForm.get('nombreEstadoBoleta').valid && success"> Por favor ingrese
                             el nombre de la boleta </small>
                         </div>
                       </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="submit" class="btn btn block btn-outline-success">Actualizar</button>
+                      <button type="submit" class="btn btn block btn-outline-success"#EditPermission disabled>Actualizar</button>
                     </div>
                   </form>
                 </div>
