@@ -2,10 +2,6 @@ import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ViewMainEstadoBoletaComponent } from './components/estadoBoleta/view-main-estado-boleta.component';
 import { ListaEstadoLicenciaComponent } from './components/estadoLicencia/lista-estado-licencia.component';
-<<<<<<< HEAD
-import { NuevoEstadoLicenciaComponent } from './components/estadoLicencia/nuevo-estado-licencia.component';
-=======
->>>>>>> origin/develop
 import { EditarPermisoComponent } from './components/permiso/editar-permiso.component';
 import { ListaPermisoComponent } from './components/permiso/lista-permiso.component';
 import { DetalleProvinciaComponent } from './components/provincia/detalle-provincia.component';
@@ -28,15 +24,7 @@ const routes: Routes = [
   {path: 'recoveryPassword', component: RecoveryPasswordComponent},
   {path: 'estadoBoleta', component: ViewMainEstadoBoletaComponent},
   {path: 'estadoLicencia', component: ListaEstadoLicenciaComponent},
-<<<<<<< HEAD
-  {path: 'estadoLicencia/detalle/:id', component: DetalleEstadoLicenciaComponent},
-  {path: 'estadoLicencia/nuevo', component: NuevoEstadoLicenciaComponent},
-  {path: 'estadoLicencia/editar/:id', component: EditarEstadoLicenciaComponent},
   {path: 'permisos', component: ListaPermisoComponent},
-=======
-  {path: 'permiso', component: ListaPermisoComponent},
->>>>>>> origin/develop
-  {path: 'permiso/editar/:id', component: EditarPermisoComponent},
   {path: 'rol', component: ListaRolComponent},
   {path: 'rol/detalle/:id', component:DetalleRolComponent},
   {path: 'rol/nuevo', component: NuevoRolComponent},
