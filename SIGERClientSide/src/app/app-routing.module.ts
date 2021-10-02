@@ -18,13 +18,13 @@ import { LoginComponent } from './layouts/login/login.component';
 import { RecoveryPasswordComponent } from './layouts/recovery-password/recovery-password.component';
 
 const routes: Routes = [
+  {path: '', component: LoginComponent},
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'recoveryPassword', component: RecoveryPasswordComponent},
   {path: 'estadoBoleta', component: ViewMainEstadoBoletaComponent},
   {path: 'estadoLicencia', component: ListaEstadoLicenciaComponent},
-  {path: 'permiso', component: ListaPermisoComponent},
-  {path: 'permiso/editar/:id', component: EditarPermisoComponent},
+  {path: 'permisos', component: ListaPermisoComponent},
   {path: 'rol', component: ListaRolComponent},
   {path: 'rol/detalle/:id', component:DetalleRolComponent},
   {path: 'rol/nuevo', component: NuevoRolComponent},

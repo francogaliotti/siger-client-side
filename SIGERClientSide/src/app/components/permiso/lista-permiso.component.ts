@@ -1,10 +1,11 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Permiso } from 'src/app/models/permiso';
 import { PermisoService } from 'src/app/services/permiso.service';
-import { faEdit, faFileAlt, faGrinTongueSquint, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faFileAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { sequence } from '@angular/animations';
+import { EditarPermisoComponent } from './editar-permiso.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-lista-permiso',
@@ -21,7 +22,8 @@ export class ListaPermisoComponent implements OnInit {
 
   formNewPermiso: FormGroup;
 
-  @ViewChild("CreatePermission")CreatePermission: ElementRef;
+  @ViewChild("CreatePermission") CreatePermission: ElementRef;
+  @ViewChild(EditarPermisoComponent) editPermission: EditarPermisoComponent;
 
   success: boolean;
 
@@ -35,9 +37,10 @@ export class ListaPermisoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargarPermisos();
+    this.loadPermission();
   }
-  cargarPermisos(): void {
+
+  loadPermission(): void {
     this.permisoService.list().subscribe(
       data => {
         this.permisos = data
@@ -46,15 +49,36 @@ export class ListaPermisoComponent implements OnInit {
       }
     )
   }
-  borrarPermiso(id?: number): void {
-    this.permisoService.delete(id).subscribe(
-      data => {
-        alert("Se ha eliminado el Permiso");
-        this.cargarPermisos();
-      }, err => {
-        console.log(err);
-      }
-    )
+
+  deletePermission(id: number): boolean {
+    this.success = false;
+
+    if (id != null) {
+      this.permisoService.delete(id).subscribe(
+        data => {
+          this.loadPermission();
+          this.success = true;
+
+          Swal.fire({
+            title: "Éxito",
+            icon: "success",
+            showCloseButton: false,
+            showConfirmButton: false
+          });
+        }, err => {
+          console.log(err);
+
+          Swal.fire({
+            title: "Oops! hubo un problema",
+            icon: "error",
+            showCloseButton: false,
+            showConfirmButton: false
+          });
+        }
+      )
+    }
+
+    return this.success;
   }
 
   onCreate(): boolean {
@@ -66,12 +90,26 @@ export class ListaPermisoComponent implements OnInit {
 
     if (this.formNewPermiso.valid == true) {
       this.permisoService.save(permiso).subscribe(
-        data => {    
+        data => {
           this.success = true;
-          this.cargarPermisos();
+          this.loadPermission();
+
+          Swal.fire({
+            title: "Éxito",
+            icon: "success",
+            showCloseButton: false,
+            showConfirmButton: false
+          });
         },
         err => {
           console.log(err.error.mensaje);
+
+          Swal.fire({
+            title: "Oops! hubo un problema",
+            icon: "error",
+            showCloseButton: false,
+            showConfirmButton: false
+          });
         }
       );
 
@@ -80,11 +118,19 @@ export class ListaPermisoComponent implements OnInit {
     return this.success;
   }
 
-  checkForm(): void{
-    if(this.formNewPermiso.get('codigoPermiso')?.valid && this.formNewPermiso.get('nombrePermiso')?.valid){
+  checkForm(): void {
+    if (this.formNewPermiso.get('codigoPermiso')?.valid && this.formNewPermiso.get('nombrePermiso')?.valid) {
       this.renderer.setProperty(this.CreatePermission.nativeElement, 'disabled', false);
-    }else{
+    } else {
       this.renderer.setProperty(this.CreatePermission.nativeElement, 'disabled', true);
     }
+  }
+
+  open(id: number, codPermission: string, namePermission: string) {
+    this.editPermission.open(id, codPermission, namePermission);
+  }
+
+  refreshTable($event: any): void {
+    this.loadPermission();
   }
 }

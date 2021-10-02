@@ -1,0 +1,11 @@
+.edit-form{
+    background-color: #EBFFEC;
+    border: 2px solid black;
+    box-shadow: 5px 5px 15px 2px;
+}
+
+small{
+    font-size: 11px;
+    position: absolute;
+    z-index: 1;
+}

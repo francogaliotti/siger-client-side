@@ -1,22 +1,43 @@
-<div class="container editarPermiso">
-    <form [formGroup]="permisoForm" (ngSubmit)="onUpdate()">
-        
-    <div class="form-group">
-        <input formControlName="codigoPermiso" class="form-control login-inputs" maxlength="10" value="{{permiso.codigoPermiso}}"
-         [class.validfield]="this.permisoForm.get('codigoPermiso')?.valid"
-         [class.invalidfield]="this.permisoForm.get('codigoPermiso')?.invalid && this.permisoForm.get('codigoPermiso')?.touched" type="text" placeholder="Ingrese Codigo del Permiso"/>
-    </div>
-    <div class="form-group">
-        <input formControlName="nombrePermiso" class="form-control login-inputs" value="{{permiso.nombrePermiso}}"
-        [class.validfield]="this.permisoForm.get('nombrePermiso')?.valid"
-        [class.invalidfield]="this.permisoForm.get('nombrePermiso')?.invalid && this.permisoForm.get('nombrePermiso')?.touched" type="text" placeholder="Ingrese Nombre del Permiso"/>
-    </div>
-    <div class="form-group">
-        <div class="row justify-content-center mt-3">
-            <div class="col-12">
-                <button type="submit" class="btn btn-outline-success btn block" ><b>Actualizar</b></button>
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body edit-form">
+                <h5 class="text-center">Editar Permiso</h5>
+                <form [formGroup]="editPermisoForm" (ngSubmit)="onUpdate(permiso.id)">
+                    <input type="hidden" formControlName="id">
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-3 offset-1 text-end mt-3" for="Codigo"><b>Código * </b></label>
+                            <div class="col-7">
+                                <input formControlName="codigoPermiso" (focusout)="checkForm()" 
+                                    class="form-control mt-3" maxlength="10"
+                                    [class.validfield]="this.editPermisoForm.get('codigoPermiso')?.valid"
+                                    [class.invalidfield]="this.editPermisoForm.get('codigoPermiso')?.invalid && this.editPermisoForm.get('codigoPermiso')?.touched"
+                                    type="text" />
+                                <small class="text-danger" *ngIf="!editPermisoForm.get('codigoPermiso').valid && this.editPermisoForm.get('codigoPermiso')?.touched"> El campo es obligatorio</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-3 offset-1 text-end mt-3" for="Codigo"><b>Nombre * </b></label>
+                            <div class="col-7">
+                                <input formControlName="nombrePermiso" (focusout)="checkForm()"
+                                    class="form-control nombreEstadoBoleta-inputs mt-3"
+                                    [class.validfield]="this.editPermisoForm.get('nombrePermiso')?.valid"
+                                    [class.invalidfield]="this.editPermisoForm.get('nombrePermiso')?.invalid && this.editPermisoForm.get('nombrePermiso')?.touched"
+                                    type="text" />
+                                <small class="text-danger" *ngIf="!editPermisoForm.get('nombrePermiso').valid && this.editPermisoForm.get('nombrePermiso')?.touched"> El campo es obligatorio</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer mt-4">
+                        <button #EditPermission type="submit" class="btn btn block btn-outline-success">Actualizar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close()">Cancelar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    </form>
-    </div>
+</div>
