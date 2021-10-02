@@ -1,48 +1,40 @@
-<div class="modal" id="editarModal">
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Editar Estado Boleta</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
+            <div class="modal-body edit-form">
+                <h5 class="text-center">Editar Permiso</h5>
                 <form [formGroup]="editPermisoForm" (ngSubmit)="onUpdate(permiso.id)">
-                    <input type="hidden" formControlName="id" value="{{permiso.id}}">
+                    <input type="hidden" formControlName="id">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-5">
-                                <label class="mt-3" for="Codigo"><b>Codigo </b></label>
-                            </div>
+                            <label class="col-md-3 offset-1 text-end mt-3" for="Codigo"><b>Código * </b></label>
                             <div class="col-7">
-                                <input formControlName="codigoPermiso" class="form-control mt-3" maxlength="10"
+                                <input formControlName="codigoPermiso" (focusout)="checkForm()" 
+                                    class="form-control mt-3" maxlength="10"
                                     [class.validfield]="this.editPermisoForm.get('codigoPermiso')?.valid"
                                     [class.invalidfield]="this.editPermisoForm.get('codigoPermiso')?.invalid && this.editPermisoForm.get('codigoPermiso')?.touched"
                                     type="text" />
-                                <small *ngIf="!editPermisoForm.get('codigoPermiso').valid "> El campo es obligatorio
-                                </small>
+                                <small class="text-danger" *ngIf="!editPermisoForm.get('codigoPermiso').valid && this.editPermisoForm.get('codigoPermiso')?.touched"> El campo es obligatorio</small>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-5">
-                                <label class="mt-3" for="Codigo"><b>Nombre </b></label>
-                            </div>
+                            <label class="col-md-3 offset-1 text-end mt-3" for="Codigo"><b>Nombre * </b></label>
                             <div class="col-7">
-                                <input formControlName="nombrePermiso"
+                                <input formControlName="nombrePermiso" (focusout)="checkForm()"
                                     class="form-control nombreEstadoBoleta-inputs mt-3"
                                     [class.validfield]="this.editPermisoForm.get('nombrePermiso')?.valid"
                                     [class.invalidfield]="this.editPermisoForm.get('nombrePermiso')?.invalid && this.editPermisoForm.get('nombrePermiso')?.touched"
                                     type="text" />
-                                <small *ngIf="!editPermisoForm.get('nombrePermiso').valid "> El campo es obligatorio
-                                </small>
+                                <small class="text-danger" *ngIf="!editPermisoForm.get('nombrePermiso').valid && this.editPermisoForm.get('nombrePermiso')?.touched"> El campo es obligatorio</small>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn block btn-outline-success">Actualizar</button>
+                    <div class="modal-footer mt-4">
+                        <button #EditPermission type="submit" class="btn btn block btn-outline-success">Actualizar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close()">Cancelar</button>
                     </div>
                 </form>
             </div>

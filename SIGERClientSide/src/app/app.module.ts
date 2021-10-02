@@ -30,6 +30,8 @@ import { VerticalnavbarComponent } from './layouts/verticalnavbar/verticalnavbar
 import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { HomeComponent } from './layouts/home/home.component';
 import { ErrorsComponent } from './layouts/errors/errors.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+;
 
 @NgModule({
   declarations: [
@@ -55,14 +57,17 @@ import { ErrorsComponent } from './layouts/errors/errors.component';
     NavbarComponent,
     VerticalnavbarComponent,
     HomeComponent,
-    ErrorsComponent,
+    ErrorsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    SweetAlert2Module.forRoot(),
+    SweetAlert2Module,
+    SweetAlert2Module.forChild()
   ],
   providers: [],
   bootstrap: [AppComponent]

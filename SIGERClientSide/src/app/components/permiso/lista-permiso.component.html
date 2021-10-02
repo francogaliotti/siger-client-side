@@ -1,5 +1,7 @@
 <app-home></app-home>
 <div class="container initial-position">
+
+  <!--Form-->
   <div class="row justify-content-center">
     <div class="col-6">
       <form [formGroup]="formNewPermiso" (ngSubmit)="onCreate()" class="create-form">
@@ -8,21 +10,25 @@
             <label class="col-md-3 offset-1 text-end mt-3">
               <b>Código *</b>
             </label>
-            <input formControlName="codigoPermiso" type="text" class="form-control mt-3" maxlength="10" style="width: 130px;"
-            [class.validfield]="this.formNewPermiso.get('codigoPermiso')?.valid"
-            [class.invalidfield]="this.formNewPermiso.get('codigoPermiso')?.invalid && this.formNewPermiso.get('codigoPermiso')?.touched"
-            (focusout)="checkForm()"> 
-            <small class="text-danger" *ngIf="this.formNewPermiso.get('codigoPermiso')?.touched && this.formNewPermiso.get('codigoPermiso')?.invalid">El campo es obligatorio</small>
+            <input formControlName="codigoPermiso" type="text" class="form-control mt-3" maxlength="10"
+              style="width: 130px;" [class.validfield]="this.formNewPermiso.get('codigoPermiso')?.valid"
+              [class.invalidfield]="this.formNewPermiso.get('codigoPermiso')?.invalid && this.formNewPermiso.get('codigoPermiso')?.touched"
+              (focusout)="checkForm()">
+            <small class="text-danger"
+              *ngIf="this.formNewPermiso.get('codigoPermiso')?.touched && this.formNewPermiso.get('codigoPermiso')?.invalid">El
+              campo es obligatorio</small>
           </div>
           <div class="row mt-1">
             <label class="col-md-3 offset-1 text-end mt-3">
-              <b>Descripción *</b>  
+              <b>Nombre *</b>
             </label>
-            <input formControlName="nombrePermiso" type="text" class="form-control mt-3" maxlength="30" style="width: 275px;"
-            [class.validfield]="this.formNewPermiso.get('nombrePermiso')?.valid"
-            [class.invalidfield]="this.formNewPermiso.get('nombrePermiso')?.invalid && this.formNewPermiso.get('nombrePermiso')?.touched"
-            (focusout)="checkForm()"> 
-            <small class="text-danger" *ngIf="this.formNewPermiso.get('nombrePermiso')?.touched && this.formNewPermiso.get('nombrePermiso')?.invalid">El campo es obligatorio</small>
+            <input formControlName="nombrePermiso" type="text" class="form-control mt-3" maxlength="30"
+              style="width: 275px;" [class.validfield]="this.formNewPermiso.get('nombrePermiso')?.valid"
+              [class.invalidfield]="this.formNewPermiso.get('nombrePermiso')?.invalid && this.formNewPermiso.get('nombrePermiso')?.touched"
+              (focusout)="checkForm()">
+            <small class="text-danger"
+              *ngIf="this.formNewPermiso.get('nombrePermiso')?.touched && this.formNewPermiso.get('nombrePermiso')?.invalid">El
+              campo es obligatorio</small>
           </div>
         </div>
         <button class="btn text-white mt-4 btn-sm" #CreatePermission disabled>
@@ -31,6 +37,8 @@
       </form>
     </div>
   </div>
+
+  <!--Table-->
   <div class="row mt-4 justify-content-center">
     <div class="col-3">
       <h3>Permisos Existentes</h3>
@@ -56,13 +64,23 @@
               <td>{{permiso.codigoPermiso}}</td>
               <td>{{permiso.nombrePermiso}}</td>
               <td>
-                <button class="btn bg-secondary" routerLink="/permiso/editar/{{permiso.id}}">
+                <button class="btn bg-secondary"
+                  (click)="open(permiso.id, permiso.codigoPermiso, permiso.nombrePermiso)">
                   <fa-icon [icon]="faEdit"></fa-icon> Editar
                 </button>
-                <button class="btn bg-danger" (click)="borrarPermiso(permiso.id)">
+                <button class="btn bg-danger" [swal]="{
+                    title: 'Cuidado',
+                    icon: 'question',
+                    text: 'Esta acción es irreversible. ¿Desea continuar?',
+                    showCancelButton: true,
+                    cancelButtonText: 'Cancelar',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Continuar'}" (confirm)="deletePermission(permiso.id)">
+
                   <fa-icon [icon]="faTrash"></fa-icon> Eliminar
                 </button>
               </td>
+
             </tr>
           </tbody>
         </table>
@@ -70,3 +88,7 @@
     </div>
   </div>
 </div>
+
+<!--Swal and son component-->
+<swal></swal>
+<app-editar-permiso (refreshEvent)="refreshTable($event)"></app-editar-permiso>
