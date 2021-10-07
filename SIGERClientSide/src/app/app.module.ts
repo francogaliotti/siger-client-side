@@ -25,6 +25,7 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { HomeComponent } from './layouts/home/home.component';
 import { ErrorsComponent } from './layouts/errors/errors.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { IndexRolComponent } from './components/rol/index-rol.component';
 ;
 
 @NgModule({
@@ -48,7 +49,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     NavbarComponent,
     VerticalnavbarComponent,
     HomeComponent,
-    ErrorsComponent
+    ErrorsComponent,
+    IndexRolComponent,
   ],
   imports: [
     BrowserModule,

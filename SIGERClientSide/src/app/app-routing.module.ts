@@ -8,10 +8,8 @@ import { DetalleProvinciaComponent } from './components/provincia/detalle-provin
 import { EditarProvinciaComponent } from './components/provincia/editar-provincia.component';
 import { ListaProvinciaComponent } from './components/provincia/lista-provincia.component';
 import { NuevoProvinciaComponent } from './components/provincia/nuevo-provincia.component';
-import { DetalleRolComponent } from './components/rol/detalle-rol.component';
-import { EditarRolComponent } from './components/rol/editar-rol.component';
+import { IndexRolComponent } from './components/rol/index-rol.component';
 import { ListaRolComponent } from './components/rol/lista-rol.component';
-import { NuevoRolComponent } from './components/rol/nuevo-rol.component';
 import { ErrorsComponent } from './layouts/errors/errors.component';
 import { HomeComponent } from './layouts/home/home.component';
 import { LoginComponent } from './layouts/login/login.component';
@@ -25,10 +23,7 @@ const routes: Routes = [
   {path: 'estadoBoleta', component: ViewMainEstadoBoletaComponent},
   {path: 'estadoLicencia', component: ListaEstadoLicenciaComponent},
   {path: 'permisos', component: ListaPermisoComponent},
-  {path: 'rol', component: ListaRolComponent},
-  {path: 'rol/detalle/:id', component:DetalleRolComponent},
-  {path: 'rol/nuevo', component: NuevoRolComponent},
-  {path: 'rol/editar/:id', component: EditarRolComponent},
+  {path: 'roles', component: IndexRolComponent},
   {path: 'provincia', component: ListaProvinciaComponent},
   {path: 'provincia/detalle/:id', component:DetalleProvinciaComponent},
   {path: 'provincia/nuevo', component: NuevoProvinciaComponent},
