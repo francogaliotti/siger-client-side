@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  usuario: Usuario = new Usuario("","","","");
+  usuario: Usuario = new Usuario("", "", "", "");
 
   isLogged = false;
   isLoginFail = false;
@@ -25,10 +25,10 @@ export class LoginComponent implements OnInit {
   roles: string[] = [];
   errMsj: string;
 
-  constructor(private _tokenService: TokenService, 
+  constructor(private _tokenService: TokenService,
     private router: Router,
-    private _loginForm: FormBuilder, 
-    private _authService: AuthService) { 
+    private _loginForm: FormBuilder,
+    private _authService: AuthService) {
     this.ChangeBody();
 
     //Login form
@@ -40,20 +40,20 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(this._tokenService.getToken()){
+    if (this._tokenService.getToken()) {
       this.isLogged = true;
       this.isLoginFail = false;
       this.roles = this._tokenService.getAuthorities();
     }
   }
 
-  ChangeBody(){
+  ChangeBody() {
     document.body.style.backgroundImage = "url('assets/images/Login2.jpg')";
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundRepeat = "no-repeat";
   }
 
-  SignIn(){
+  SignIn() {
 
     this.loginUsuario = new LoginUsuario(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value);
 
@@ -70,9 +70,17 @@ export class LoginComponent implements OnInit {
     }*/
 
     this._authService.LogIn(this.loginUsuario).subscribe(data => {
+      this.isLogged = true;
+      this._tokenService.setToken(data.token);
+      this._tokenService.setUsername(data.username);
+      this._tokenService.setAuthorities(data.authorities);
+      this.roles = data.authorities;
+
       console.log(data);
       this.router.navigate(['/home']);
     }, error => {
+      this.isLogged = false;
+      
       console.log(error);
     });
 
