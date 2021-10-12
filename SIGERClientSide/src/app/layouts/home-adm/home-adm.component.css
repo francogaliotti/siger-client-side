@@ -1,0 +1,77 @@
+.max-container{ 
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    margin-top: 35px;
+    margin-left: 300px;
+    margin-right: 100px;
+    width: 750px;
+}
+.container{
+    border: solid 1px #000;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px 2px;
+}
+.intro-container{
+    background-color: #FFA030;
+    width: 700px;
+    margin-top: 35px; 
+}
+.user-container{
+    background-color:#F2BD6A;
+    margin-top: 35px;
+    border-radius: 40px;
+}
+.mini-container{
+    display: inline-block;
+    background-color: #FFA030;
+    width: 200px;
+    height: 170px;
+    margin-top: 10px; 
+    margin-right: 40px;
+    margin-left: 40px;
+    margin-bottom: 15px;
+}
+button{
+    background-color: #169BD5;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    width: 140px;
+    height: 40px;
+}
+p{
+    margin-top: 10px;
+}
+.admin-container{
+    background-color:#F2BD6A;
+    margin-top: 35px;
+    margin-bottom: 35px;
+    border-radius: 40px;
+}
+.micro-container{
+    display: inline-block;
+    background-color: #FFA030;
+    width: 200px;
+    height: 100%; 
+    margin-right: 15px;
+    margin-left: 15px;
+}
+.sub-container{
+    display: inline-block;
+    width: 230px;
+    height: 100%;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+.c-container{
+    background-color: #FFA030;
+    width: 100%;
+    height: 200px;
+    margin-bottom: 15px;
+}
+.contenedor{
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    height: 415px;
+}

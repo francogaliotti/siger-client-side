@@ -26,6 +26,8 @@ import { ErrorsComponent } from './layouts/errors/errors.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { RegisterComponent } from './auth/register.component';
 import { LoginComponent } from './auth/login.component';
+import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
+;
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { LoginComponent } from './auth/login.component';
     VerticalnavbarComponent,
     HomeComponent,
     ErrorsComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeAdmComponent
   ],
   imports: [
     BrowserModule,

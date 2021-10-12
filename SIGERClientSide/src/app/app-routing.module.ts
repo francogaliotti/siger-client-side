@@ -16,10 +16,11 @@ import { NuevoRolComponent } from './components/rol/nuevo-rol.component';
 import { ErrorsComponent } from './layouts/errors/errors.component';
 import { HomeComponent } from './layouts/home/home.component';
 import { RecoveryPasswordComponent } from './layouts/recovery-password/recovery-password.component';
+import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
-  {path: 'home', component: HomeComponent},
+  {path: 'home', component: HomeAdmComponent},
   {path: 'login', component: LoginComponent},
   {path: 'recoveryPassword', component: RecoveryPasswordComponent},
   {path: 'estadoBoleta', component: ViewMainEstadoBoletaComponent},
