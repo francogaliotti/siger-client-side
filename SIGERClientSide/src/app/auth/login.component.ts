@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Usuario } from 'src/app/models/usuario';
-import { LoginService } from 'src/app/services/login.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { LoginUsuario } from '../models/login-usuario';
+import { TokenService } from '../services/token.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +15,20 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private _loginForm: FormBuilder, private _loginService: LoginService) { 
+  usuario: Usuario = new Usuario("","","","");
+
+  isLogged = false;
+  isLoginFail = false;
+  loginUsuario: LoginUsuario;
+  username: string;
+  password: string;
+  roles: string[] = [];
+  errMsj: string;
+
+  constructor(private _tokenService: TokenService, 
+    private router: Router,
+    private _loginForm: FormBuilder, 
+    private _authService: AuthService) { 
     this.ChangeBody();
 
     //Login form
@@ -24,6 +40,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this._tokenService.getToken()){
+      this.isLogged = true;
+      this.isLoginFail = false;
+      this.roles = this._tokenService.getAuthorities();
+    }
   }
 
   ChangeBody(){
@@ -34,7 +55,9 @@ export class LoginComponent implements OnInit {
 
   SignIn(){
 
-    const user: Usuario = {
+    this.loginUsuario = new LoginUsuario(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value);
+
+    /*const user: Usuario = {
       username: this.loginForm.get('username')?.value,
       password: this.loginForm.get('password')?.value,
       recordarme: this.loginForm.get('rememberme')?.value,
@@ -44,10 +67,11 @@ export class LoginComponent implements OnInit {
       rolNecesario: "",
       enabled: false,
       roles: Array()
-    }
+    }*/
 
-    this._loginService.SignIn().subscribe(data => {
+    this._authService.LogIn(this.loginUsuario).subscribe(data => {
       console.log(data);
+      this.router.navigate(['/home']);
     }, error => {
       console.log(error);
     });

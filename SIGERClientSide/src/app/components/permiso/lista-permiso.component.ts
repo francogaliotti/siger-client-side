@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Permiso } from 'src/app/models/permiso';
 import { PermisoService } from 'src/app/services/permiso.service';
-import { faEdit, faFileAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faFileAlt, faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EditarPermisoComponent } from './editar-permiso.component';

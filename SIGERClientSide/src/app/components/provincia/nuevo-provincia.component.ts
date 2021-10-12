@@ -12,6 +12,7 @@ import { ProvinciaService } from 'src/app/services/provincia.service';
 export class NuevoProvinciaComponent implements OnInit {
 
   provinciaForm: FormGroup;
+  
   constructor(private provinciaService:ProvinciaService, 
     private _provincia:FormBuilder, 
     private router:Router) {

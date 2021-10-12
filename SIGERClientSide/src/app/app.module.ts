@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './layouts/login/login.component';
 import { RecoveryPasswordComponent } from './layouts/recovery-password/recovery-password.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ListaPermisoComponent } from './components/permiso/lista-permiso.component';
@@ -25,7 +24,8 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { HomeComponent } from './layouts/home/home.component';
 import { ErrorsComponent } from './layouts/errors/errors.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-;
+import { RegisterComponent } from './auth/register.component';
+import { LoginComponent } from './auth/login.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,8 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     NavbarComponent,
     VerticalnavbarComponent,
     HomeComponent,
-    ErrorsComponent
+    ErrorsComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
