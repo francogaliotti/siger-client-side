@@ -23,4 +23,13 @@ export class Usuario extends BaseEntity{
 
     roles: Array<Rol>;
 
+    constructor(username: string, password: string, correoInstitucional: string, rolNecesario: string, id?: number){
+        super();
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.correoInstitucional = correoInstitucional;
+        this.rolNecesario = rolNecesario;
+    }
+
 }

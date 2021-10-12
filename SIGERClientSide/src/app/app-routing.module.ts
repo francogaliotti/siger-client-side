@@ -1,5 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './auth/login.component';
 import { ViewMainEstadoBoletaComponent } from './components/estadoBoleta/view-main-estado-boleta.component';
 import { ListaEstadoLicenciaComponent } from './components/estadoLicencia/lista-estado-licencia.component';
 import { EditarPermisoComponent } from './components/permiso/editar-permiso.component';
@@ -14,7 +15,6 @@ import { ListaRolComponent } from './components/rol/lista-rol.component';
 import { NuevoRolComponent } from './components/rol/nuevo-rol.component';
 import { ErrorsComponent } from './layouts/errors/errors.component';
 import { HomeComponent } from './layouts/home/home.component';
-import { LoginComponent } from './layouts/login/login.component';
 import { RecoveryPasswordComponent } from './layouts/recovery-password/recovery-password.component';
 import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
 

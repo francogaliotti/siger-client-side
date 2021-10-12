@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { EstadoLicencia } from 'src/app/models/estado-licencia';
 import { EstadoLicenciaService } from 'src/app/services/estado-licencia.service';
 import {Modal} from 'bootstrap';
-import { faEdit, faFileAlt, faGrinTongueSquint, faTrash, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faFileAlt, faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import * as bootstrap from 'bootstrap';
 
 @Component({
