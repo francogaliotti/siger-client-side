@@ -17,6 +17,7 @@ import { HomeComponent } from './layouts/home/home.component';
 import { LoginComponent } from './layouts/login/login.component';
 import { RecoveryPasswordComponent } from './layouts/recovery-password/recovery-password.component';
 import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
+import {ZonaInhospitaComponent} from './components/zona-inhospita/zona-inhospita.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'recoveryPassword', component: RecoveryPasswordComponent},
   {path: 'estadoBoleta', component: ViewMainEstadoBoletaComponent},
   {path: 'estadoLicencia', component: ListaEstadoLicenciaComponent},
+  {path: 'zonaInhospita', component: ZonaInhospitaComponent},
   {path: 'permisos', component: ListaPermisoComponent},
   {path: 'rol', component: ListaRolComponent},
   {path: 'rol/detalle/:id', component:DetalleRolComponent},

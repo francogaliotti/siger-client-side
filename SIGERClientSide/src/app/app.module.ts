@@ -26,6 +26,7 @@ import { HomeComponent } from './layouts/home/home.component';
 import { ErrorsComponent } from './layouts/errors/errors.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
+import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita.component';
 ;
 
 @NgModule({
@@ -50,7 +51,8 @@ import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
     VerticalnavbarComponent,
     HomeComponent,
     ErrorsComponent,
-    HomeAdmComponent
+    HomeAdmComponent,
+    ZonaInhospitaComponent
   ],
   imports: [
     BrowserModule,
