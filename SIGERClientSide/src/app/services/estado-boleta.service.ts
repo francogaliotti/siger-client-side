@@ -8,7 +8,7 @@ import { connectionURL } from './connectionURL';
   providedIn: 'root'
 })
 
-export class EstadoBoletasService extends connectionURL{
+export class EstadoBoletaService extends connectionURL{
 
   constructor(private httpClient: HttpClient) {
     super();

@@ -27,6 +27,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { RegisterComponent } from './auth/register.component';
 import { LoginComponent } from './auth/login.component';
 import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
+import { interceptorProvider } from './interceptors/estado-boleta-interceptor.service';
 ;
 
 @NgModule({
@@ -64,7 +65,7 @@ import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
     SweetAlert2Module,
     SweetAlert2Module.forChild()
   ],
-  providers: [],
+  providers: [interceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
