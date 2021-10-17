@@ -17,20 +17,23 @@ import { ErrorsComponent } from './layouts/errors/errors.component';
 import { HomeComponent } from './layouts/home/home.component';
 import { RecoveryPasswordComponent } from './layouts/recovery-password/recovery-password.component';
 import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
-import { EstadoBoletaGuardService as guard} from './guards/estado-boleta-guard.service';
+import { EstadoBoletaGuardService as estadoBoletaGuard} from './guards/estado-boleta-guard.service';
+import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico.component';
+import { ViaticoGuardService as ViaticoGuard} from './guards/viatico-guard.service';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'home', component: HomeAdmComponent},
   {path: 'login', component: LoginComponent},
   {path: 'recoveryPassword', component: RecoveryPasswordComponent},
-  {path: 'estadoBoleta', component: ViewMainEstadoBoletaComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user'] }},
+  {path: 'estadoBoleta', component: ViewMainEstadoBoletaComponent, canActivate: [estadoBoletaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'estadoLicencia', component: ListaEstadoLicenciaComponent},
+  {path: 'viatico', component: ViewMainViaticoComponent, canActivate: [ViaticoGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'permisos', component: ListaPermisoComponent},
-  {path: 'rol', component: ListaRolComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user'] }},
-  {path: 'rol/detalle/:id', component:DetalleRolComponent, canActivate: [guard], data: { expectedRol: ['admin', 'user'] }},
-  {path: 'rol/nuevo', component: NuevoRolComponent, canActivate: [guard], data: { expectedRol: ['admin'] }},
-  {path: 'rol/editar/:id', component: EditarRolComponent, canActivate: [guard], data: { expectedRol: ['admin'] }},
+  {path: 'rol', component: ListaRolComponent/*, canActivate: [guard], data: { expectedRol: ['admin', 'user'] }*/},
+  {path: 'rol/detalle/:id', component:DetalleRolComponent/*, canActivate: [guard], data: { expectedRol: ['admin', 'user'] }*/},
+  {path: 'rol/nuevo', component: NuevoRolComponent/*, canActivate: [guard], data: { expectedRol: ['admin'] }*/},
+  {path: 'rol/editar/:id', component: EditarRolComponent/*, canActivate: [guard], data: { expectedRol: ['admin'] }*/},
   {path: 'provincia', component: ListaProvinciaComponent},
   {path: 'provincia/detalle/:id', component:DetalleProvinciaComponent},
   {path: 'provincia/nuevo', component: NuevoProvinciaComponent},

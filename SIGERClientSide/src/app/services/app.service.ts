@@ -34,4 +34,3 @@ export class AppService extends connectionURL {
   }
 
 }
-
