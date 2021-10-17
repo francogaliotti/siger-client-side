@@ -28,6 +28,7 @@ import { RegisterComponent } from './auth/register.component';
 import { LoginComponent } from './auth/login.component';
 import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
 import { interceptorProvider } from './interceptors/estado-boleta-interceptor.service';
+import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico.component';
 ;
 
 @NgModule({
@@ -53,7 +54,8 @@ import { interceptorProvider } from './interceptors/estado-boleta-interceptor.se
     HomeComponent,
     ErrorsComponent,
     RegisterComponent,
-    HomeAdmComponent
+    HomeAdmComponent,
+    ViewMainViaticoComponent
   ],
   imports: [
     BrowserModule,

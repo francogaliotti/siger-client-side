@@ -42,8 +42,7 @@ export class ViewMainEstadoBoletaComponent implements OnInit {
   constructor(
     private _estadoBoleta: FormBuilder, 
     private _editEstadoBoleta: FormBuilder,
-    private _estadoBoletaService: EstadoBoletaService, 
-    private activatedRoute: ActivatedRoute,
+    private _estadoBoletaService: EstadoBoletaService,
     private router: Router,
     private renderer: Renderer2,
     private _tokenService: TokenService
