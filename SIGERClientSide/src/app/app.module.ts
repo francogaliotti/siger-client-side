@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './layouts/login/login.component';
 import { RecoveryPasswordComponent } from './layouts/recovery-password/recovery-password.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ListaPermisoComponent } from './components/permiso/lista-permiso.component';
@@ -24,6 +23,11 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { IndexRolComponent } from './components/rol/index-rol.component';
 import { AddPermissionComponent } from './components/rol/add-permission.component';
 import { EditRolComponent } from './components/rol/edit-rol.component';
+import { RegisterComponent } from './auth/register.component';
+import { LoginComponent } from './auth/login.component';
+import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
+import { interceptorProvider } from './interceptors/estado-boleta-interceptor.service';
+import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico.component';
 ;
 
 @NgModule({
@@ -47,6 +51,9 @@ import { EditRolComponent } from './components/rol/edit-rol.component';
     IndexRolComponent,
     AddPermissionComponent,
     EditRolComponent,
+    RegisterComponent,
+    HomeAdmComponent,
+    ViewMainViaticoComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +65,7 @@ import { EditRolComponent } from './components/rol/edit-rol.component';
     SweetAlert2Module,
     SweetAlert2Module.forChild()
   ],
-  providers: [],
+  providers: [interceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

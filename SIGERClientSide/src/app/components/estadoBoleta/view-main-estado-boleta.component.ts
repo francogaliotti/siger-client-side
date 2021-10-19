@@ -2,10 +2,11 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/co
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EstadoBoleta } from 'src/app/models/estado-boleta';
-import { EstadoBoletasService } from 'src/app/services/estado-boletas.service';
+import { EstadoBoletaService } from 'src/app/services/estado-boleta.service';
 import { Modal } from 'bootstrap';
 import * as bootstrap from 'bootstrap';
 import { faEdit, faFileAlt, faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-view-main',
@@ -35,13 +36,16 @@ export class ViewMainEstadoBoletaComponent implements OnInit {
 
   @ViewChild("EditPermission")EditPermission: ElementRef;
 
+  roles: string[];
+  isAdmin = false;
+
   constructor(
     private _estadoBoleta: FormBuilder, 
     private _editEstadoBoleta: FormBuilder,
-    private _estadoBoletaService: EstadoBoletasService, 
-    private activatedRoute: ActivatedRoute,
+    private _estadoBoletaService: EstadoBoletaService,
     private router: Router,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    private _tokenService: TokenService
     ) {
       this.estadoBoletaForm = this._estadoBoleta.group({
         codEstadoBoleta: ['', [Validators.required, Validators.maxLength(10)] ],
@@ -57,6 +61,12 @@ export class ViewMainEstadoBoletaComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarEstadoBoleta();
+    this.roles = this._tokenService.getAuthorities();
+    this.roles.forEach(rol => {
+      if (rol === 'ROLE_ADMIN') {
+        this.isAdmin = true;
+      }
+    });
   }
 
   cargarEstadoBoleta():void{
