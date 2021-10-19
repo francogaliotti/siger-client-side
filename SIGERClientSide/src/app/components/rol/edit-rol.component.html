@@ -1,0 +1,39 @@
+<div class="modal" id="editRol">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content edit-form">
+            <div class="modal-body ">
+                <h5>Editar Rol</h5>
+                <form [formGroup]="editRolForm">
+                    <input type="hidden" formControlName="idRol">
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-3 offset-1 text-end mt-3" for="Codigo"><b>Nombre * </b></label>
+                            <div class="col-7">
+                                <input formControlName="rolName" (focusout)="checkForm()"
+                                    class="form-control mt-3"
+                                    [class.validfield]="this.editRolForm.get('rolName')?.valid"
+                                    [class.invalidfield]="this.editRolForm.get('rolName')?.invalid && this.editRolForm.get('rolName')?.touched"
+                                    type="text" />
+                                <small class="text-danger" *ngIf="!editRolForm.get('rolName').valid && this.editRolForm.get('rolName')?.touched"> El campo es obligatorio</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h6 class="mt-4">Seleccione los siguientes permisos:</h6>
+                    <div *ngFor="let permiso of permisos" class="text-right" style="border-bottom: lightgrey solid 1px;">
+                        <label class=" offset-2">
+                            <input type="checkbox" value="{{permiso.id}}" name="editPermissions">
+                            &nbsp;{{permiso.nombrePermiso}}
+                        </label>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-footer mt-4">
+                <button #EditRol type="submit" class="btn btn block btn-outline-success" (click)="submit_form()">Actualizar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="close_modal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

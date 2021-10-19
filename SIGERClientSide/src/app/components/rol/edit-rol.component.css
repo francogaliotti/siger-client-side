@@ -9,6 +9,7 @@ small{
     position: absolute;
     z-index: 1;
 }
+
 .validfield{
     border-style: solid 4px;
     border-color: green;

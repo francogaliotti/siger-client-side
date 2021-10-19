@@ -85,8 +85,10 @@ export class ListaPermisoComponent implements OnInit {
 
     this.success = false;
 
-    const permiso = new Permiso(this.formNewPermiso.get('codigoPermiso')?.value,
-      this.formNewPermiso.get('nombrePermiso')?.value);
+    const permiso: Permiso = {
+      codigoPermiso: this.formNewPermiso.get('codigoPermiso')?.value,
+      nombrePermiso: this.formNewPermiso.get('nombrePermiso')?.value
+    };
 
     if (this.formNewPermiso.valid == true) {
       this.permisoService.save(permiso).subscribe(
