@@ -7,16 +7,11 @@ export class Rol extends BaseEntity{
 	
 	nombreRol: string;
 
-    //Relation
-
     permisos: Permiso[];
 
-    constructor(codigoRol:string, nombreRol:string, permisos:Permiso[], id?:number){
+    constructor(){
         super();
-        this.id=id;
-        this.codigoRol=codigoRol;
-        this.nombreRol=nombreRol;
-        this.permisos=permisos;
     }
+
 
 }
