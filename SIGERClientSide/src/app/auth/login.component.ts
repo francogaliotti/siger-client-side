@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/models/usuario';
 import { AuthService } from 'src/app/services/auth.service';
-import { LoginUsuario } from '../models/login-usuario';
+import { LoginUsuario } from '../dto/login-usuario';
 import { TokenService } from '../services/token.service';
 
 @Component({
