@@ -3,9 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EstadoLicencia } from 'src/app/models/estado-licencia';
 import { EstadoLicenciaService } from 'src/app/services/estado-licencia.service';
-import {Modal} from 'bootstrap';
+import { Modal } from 'bootstrap';
 import { faEdit, faFileAlt, faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import * as bootstrap from 'bootstrap';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-lista-estado-licencia',
@@ -18,32 +19,41 @@ export class ListaEstadoLicenciaComponent implements OnInit {
   estadoLicenciaForm: FormGroup;
   editEstadoLicenciaForm: FormGroup;
   testModal: Modal | undefined;
-  newEstadoLicencia: EstadoLicencia = new EstadoLicencia('','');
+  newEstadoLicencia: EstadoLicencia = new EstadoLicencia('', '');
 
   faEdit = faEdit;
   faTrash = faTrash;
   faPlusCircle = faPlusCircle;
-  
 
-  constructor(private _estadoLicencia: FormBuilder,private _estadoLicenciaService: EstadoLicenciaService,
-    private router: Router, private _editEstadoLicencia: FormBuilder) { 
-      this.estadoLicenciaForm = this._estadoLicencia.group({
-        codEstadoLicencia: ['', [Validators.required, Validators.maxLength(10)]],
-        nombreEstadoLicencia: ['', Validators.required]
-      });
-      this.editEstadoLicenciaForm = this._editEstadoLicencia.group({
-        id: ['',Validators.required],
-        codEstadoLicencia: ['', [Validators.required, Validators.maxLength(10)] ],
-        nombreEstadoLicencia: ['', Validators.required]
-      });
-    }
+  roles: string[];
+  isAdmin = false;
+
+
+  constructor(private _estadoLicencia: FormBuilder, private _estadoLicenciaService: EstadoLicenciaService,
+    private router: Router, private _editEstadoLicencia: FormBuilder, private _tokenService: TokenService) {
+    this.estadoLicenciaForm = this._estadoLicencia.group({
+      codEstadoLicencia: ['', [Validators.required, Validators.maxLength(10)]],
+      nombreEstadoLicencia: ['', Validators.required]
+    });
+    this.editEstadoLicenciaForm = this._editEstadoLicencia.group({
+      id: ['', Validators.required],
+      codEstadoLicencia: ['', [Validators.required, Validators.maxLength(10)]],
+      nombreEstadoLicencia: ['', Validators.required]
+    });
+  }
 
 
   ngOnInit(): void {
     this.cargarEstadoLicencia();
+    this.roles = this._tokenService.getAuthorities();
+    this.roles.forEach(rol => {
+      if (rol === 'ROLE_ADMIN') {
+        this.isAdmin = true;
+      }
+    })
   }
 
-  cargarEstadoLicencia():void{
+  cargarEstadoLicencia(): void {
     this._estadoLicenciaService.list().subscribe(
       data => {
         this.estadoLicencia = data;
@@ -54,7 +64,7 @@ export class ListaEstadoLicenciaComponent implements OnInit {
     );
   }
 
-  borrarEstadoLicencia(id?:number):void{
+  borrarEstadoLicencia(id?: number): void {
     this._estadoLicenciaService.delete(id).subscribe(
       data => {
         alert('Se ha eliminado el Estado de Licencia satisfactoriamente')
@@ -65,9 +75,9 @@ export class ListaEstadoLicenciaComponent implements OnInit {
       }
     );
   }
-  onCreate():void{
+  onCreate(): void {
     const estadoLicencia = new EstadoLicencia(this.estadoLicenciaForm.get('codEstadoLicencia')?.value,
-    this.estadoLicenciaForm.get('nombreEstadoLicencia')?.value);
+      this.estadoLicenciaForm.get('nombreEstadoLicencia')?.value);
     this._estadoLicenciaService.save(estadoLicencia).subscribe(
       data => {
         alert('Estado de Licencia creado Satisfactoriamente');
@@ -80,16 +90,16 @@ export class ListaEstadoLicenciaComponent implements OnInit {
       }
     );
   }
- 
-  
-  open(id?: number): void{
-    this.testModal = new bootstrap.Modal(document.getElementById('exampleModal'),{
+
+
+  open(id?: number): void {
+    this.testModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
       keyboard: false
     })
     this.cargarEstadoLicenciaForUpdate(id);
     this.testModal?.show();
   }
- 
+
 
   cargarEstadoLicenciaForUpdate(id?: number): void {
     this._estadoLicenciaService.detail(id).subscribe(
@@ -97,8 +107,8 @@ export class ListaEstadoLicenciaComponent implements OnInit {
         this.newEstadoLicencia = data;
         console.log(this.newEstadoLicencia);
         this.editEstadoLicenciaForm = this._editEstadoLicencia.group({
-          id: [this.newEstadoLicencia.id,Validators.required],
-          codEstadoLicencia: [this.newEstadoLicencia.codEstadoLicencia, [Validators.required, Validators.maxLength(10)] ],
+          id: [this.newEstadoLicencia.id, Validators.required],
+          codEstadoLicencia: [this.newEstadoLicencia.codEstadoLicencia, [Validators.required, Validators.maxLength(10)]],
           nombreEstadoLicencia: [this.newEstadoLicencia.nombreEstadoLicencia, Validators.required]
         });
       },

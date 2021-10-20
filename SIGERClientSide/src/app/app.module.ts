@@ -26,6 +26,7 @@ import { EditRolComponent } from './components/rol/edit-rol.component';
 import { RegisterComponent } from './auth/register.component';
 import { LoginComponent } from './auth/login.component';
 import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
+import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita.component';
 import { interceptorProvider } from './interceptors/estado-boleta-interceptor.service';
 import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico.component';
 ;
@@ -48,6 +49,8 @@ import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico
     VerticalnavbarComponent,
     HomeComponent,
     ErrorsComponent,
+    HomeAdmComponent,
+    ZonaInhospitaComponent,
     IndexRolComponent,
     AddPermissionComponent,
     EditRolComponent,

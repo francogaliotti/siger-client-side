@@ -13,6 +13,11 @@ import { ErrorsComponent } from './layouts/errors/errors.component';
 import { HomeComponent } from './layouts/home/home.component';
 import { RecoveryPasswordComponent } from './layouts/recovery-password/recovery-password.component';
 import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
+import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita.component';
+import { EstadoBoletaGuardService as guard} from './guards/estado-boleta-guard.service';
+import { EstadoLicenciaGuardService as estadoLicenciaGuard} from './guards/estado-licencia-guard.service';
+import { ZonaInhospitaGuardService as zonaInhospitaGuard} from './guards/zona-inhospita-guard.service';
+
 import { EstadoBoletaGuardService as estadoBoletaGuard} from './guards/estado-boleta-guard.service';
 import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico.component';
 import { ViaticoGuardService as ViaticoGuard} from './guards/viatico-guard.service';
@@ -23,7 +28,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'recoveryPassword', component: RecoveryPasswordComponent},
   {path: 'estadoBoleta', component: ViewMainEstadoBoletaComponent, canActivate: [estadoBoletaGuard], data: { expectedRol: ['admin', 'user'] }},
-  {path: 'estadoLicencia', component: ListaEstadoLicenciaComponent},
+  {path: 'estadoLicencia', component: ListaEstadoLicenciaComponent, canActivate: [estadoLicenciaGuard], data: { expectedRol: ['admin', 'user'] }},
+  {path: 'zonaInhospita', component: ZonaInhospitaComponent, canActivate: [zonaInhospitaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'viatico', component: ViewMainViaticoComponent, canActivate: [ViaticoGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'permisos', component: ListaPermisoComponent},
   {path: 'roles', component: IndexRolComponent},
