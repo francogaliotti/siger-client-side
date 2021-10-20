@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './layouts/login/login.component';
 import { RecoveryPasswordComponent } from './layouts/recovery-password/recovery-password.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ListaPermisoComponent } from './components/permiso/lista-permiso.component';
@@ -25,9 +24,11 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { HomeComponent } from './layouts/home/home.component';
 import { ErrorsComponent } from './layouts/errors/errors.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { RegisterComponent } from './auth/register.component';
+import { LoginComponent } from './auth/login.component';
 import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
 import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita.component';
-;
+import { interceptorProvider } from './interceptors/estado-boleta-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,9 @@ import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospi
     HomeComponent,
     ErrorsComponent,
     HomeAdmComponent,
-    ZonaInhospitaComponent
+    ZonaInhospitaComponent,
+    RegisterComponent,
+    HomeAdmComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,7 @@ import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospi
     SweetAlert2Module,
     SweetAlert2Module.forChild()
   ],
-  providers: [],
+  providers: [interceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
