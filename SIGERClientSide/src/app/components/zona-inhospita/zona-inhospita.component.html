@@ -5,7 +5,7 @@
           Configure las Zonas Inhospitas
         </div>
       </header>
-      <div class="container altaZona mt-4">
+      <div class="container altaZona mt-4" *ngIf="isAdmin">
 
         <form [formGroup]="zonaInhospitaForm" (ngSubmit)="onCreate()">
             <header>
@@ -92,7 +92,7 @@
                 <th scope="col">Codigo</th>
                 <th scope="col">Denominación</th>
                 <th scope="col">Precio</th>
-                <th scope="col">Acciones</th>
+                <th scope="col" *ngIf="isAdmin">Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -101,10 +101,10 @@
                 <td>{{zona.codZona}}</td>
                 <td>{{zona.denominacionZona}}</td>
                 <td>${{zona.precio}}</td>
-                <td><button class="btn bg-secondary" (click)="open(zona.id)">
+                <td><button class="btn bg-secondary" (click)="open(zona.id)" *ngIf="isAdmin">
                   <fa-icon [icon]="faEdit"></fa-icon>
                     Editar</button>
-                  <button class="btn bg-danger" (click)="borrarZona(zona.id)">
+                  <button class="btn bg-danger" (click)="borrarZona(zona.id)" *ngIf="isAdmin">
                     <fa-icon [icon]="faTrash"></fa-icon>
                     Eliminar</button>
                 </td>
@@ -117,7 +117,7 @@
       </div>
 </div>
 
-<!-- 
+
 <div class="modal fade" id="exampleModal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -130,18 +130,18 @@
         <div class="modal-body">
           <form [formGroup]="editZonaForm" (ngSubmit)="onUpdate(newZona.id)">
   
-            <input type="hidden" formControlName="id" value="{{newEstadoLicencia.id}}">
+            <input type="hidden" formControlName="id" value="{{newZona.id}}">
             <div class="form-group">
               <div class="row">
                 <div class="col-5">
-                  <label class="mt-3" for="Codigo"><b>Codigo Estado Licencia</b></label>
+                  <label class="mt-3" for="Codigo"><b>Codigo Zona Inhospita</b></label>
                 </div>
                 <div class="col-7">
-                  <input formControlName="codEstadoLicencia" class="form-control codEstadoLicencia-inputs mt-3"
-                    maxlength="10" value="{{newEstadoLicencia.codEstadoLicencia}}"
-                    [class.validfield]="this.editEstadoLicenciaForm.get('codEstadoLicencia')?.valid"
-                    [class.invalidfield]="this.editEstadoLicenciaForm.get('codEstadoLicencia')?.invalid && this.editEstadoLicenciaForm.get('codEstadoLicencia')?.touched"
-                    type="text" placeholder="Ingrese Codigo del Estado Licencia" />
+                  <input formControlName="codZona" class="form-control codZona-inputs mt-3"
+                    maxlength="10" value="{{newZona.codZona}}"
+                    [class.validfield]="this.editZonaForm.get('codZona')?.valid"
+                    [class.invalidfield]="this.editZonaForm.get('codZona')?.invalid && this.editZonaForm.get('codZona')?.touched"
+                    type="text" placeholder="Ingrese Código de Zona" />
                 </div>
               </div>
   
@@ -149,17 +149,32 @@
             <div class="form-group">
               <div class="row">
                 <div class="col-5">
-                  <label class="mt-3" for="Codigo"><b>Nombre Estado Licencia</b></label>
+                  <label class="mt-3" for="Codigo"><b>Nombre Zona Inhospita</b></label>
                 </div>
                 <div class="col-7">
-                  <input formControlName="nombreEstadoLicencia" class="form-control nombreEstadoLicencia-inputs mt-3"
-                    value="{{newEstadoLicencia.nombreEstadoLicencia}}"
-                    [class.validfield]="this.editEstadoLicenciaForm.get('nombreEstadoLicencia')?.valid"
-                    [class.invalidfield]="this.editEstadoLicenciaForm.get('nombreEstadoLicencia')?.invalid && this.editEstadoLicenciaForm.get('nombreEstadoLicencia')?.touched"
-                    type="text" placeholder="Ingrese Nombre del Estado Licencia" />
+                  <input formControlName="denominacionZona" class="form-control denominacionZona-inputs mt-3"
+                    value="{{newZona.denominacionZona}}"
+                    [class.validfield]="this.editZonaForm.get('denominacionZona')?.valid"
+                    [class.invalidfield]="this.editZonaForm.get('denominacionZona')?.invalid && this.editZonaForm.get('denominacionZona')?.touched"
+                    type="text" placeholder="Ingrese Nombre de Zona" />
                 </div>
               </div>
   
+            </div>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-5">
+                  <label class="mt-3" for="Codigo"><b>Precio de zona</b></label>
+                </div>
+                <div class="col-7">
+                  <input formControlName="precio" class="form-control precio-inputs mt-3"
+                    [class.validfield]="this.editZonaForm.get('precio')?.valid"
+                    [class.invalidfield]="this.editZonaForm.get('precio')?.invalid && this.editZonaForm.get('precio')?.touched"
+                    type="text" placeholder="Ingrese el precio" />
+                  
+                </div>
+              </div>
             </div>
   
             <div class="form-group">
@@ -176,4 +191,3 @@
     </div>
   
   </div>
--->
