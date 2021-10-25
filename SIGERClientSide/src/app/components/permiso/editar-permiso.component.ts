@@ -1,6 +1,5 @@
 import { Component, ElementRef, EventEmitter, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { Modal } from 'bootstrap';
 import * as bootstrap from 'bootstrap';
 import { Permiso } from 'src/app/models/permiso';
@@ -26,7 +25,6 @@ export class EditarPermisoComponent implements OnInit {
   constructor(
     private _permiso: PermisoService,
     private permisoForm: FormBuilder,
-    private activatedRoute: ActivatedRoute,
     private renderer: Renderer2) {
 
       this.loadForm_WithoutData();
@@ -52,7 +50,10 @@ export class EditarPermisoComponent implements OnInit {
           });
   
           this.refreshEvent.emit();
+         
           this.success = true;
+
+          this.close();
         },
         err => {
           console.log(err);

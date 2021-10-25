@@ -9,10 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { ListaPermisoComponent } from './components/permiso/lista-permiso.component';
 import { EditarPermisoComponent } from './components/permiso/editar-permiso.component';
 import { ListaEstadoLicenciaComponent } from './components/estadoLicencia/lista-estado-licencia.component';
-import { ListaRolComponent } from './components/rol/lista-rol.component';
-import { DetalleRolComponent } from './components/rol/detalle-rol.component';
-import { EditarRolComponent } from './components/rol/editar-rol.component';
-import { NuevoRolComponent } from './components/rol/nuevo-rol.component';
 import { ListaProvinciaComponent } from './components/provincia/lista-provincia.component';
 import { DetalleProvinciaComponent } from './components/provincia/detalle-provincia.component';
 import { EditarProvinciaComponent } from './components/provincia/editar-provincia.component';
@@ -24,9 +20,13 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { HomeComponent } from './layouts/home/home.component';
 import { ErrorsComponent } from './layouts/errors/errors.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { IndexRolComponent } from './components/rol/index-rol.component';
+import { AddPermissionComponent } from './components/rol/add-permission.component';
+import { EditRolComponent } from './components/rol/edit-rol.component';
 import { RegisterComponent } from './auth/register.component';
 import { LoginComponent } from './auth/login.component';
 import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
+import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita.component';
 import { interceptorProvider } from './interceptors/estado-boleta-interceptor.service';
 import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico.component';
 ;
@@ -39,10 +39,6 @@ import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico
     ListaPermisoComponent,
     EditarPermisoComponent,
     ListaEstadoLicenciaComponent,
-    ListaRolComponent,
-    DetalleRolComponent,
-    EditarRolComponent,
-    NuevoRolComponent,
     ListaProvinciaComponent,
     DetalleProvinciaComponent,
     EditarProvinciaComponent,
@@ -53,6 +49,11 @@ import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico
     VerticalnavbarComponent,
     HomeComponent,
     ErrorsComponent,
+    HomeAdmComponent,
+    ZonaInhospitaComponent,
+    IndexRolComponent,
+    AddPermissionComponent,
+    EditRolComponent,
     RegisterComponent,
     HomeAdmComponent,
     ViewMainViaticoComponent

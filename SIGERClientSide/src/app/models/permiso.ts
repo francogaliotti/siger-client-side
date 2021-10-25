@@ -6,11 +6,8 @@ export class Permiso extends BaseEntity{
 	
 	nombrePermiso: string;
 
-    constructor(codigoPermiso:string, nombrePermiso:string, id?:number){
+    constructor(){
         super();
-        this.codigoPermiso=codigoPermiso;
-        this.nombrePermiso=nombrePermiso;
-        this.id=id;
     }
     
 }
