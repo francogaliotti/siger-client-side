@@ -89,7 +89,7 @@ export class ViewMainViaticoComponent implements OnInit {
   borrarViatico(id?:number):void{
     this._viaticoService.delete(id).subscribe(
       data => {
-        alert('Se ha eliminado el Viatico satisfactoriamente');
+        //alert('Se ha eliminado el Viatico satisfactoriamente');
         Swal.fire({
           title: "Éxito",
           icon: "success",
@@ -99,7 +99,7 @@ export class ViewMainViaticoComponent implements OnInit {
         this.cargarViatico();
       },
       err => {
-        alert(err.error.mensaje);
+        //alert(err.error.mensaje);
         Swal.fire({
           title: "Oops! hubo un problema",
           icon: "error",
