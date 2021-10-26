@@ -21,6 +21,7 @@ import { ZonaInhospitaGuardService as zonaInhospitaGuard} from './guards/zona-in
 import { EstadoBoletaGuardService as estadoBoletaGuard} from './guards/estado-boleta-guard.service';
 import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico.component';
 import { ViaticoGuardService as ViaticoGuard} from './guards/viatico-guard.service';
+import { TipoLicenciaComponent } from './components/tipo-licencia/tipo-licencia.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path: 'recoveryPassword', component: RecoveryPasswordComponent},
   {path: 'estadoBoleta', component: ViewMainEstadoBoletaComponent, canActivate: [estadoBoletaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'estadoLicencia', component: ListaEstadoLicenciaComponent, canActivate: [estadoLicenciaGuard], data: { expectedRol: ['admin', 'user'] }},
+  {path: 'tipoLicencia', component: TipoLicenciaComponent},
   {path: 'zonaInhospita', component: ZonaInhospitaComponent, canActivate: [zonaInhospitaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'viatico', component: ViewMainViaticoComponent, canActivate: [ViaticoGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'permisos', component: ListaPermisoComponent},

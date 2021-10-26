@@ -35,4 +35,11 @@ export class TipoLicencia extends BaseEntity{
 
 	tipoRequerimiento: TipoRequerimiento;
 
+	constructor(codigo: string, denominacion: string, id?: number){
+        super();
+        this.id = id;
+        this.codigo =  codigo;
+        this.denominacion = denominacion;
+    }
+
 }

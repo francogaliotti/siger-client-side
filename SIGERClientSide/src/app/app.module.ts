@@ -29,6 +29,7 @@ import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
 import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita.component';
 import { interceptorProvider } from './interceptors/estado-boleta-interceptor.service';
 import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico.component';
+import { TipoLicenciaComponent } from './components/tipo-licencia/tipo-licencia.component';
 ;
 
 @NgModule({
@@ -56,7 +57,8 @@ import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico
     EditRolComponent,
     RegisterComponent,
     HomeAdmComponent,
-    ViewMainViaticoComponent
+    ViewMainViaticoComponent,
+    TipoLicenciaComponent
   ],
   imports: [
     BrowserModule,
