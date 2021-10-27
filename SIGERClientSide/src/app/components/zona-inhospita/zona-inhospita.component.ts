@@ -43,12 +43,6 @@ export class ZonaInhospitaComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarZonaInhospita();
-    this.roles = this._tokenService.getAuthorities();
-    this.roles.forEach(rol => {
-      if (rol === 'ROLE_ADMIN') {
-        this.isAdmin = true;
-      }
-    })
   }
 
   cargarZonaInhospita():void{

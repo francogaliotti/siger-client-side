@@ -45,12 +45,6 @@ export class ListaEstadoLicenciaComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarEstadoLicencia();
-    this.roles = this._tokenService.getAuthorities();
-    this.roles.forEach(rol => {
-      if (rol === 'ROLE_ADMIN') {
-        this.isAdmin = true;
-      }
-    })
   }
 
   cargarEstadoLicencia(): void {
