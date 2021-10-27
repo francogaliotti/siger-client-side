@@ -61,12 +61,6 @@ export class ViewMainEstadoBoletaComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarEstadoBoleta();
-    this.roles = this._tokenService.getAuthorities();
-    this.roles.forEach(rol => {
-      if (rol === 'ROLE_ADMIN') {
-        this.isAdmin = true;
-      }
-    });
   }
 
   cargarEstadoBoleta():void{

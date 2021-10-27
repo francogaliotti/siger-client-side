@@ -66,12 +66,6 @@ export class ViewMainViaticoComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarViatico();
-    this.roles = this._tokenService.getAuthorities();
-    this.roles.forEach(rol => {
-      if (rol === 'ROLE_ADMIN') {
-        this.isAdmin = true;
-      }
-    });
   }
 
   cargarViatico():void{
@@ -89,7 +83,6 @@ export class ViewMainViaticoComponent implements OnInit {
   borrarViatico(id?:number):void{
     this._viaticoService.delete(id).subscribe(
       data => {
-        //alert('Se ha eliminado el Viatico satisfactoriamente');
         Swal.fire({
           title: "Éxito",
           icon: "success",
@@ -99,7 +92,6 @@ export class ViewMainViaticoComponent implements OnInit {
         this.cargarViatico();
       },
       err => {
-        //alert(err.error.mensaje);
         Swal.fire({
           title: "Oops! hubo un problema",
           icon: "error",
@@ -174,7 +166,6 @@ export class ViewMainViaticoComponent implements OnInit {
     this.viatico.importe = this.editViaticoForm.get('importe')?.value;
     this._viaticoService.update(id, this.viatico).subscribe(
       data => {
-        //alert('Viatico actualizado Satisfactoriamente');
         this.cargarViatico();
         this.modal?.hide();
 

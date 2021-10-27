@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
@@ -29,7 +29,7 @@ import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
 import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita.component';
 import { interceptorProvider } from './interceptors/estado-boleta-interceptor.service';
 import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico.component';
-;
+import { ChangePasswordComponent } from './components/changepassword/change-password.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +56,8 @@ import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico
     EditRolComponent,
     RegisterComponent,
     HomeAdmComponent,
-    ViewMainViaticoComponent
+    ViewMainViaticoComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +67,8 @@ import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico
     FontAwesomeModule,
     SweetAlert2Module.forRoot(),
     SweetAlert2Module,
-    SweetAlert2Module.forChild()
+    SweetAlert2Module.forChild(),
+    FormsModule
   ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent]
