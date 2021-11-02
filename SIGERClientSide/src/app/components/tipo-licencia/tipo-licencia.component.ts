@@ -10,11 +10,11 @@ import { TipoLicencia } from 'src/app/models/tipo-licencia';
 import { TipoLicenciaService } from 'src/app/services/tipo-licencia.service';
 
 @Component({
-  selector: 'app-lista-estado-licencia',
-  templateUrl: './lista-estado-licencia.component.html',
-  styleUrls: ['./lista-estado-licencia.component.css']
+  selector: 'tipo-licencia',
+  templateUrl: './tipo-licencia.component.html',
+  styleUrls: ['./tipo-licencia.component.css']
 })
-export class ListaEstadoLicenciaComponent implements OnInit {
+export class TipoLicenciaComponent implements OnInit {
 
   tipoLicencia: TipoLicencia[] = [];
   tipoLicenciaForm: FormGroup;
@@ -65,7 +65,7 @@ export class ListaEstadoLicenciaComponent implements OnInit {
     );
   }
 
-  borrarEstadoLicencia(id?: number): void {
+  borrarTipoLicencia(id?: number): void {
     this._tipoLicenciaService.delete(id).subscribe(
       data => {
         alert('Se ha eliminado el Tipo de Licencia satisfactoriamente')

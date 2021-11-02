@@ -137,7 +137,7 @@
               </div>
               <div class="col-7">
                 <input formControlName="denominacion" class="form-control denominacion-inputs mt-3"
-                  value="{{newTipoLicencia.nombreEstadoLicencia}}"
+                  value="{{newTipoLicencia.denominacion}}"
                   [class.validfield]="this.editTipoLicenciaForm.get('denominacion')?.valid"
                   [class.invalidfield]="this.editTipoLicenciaForm.get('denominacion')?.invalid && this.editTipoLicenciaForm.get('denominacion')?.touched"
                   type="text" placeholder="Ingrese Nombre del Tipo de Licencia" />
