@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './app-routing.module';
@@ -31,6 +31,7 @@ import { interceptorProvider } from './interceptors/estado-boleta-interceptor.se
 import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico.component';
 import { TipoLicenciaComponent } from './components/tipo-licencia/tipo-licencia.component';
 ;
+import { ChangePasswordComponent } from './components/changepassword/change-password.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { TipoLicenciaComponent } from './components/tipo-licencia/tipo-licencia.
     RegisterComponent,
     HomeAdmComponent,
     ViewMainViaticoComponent,
-    TipoLicenciaComponent
+    TipoLicenciaComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,8 @@ import { TipoLicenciaComponent } from './components/tipo-licencia/tipo-licencia.
     FontAwesomeModule,
     SweetAlert2Module.forRoot(),
     SweetAlert2Module,
-    SweetAlert2Module.forChild()
+    SweetAlert2Module.forChild(),
+    FormsModule
   ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent]

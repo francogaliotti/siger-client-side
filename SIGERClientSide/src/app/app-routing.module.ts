@@ -14,20 +14,21 @@ import { HomeComponent } from './layouts/home/home.component';
 import { RecoveryPasswordComponent } from './layouts/recovery-password/recovery-password.component';
 import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
 import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita.component';
-import { EstadoBoletaGuardService as guard} from './guards/estado-boleta-guard.service';
 import { EstadoLicenciaGuardService as estadoLicenciaGuard} from './guards/estado-licencia-guard.service';
 import { ZonaInhospitaGuardService as zonaInhospitaGuard} from './guards/zona-inhospita-guard.service';
-
 import { EstadoBoletaGuardService as estadoBoletaGuard} from './guards/estado-boleta-guard.service';
 import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico.component';
 import { ViaticoGuardService as ViaticoGuard} from './guards/viatico-guard.service';
 import { TipoLicenciaComponent } from './components/tipo-licencia/tipo-licencia.component';
+import { LoginGuard } from './guards/login.guard';
+import { ChangePasswordComponent } from './components/changepassword/change-password.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'home', component: HomeAdmComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'recoveryPassword', component: RecoveryPasswordComponent},
+  {path: 'recoveryPassword', component: RecoveryPasswordComponent, canActivate: [LoginGuard]},
+  {path: 'change-password/:tokenPassword', component: ChangePasswordComponent, canActivate: [LoginGuard]},
   {path: 'estadoBoleta', component: ViewMainEstadoBoletaComponent, canActivate: [estadoBoletaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'estadoLicencia', component: ListaEstadoLicenciaComponent, canActivate: [estadoLicenciaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'tipoLicencia', component: TipoLicenciaComponent},
