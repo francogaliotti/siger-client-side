@@ -46,12 +46,7 @@ export class TipoLicenciaComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarTipoLicencia();
-    this.roles = this._tokenService.getAuthorities();
-    this.roles.forEach(rol => {
-      if (rol === 'ROLE_ADMIN') {
-        this.isAdmin = true;
-      }
-    })
+    this.isAdmin = this._tokenService.IsAdmin();
   }
 
   cargarTipoLicencia(): void {

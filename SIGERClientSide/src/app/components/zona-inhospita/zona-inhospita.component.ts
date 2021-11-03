@@ -43,6 +43,7 @@ export class ZonaInhospitaComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarZonaInhospita();
+    this.isAdmin = this._tokenService.IsAdmin();
   }
 
   cargarZonaInhospita():void{
