@@ -4,7 +4,7 @@ import { Sector } from "./sector";
 
 export class TipoRequerimiento extends BaseEntity{
 
-    denominacion: string;
+    tipoRequerimientoDenominacion: string;
 
 	cantNiveles: number;
 
@@ -13,5 +13,11 @@ export class TipoRequerimiento extends BaseEntity{
     aprueban: Array<Sector>;
 
     aprobadores: Array<Empleado>;
+
+    constructor (tipoRequerimientoDenominacion: string, cantNiveles: number){
+        super();
+        this.tipoRequerimientoDenominacion = tipoRequerimientoDenominacion;
+        this.cantNiveles = cantNiveles;
+    }
     
 }

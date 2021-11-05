@@ -66,6 +66,7 @@ export class ViewMainViaticoComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarViatico();
+    this.isAdmin = this._tokenService.IsAdmin();
   }
 
   cargarViatico():void{

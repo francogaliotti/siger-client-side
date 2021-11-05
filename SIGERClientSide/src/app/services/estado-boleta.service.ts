@@ -24,10 +24,10 @@ export class EstadoBoletaService extends connectionURL{
     return this.httpClient.get<EstadoBoleta>(this.app_url + this.endpoint);
   }
 
-  public detailname(nombreEstadoBoleta: string): Observable<EstadoBoleta>{
+  /*public detailname(nombreEstadoBoleta: string): Observable<EstadoBoleta>{
     this.endpoint = 'estadoBoleta/detail/' + nombreEstadoBoleta;
     return this.httpClient.get<EstadoBoleta>(this.app_url + this.endpoint);
-  }
+  }*/
 
   public save(estadoBoleta: EstadoBoleta): Observable<any>{
     this.endpoint = 'estadoBoleta/create';
