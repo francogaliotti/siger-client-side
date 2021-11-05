@@ -45,6 +45,7 @@ export class ListaEstadoLicenciaComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarEstadoLicencia();
+    this.isAdmin = this._tokenService.IsAdmin();
   }
 
   cargarEstadoLicencia(): void {

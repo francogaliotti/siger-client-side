@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { EstadoBoleta } from 'src/app/models/estado-boleta';
 import { EstadoBoletaService } from 'src/app/services/estado-boleta.service';
 import { Modal } from 'bootstrap';
@@ -56,11 +56,11 @@ export class ViewMainEstadoBoletaComponent implements OnInit {
         codEstadoBoleta: ["", [Validators.required, Validators.maxLength(10)] ],
         nombreEstadoBoleta: ["", Validators.required]
       });
-      
      }
 
   ngOnInit(): void {
     this.cargarEstadoBoleta();
+    this.isAdmin = this._tokenService.IsAdmin();
   }
 
   cargarEstadoBoleta():void{

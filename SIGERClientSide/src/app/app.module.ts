@@ -23,13 +23,13 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { IndexRolComponent } from './components/rol/index-rol.component';
 import { AddPermissionComponent } from './components/rol/add-permission.component';
 import { EditRolComponent } from './components/rol/edit-rol.component';
-import { RegisterComponent } from './auth/register.component';
 import { LoginComponent } from './auth/login.component';
 import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
 import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita.component';
 import { interceptorProvider } from './interceptors/estado-boleta-interceptor.service';
 import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico.component';
 import { ChangePasswordComponent } from './components/changepassword/change-password.component';
+import { ViewMainTipoBoletaComponent } from './components/tipo-boleta/view-main-tipo-boleta.component';
 
 @NgModule({
   declarations: [
@@ -54,10 +54,10 @@ import { ChangePasswordComponent } from './components/changepassword/change-pass
     IndexRolComponent,
     AddPermissionComponent,
     EditRolComponent,
-    RegisterComponent,
     HomeAdmComponent,
     ViewMainViaticoComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    ViewMainTipoBoletaComponent
   ],
   imports: [
     BrowserModule,

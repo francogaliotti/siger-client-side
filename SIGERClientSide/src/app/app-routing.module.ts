@@ -4,10 +4,6 @@ import { LoginComponent } from './auth/login.component';
 import { ViewMainEstadoBoletaComponent } from './components/estadoBoleta/view-main-estado-boleta.component';
 import { ListaEstadoLicenciaComponent } from './components/estadoLicencia/lista-estado-licencia.component';
 import { ListaPermisoComponent } from './components/permiso/lista-permiso.component';
-import { DetalleProvinciaComponent } from './components/provincia/detalle-provincia.component';
-import { EditarProvinciaComponent } from './components/provincia/editar-provincia.component';
-import { ListaProvinciaComponent } from './components/provincia/lista-provincia.component';
-import { NuevoProvinciaComponent } from './components/provincia/nuevo-provincia.component';
 import { IndexRolComponent } from './components/rol/index-rol.component';
 import { ErrorsComponent } from './layouts/errors/errors.component';
 import { HomeComponent } from './layouts/home/home.component';
@@ -21,6 +17,8 @@ import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico
 import { ViaticoGuardService as ViaticoGuard} from './guards/viatico-guard.service';
 import { LoginGuard } from './guards/login.guard';
 import { ChangePasswordComponent } from './components/changepassword/change-password.component';
+import { ViewMainTipoBoletaComponent } from './components/tipo-boleta/view-main-tipo-boleta.component';
+import { TipoBoletaGuardService as tipoBoletaGuard} from './guards/tipo-boleta-guard.service';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -34,10 +32,7 @@ const routes: Routes = [
   {path: 'viatico', component: ViewMainViaticoComponent, canActivate: [ViaticoGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'permisos', component: ListaPermisoComponent},
   {path: 'roles', component: IndexRolComponent},
-  {path: 'provincia', component: ListaProvinciaComponent},
-  {path: 'provincia/detalle/:id', component:DetalleProvinciaComponent},
-  {path: 'provincia/nuevo', component: NuevoProvinciaComponent},
-  {path: 'provincia/editar/:id', component: EditarProvinciaComponent},
+  {path: 'tipoBoleta', component: ViewMainTipoBoletaComponent, canActivate:  [tipoBoletaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: '**', component: ErrorsComponent}
   
 ];
