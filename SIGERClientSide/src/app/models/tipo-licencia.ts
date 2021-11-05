@@ -16,6 +16,8 @@ export class TipoLicencia extends BaseEntity{
 	codigo: string;
 	
 	denominacion: string;
+
+	justificaPresentismo: boolean;
 	
 	generaRequerimiento: string;
 	

@@ -8,6 +8,8 @@ import * as bootstrap from 'bootstrap';
 import { TokenService } from 'src/app/services/token.service';
 import { TipoLicencia } from 'src/app/models/tipo-licencia';
 import { TipoLicenciaService } from 'src/app/services/tipo-licencia.service';
+import { TipoLicenciaDTO } from 'src/app/dto/tipoLicenciaDTO';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'tipo-licencia',
@@ -16,11 +18,11 @@ import { TipoLicenciaService } from 'src/app/services/tipo-licencia.service';
 })
 export class TipoLicenciaComponent implements OnInit {
 
-  tipoLicencia: TipoLicencia[] = [];
+  tipoLicencia: TipoLicenciaDTO[] = [];
   tipoLicenciaForm: FormGroup;
   editTipoLicenciaForm: FormGroup;
   testModal: Modal | undefined;
-  newTipoLicencia: TipoLicencia = new TipoLicencia('', '');
+  newTipoLicencia: TipoLicenciaDTO = new TipoLicenciaDTO();
 
   faEdit = faEdit;
   faTrash = faTrash;
@@ -34,7 +36,7 @@ export class TipoLicenciaComponent implements OnInit {
     private router: Router, private _editTipoLicencia: FormBuilder, private _tokenService: TokenService) {
     this.tipoLicenciaForm = this._tipoLicencia.group({
       codigo: ['', [Validators.required, Validators.maxLength(10)]],
-      denominacion: ['', Validators.required]
+      denominacion: ['', Validators.required],
     });
     this.editTipoLicenciaForm = this._editTipoLicencia.group({
       id: ['', Validators.required],
@@ -72,8 +74,9 @@ export class TipoLicenciaComponent implements OnInit {
     );
   }
   onCreate(): void {
-    const tipoLicencia = new TipoLicencia(this.tipoLicenciaForm.get('codigo')?.value,
-      this.tipoLicenciaForm.get('denominacion')?.value);
+    const tipoLicencia = new TipoLicenciaDTO();
+      tipoLicencia.codigo=this.tipoLicenciaForm.get('codigo')?.value;
+      tipoLicencia.denominacion = this.tipoLicenciaForm.get('denominacion')?.value
     this._tipoLicenciaService.save(tipoLicencia).subscribe(
       data => {
         alert('Tipo de Licencia creado Satisfactoriamente');
