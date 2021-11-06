@@ -56,6 +56,14 @@
     
     top: 300px; left: 576px;
 }
+.precio-inputs{
+
+    
+    width: 300px; 
+    height: 25px;
+    
+    top: 300px; left: 576px;
+}
 .btn-outline-success{
     background-color: #169BD5;
     float: right;
