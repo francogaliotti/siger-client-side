@@ -1,27 +1,26 @@
-import { BaseEntity } from "./base-entity";
-import { TipoRequerimiento } from "./tipo-requerimiento";
+import { BaseEntity } from "../models/base-entity";
 
-export class TipoBoleta extends BaseEntity{
+export class TipoBoletaDTO extends BaseEntity{
 
-    codigo: string;
+     codigo: string;
+     
+     tipoBoletaDenominacion: string;
+     
+     tieneMovilidad: boolean;
+     
+     tieneZonaInhospita: boolean;
+     
+     tieneViatico: boolean;
+     
+     permiteNoFichadaRetorno: boolean;
+     
+     permiteNoFichadaSalida: boolean;
+     
+     tipoRequerimientoDenominacion: string;
+     
+     tipoRequerimientoCantNiveles:number;
 
-	tipoBoletaDenominacion: string;
-	
-	tieneMovilidad: boolean;
-	
-	tieneZonaInhospita: boolean;
-	
-	tieneViatico: boolean;
-	
-	permiteNoFichadaRetorno: boolean;
-	
-	permiteNoFichadaSalida: boolean;
-
-	//Relation
-
-	tipoRequerimiento: TipoRequerimiento;
-
-	constructor(
+     constructor(
 		codigo: string,
 		tipoBoletaDenominacion: string,
 		tieneMovilidad: boolean,
@@ -41,5 +40,4 @@ export class TipoBoleta extends BaseEntity{
 		this.permiteNoFichadaSalida = permiteNoFichadaSalida;
 		//this.tipoRequerimiento = tipoRequerimiento;
 	}
-	
 }

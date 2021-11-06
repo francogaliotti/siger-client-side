@@ -23,10 +23,10 @@ export class ViaticoService extends connectionURL {
     return this.httpClient.get<Viatico>(this.app_url + this.endpoint);
   }
 
-  public detailname(denominacionViatico: string): Observable<Viatico>{
+  /*public detailname(denominacionViatico: string): Observable<Viatico>{
     this.endpoint = 'viatico/detail/' + denominacionViatico;
     return this.httpClient.get<Viatico>(this.app_url + this.endpoint);
-  }
+  }*/
 
   public save(viatico: Viatico): Observable<any>{
     this.endpoint = 'viatico/create';
