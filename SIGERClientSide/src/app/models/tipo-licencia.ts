@@ -16,6 +16,8 @@ export class TipoLicencia extends BaseEntity{
 	codigo: string;
 	
 	denominacion: string;
+
+	justificaPresentismo: boolean;
 	
 	generaRequerimiento: string;
 	
@@ -34,5 +36,12 @@ export class TipoLicencia extends BaseEntity{
 	//Relation
 
 	tipoRequerimiento: TipoRequerimiento;
+
+	constructor(codigo: string, denominacion: string, id?: number){
+        super();
+        this.id = id;
+        this.codigo =  codigo;
+        this.denominacion = denominacion;
+    }
 
 }

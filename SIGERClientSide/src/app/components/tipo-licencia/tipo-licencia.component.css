@@ -1,13 +1,13 @@
 .conteiner{
     background-color: #EBFFEC;
     font-family:'Times New Roman', Times, serif;
-    font-size: 13px;
+    font-size: 7px;
 }
 
 .row{
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 18px;
-    text-align: center;
+    font-size: 15px;
+    text-align: left;
 }
 
 .searcher{
@@ -15,15 +15,18 @@
     height: 34px;
     width: 475px;
 }
+h1{
+    font-size: 20px;
+    text-align: center;
+}
 
-
-.altaZona{
+.altaTipoLicencia{
     background: #EBFFEC;
     margin-top: 20px;
-    margin-left: 350px;
+    margin-left: 220px;
     top: 2px; left: 380px;
-    width: 650px;
-    height: 250px;
+    width: 880px;
+    height: 530px;
     border: 2px solid black;
     box-shadow: 5px 5px 15px 2px;
 }
@@ -39,7 +42,7 @@
     text-align: center;
 }
 
-.codZona-inputs{
+.codigo-inputs{
    
     
     width: 300px; 
@@ -48,15 +51,7 @@
     top: 268px; left: 576px;
 }
 
-.denominacionZona-inputs{
-
-    
-    width: 300px; 
-    height: 25px;
-    
-    top: 300px; left: 576px;
-}
-.precio-inputs{
+.denominacion-inputs{
 
     
     width: 300px; 
@@ -95,7 +90,7 @@
     background: #EBFFEC;
     margin-top: 20px;
     width: 600px;
-    height: 300px;
+    height: 250px;
     top: 2px;
     border: 2px solid #333333;
 }
@@ -133,16 +128,19 @@ th:nth-child(3){
     width: 15%;
 }
 
-
-td:nth-child(4){
-    width: 4%;
-}
-
-td:nth-child(5){
+td:nth-child(3){
     width: 15%;
 }
 
-td:nth-child(5) > button{
+th:nth-child(4){
+    width: 15%;
+}
+
+td:nth-child(4){
+    width: 15%;
+}
+
+td:nth-child(4) > button{
     margin-left: 20px;
     color: white;
 }
@@ -153,6 +151,6 @@ table > tbody > tr > td > button{
     padding: 0.5px;
 }
 .table-responsive{
-    margin-left: 300px;
+    margin-left: 200px;
     width: 700px;
 }

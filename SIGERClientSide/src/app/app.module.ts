@@ -28,6 +28,8 @@ import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
 import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita.component';
 import { interceptorProvider } from './interceptors/estado-boleta-interceptor.service';
 import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico.component';
+import { TipoLicenciaComponent } from './components/tipo-licencia/tipo-licencia.component';
+;
 import { ChangePasswordComponent } from './components/changepassword/change-password.component';
 import { ViewMainTipoBoletaComponent } from './components/tipo-boleta/view-main-tipo-boleta.component';
 
@@ -56,6 +58,7 @@ import { ViewMainTipoBoletaComponent } from './components/tipo-boleta/view-main-
     EditRolComponent,
     HomeAdmComponent,
     ViewMainViaticoComponent,
+    TipoLicenciaComponent,
     ChangePasswordComponent,
     ViewMainTipoBoletaComponent
   ],

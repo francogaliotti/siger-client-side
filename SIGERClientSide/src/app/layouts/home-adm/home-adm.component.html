@@ -20,7 +20,7 @@
             <button type="submit">Asistencia</button>
         </div>
     </div>
-    <div class="admin-container container">
+    <div class="admin-container container" *ngIf="isAdmin">
         <h3>¿Eres administrador? Entonces, intenta lo siguiente...</h3>
         <div class="contenedor">
             <div class="micro-container container">
@@ -57,3 +57,6 @@
         </div>
     </div>
 </div>
+<footer>
+    <app-footer></app-footer>
+  </footer>
