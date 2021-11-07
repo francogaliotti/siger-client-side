@@ -63,21 +63,21 @@ export class ViewMainTipoBoletaComponent implements OnInit {
     this.tipoBoletaForm = this._tipoBoleta.group({
       codigo: ['', [Validators.required, Validators.maxLength(10)]],
       tipoBoletaDenominacion: ['', Validators.required],
-      tieneMovilidad: [false],
-      tieneZonaInhospita: [false],
-      tieneViatico: [false],
-      permiteNoFichadaRetorno: [false],
-      permiteNoFichadaSalida: [false]
+      tieneMovilidad: [],
+      tieneZonaInhospita: [],
+      tieneViatico: [],
+      permiteNoFichadaRetorno: [],
+      permiteNoFichadaSalida: []
     });
     this.editTipoBoletaForm = this._editTipoBoleta.group({
       id: ["", Validators.required],
       codigo: ["", [Validators.required, Validators.maxLength(10)]],
       tipoBoletaDenominacion: ["", Validators.required],
-      tieneMovilidad: [false],
-      tieneZonaInhospita: [false],
-      tieneViatico: [false],
-      permiteNoFichadaRetorno: [false],
-      permiteNoFichadaSalida: [false]
+      tieneMovilidad: [],
+      tieneZonaInhospita: [],
+      tieneViatico: [],
+      permiteNoFichadaRetorno: [],
+      permiteNoFichadaSalida: []
     });
   }
 
@@ -173,14 +173,14 @@ export class ViewMainTipoBoletaComponent implements OnInit {
         this.tipoBoleta = data;
         console.log(this.tipoBoleta);
         this.editTipoBoletaForm = this._editTipoBoleta.group({
-          id: ["", Validators.required],
-          codigo: ["", [Validators.required, Validators.maxLength(10)]],
-          tipoBoletaDenominacion: ["", Validators.required],
-          tieneMovilidad: [false],
-          tieneZonaInhospita: [false],
-          tieneViatico: [false],
-          permiteNoFichadaRetorno: [false],
-          permiteNoFichadaSalida: [false]
+          id: [this.tipoBoleta.id, Validators.required],
+          codigo: [this.tipoBoleta.codigo, [Validators.required, Validators.maxLength(10)]],
+          tipoBoletaDenominacion: [this.tipoBoleta.tipoBoletaDenominacion, Validators.required],
+          tieneMovilidad: [this.tipoBoleta.tieneMovilidad],
+          tieneViatico: [this.tipoBoleta.tieneViatico],
+          tieneZonaInhospita: [this.tipoBoleta.tieneZonaInhospita],
+          permiteNoFichadaRetorno: [this.tipoBoleta.permiteNoFichadaRetorno],
+          permiteNoFichadaSalida: [this.tipoBoleta.permiteNoFichadaSalida]
         });
       },
       err => {

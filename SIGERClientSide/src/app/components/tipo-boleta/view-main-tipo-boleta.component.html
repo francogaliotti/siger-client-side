@@ -1,4 +1,4 @@
-<app-home></app-home>
+
 <div class="container initial-position">
   <header>
     <div class="row justify-content-center mt-3">
@@ -192,8 +192,8 @@ aria-hidden="true">
           <li class="list-group-item"><b>Codigo: </b>{{tipoBoleta.codigo}}</li>
           <li class="list-group-item"><b>Denominacion: </b>{{tipoBoleta.tipoBoletaDenominacion}}</li>
           <li class="list-group-item"><b>Movilidad: </b>{{tipoBoleta.tieneMovilidad}}</li>
-          <li class="list-group-item"><b>Zona Inhospita: </b>{{tipoBoleta.tieneZonaInhospita}}</li>
           <li class="list-group-item"><b>Viaticos: </b>{{tipoBoleta.tieneViatico}}</li>
+          <li class="list-group-item"><b>Zona Inhospita: </b>{{tipoBoleta.tieneZonaInhospita}}</li>
         </ul>
       </div>
       <div class="modal-footer mt-4">
@@ -209,7 +209,7 @@ aria-hidden="true">
 <!--End Detail Modal-->
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal">
+<div class="modal fade" id="editarModal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -249,9 +249,24 @@ aria-hidden="true">
                   type="text" placeholder="Ingrese Nombre del Tipo de Boleta" />
               </div>
             </div>
-
           </div>
-
+          <div class="row mt-3">
+            <div class="col-12">
+              <input formControlName="tieneMovilidad" type="checkbox" id="tieneMovilidad"><i> Se requiere movilidad
+                particular o de la organización</i>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-12">
+              <input formControlName="tieneViatico" type="checkbox" id="tieneViatico"><i> Posee viáticos</i>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-12">
+              <input formControlName="tieneZonaInhospita" type="checkbox" id="tieneZonaInhospita"><i> Es para zonas
+                inhospitas</i>
+            </div>
+          </div>
           <div class="form-group">
             <div class="row justify-content-center mt-3">
               <div class="col-12">
