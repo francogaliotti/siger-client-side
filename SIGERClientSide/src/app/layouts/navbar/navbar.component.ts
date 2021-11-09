@@ -14,13 +14,18 @@ export class NavbarComponent implements OnInit {
 
   isLogged = false;
   username: string | null = '';
+  role: string = '';
 
   constructor(private router: Router, private _tokenService: TokenService) { }
 
   ngOnInit(): void {
     if (this._tokenService.getToken()) {
       this.isLogged = true;
+      this.role = 'Usuario';
       this.username = this._tokenService.getUsername();
+      if(this._tokenService.IsAdmin()){
+        this.role = 'Administrador'
+      }
     } else {
       this.isLogged = false;
       this.username = '';
