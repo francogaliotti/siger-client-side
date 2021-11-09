@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Modal } from 'bootstrap';
-import { faEdit, faFileAlt, faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faArrowAltCircleDown, faEdit, faFileAlt, faPlusCircle, faTrash, faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons';
 import * as bootstrap from 'bootstrap';
 import { TokenService } from 'src/app/services/token.service';
 import { TipoLicencia } from 'src/app/models/tipo-licencia';
@@ -26,6 +26,7 @@ export class TipoLicenciaComponent implements OnInit {
   tipoLicenciaForm: FormGroup;
   editTipoLicenciaForm: FormGroup;
   testModal: Modal | undefined;
+  modal: Modal | undefined;
   newTipoLicencia: TipoLicenciaDTO = new TipoLicenciaDTO('','',false,'','',0,'','','','',0,'');
   sectorArray: Sector[] = [];
   empleadoArray: Empleado[] = [];
@@ -33,7 +34,9 @@ export class TipoLicenciaComponent implements OnInit {
 
   faEdit = faEdit;
   faTrash = faTrash;
+  faArrow= faArrowAltCircleLeft;
   faPlusCircle = faPlusCircle;
+  faEye = faEye;
 
   roles: string[];
   isAdmin = false;
@@ -196,5 +199,28 @@ export class TipoLicenciaComponent implements OnInit {
     );
 
   }
+  openDetail(id?: number): void {
+    this.modal = new bootstrap.Modal(document.getElementById('detalleModal'), {
+      keyboard: false
+    })
+    this.cargarTipoBoletaForDetail(id);
+    this.modal?.show();
+  }
+  cargarTipoBoletaForDetail(id?: number): void {
+    this._tipoLicenciaService.detail(id).subscribe(
+      data => {
+        this.newTipoLicencia = data;
+      },
+      err => {
+        alert(err.error.mensaje);
+        this.volver();
+      }
+    );
+  }
+  volver(): void {
+    this.modal?.hide();
+    this.router.navigate(['tipoLicencia']);
+  }
+  
 
 }

@@ -9,7 +9,9 @@ import { TokenService } from 'src/app/services/token.service';
 export class HomeAdmComponent implements OnInit {
   isAdmin = false;
 
-  constructor(private _tokenService: TokenService) { }
+  constructor(private _tokenService: TokenService) {
+    document.body.style.backgroundImage = null;
+   }
 
   ngOnInit(): void {
     this.isAdmin = this._tokenService.IsAdmin();

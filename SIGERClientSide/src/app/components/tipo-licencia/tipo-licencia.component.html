@@ -150,7 +150,11 @@
               <td style="display: none;">{{tiposLicencia.id}}</td>
               <td>{{tiposLicencia.codigo}}</td>
               <td>{{tiposLicencia.denominacion}}</td>
-              <td><button class="btn bg-secondary" (click)="open(tiposLicencia.id)" *ngIf="isAdmin">
+              <td>
+                <button class="btn bg-primary" (click)="openDetail(tiposLicencia.id)">
+                  <fa-icon [icon]="faEye"></fa-icon> Detalles
+                </button>
+                <button class="btn bg-secondary" (click)="open(tiposLicencia.id)" *ngIf="isAdmin">
                   <fa-icon [icon]="faEdit"></fa-icon>
                   Editar
                 </button>
@@ -168,7 +172,30 @@
     </div>
   </div>
 </div>
+<!--Detail Modal-->
 
+<div class="modal fade" id="detalleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-body edit-form">
+      <h5 class="text-center">Detalle del Tipo de Licecencia</h5>
+      <div class="container">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><b>Codigo: </b>{{newTipoLicencia.codigo}}</li>
+          <li class="list-group-item"><b>Denominacion: </b>{{newTipoLicencia.denominacion}}</li>
+          <li class="list-group-item"><b>Movilidad: </b>{{newTipoLicencia.justificaPresentismo}}</li>
+        </ul>
+      </div>
+      <div class="modal-footer mt-4">
+        <button class="btn btn-outline-primary btn-block" (click)="volver()">
+          <fa-icon [icon]="faArrow"></fa-icon> Volver
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal">
   <div class="modal-dialog">
