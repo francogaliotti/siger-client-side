@@ -29,5 +29,9 @@ export class Sector extends BaseEntity{
 	tipoSector: TipoSector;
 
 	domicilio: Domicilio;
+
+	constructor(){
+		super();
+	}
 	
 }

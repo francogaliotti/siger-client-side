@@ -39,7 +39,7 @@ export class ViewMainViaticoComponent implements OnInit {
 
   @ViewChild("EditPermission")EditPermission: ElementRef;
 
-  roles: string[];
+  //roles: string[];
   isAdmin = false;
 
   constructor(

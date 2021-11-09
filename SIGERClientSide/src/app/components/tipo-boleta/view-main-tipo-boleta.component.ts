@@ -1,12 +1,13 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { faEdit, faFileAlt, faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faArrowAltCircleLeft, faEdit, faEye, faFileAlt, faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import * as bootstrap from 'bootstrap';
 import { Modal } from 'bootstrap';
 import * as $ from 'jquery';
 import { TipoBoletaDTO } from 'src/app/dto/tipo-boleta-dto';
 import { Empleado } from 'src/app/models/empleado';
+import { Sector } from 'src/app/models/sector';
 import { TipoBoleta } from 'src/app/models/tipo-boleta';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { SectorService } from 'src/app/services/sector.service';
@@ -24,10 +25,16 @@ export class ViewMainTipoBoletaComponent implements OnInit {
   faEdit = faEdit;
   faFileAlt = faFileAlt;
   faTrash = faTrash;
+  faEye = faEye;
+  faArrow = faArrowAltCircleLeft;
 
-  tipoBoleta: TipoBoletaDTO = new TipoBoletaDTO("","",false,false,false,false,false);
+  tipoBoleta: TipoBoletaDTO = new TipoBoletaDTO("", "", false, false, false, false, false);
 
   tipoBoletaArray: TipoBoletaDTO[] = [];
+
+  sectorArray: Sector[] = [];
+
+  empleadoArray: Empleado[] = [];
 
   tipoBoletaForm: FormGroup;
 
@@ -37,11 +44,10 @@ export class ViewMainTipoBoletaComponent implements OnInit {
 
   modal: Modal | undefined
 
-  @ViewChild("CreatePermission")CreatePermission: ElementRef;
+  @ViewChild("CreatePermission") CreatePermission: ElementRef;
 
-  @ViewChild("EditPermission")EditPermission: ElementRef;
+  @ViewChild("EditPermission") EditPermission: ElementRef;
 
-  roles: string[];
   isAdmin = false;
 
   constructor(
@@ -55,22 +61,34 @@ export class ViewMainTipoBoletaComponent implements OnInit {
     private _tokenService: TokenService
   ) {
     this.tipoBoletaForm = this._tipoBoleta.group({
-      codigo: ['', [Validators.required, Validators.maxLength(10)] ],
-      tipoBoletaDenominacion: ['', Validators.required]
+      codigo: ['', [Validators.required, Validators.maxLength(10)]],
+      tipoBoletaDenominacion: ['', Validators.required],
+      tieneMovilidad: [false],
+      tieneZonaInhospita: [false],
+      tieneViatico: [false],
+      permiteNoFichadaRetorno: [false],
+      permiteNoFichadaSalida: [false]
     });
     this.editTipoBoletaForm = this._editTipoBoleta.group({
-      id: ["",Validators.required],
-      codigo: ["", [Validators.required, Validators.maxLength(10)] ],
-      tipoBoletaDenominacion: ["", Validators.required]
+      id: ["", Validators.required],
+      codigo: ["", [Validators.required, Validators.maxLength(10)]],
+      tipoBoletaDenominacion: ["", Validators.required],
+      tieneMovilidad: [false],
+      tieneZonaInhospita: [false],
+      tieneViatico: [false],
+      permiteNoFichadaRetorno: [false],
+      permiteNoFichadaSalida: [false]
     });
-   }
+  }
 
   ngOnInit(): void {
-    this.cargarEstadoBoleta();
+    this.cargarTipoBoleta();
+    this.SectoresList();
+    this.EmpleadosList();
     this.isAdmin = this._tokenService.IsAdmin();
   }
 
-  cargarEstadoBoleta():void{
+  cargarTipoBoleta(): void {
     this.tipoBoletaArray = null;
     this._tipoBoletaService.list().subscribe(
       data => {
@@ -82,11 +100,11 @@ export class ViewMainTipoBoletaComponent implements OnInit {
     );
   }
 
-  borrarEstadoBoleta(id?:number):void{
+  borrarTipoBoleta(id?: number): void {
     this._tipoBoletaService.delete(id).subscribe(
       data => {
         alert('Se ha eliminado el Tipo de Boleta satisfactoriamente')
-        this.cargarEstadoBoleta();
+        this.cargarTipoBoleta();
       },
       err => {
         alert(err.error.mensaje);
@@ -94,7 +112,7 @@ export class ViewMainTipoBoletaComponent implements OnInit {
     );
   }
 
-  onCreate():boolean{
+  onCreate(): boolean {
     this.success = false;
     const tipoBoleta = new TipoBoletaDTO(this.tipoBoletaForm.get('codigo')?.value,
     this.tipoBoletaForm.get('tipoBoletaDenominacion')?.value,
@@ -103,38 +121,66 @@ export class ViewMainTipoBoletaComponent implements OnInit {
     this.tipoBoletaForm.get('tieneViatico')?.value,
     this.tipoBoletaForm.get('permiteNoFichadaRetorno')?.value,
     this.tipoBoletaForm.get('permiteNoFichadaSalida')?.value);
-    
+
     if (this.tipoBoletaForm.valid == true) {
-    this._tipoBoletaService.save(tipoBoleta).subscribe(
-      data => {
-        this.success = true;
-        this.cargarEstadoBoleta();
-      },
-      err => {
-        alert(err.console.mensaje);
-      }
-    );
+      console.log(tipoBoleta);
+      this._tipoBoletaService.save(tipoBoleta).subscribe(
+        data => {
+          this.success = true;
+          this.cargarTipoBoleta();
+        },
+        err => {
+          console.log(err);
+        }
+      );
     }
     return this.success;
   }
 
-  open(id?: number): void{
-    this.modal = new bootstrap.Modal(document.getElementById('editarModal'),{
+  SectoresList(): void {
+    this._sectorService.list().subscribe(
+      data => {
+        this.sectorArray = data;
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  EmpleadosList(): void {
+    this._empleadoService.list().subscribe(
+      data => {
+        this.empleadoArray = data;
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  open(id?: number): void {
+    this.modal = new bootstrap.Modal(document.getElementById('editarModal'), {
       keyboard: false
     })
-    this.cargarEstadoBoletaForUpdate(id);
+    this.cargarTipoBoletaForUpdate(id);
     this.modal?.show();
   }
 
-  cargarEstadoBoletaForUpdate(id?: number): void {
+  cargarTipoBoletaForUpdate(id?: number): void {
     this._tipoBoletaService.detail(id).subscribe(
       data => {
         this.tipoBoleta = data;
         console.log(this.tipoBoleta);
         this.editTipoBoletaForm = this._editTipoBoleta.group({
-          id: [this.tipoBoleta.id,Validators.required],
-          codEstadoBoleta: [this.tipoBoleta.codigo, [Validators.required, Validators.maxLength(10)] ],
-          nombreEstadoBoleta: [this.tipoBoleta.tipoBoletaDenominacion, Validators.required]
+          id: ["", Validators.required],
+          codigo: ["", [Validators.required, Validators.maxLength(10)]],
+          tipoBoletaDenominacion: ["", Validators.required],
+          tieneMovilidad: [false],
+          tieneZonaInhospita: [false],
+          tieneViatico: [false],
+          permiteNoFichadaRetorno: [false],
+          permiteNoFichadaSalida: [false]
         });
       },
       err => {
@@ -149,25 +195,25 @@ export class ViewMainTipoBoletaComponent implements OnInit {
     this._tipoBoletaService.update(id, this.tipoBoleta).subscribe(
       data => {
         alert('Tipo de Boleta actualizado Satisfactoriamente');
-        this.cargarEstadoBoleta();
+        this.cargarTipoBoleta();
         this.modal?.hide();
       },
       err => {
         alert(err);
       }
     );
-    
+
   }
 
-  openDetail(id?: number): void{
-    this.modal = new bootstrap.Modal(document.getElementById('detalleModal'),{
+  openDetail(id?: number): void {
+    this.modal = new bootstrap.Modal(document.getElementById('detalleModal'), {
       keyboard: false
     })
-    this.cargarEstadoBoletaForDetail(id);
+    this.cargarTipoBoletaForDetail(id);
     this.modal?.show();
   }
 
-  cargarEstadoBoletaForDetail(id?: number): void{
+  cargarTipoBoletaForDetail(id?: number): void {
     this._tipoBoletaService.detail(id).subscribe(
       data => {
         this.tipoBoleta = data;
@@ -181,21 +227,21 @@ export class ViewMainTipoBoletaComponent implements OnInit {
 
   volver(): void {
     this.modal?.hide();
-    this.router.navigate(['estadoBoleta']);
+    this.router.navigate(['tipoBoleta']);
   }
 
-  checkEstadoBoletaForm(): void{
-    if(this.tipoBoletaForm.get('codEstadoBoleta')?.valid && this.tipoBoletaForm.get('nombreEstadoBoleta')?.valid){
+  checkTipoBoletaForm(): void {
+    if (this.tipoBoletaForm.get('codigo')?.valid && this.tipoBoletaForm.get('tipoBoletaDenominacion')?.valid) {
       this.renderer.setProperty(this.CreatePermission.nativeElement, 'disabled', false);
-    }else{
+    } else {
       this.renderer.setProperty(this.CreatePermission.nativeElement, 'disabled', true);
     }
   }
 
-  checkEditEstadoBoletaForm(): void{
-    if(this.editTipoBoletaForm.get('codEstadoBoleta')?.valid && this.editTipoBoletaForm.get('nombreEstadoBoleta')?.valid){
+  checkEditTipoBoletaForm(): void {
+    if (this.editTipoBoletaForm.get('codigo')?.valid && this.editTipoBoletaForm.get('tipoBoletaDenominacion')?.valid) {
       this.renderer.setProperty(this.EditPermission.nativeElement, 'disabled', false);
-    }else{
+    } else {
       this.renderer.setProperty(this.EditPermission.nativeElement, 'disabled', true);
     }
   }

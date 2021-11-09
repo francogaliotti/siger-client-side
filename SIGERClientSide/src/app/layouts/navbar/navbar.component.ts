@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { TokenService } from 'src/app/services/token.service';
 
@@ -12,23 +13,24 @@ export class NavbarComponent implements OnInit {
   faSignOut = faArrowRight;
 
   isLogged = false;
-  username: string|null = '';
+  username: string | null = '';
 
-  constructor(private _tokenService: TokenService) { }
+  constructor(private router: Router, private _tokenService: TokenService) { }
 
   ngOnInit(): void {
-    if(this._tokenService.getToken()){
+    if (this._tokenService.getToken()) {
       this.isLogged = true;
       this.username = this._tokenService.getUsername();
-    }else{
+    } else {
       this.isLogged = false;
       this.username = '';
     }
   }
 
-  onLogOut(): void{
+  onLogOut(): void {
     this._tokenService.logOut();
-    window.location.reload();
+    this.isLogged = false;
+    this.router.navigate(['/login']);
   }
 
 }

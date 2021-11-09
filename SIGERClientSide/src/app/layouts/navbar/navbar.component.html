@@ -8,8 +8,9 @@
         </div>
         <div class="col-1 offset-4 mt-4">
             <label>Cerrar Sesion
-                <button >
-                    <fa-icon [icon]="faSignOut"></fa-icon>
+                <button>
+                    <fa-icon [icon]="faSignOut" (click)="onLogOut()">
+                    </fa-icon>
                 </button>
             </label>
         </div>

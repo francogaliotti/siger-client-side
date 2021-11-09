@@ -15,10 +15,6 @@ export class TipoBoletaDTO extends BaseEntity{
      permiteNoFichadaRetorno: boolean;
      
      permiteNoFichadaSalida: boolean;
-     
-     tipoRequerimientoDenominacion: string;
-     
-     tipoRequerimientoCantNiveles:number;
 
      constructor(
 		codigo: string,
@@ -28,7 +24,7 @@ export class TipoBoletaDTO extends BaseEntity{
 		tieneViatico: boolean,
 		permiteNoFichadaRetorno: boolean,
 		permiteNoFichadaSalida: boolean,
-		//tipoRequerimiento: TipoRequerimiento
+		
 	){
 		super();
 		this.codigo = codigo;
@@ -38,6 +34,5 @@ export class TipoBoletaDTO extends BaseEntity{
 		this.tieneViatico = tieneViatico;
 		this.permiteNoFichadaRetorno = permiteNoFichadaRetorno;
 		this.permiteNoFichadaSalida = permiteNoFichadaSalida;
-		//this.tipoRequerimiento = tipoRequerimiento;
 	}
 }
