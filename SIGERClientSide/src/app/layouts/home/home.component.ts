@@ -11,7 +11,9 @@ export class HomeComponent implements OnInit {
   isLogged = false;
   isAdmin = false;
 
-  constructor(private _tokenService: TokenService) { }
+  constructor(private _tokenService: TokenService) { 
+    document.body.style.backgroundImage = null;
+  }
 
   ngOnInit(): void {
     this.isLogged = this._tokenService.isLogged();

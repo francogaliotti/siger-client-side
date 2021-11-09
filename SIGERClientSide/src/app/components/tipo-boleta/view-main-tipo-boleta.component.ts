@@ -50,6 +50,8 @@ export class ViewMainTipoBoletaComponent implements OnInit {
 
   isAdmin = false;
 
+  nivelesAutorizacionArray: number[]=[1,2,3,4];
+
   constructor(
     private _tipoBoleta: FormBuilder,
     private _editTipoBoleta: FormBuilder,
