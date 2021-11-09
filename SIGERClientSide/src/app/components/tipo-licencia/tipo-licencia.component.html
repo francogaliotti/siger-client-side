@@ -7,7 +7,7 @@
       <h1>Configure los tipos para las licencias</h1>
     </div>
   </header>
-  <div class="container altaTipoLicencia mt-4">
+  <div class="container altaTipoLicencia mt-4" *ngIf="isAdmin">
     <form [formGroup]="tipoLicenciaForm" (ngSubmit)="onCreate()">
       <header>
         <div class="row justify-content-center mt-auto">
