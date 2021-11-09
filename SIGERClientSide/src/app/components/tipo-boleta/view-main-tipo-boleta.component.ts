@@ -13,6 +13,7 @@ import { EmpleadoService } from 'src/app/services/empleado.service';
 import { SectorService } from 'src/app/services/sector.service';
 import { TipoBoletaService } from 'src/app/services/tipo-boleta.service';
 import { TokenService } from 'src/app/services/token.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-view-main-tipo-boleta',
@@ -50,7 +51,7 @@ export class ViewMainTipoBoletaComponent implements OnInit {
 
   isAdmin = false;
 
-  nivelesAutorizacionArray: number[]=[1,2,3,4];
+  nivelesAutorizacionArray: number[] = [1, 2, 3, 4];
 
   constructor(
     private _tipoBoleta: FormBuilder,
@@ -105,11 +106,21 @@ export class ViewMainTipoBoletaComponent implements OnInit {
   borrarTipoBoleta(id?: number): void {
     this._tipoBoletaService.delete(id).subscribe(
       data => {
-        alert('Se ha eliminado el Tipo de Boleta satisfactoriamente')
+        Swal.fire({
+          title: "Éxito",
+          icon: "success",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
         this.cargarTipoBoleta();
       },
       err => {
-        alert(err.error.mensaje);
+        Swal.fire({
+          title: "Oops! hubo un problema",
+          icon: "error",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
       }
     );
   }
@@ -117,22 +128,34 @@ export class ViewMainTipoBoletaComponent implements OnInit {
   onCreate(): boolean {
     this.success = false;
     const tipoBoleta = new TipoBoletaDTO(this.tipoBoletaForm.get('codigo')?.value,
-    this.tipoBoletaForm.get('tipoBoletaDenominacion')?.value,
-    this.tipoBoletaForm.get('tieneMovilidad')?.value,
-    this.tipoBoletaForm.get('tieneZonaInhospita')?.value,
-    this.tipoBoletaForm.get('tieneViatico')?.value,
-    this.tipoBoletaForm.get('permiteNoFichadaRetorno')?.value,
-    this.tipoBoletaForm.get('permiteNoFichadaSalida')?.value);
+      this.tipoBoletaForm.get('tipoBoletaDenominacion')?.value,
+      this.tipoBoletaForm.get('tieneMovilidad')?.value,
+      this.tipoBoletaForm.get('tieneZonaInhospita')?.value,
+      this.tipoBoletaForm.get('tieneViatico')?.value,
+      this.tipoBoletaForm.get('permiteNoFichadaRetorno')?.value,
+      this.tipoBoletaForm.get('permiteNoFichadaSalida')?.value);
 
     if (this.tipoBoletaForm.valid == true) {
       console.log(tipoBoleta);
       this._tipoBoletaService.save(tipoBoleta).subscribe(
         data => {
           this.success = true;
+
+          Swal.fire({
+            title: "Éxito",
+            icon: "success",
+            showCloseButton: false,
+            showConfirmButton: false
+          });
           this.cargarTipoBoleta();
         },
         err => {
-          console.log(err);
+          Swal.fire({
+            title: "Oops! hubo un problema",
+            icon: "error",
+            showCloseButton: false,
+            showConfirmButton: false
+          });
         }
       );
     }
@@ -196,12 +219,22 @@ export class ViewMainTipoBoletaComponent implements OnInit {
     this.tipoBoleta.tipoBoletaDenominacion = this.editTipoBoletaForm.get('tipoBoletaDenominacion')?.value;
     this._tipoBoletaService.update(id, this.tipoBoleta).subscribe(
       data => {
-        alert('Tipo de Boleta actualizado Satisfactoriamente');
+        Swal.fire({
+          title: "Éxito",
+          icon: "success",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
         this.cargarTipoBoleta();
         this.modal?.hide();
       },
       err => {
-        alert(err);
+        Swal.fire({
+          title: "Oops! hubo un problema",
+          icon: "error",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
       }
     );
 

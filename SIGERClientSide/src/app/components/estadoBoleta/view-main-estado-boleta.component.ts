@@ -7,6 +7,7 @@ import { Modal } from 'bootstrap';
 import * as bootstrap from 'bootstrap';
 import { faEdit, faFileAlt, faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { TokenService } from 'src/app/services/token.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-view-main',
@@ -78,11 +79,21 @@ export class ViewMainEstadoBoletaComponent implements OnInit {
   borrarEstadoBoleta(id?:number):void{
     this._estadoBoletaService.delete(id).subscribe(
       data => {
-        alert('Se ha eliminado el Estado de Boleta satisfactoriamente')
+        Swal.fire({
+          title: "Éxito",
+          icon: "success",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
         this.cargarEstadoBoleta();
       },
       err => {
-        alert(err.error.mensaje);
+        Swal.fire({
+          title: "Oops! hubo un problema",
+          icon: "error",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
       }
     );
   }
@@ -97,9 +108,20 @@ export class ViewMainEstadoBoletaComponent implements OnInit {
       data => {
         this.success = true;
         this.cargarEstadoBoleta();
+        Swal.fire({
+          title: "Éxito",
+          icon: "success",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
       },
       err => {
-        alert(err.console.mensaje);
+        Swal.fire({
+          title: "Oops! hubo un problema",
+          icon: "error",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
       }
     );
     }
@@ -136,12 +158,22 @@ export class ViewMainEstadoBoletaComponent implements OnInit {
     this.estadoBoleta.nombreEstadoBoleta = this.editEstadoBoletaForm.get('nombreEstadoBoleta')?.value;
     this._estadoBoletaService.update(id, this.estadoBoleta).subscribe(
       data => {
-        alert('Estado de Boleta actualizado Satisfactoriamente');
+        Swal.fire({
+          title: "Éxito",
+          icon: "success",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
         this.cargarEstadoBoleta();
         this.modal?.hide();
       },
       err => {
-        alert(err);
+        Swal.fire({
+          title: "Oops! hubo un problema",
+          icon: "error",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
       }
     );
     
