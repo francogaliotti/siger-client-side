@@ -15,32 +15,32 @@ export class EstadoBoletaService extends connectionURL{
   }
 
   public list(): Observable<EstadoBoleta[]>{
-    this.endpoint = 'estadoBoleta/list';
+    this.endpoint = 'estado-boleta/';
     return this.httpClient.get<EstadoBoleta[]>(this.app_url + this.endpoint);
   }
 
   public detail(id: number): Observable<EstadoBoleta>{
-    this.endpoint = 'estadoBoleta/detail/' + id;
+    this.endpoint = 'estado-boleta/' + id;
     return this.httpClient.get<EstadoBoleta>(this.app_url + this.endpoint);
   }
 
   /*public detailname(nombreEstadoBoleta: string): Observable<EstadoBoleta>{
-    this.endpoint = 'estadoBoleta/detail/' + nombreEstadoBoleta;
+    this.endpoint = 'estado-boleta/detail/' + nombreEstadoBoleta;
     return this.httpClient.get<EstadoBoleta>(this.app_url + this.endpoint);
   }*/
 
   public save(estadoBoleta: EstadoBoleta): Observable<any>{
-    this.endpoint = 'estadoBoleta/create';
+    this.endpoint = 'estado-boleta/';
     return this.httpClient.post<any>(this.app_url + this.endpoint, estadoBoleta);
   }
 
   public update(id: number, estadoBoleta: EstadoBoleta): Observable<any>{
-    this.endpoint = 'estadoBoleta/update/' + id;
+    this.endpoint = 'estado-boleta/' + id;
     return this.httpClient.put<any>(this.app_url + this.endpoint, estadoBoleta);
   }
 
   public delete(id?: number): Observable<any>{
-    this.endpoint = 'estadoBoleta/delete/' + id;
+    this.endpoint = 'estado-boleta/' + id;
     return this.httpClient.delete<any>(this.app_url + this.endpoint);
   }
 }

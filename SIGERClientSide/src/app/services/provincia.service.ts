@@ -13,31 +13,31 @@ export class ProvinciaService extends connectionURL{
     super();
   }
   public list(): Observable<Provincia[]>{
-    this.endpoint = 'provincia/list';
+    this.endpoint = 'provincia/';
     return this.httpClient.get<Provincia[]>(this.app_url + this.endpoint);
   }
 
   public detail(id: number): Observable<Provincia>{
-    this.endpoint = 'provincia/detail/' + id;
+    this.endpoint = 'provincia/' + id;
     return this.httpClient.get<Provincia>(this.app_url + this.endpoint);
   }
 
-  public detailname(denom: string): Observable<Provincia>{
+  /*public detailname(denom: string): Observable<Provincia>{
     this.endpoint = 'provincia/detail/' + denom;
     return this.httpClient.get<Provincia>(this.app_url + this.endpoint);
-  }
+  }*/
 
   public save(permiso: Provincia): Observable<any>{
-    this.endpoint = 'provincia/create';
+    this.endpoint = 'provincia/';
     return this.httpClient.post<any>(this.app_url + this.endpoint, permiso);
   }
 
   public update(id: number, permiso: Provincia): Observable<any>{
-    this.endpoint = 'provincia/update/' + id;
+    this.endpoint = 'provincia/' + id;
     return this.httpClient.put<any>(this.app_url + this.endpoint, permiso);
   }
 
   public delete(id?: number): Observable<any>{
-    this.endpoint = 'provincia/delete/' + id;
+    this.endpoint = 'provincia/' + id;
     return this.httpClient.delete<any>(this.app_url + this.endpoint);
   }}
