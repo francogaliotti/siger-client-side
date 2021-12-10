@@ -13,27 +13,27 @@ export class ZonaInhospitaService extends connectionURL{
   }
 
   public list(): Observable<ZonaInhospita[]>{
-    this.endpoint = 'zonaInhospita/list';
+    this.endpoint = 'zona-inhospita/';
     return this.httpClient.get<ZonaInhospita[]>(this.app_url + this.endpoint);
   }
 
   public detail(id: number): Observable<ZonaInhospita>{
-    this.endpoint = 'zonaInhospita/detail/' + id;
+    this.endpoint = 'zona-inhospita/' + id;
     return this.httpClient.get<ZonaInhospita>(this.app_url + this.endpoint);
   }
 
   public save(zonaInhospita: ZonaInhospita): Observable<any>{
-    this.endpoint = 'zonaInhospita/create';
+    this.endpoint = 'zona-inhospita/';
     return this.httpClient.post<any>(this.app_url + this.endpoint, zonaInhospita);
   }
 
   public update(id: number, zonaInhospita: ZonaInhospita): Observable<any>{
-    this.endpoint = 'zonaInhospita/update/' + id;
+    this.endpoint = 'zona-inhospita/' + id;
     return this.httpClient.put<any>(this.app_url + this.endpoint, zonaInhospita);
   }
 
   public delete(id?: number): Observable<any>{
-    this.endpoint = 'zonaInhospita/delete/' + id;
+    this.endpoint = 'zona-inhospita/' + id;
     return this.httpClient.delete<any>(this.app_url + this.endpoint);
   }
 }

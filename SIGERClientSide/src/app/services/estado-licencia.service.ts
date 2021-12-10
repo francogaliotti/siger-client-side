@@ -15,12 +15,12 @@ export class EstadoLicenciaService extends connectionURL{
   }
 
   public list(): Observable<EstadoLicencia[]>{
-    this.endpoint = 'estadoLicencia/list';
+    this.endpoint = 'estado-licencia/';
     return this.httpClient.get<EstadoLicencia[]>(this.app_url + this.endpoint);
   }
 
   public detail(id: number): Observable<EstadoLicencia>{
-    this.endpoint = 'estadoLicencia/detail/' + id;
+    this.endpoint = 'estado-licencia/' + id;
     return this.httpClient.get<EstadoLicencia>(this.app_url + this.endpoint);
   }
 
@@ -30,17 +30,17 @@ export class EstadoLicenciaService extends connectionURL{
   }*/
 
   public save(estadoLicencia: EstadoLicencia): Observable<any>{
-    this.endpoint = 'estadoLicencia/create';
+    this.endpoint = 'estado-licencia/';
     return this.httpClient.post<any>(this.app_url + this.endpoint, estadoLicencia);
   }
 
   public update(id: number, estadoLicencia: EstadoLicencia): Observable<any>{
-    this.endpoint = 'estadoLicencia/update/' + id;
+    this.endpoint = 'estado-licencia/' + id;
     return this.httpClient.put<any>(this.app_url + this.endpoint, estadoLicencia);
   }
 
   public delete(id?: number): Observable<any>{
-    this.endpoint = 'estadoLicencia/delete/' + id;
+    this.endpoint = 'estado-licencia/' + id;
     return this.httpClient.delete<any>(this.app_url + this.endpoint);
   }
 
