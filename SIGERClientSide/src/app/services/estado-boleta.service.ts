@@ -14,10 +14,26 @@ export class EstadoBoletaService extends connectionURL{
     super();
   }
 
-  public list(): Observable<EstadoBoleta[]>{
-    this.endpoint = 'estado-boleta/';
-    return this.httpClient.get<EstadoBoleta[]>(this.app_url + this.endpoint);
+  public list(page: number): Observable<EstadoBoleta[]>{
+    this.endpoint = 'estado-boleta/?page='+ page;
+    console.log(this.endpoint);
+    return this.httpClient.get<EstadoBoleta[]>(this.app_url + this.endpoint)
   }
+
+  /*private transform( resp: FetchAllEstadoBoletaResponse): Estado_Boleta[]{
+    
+    const estado_boleta_list: Estado_Boleta[] = resp.results.map( estado_boleta =>{
+
+      return {
+
+        id: estado_boleta.id,
+        codEstadoBoleta: estado_boleta.codEstadoBoleta,
+        nombreEstadoBoleta: estado_boleta.nombreEstadoBoleta,
+      }
+    })
+    return estado_boleta_list;
+
+  }*/
 
   public detail(id: number): Observable<EstadoBoleta>{
     this.endpoint = 'estado-boleta/' + id;

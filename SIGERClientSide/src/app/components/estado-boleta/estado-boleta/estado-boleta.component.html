@@ -46,6 +46,11 @@
     <div class="col-2">
     </div>
     <div class="col-9">
+      <input type="text"
+        class="form-control mb-2"
+        placeholder="Buscar Estado de Boleta"
+        #txtSearch
+        (keyup)="onSearch( txtSearch.value )" />
       <div class="table-responsive">
         <table class="table text-center">
           <thead>
@@ -57,7 +62,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let estadosBoleta of estadoBoletaArray">
+            <tr *ngFor="let estadosBoleta of estadoBoletaArray | estadoBoletaPipe:page:search">
               <td style="display: none;">{{estadosBoleta.id}}</td>
               <td>{{estadosBoleta.codEstadoBoleta}}</td>
               <td>{{estadosBoleta.nombreEstadoBoleta}}</td>
@@ -136,6 +141,13 @@
             </div>
           </div>
         </table>
+        <button class="btn btn-primary" (click)="prevPage()" [disabled]="page === 0">
+          Anteriores
+        </button>
+        &nbsp;
+        <button class="btn btn-primary" (click)="nextPage()" [disabled]="(estadoBoletaArray | estadoBoletaPipe:page:search).length === 1">
+          Siguientes
+        </button>
       </div>
     </div>
   </div>
