@@ -68,8 +68,6 @@ export class EstadoBoletaComponent implements OnInit {
   }
 
   cargarEstadoBoleta():void{
-    //this.estadoBoletaArray = [];
-    console.log(this.searchPage);
     this._estadoBoletaService.list(this.searchPage)
     .subscribe( data => {
         this.estadoBoletaArray = data;
@@ -83,14 +81,12 @@ export class EstadoBoletaComponent implements OnInit {
   nextPage() {
     this.page += 10;
     this.searchPage = this.searchPage + 1;
-    //this.cargarEstadoBoleta();
   }
 
   prevPage() {
     if ( this.page > 0 )
       this.page -= 10;
       this.searchPage = this.searchPage - 1;
-      //this.cargarEstadoBoleta();
   }
 
   onSearch( search: string ) {

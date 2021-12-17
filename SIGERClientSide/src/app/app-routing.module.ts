@@ -1,7 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login.component';
-import { ListaEstadoLicenciaComponent } from './components/estadoLicencia/lista-estado-licencia.component';
 import { ListaPermisoComponent } from './components/permiso/lista-permiso.component';
 import { IndexRolComponent } from './components/rol/index-rol.component';
 import { ErrorsComponent } from './layouts/errors/errors.component';
@@ -20,6 +19,8 @@ import { ChangePasswordComponent } from './components/changepassword/change-pass
 import { ViewMainTipoBoletaComponent } from './components/tipo-boleta/view-main-tipo-boleta.component';
 import { TipoBoletaGuardService as tipoBoletaGuard} from './guards/tipo-boleta-guard.service';
 import { EstadoBoletaComponent } from './components/estado-boleta/estado-boleta/estado-boleta.component';
+import { ListaEstadoLicenciaComponent } from './components/estado-licencia/estado-licencia/lista-estado-licencia.component';
+
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -28,7 +29,7 @@ const routes: Routes = [
   {path: 'recoveryPassword', component: RecoveryPasswordComponent, canActivate: [LoginGuard]},
   {path: 'change-password/:tokenPassword', component: ChangePasswordComponent, canActivate: [LoginGuard]},
   {path: 'estado-boleta', component: EstadoBoletaComponent, canActivate: [estadoBoletaGuard], data: { expectedRol: ['admin', 'user'] }},
-  {path: 'estadoLicencia', component: ListaEstadoLicenciaComponent, canActivate: [estadoLicenciaGuard], data: { expectedRol: ['admin', 'user'] }},
+  {path: 'estado-licencia', component: ListaEstadoLicenciaComponent, canActivate: [estadoLicenciaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'tipoLicencia', component: TipoLicenciaComponent},
   {path: 'zonaInhospita', component: ZonaInhospitaComponent, canActivate: [zonaInhospitaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'viatico', component: ViewMainViaticoComponent, canActivate: [ViaticoGuard], data: { expectedRol: ['admin', 'user'] }},

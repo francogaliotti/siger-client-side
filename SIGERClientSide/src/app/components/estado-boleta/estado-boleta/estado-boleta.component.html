@@ -142,11 +142,11 @@
           </div>
         </table>
         <button class="btn btn-primary" (click)="prevPage()" [disabled]="page === 0">
-          Anteriores
+          Anterior
         </button>
         &nbsp;
         <button class="btn btn-primary" (click)="nextPage()" [disabled]="(estadoBoletaArray | estadoBoletaPipe:page:search).length === 1">
-          Siguientes
+          Siguiente
         </button>
       </div>
     </div>

@@ -14,8 +14,8 @@ export class EstadoLicenciaService extends connectionURL{
     super();
   }
 
-  public list(): Observable<EstadoLicencia[]>{
-    this.endpoint = 'estado-licencia/';
+  public list(page: number): Observable<EstadoLicencia[]>{
+    this.endpoint = 'estado-licencia/?page='+ page;
     return this.httpClient.get<EstadoLicencia[]>(this.app_url + this.endpoint);
   }
 

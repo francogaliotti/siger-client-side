@@ -68,6 +68,11 @@
   <div class="row mt-4">
     
     <div class="col-9">
+      <input type="text"
+        class="form-control mb-2"
+        placeholder="Buscar Estado de Licencia"
+        #txtSearch
+        (keyup)="onSearch( txtSearch.value )" />
       <div class="table-responsive">
         <table class="table text-center">
 
@@ -80,7 +85,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let estadosLicencia of estadoLicencia">
+            <tr *ngFor="let estadosLicencia of estadoLicencia | estadoLicenciaPipe:page:search">
               <td style="display: none;">{{estadosLicencia.id}}</td>
               <td>{{estadosLicencia.codEstadoLicencia}}</td>
               <td>{{estadosLicencia.nombreEstadoLicencia}}</td>
@@ -96,6 +101,13 @@
           </tbody>
 
         </table>
+        <button class="btn btn-primary" (click)="prevPage()" [disabled]="page === 0">
+          Anterior
+        </button>
+        &nbsp;
+        <button class="btn btn-primary" (click)="nextPage()" [disabled]="(estadoLicencia | estadoLicenciaPipe:page:search).length === 1">
+          Siguiente
+        </button>
       </div>
     </div>
   </div>

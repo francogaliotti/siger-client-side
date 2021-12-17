@@ -13,7 +13,7 @@ export class EstadoBoletaPipe implements PipeTransform {
 
     const filtered_Estado_Boletas = estado_boletas.filter(resp => resp.nombreEstadoBoleta.includes( search ));
 
-    return filtered_Estado_Boletas.slice(page, page +10);;
+    return filtered_Estado_Boletas.slice(page, page +10);
   }
 
 }

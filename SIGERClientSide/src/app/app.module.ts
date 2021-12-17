@@ -7,13 +7,11 @@ import { AppComponent } from './app.component';
 import { RecoveryPasswordComponent } from './layouts/recovery-password/recovery-password.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ListaPermisoComponent } from './components/permiso/lista-permiso.component';
-import { EditarPermisoComponent } from './components/permiso/editar-permiso.component';
-import { ListaEstadoLicenciaComponent } from './components/estadoLicencia/lista-estado-licencia.component';
+import { EditarPermisoComponent } from './components/permiso/editar-permiso.component'
 import { ListaProvinciaComponent } from './components/provincia/lista-provincia.component';
 import { DetalleProvinciaComponent } from './components/provincia/detalle-provincia.component';
 import { EditarProvinciaComponent } from './components/provincia/editar-provincia.component';
 import { NuevoProvinciaComponent } from './components/provincia/nuevo-provincia.component';
-
 import { FooterComponent } from './layouts/footer/footer.component';
 import { VerticalnavbarComponent } from './layouts/verticalnavbar/verticalnavbar.component';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
@@ -29,12 +27,12 @@ import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospi
 import { interceptorProvider } from './interceptors/estado-boleta-interceptor.service';
 import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico.component';
 import { TipoLicenciaComponent } from './components/tipo-licencia/tipo-licencia.component';
-;
 import { ChangePasswordComponent } from './components/changepassword/change-password.component';
 import { ViewMainTipoBoletaComponent } from './components/tipo-boleta/view-main-tipo-boleta.component';
 import { EstadoBoletaComponent } from './components/estado-boleta/estado-boleta/estado-boleta.component';
 import { EstadoBoletaPipe } from './components/estado-boleta/pipes/estado-boleta.pipe';
-
+import { ListaEstadoLicenciaComponent } from './components/estado-licencia/estado-licencia/lista-estado-licencia.component';
+import { EstadoLicenciaPipe } from './components/estado-licencia/pipes/estado-licencia.pipe';
 
 @NgModule({
   declarations: [
@@ -64,7 +62,8 @@ import { EstadoBoletaPipe } from './components/estado-boleta/pipes/estado-boleta
     ChangePasswordComponent,
     ViewMainTipoBoletaComponent,
     EstadoBoletaComponent,
-    EstadoBoletaPipe
+    EstadoBoletaPipe,
+    EstadoLicenciaPipe
 
   ],
   imports: [
@@ -77,7 +76,6 @@ import { EstadoBoletaPipe } from './components/estado-boleta/pipes/estado-boleta
     SweetAlert2Module,
     SweetAlert2Module.forChild(),
     FormsModule
-    //EstadoBoletaModule
   ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent]
