@@ -1,7 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login.component';
-import { ViewMainEstadoBoletaComponent } from './components/estadoBoleta/view-main-estado-boleta.component';
 import { ListaEstadoLicenciaComponent } from './components/estadoLicencia/lista-estado-licencia.component';
 import { ListaPermisoComponent } from './components/permiso/lista-permiso.component';
 import { IndexRolComponent } from './components/rol/index-rol.component';
@@ -20,6 +19,7 @@ import { LoginGuard } from './guards/login.guard';
 import { ChangePasswordComponent } from './components/changepassword/change-password.component';
 import { ViewMainTipoBoletaComponent } from './components/tipo-boleta/view-main-tipo-boleta.component';
 import { TipoBoletaGuardService as tipoBoletaGuard} from './guards/tipo-boleta-guard.service';
+import { EstadoBoletaComponent } from './components/estado-boleta/estado-boleta/estado-boleta.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -27,7 +27,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'recoveryPassword', component: RecoveryPasswordComponent, canActivate: [LoginGuard]},
   {path: 'change-password/:tokenPassword', component: ChangePasswordComponent, canActivate: [LoginGuard]},
-  {path: 'estadoBoleta', component: ViewMainEstadoBoletaComponent, canActivate: [estadoBoletaGuard], data: { expectedRol: ['admin', 'user'] }},
+  {path: 'estado-boleta', component: EstadoBoletaComponent, canActivate: [estadoBoletaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'estadoLicencia', component: ListaEstadoLicenciaComponent, canActivate: [estadoLicenciaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'tipoLicencia', component: TipoLicenciaComponent},
   {path: 'zonaInhospita', component: ZonaInhospitaComponent, canActivate: [zonaInhospitaGuard], data: { expectedRol: ['admin', 'user'] }},

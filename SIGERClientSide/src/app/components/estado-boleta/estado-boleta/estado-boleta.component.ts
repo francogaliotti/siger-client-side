@@ -1,20 +1,20 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { EstadoBoleta } from 'src/app/models/estado-boleta';
-import { EstadoBoletaService } from 'src/app/services/estado-boleta.service';
+import { faEdit, faFileAlt, faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Modal } from 'bootstrap';
 import * as bootstrap from 'bootstrap';
-import { faEdit, faFileAlt, faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { EstadoBoleta } from 'src/app/models/estado-boleta';
+import { EstadoBoletaService } from 'src/app/services/estado-boleta.service';
 import { TokenService } from 'src/app/services/token.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-view-main',
-  templateUrl: './view-main-estado-boleta.component.html',
-  styleUrls: ['./view-main-estado-boleta.component.css']
+  selector: 'app-estado-boleta',
+  templateUrl: './estado-boleta.component.html',
+  styleUrls: ['./estado-boleta.component.css']
 })
-export class ViewMainEstadoBoletaComponent implements OnInit {
+export class EstadoBoletaComponent implements OnInit {
 
   fapluscircle = faPlusCircle;
   faEdit = faEdit;
@@ -37,8 +37,11 @@ export class ViewMainEstadoBoletaComponent implements OnInit {
 
   @ViewChild("EditPermission")EditPermission: ElementRef;
 
-  //roles: string[];
   isAdmin = false;
+
+  searchPage = 0;
+  page = 0;
+  search: string = '';
 
   constructor(
     private _estadoBoleta: FormBuilder, 
@@ -65,15 +68,34 @@ export class ViewMainEstadoBoletaComponent implements OnInit {
   }
 
   cargarEstadoBoleta():void{
-    this.estadoBoletaArray = null;
-    this._estadoBoletaService.list().subscribe(
-      data => {
+    //this.estadoBoletaArray = [];
+    console.log(this.searchPage);
+    this._estadoBoletaService.list(this.searchPage)
+    .subscribe( data => {
         this.estadoBoletaArray = data;
       },
       err => {
         console.log(err);
       }
     );
+  }
+
+  nextPage() {
+    this.page += 10;
+    this.searchPage = this.searchPage + 1;
+    //this.cargarEstadoBoleta();
+  }
+
+  prevPage() {
+    if ( this.page > 0 )
+      this.page -= 10;
+      this.searchPage = this.searchPage - 1;
+      //this.cargarEstadoBoleta();
+  }
+
+  onSearch( search: string ) {
+    this.page = 0;
+    this.search = search;
   }
 
   borrarEstadoBoleta(id?:number):void{
