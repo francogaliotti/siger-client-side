@@ -23,7 +23,6 @@ import { AddPermissionComponent } from './components/rol/add-permission.componen
 import { EditRolComponent } from './components/rol/edit-rol.component';
 import { LoginComponent } from './auth/login.component';
 import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
-import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita.component';
 import { interceptorProvider } from './interceptors/estado-boleta-interceptor.service';
 import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico.component';
 import { TipoLicenciaComponent } from './components/tipo-licencia/tipo-licencia.component';
@@ -33,6 +32,8 @@ import { EstadoBoletaComponent } from './components/estado-boleta/estado-boleta/
 import { EstadoBoletaPipe } from './components/estado-boleta/pipes/estado-boleta.pipe';
 import { ListaEstadoLicenciaComponent } from './components/estado-licencia/estado-licencia/lista-estado-licencia.component';
 import { EstadoLicenciaPipe } from './components/estado-licencia/pipes/estado-licencia.pipe';
+import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita/zona-inhospita.component';
+import { ZonaInhospitaPipe } from './components/zona-inhospita/pipes/zona-inhospita.pipe';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { EstadoLicenciaPipe } from './components/estado-licencia/pipes/estado-li
     ViewMainTipoBoletaComponent,
     EstadoBoletaComponent,
     EstadoBoletaPipe,
-    EstadoLicenciaPipe
+    EstadoLicenciaPipe,
+    ZonaInhospitaPipe
 
   ],
   imports: [

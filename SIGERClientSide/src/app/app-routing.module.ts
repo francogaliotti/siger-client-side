@@ -7,7 +7,6 @@ import { ErrorsComponent } from './layouts/errors/errors.component';
 import { HomeComponent } from './layouts/home/home.component';
 import { RecoveryPasswordComponent } from './layouts/recovery-password/recovery-password.component';
 import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
-import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita.component';
 import { EstadoLicenciaGuardService as estadoLicenciaGuard} from './guards/estado-licencia-guard.service';
 import { ZonaInhospitaGuardService as zonaInhospitaGuard} from './guards/zona-inhospita-guard.service';
 import { EstadoBoletaGuardService as estadoBoletaGuard} from './guards/estado-boleta-guard.service';
@@ -20,6 +19,7 @@ import { ViewMainTipoBoletaComponent } from './components/tipo-boleta/view-main-
 import { TipoBoletaGuardService as tipoBoletaGuard} from './guards/tipo-boleta-guard.service';
 import { EstadoBoletaComponent } from './components/estado-boleta/estado-boleta/estado-boleta.component';
 import { ListaEstadoLicenciaComponent } from './components/estado-licencia/estado-licencia/lista-estado-licencia.component';
+import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita/zona-inhospita.component';
 
 
 const routes: Routes = [
@@ -31,7 +31,7 @@ const routes: Routes = [
   {path: 'estado-boleta', component: EstadoBoletaComponent, canActivate: [estadoBoletaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'estado-licencia', component: ListaEstadoLicenciaComponent, canActivate: [estadoLicenciaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'tipoLicencia', component: TipoLicenciaComponent},
-  {path: 'zonaInhospita', component: ZonaInhospitaComponent, canActivate: [zonaInhospitaGuard], data: { expectedRol: ['admin', 'user'] }},
+  {path: 'zona-inhospita', component: ZonaInhospitaComponent, canActivate: [zonaInhospitaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'viatico', component: ViewMainViaticoComponent, canActivate: [ViaticoGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'permisos', component: ListaPermisoComponent},
   {path: 'roles', component: IndexRolComponent},
