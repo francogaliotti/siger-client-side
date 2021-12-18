@@ -7,6 +7,7 @@ import * as bootstrap from 'bootstrap';
 import { ZonaInhospita } from 'src/app/models/zona-inhospita';
 import { ZonaInhospitaService } from 'src/app/services/zona-inhospita.service';
 import { TokenService } from 'src/app/services/token.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-zona-inhospita',
@@ -59,7 +60,12 @@ export class ZonaInhospitaComponent implements OnInit {
   borrarZona(id?:number):void{
     this._zonaInhospitaService.delete(id).subscribe(
       data => {
-        alert('Se ha eliminado la zona satisfactoriamente')
+        Swal.fire({
+          title: "Éxito al eliminar",
+          icon: "success",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
         this.cargarZonaInhospita();
       },
       err => {
@@ -72,7 +78,12 @@ export class ZonaInhospitaComponent implements OnInit {
     this.zonaInhospitaForm.get('denominacionZona')?.value, this.zonaInhospitaForm.get('precio')?.value);
     this._zonaInhospitaService.save(zonaInhospita).subscribe(
       data => {
-        alert('Zona Inhóspita creada Satisfactoriamente');
+        Swal.fire({
+          title: "Éxito al crear",
+          icon: "success",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
         this.cargarZonaInhospita();
         this.router.navigate(['/zonaInhospita']);
       },
@@ -114,7 +125,12 @@ export class ZonaInhospitaComponent implements OnInit {
     this.newZona.precio = this.editZonaForm.get('precio')?.value;
     this._zonaInhospitaService.update(id, this.newZona).subscribe(
       data => {
-        alert('Zona Inhóspita actualizada Satisfactoriamente');
+        Swal.fire({
+          title: "Éxito al actualizar",
+          icon: "success",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
         this.cargarZonaInhospita();
         this.testModal?.hide();
       },

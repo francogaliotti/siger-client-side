@@ -14,6 +14,7 @@ import { Sector } from 'src/app/models/sector';
 import { Empleado } from 'src/app/models/empleado';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { SectorService } from 'src/app/services/sector.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'tipo-licencia',
@@ -100,7 +101,12 @@ export class TipoLicenciaComponent implements OnInit {
   borrarTipoLicencia(id?: number): void {
     this._tipoLicenciaService.delete(id).subscribe(
       data => {
-        alert('Se ha eliminado el Tipo de Licencia satisfactoriamente')
+        Swal.fire({
+          title: "Éxito al eliminar",
+          icon: "success",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
         this.cargarTipoLicencia();
       },
       err => {
@@ -125,7 +131,12 @@ export class TipoLicenciaComponent implements OnInit {
       
     this._tipoLicenciaService.save(tipoLicencia).subscribe(
       data => {
-        alert('Tipo de Licencia creado Satisfactoriamente');
+        Swal.fire({
+          title: "Éxito al crear",
+          icon: "success",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
         this.cargarTipoLicencia();
         this.router.navigate(['/tipoLicencia']);
       },
@@ -189,7 +200,12 @@ export class TipoLicenciaComponent implements OnInit {
     this.newTipoLicencia.denominacion = this.editTipoLicenciaForm.get('denominacion')?.value;
     this._tipoLicenciaService.update(id, this.newTipoLicencia).subscribe(
       data => {
-        alert('Tipo de Licencia actualizado Satisfactoriamente');
+        Swal.fire({
+          title: "Éxito al actualizar",
+          icon: "success",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
         this.cargarTipoLicencia();
         this.testModal?.hide();
       },

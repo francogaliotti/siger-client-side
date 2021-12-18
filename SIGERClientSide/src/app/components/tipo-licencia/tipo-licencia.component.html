@@ -68,7 +68,7 @@
         <div class="row">
           <div class="col-12">
             <p>¿Qué niveles de autorización necesita?
-              <select>
+              <select formControlName="tipoRequerimientoCantNiveles">
                 <option values="0">Seleccione un nivel de autorización</option>
                 <option *ngFor="let nivel of nivelesAutorizacionArray" [ngValue]="nivel">{{nivel}}</option>
               </select>
