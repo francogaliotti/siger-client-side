@@ -13,8 +13,8 @@ export class EmpleadoService extends connectionURL{
     super();
   }
 
-  public list(): Observable<Empleado[]>{
-    this.endpoint = 'empleado/';
+  public list(page: number): Observable<Empleado[]>{
+    this.endpoint = 'empleado/?page='+ page;
     return this.httpClient.get<Empleado[]>(this.app_url + this.endpoint);
   }
 

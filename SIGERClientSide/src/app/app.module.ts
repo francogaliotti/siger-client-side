@@ -26,7 +26,6 @@ import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
 import { interceptorProvider } from './interceptors/estado-boleta-interceptor.service';
 import { TipoLicenciaComponent } from './components/tipo-licencia/tipo-licencia.component';
 import { ChangePasswordComponent } from './components/changepassword/change-password.component';
-import { ViewMainTipoBoletaComponent } from './components/tipo-boleta/view-main-tipo-boleta.component';
 import { EstadoBoletaComponent } from './components/estado-boleta/estado-boleta/estado-boleta.component';
 import { EstadoBoletaPipe } from './components/estado-boleta/pipes/estado-boleta.pipe';
 import { ListaEstadoLicenciaComponent } from './components/estado-licencia/estado-licencia/estado-licencia.component';
@@ -35,6 +34,8 @@ import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospi
 import { ZonaInhospitaPipe } from './components/zona-inhospita/pipes/zona-inhospita.pipe';
 import { ViewMainViaticoComponent } from './components/viatico/viatico/viatico.component';
 import { ViaticoPipe } from './components/viatico/pipes/viatico.pipe';
+import { ViewMainTipoBoletaComponent } from './components/tipo-boleta/tipo-boleta/tipo-boleta.component';
+import { TipoBoletaPipe } from './components/tipo-boleta/pipes/tipo-boleta.pipe';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { ViaticoPipe } from './components/viatico/pipes/viatico.pipe';
     EstadoBoletaPipe,
     EstadoLicenciaPipe,
     ZonaInhospitaPipe,
-    ViaticoPipe
+    ViaticoPipe,
+    TipoBoletaPipe
 
   ],
   imports: [

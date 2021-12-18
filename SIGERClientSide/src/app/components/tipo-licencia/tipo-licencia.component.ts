@@ -35,10 +35,11 @@ export class TipoLicenciaComponent implements OnInit {
   faTrash = faTrash;
   faPlusCircle = faPlusCircle;
 
-  roles: string[];
   isAdmin = false;
- 
 
+  searchPage = 0;
+  page = 0;
+  search: string = '';
 
   constructor(private _tipoLicencia: FormBuilder, private _tipoLicenciaService: TipoLicenciaService,
     private router: Router, private _editTipoLicencia: FormBuilder, private _tokenService: TokenService,
@@ -133,7 +134,7 @@ export class TipoLicenciaComponent implements OnInit {
     );
   }
   SectoresList(): void {
-    this._sectorService.list().subscribe(
+    this._sectorService.list(this.searchPage).subscribe(
       data => {
         this.sectorArray = data;
       },
@@ -144,7 +145,7 @@ export class TipoLicenciaComponent implements OnInit {
   }
 
   EmpleadosList(): void {
-    this._empleadoService.list().subscribe(
+    this._empleadoService.list(this.searchPage).subscribe(
       data => {
         this.empleadoArray = data;
       },

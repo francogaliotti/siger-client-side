@@ -14,12 +14,12 @@ import { ViaticoGuardService as ViaticoGuard} from './guards/viatico-guard.servi
 import { TipoLicenciaComponent } from './components/tipo-licencia/tipo-licencia.component';
 import { LoginGuard } from './guards/login.guard';
 import { ChangePasswordComponent } from './components/changepassword/change-password.component';
-import { ViewMainTipoBoletaComponent } from './components/tipo-boleta/view-main-tipo-boleta.component';
 import { TipoBoletaGuardService as tipoBoletaGuard} from './guards/tipo-boleta-guard.service';
 import { EstadoBoletaComponent } from './components/estado-boleta/estado-boleta/estado-boleta.component';
 import { ListaEstadoLicenciaComponent } from './components/estado-licencia/estado-licencia/estado-licencia.component';
 import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita/zona-inhospita.component';
 import { ViewMainViaticoComponent } from './components/viatico/viatico/viatico.component';
+import { ViewMainTipoBoletaComponent } from './components/tipo-boleta/tipo-boleta/tipo-boleta.component';
 
 
 const routes: Routes = [
@@ -35,7 +35,7 @@ const routes: Routes = [
   {path: 'viatico', component: ViewMainViaticoComponent, canActivate: [ViaticoGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'permisos', component: ListaPermisoComponent},
   {path: 'roles', component: IndexRolComponent},
-  {path: 'tipoBoleta', component: ViewMainTipoBoletaComponent, canActivate:  [tipoBoletaGuard], data: { expectedRol: ['admin', 'user'] }},
+  {path: 'tipo-boleta', component: ViewMainTipoBoletaComponent, canActivate:  [tipoBoletaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: '**', component: ErrorsComponent}
   
 ];
