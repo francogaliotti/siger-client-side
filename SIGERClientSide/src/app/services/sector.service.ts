@@ -13,8 +13,8 @@ export class SectorService extends connectionURL{
     super();
   }
 
-  public list(): Observable<Sector[]>{
-    this.endpoint = 'sector/';
+  public list(page: number): Observable<Sector[]>{
+    this.endpoint = 'sector/?page='+ page;
     return this.httpClient.get<Sector[]>(this.app_url + this.endpoint);
   }
 

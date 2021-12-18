@@ -134,6 +134,11 @@
   <div class="row mt-4">
 
     <div class="col-9">
+      <input type="text"
+        class="form-control mb-2"
+        placeholder="Buscar Tipos de Licencia"
+        #txtSearch
+        (keyup)="onSearch( txtSearch.value )" />
       <div class="table-responsive">
         <table class="table text-center">
 
@@ -146,7 +151,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let tiposLicencia of tipoLicencia">
+            <tr *ngFor="let tiposLicencia of tipoLicencia | tipoLicenciaPipe:page:search">
               <td style="display: none;">{{tiposLicencia.id}}</td>
               <td>{{tiposLicencia.codigo}}</td>
               <td>{{tiposLicencia.denominacion}}</td>
@@ -164,6 +169,13 @@
           </tbody>
 
         </table>
+        <button class="btn btn-primary" (click)="prevPage()" [disabled]="page === 0">
+          Anterior
+        </button>
+        &nbsp;
+        <button class="btn btn-primary" (click)="nextPage()" [disabled]="(tipoLicencia | tipoLicenciaPipe:page:search).length === 1">
+          Siguiente
+        </button>
       </div>
     </div>
   </div>

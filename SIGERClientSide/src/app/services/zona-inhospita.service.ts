@@ -12,8 +12,8 @@ export class ZonaInhospitaService extends connectionURL{
     super();
   }
 
-  public list(): Observable<ZonaInhospita[]>{
-    this.endpoint = 'zona-inhospita/';
+  public list(page: number): Observable<ZonaInhospita[]>{
+    this.endpoint = 'zona-inhospita/?page='+ page;
     return this.httpClient.get<ZonaInhospita[]>(this.app_url + this.endpoint);
   }
 

@@ -10,11 +10,11 @@ import { ViaticoService } from 'src/app/services/viatico.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-view-main-viatico',
-  templateUrl: './view-main-viatico.component.html',
-  styleUrls: ['./view-main-viatico.component.css']
+  selector: 'app-viatico',
+  templateUrl: './viatico.component.html',
+  styleUrls: ['./viatico.component.css']
 })
-export class ViewMainViaticoComponent implements OnInit {
+export class ViaticoComponent implements OnInit {
 
   fapluscircle = faPlusCircle;
   faEdit = faEdit;
@@ -39,8 +39,11 @@ export class ViewMainViaticoComponent implements OnInit {
 
   @ViewChild("EditPermission")EditPermission: ElementRef;
 
-  //roles: string[];
   isAdmin = false;
+
+  searchPage = 0;
+  page = 0;
+  search: string = '';
 
   constructor(
     private _viatico: FormBuilder, 
@@ -70,8 +73,8 @@ export class ViewMainViaticoComponent implements OnInit {
   }
 
   cargarViatico():void{
-    this.viaticoArray = null;
-    this._viaticoService.list().subscribe(
+    console.log(this.searchPage);
+    this._viaticoService.list(this.searchPage).subscribe(
       data => {
         this.viaticoArray = data;
       },
@@ -79,6 +82,22 @@ export class ViewMainViaticoComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  nextPage() {
+    this.page += 10;
+    this.searchPage = this.searchPage + 1;
+  }
+
+  prevPage() {
+    if ( this.page > 0 )
+      this.page -= 10;
+      this.searchPage = this.searchPage - 1;
+  }
+
+  onSearch( search: string ) {
+    this.page = 0;
+    this.search = search;
   }
 
   borrarViatico(id?:number):void{

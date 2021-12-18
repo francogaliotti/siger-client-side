@@ -16,11 +16,11 @@ import { TokenService } from 'src/app/services/token.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-view-main-tipo-boleta',
-  templateUrl: './view-main-tipo-boleta.component.html',
-  styleUrls: ['./view-main-tipo-boleta.component.css']
+  selector: 'app-tipo-boleta',
+  templateUrl: './tipo-boleta.component.html',
+  styleUrls: ['./tipo-boleta.component.css']
 })
-export class ViewMainTipoBoletaComponent implements OnInit {
+export class TipoBoletaComponent implements OnInit {
 
   fapluscircle = faPlusCircle;
   faEdit = faEdit;
@@ -52,6 +52,10 @@ export class ViewMainTipoBoletaComponent implements OnInit {
   isAdmin = false;
 
   nivelesAutorizacionArray: number[] = [1, 2, 3, 4];
+
+  searchPage = 0;
+  page = 0;
+  search: string = '';
 
   constructor(
     private _tipoBoleta: FormBuilder,
@@ -92,8 +96,7 @@ export class ViewMainTipoBoletaComponent implements OnInit {
   }
 
   cargarTipoBoleta(): void {
-    this.tipoBoletaArray = null;
-    this._tipoBoletaService.list().subscribe(
+    this._tipoBoletaService.list(this.searchPage).subscribe(
       data => {
         this.tipoBoletaArray = data;
       },
@@ -101,6 +104,22 @@ export class ViewMainTipoBoletaComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  nextPage() {
+    this.page += 10;
+    this.searchPage = this.searchPage + 1;
+  }
+
+  prevPage() {
+    if ( this.page > 0 )
+      this.page -= 10;
+      this.searchPage = this.searchPage - 1;
+  }
+
+  onSearch( search: string ) {
+    this.page = 0;
+    this.search = search;
   }
 
   borrarTipoBoleta(id?: number): void {
@@ -163,7 +182,7 @@ export class ViewMainTipoBoletaComponent implements OnInit {
   }
 
   SectoresList(): void {
-    this._sectorService.list().subscribe(
+    this._sectorService.list(this.searchPage).subscribe(
       data => {
         this.sectorArray = data;
       },
@@ -174,7 +193,7 @@ export class ViewMainTipoBoletaComponent implements OnInit {
   }
 
   EmpleadosList(): void {
-    this._empleadoService.list().subscribe(
+    this._empleadoService.list(this.searchPage).subscribe(
       data => {
         this.empleadoArray = data;
       },
@@ -262,7 +281,7 @@ export class ViewMainTipoBoletaComponent implements OnInit {
 
   volver(): void {
     this.modal?.hide();
-    this.router.navigate(['tipoBoleta']);
+    this.router.navigate(['tipo-boleta']);
   }
 
   checkTipoBoletaForm(): void {

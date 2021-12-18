@@ -143,6 +143,11 @@
 
   <div class="row mt-4">
     <div class="col-9">
+      <input type="text"
+        class="form-control mb-2"
+        placeholder="Buscar Tipos de Boleta"
+        #txtSearch
+        (keyup)="onSearch( txtSearch.value )" />
       <div class="table-responsive">
         <table class="table text-center">
 
@@ -155,7 +160,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let tiposBoleta of tipoBoletaArray">
+            <tr *ngFor="let tiposBoleta of tipoBoletaArray | tipoBoletaPipe:page:search">
               <td style="display: none;">{{tiposBoleta.id}}</td>
               <td>{{tiposBoleta.codigo}}</td>
               <td>{{tiposBoleta.tipoBoletaDenominacion}}</td>
@@ -175,6 +180,13 @@
             </tr>
           </tbody>
         </table>
+        <button class="btn btn-primary" (click)="prevPage()" [disabled]="page === 0">
+          Anterior
+        </button>
+        &nbsp;
+        <button class="btn btn-primary" (click)="nextPage()" [disabled]="(tipoBoletaArray | tipoBoletaPipe:page:search).length === 1">
+          Siguiente
+        </button>
       </div>
     </div>
   </div>

@@ -14,8 +14,8 @@ export class TipoBoletaService extends connectionURL{
     super();
   }
 
-  public list(): Observable<TipoBoletaDTO[]>{
-    this.endpoint = 'tipo-boleta/';
+  public list(page: number): Observable<TipoBoletaDTO[]>{
+    this.endpoint = 'tipo-boleta/?page='+ page;
     return this.httpClient.get<TipoBoletaDTO[]>(this.app_url + this.endpoint);
   }
 

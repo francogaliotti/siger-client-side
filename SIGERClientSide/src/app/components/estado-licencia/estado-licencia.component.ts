@@ -9,11 +9,11 @@ import * as bootstrap from 'bootstrap';
 import { TokenService } from 'src/app/services/token.service';
 
 @Component({
-  selector: 'app-lista-estado-licencia',
-  templateUrl: './lista-estado-licencia.component.html',
-  styleUrls: ['./lista-estado-licencia.component.css']
+  selector: 'app-estado-licencia',
+  templateUrl: './estado-licencia.component.html',
+  styleUrls: ['./estado-licencia.component.css']
 })
-export class ListaEstadoLicenciaComponent implements OnInit {
+export class EstadoLicenciaComponent implements OnInit {
 
   estadoLicencia: EstadoLicencia[] = [];
   estadoLicenciaForm: FormGroup;
@@ -25,8 +25,11 @@ export class ListaEstadoLicenciaComponent implements OnInit {
   faTrash = faTrash;
   faPlusCircle = faPlusCircle;
 
-  roles: string[];
   isAdmin = false;
+
+  searchPage = 0;
+  page = 0;
+  search: string = '';
 
 
   constructor(private _estadoLicencia: FormBuilder, private _estadoLicenciaService: EstadoLicenciaService,
@@ -49,7 +52,7 @@ export class ListaEstadoLicenciaComponent implements OnInit {
   }
 
   cargarEstadoLicencia(): void {
-    this._estadoLicenciaService.list().subscribe(
+    this._estadoLicenciaService.list(this.searchPage).subscribe(
       data => {
         this.estadoLicencia = data;
       },
@@ -57,6 +60,22 @@ export class ListaEstadoLicenciaComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  nextPage() {
+    this.page += 10;
+    this.searchPage = this.searchPage + 1;
+  }
+
+  prevPage() {
+    if ( this.page > 0 )
+      this.page -= 10;
+      this.searchPage = this.searchPage - 1;
+  }
+
+  onSearch( search: string ) {
+    this.page = 0;
+    this.search = search;
   }
 
   borrarEstadoLicencia(id?: number): void {
@@ -81,7 +100,7 @@ export class ListaEstadoLicenciaComponent implements OnInit {
       },
       err => {
         alert(err.console.mensaje);
-        this.router.navigate(['/estadoLicencia']);
+        this.router.navigate(['/estado-licencia']);
       }
     );
   }
