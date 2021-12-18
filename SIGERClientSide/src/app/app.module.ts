@@ -25,18 +25,19 @@ import { LoginComponent } from './auth/login.component';
 import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
 import { interceptorProvider } from './interceptors/estado-boleta-interceptor.service';
 import { ChangePasswordComponent } from './components/changepassword/change-password.component';
-import { EstadoBoletaComponent } from './components/estado-boleta/estado-boleta/estado-boleta.component';
-import { EstadoBoletaPipe } from './components/estado-boleta/pipes/estado-boleta.pipe';
-import { ListaEstadoLicenciaComponent } from './components/estado-licencia/estado-licencia/estado-licencia.component';
-import { EstadoLicenciaPipe } from './components/estado-licencia/pipes/estado-licencia.pipe';
-import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita/zona-inhospita.component';
-import { ZonaInhospitaPipe } from './components/zona-inhospita/pipes/zona-inhospita.pipe';
-import { ViaticoComponent } from './components/viatico/viatico/viatico.component';
-import { ViaticoPipe } from './components/viatico/pipes/viatico.pipe';
-import { TipoBoletaComponent } from './components/tipo-boleta/tipo-boleta/tipo-boleta.component';
-import { TipoBoletaPipe } from './components/tipo-boleta/pipes/tipo-boleta.pipe';
-import { TipoLicenciaComponent } from './components/tipo-licencia/tipo-licencia/tipo-licencia.component';
-import { TipoLicenciaPipe } from './components/tipo-licencia/pipes/tipo-licencia.pipe';
+import { EstadoLicenciaComponent } from './components/estado-licencia/estado-licencia.component';
+import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita.component';
+import { ViaticoComponent } from './components/viatico/viatico.component';
+import { TipoLicenciaComponent } from './components/tipo-licencia/tipo-licencia.component';
+import { TipoBoletaComponent } from './components/tipo-boleta/tipo-boleta.component';
+import { EstadoBoletaComponent } from './components/estado-boleta/estado-boleta.component';
+import { EstadoBoletaPipe } from './pipes/estado-boleta.pipe';
+import { EstadoLicenciaPipe } from './pipes/estado-licencia.pipe';
+import { ZonaInhospitaPipe } from './pipes/zona-inhospita.pipe';
+import { ViaticoPipe } from './pipes/viatico.pipe';
+import { TipoBoletaPipe } from './pipes/tipo-boleta.pipe';
+import { TipoLicenciaPipe } from './pipes/tipo-licencia.pipe';
+
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { TipoLicenciaPipe } from './components/tipo-licencia/pipes/tipo-licencia
     RecoveryPasswordComponent,
     ListaPermisoComponent,
     EditarPermisoComponent,
-    ListaEstadoLicenciaComponent,
+    EstadoLicenciaComponent,
     ListaProvinciaComponent,
     DetalleProvinciaComponent,
     EditarProvinciaComponent,
@@ -71,7 +72,7 @@ import { TipoLicenciaPipe } from './components/tipo-licencia/pipes/tipo-licencia
     ZonaInhospitaPipe,
     ViaticoPipe,
     TipoBoletaPipe,
-    TipoLicenciaPipe
+    TipoLicenciaPipe,
 
   ],
   imports: [

@@ -13,7 +13,7 @@ import { TokenService } from 'src/app/services/token.service';
   templateUrl: './estado-licencia.component.html',
   styleUrls: ['./estado-licencia.component.css']
 })
-export class ListaEstadoLicenciaComponent implements OnInit {
+export class EstadoLicenciaComponent implements OnInit {
 
   estadoLicencia: EstadoLicencia[] = [];
   estadoLicenciaForm: FormGroup;
