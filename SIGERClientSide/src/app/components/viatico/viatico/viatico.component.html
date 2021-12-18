@@ -57,6 +57,11 @@
     <div class="col-2">
     </div>
     <div class="col-9">
+      <input type="text"
+        class="form-control mb-2"
+        placeholder="Buscar Viaticos"
+        #txtSearch
+        (keyup)="onSearch( txtSearch.value )" />
       <div class="table-responsive">
         <table class="table text-center">
           <thead>
@@ -68,7 +73,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let viaticos of viaticoArray">
+            <tr *ngFor="let viaticos of viaticoArray | viaticoPipe:page:search">
               <td style="display: none;">{{viaticos.id}}</td>
               <td>{{viaticos.codViatico}}</td>
               <td>{{viaticos.denominacionViatico}}</td>
@@ -184,6 +189,13 @@
           <!--End Edit Modal-->
 
         </table>
+        <button class="btn btn-primary" (click)="prevPage()" [disabled]="page === 0">
+          Anterior
+        </button>
+        &nbsp;
+        <button class="btn btn-primary" (click)="nextPage()" [disabled]="(viaticoArray | viaticoPipe:page:search).length === 1">
+          Siguiente
+        </button>
       </div>
     </div>
   </div>

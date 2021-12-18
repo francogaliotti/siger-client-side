@@ -9,9 +9,9 @@ import * as bootstrap from 'bootstrap';
 import { TokenService } from 'src/app/services/token.service';
 
 @Component({
-  selector: 'app-lista-estado-licencia',
-  templateUrl: './lista-estado-licencia.component.html',
-  styleUrls: ['./lista-estado-licencia.component.css']
+  selector: 'app-estado-licencia',
+  templateUrl: './estado-licencia.component.html',
+  styleUrls: ['./estado-licencia.component.css']
 })
 export class ListaEstadoLicenciaComponent implements OnInit {
 

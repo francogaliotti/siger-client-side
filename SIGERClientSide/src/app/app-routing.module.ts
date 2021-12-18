@@ -10,7 +10,6 @@ import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
 import { EstadoLicenciaGuardService as estadoLicenciaGuard} from './guards/estado-licencia-guard.service';
 import { ZonaInhospitaGuardService as zonaInhospitaGuard} from './guards/zona-inhospita-guard.service';
 import { EstadoBoletaGuardService as estadoBoletaGuard} from './guards/estado-boleta-guard.service';
-import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico.component';
 import { ViaticoGuardService as ViaticoGuard} from './guards/viatico-guard.service';
 import { TipoLicenciaComponent } from './components/tipo-licencia/tipo-licencia.component';
 import { LoginGuard } from './guards/login.guard';
@@ -18,8 +17,9 @@ import { ChangePasswordComponent } from './components/changepassword/change-pass
 import { ViewMainTipoBoletaComponent } from './components/tipo-boleta/view-main-tipo-boleta.component';
 import { TipoBoletaGuardService as tipoBoletaGuard} from './guards/tipo-boleta-guard.service';
 import { EstadoBoletaComponent } from './components/estado-boleta/estado-boleta/estado-boleta.component';
-import { ListaEstadoLicenciaComponent } from './components/estado-licencia/estado-licencia/lista-estado-licencia.component';
+import { ListaEstadoLicenciaComponent } from './components/estado-licencia/estado-licencia/estado-licencia.component';
 import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita/zona-inhospita.component';
+import { ViewMainViaticoComponent } from './components/viatico/viatico/viatico.component';
 
 
 const routes: Routes = [

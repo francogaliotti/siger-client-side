@@ -13,8 +13,8 @@ export class ViaticoService extends connectionURL {
     super();
    }
 
-   public list(): Observable<Viatico[]>{
-    this.endpoint = 'viatico/';
+   public list(page: number): Observable<Viatico[]>{
+    this.endpoint = 'viatico/?page='+ page;
     return this.httpClient.get<Viatico[]>(this.app_url + this.endpoint);
   }
 
