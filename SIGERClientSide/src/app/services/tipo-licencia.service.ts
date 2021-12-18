@@ -14,8 +14,8 @@ export class TipoLicenciaService extends connectionURL{
     super();
    }
 
-   public list(): Observable<TipoLicenciaDTO[]>{
-    this.endpoint = 'tipo-licencia/';
+   public list(page: number): Observable<TipoLicenciaDTO[]>{
+    this.endpoint = 'tipo-licencia/?page='+ page;
     return this.httpClient.get<TipoLicenciaDTO[]>(this.app_url + this.endpoint);
   }
 

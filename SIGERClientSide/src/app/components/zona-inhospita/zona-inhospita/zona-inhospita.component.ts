@@ -94,11 +94,11 @@ export class ZonaInhospitaComponent implements OnInit {
       data => {
         alert('Zona Inhóspita creada Satisfactoriamente');
         this.cargarZonaInhospita();
-        this.router.navigate(['/zonaInhospita']);
+        this.router.navigate(['/zona-inhospita']);
       },
       err => {
         alert(err.console.mensaje);
-        this.router.navigate(['/estadoLicencia']);
+        this.router.navigate(['/zona-inhospita']);
       }
     );
   }

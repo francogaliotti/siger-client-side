@@ -24,7 +24,6 @@ import { EditRolComponent } from './components/rol/edit-rol.component';
 import { LoginComponent } from './auth/login.component';
 import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
 import { interceptorProvider } from './interceptors/estado-boleta-interceptor.service';
-import { TipoLicenciaComponent } from './components/tipo-licencia/tipo-licencia.component';
 import { ChangePasswordComponent } from './components/changepassword/change-password.component';
 import { EstadoBoletaComponent } from './components/estado-boleta/estado-boleta/estado-boleta.component';
 import { EstadoBoletaPipe } from './components/estado-boleta/pipes/estado-boleta.pipe';
@@ -32,10 +31,12 @@ import { ListaEstadoLicenciaComponent } from './components/estado-licencia/estad
 import { EstadoLicenciaPipe } from './components/estado-licencia/pipes/estado-licencia.pipe';
 import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita/zona-inhospita.component';
 import { ZonaInhospitaPipe } from './components/zona-inhospita/pipes/zona-inhospita.pipe';
-import { ViewMainViaticoComponent } from './components/viatico/viatico/viatico.component';
+import { ViaticoComponent } from './components/viatico/viatico/viatico.component';
 import { ViaticoPipe } from './components/viatico/pipes/viatico.pipe';
-import { ViewMainTipoBoletaComponent } from './components/tipo-boleta/tipo-boleta/tipo-boleta.component';
+import { TipoBoletaComponent } from './components/tipo-boleta/tipo-boleta/tipo-boleta.component';
 import { TipoBoletaPipe } from './components/tipo-boleta/pipes/tipo-boleta.pipe';
+import { TipoLicenciaComponent } from './components/tipo-licencia/tipo-licencia/tipo-licencia.component';
+import { TipoLicenciaPipe } from './components/tipo-licencia/pipes/tipo-licencia.pipe';
 
 @NgModule({
   declarations: [
@@ -60,16 +61,17 @@ import { TipoBoletaPipe } from './components/tipo-boleta/pipes/tipo-boleta.pipe'
     AddPermissionComponent,
     EditRolComponent,
     HomeAdmComponent,
-    ViewMainViaticoComponent,
+    ViaticoComponent,
     TipoLicenciaComponent,
     ChangePasswordComponent,
-    ViewMainTipoBoletaComponent,
+    TipoBoletaComponent,
     EstadoBoletaComponent,
     EstadoBoletaPipe,
     EstadoLicenciaPipe,
     ZonaInhospitaPipe,
     ViaticoPipe,
-    TipoBoletaPipe
+    TipoBoletaPipe,
+    TipoLicenciaPipe
 
   ],
   imports: [

@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
   templateUrl: './viatico.component.html',
   styleUrls: ['./viatico.component.css']
 })
-export class ViewMainViaticoComponent implements OnInit {
+export class ViaticoComponent implements OnInit {
 
   fapluscircle = faPlusCircle;
   faEdit = faEdit;

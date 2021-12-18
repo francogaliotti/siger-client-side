@@ -100,7 +100,7 @@ export class ListaEstadoLicenciaComponent implements OnInit {
       },
       err => {
         alert(err.console.mensaje);
-        this.router.navigate(['/estadoLicencia']);
+        this.router.navigate(['/estado-licencia']);
       }
     );
   }

@@ -219,7 +219,7 @@ export class EstadoBoletaComponent implements OnInit {
 
   volver(): void {
     this.modal?.hide();
-    this.router.navigate(['estadoBoleta']);
+    this.router.navigate(['estado-boleta']);
   }
 
   checkEstadoBoletaForm(): void{
