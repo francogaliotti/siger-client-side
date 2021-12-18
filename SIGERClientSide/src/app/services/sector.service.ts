@@ -13,13 +13,13 @@ export class SectorService extends connectionURL{
     super();
   }
 
-  public list(): Observable<Sector[]>{
-    this.endpoint = 'sector/list';
+  public list(page: number): Observable<Sector[]>{
+    this.endpoint = 'sector/?page='+ page;
     return this.httpClient.get<Sector[]>(this.app_url + this.endpoint);
   }
 
   public detail(id: number): Observable<Sector>{
-    this.endpoint = 'sector/detail/' + id;
+    this.endpoint = 'sector/' + id;
     return this.httpClient.get<Sector>(this.app_url + this.endpoint);
   }
 
@@ -29,17 +29,17 @@ export class SectorService extends connectionURL{
   }*/
 
   public save(sector: Sector): Observable<any>{
-    this.endpoint = 'sector/create';
+    this.endpoint = 'sector/';
     return this.httpClient.post<any>(this.app_url + this.endpoint, sector);
   }
 
   public update(id: number, sector: Sector): Observable<any>{
-    this.endpoint = 'sector/update/' + id;
+    this.endpoint = 'sector/' + id;
     return this.httpClient.put<any>(this.app_url + this.endpoint, sector);
   }
 
   public delete(id?: number): Observable<any>{
-    this.endpoint = 'sector/delete/' + id;
+    this.endpoint = 'sector/' + id;
     return this.httpClient.delete<any>(this.app_url + this.endpoint);
   }
 }

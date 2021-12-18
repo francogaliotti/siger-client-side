@@ -7,13 +7,11 @@ import { AppComponent } from './app.component';
 import { RecoveryPasswordComponent } from './layouts/recovery-password/recovery-password.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ListaPermisoComponent } from './components/permiso/lista-permiso.component';
-import { EditarPermisoComponent } from './components/permiso/editar-permiso.component';
-import { ListaEstadoLicenciaComponent } from './components/estadoLicencia/lista-estado-licencia.component';
+import { EditarPermisoComponent } from './components/permiso/editar-permiso.component'
 import { ListaProvinciaComponent } from './components/provincia/lista-provincia.component';
 import { DetalleProvinciaComponent } from './components/provincia/detalle-provincia.component';
 import { EditarProvinciaComponent } from './components/provincia/editar-provincia.component';
 import { NuevoProvinciaComponent } from './components/provincia/nuevo-provincia.component';
-import { ViewMainEstadoBoletaComponent } from './components/estadoBoleta/view-main-estado-boleta.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { VerticalnavbarComponent } from './layouts/verticalnavbar/verticalnavbar.component';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
@@ -25,13 +23,21 @@ import { AddPermissionComponent } from './components/rol/add-permission.componen
 import { EditRolComponent } from './components/rol/edit-rol.component';
 import { LoginComponent } from './auth/login.component';
 import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
-import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita.component';
 import { interceptorProvider } from './interceptors/estado-boleta-interceptor.service';
-import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico.component';
-import { TipoLicenciaComponent } from './components/tipo-licencia/tipo-licencia.component';
-;
 import { ChangePasswordComponent } from './components/changepassword/change-password.component';
-import { ViewMainTipoBoletaComponent } from './components/tipo-boleta/view-main-tipo-boleta.component';
+import { EstadoLicenciaComponent } from './components/estado-licencia/estado-licencia.component';
+import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita.component';
+import { ViaticoComponent } from './components/viatico/viatico.component';
+import { TipoLicenciaComponent } from './components/tipo-licencia/tipo-licencia.component';
+import { TipoBoletaComponent } from './components/tipo-boleta/tipo-boleta.component';
+import { EstadoBoletaComponent } from './components/estado-boleta/estado-boleta.component';
+import { EstadoBoletaPipe } from './pipes/estado-boleta.pipe';
+import { EstadoLicenciaPipe } from './pipes/estado-licencia.pipe';
+import { ZonaInhospitaPipe } from './pipes/zona-inhospita.pipe';
+import { ViaticoPipe } from './pipes/viatico.pipe';
+import { TipoBoletaPipe } from './pipes/tipo-boleta.pipe';
+import { TipoLicenciaPipe } from './pipes/tipo-licencia.pipe';
+
 
 @NgModule({
   declarations: [
@@ -40,12 +46,11 @@ import { ViewMainTipoBoletaComponent } from './components/tipo-boleta/view-main-
     RecoveryPasswordComponent,
     ListaPermisoComponent,
     EditarPermisoComponent,
-    ListaEstadoLicenciaComponent,
+    EstadoLicenciaComponent,
     ListaProvinciaComponent,
     DetalleProvinciaComponent,
     EditarProvinciaComponent,
     NuevoProvinciaComponent,
-    ViewMainEstadoBoletaComponent,
     FooterComponent,
     NavbarComponent,
     VerticalnavbarComponent,
@@ -57,10 +62,18 @@ import { ViewMainTipoBoletaComponent } from './components/tipo-boleta/view-main-
     AddPermissionComponent,
     EditRolComponent,
     HomeAdmComponent,
-    ViewMainViaticoComponent,
+    ViaticoComponent,
     TipoLicenciaComponent,
     ChangePasswordComponent,
-    ViewMainTipoBoletaComponent
+    TipoBoletaComponent,
+    EstadoBoletaComponent,
+    EstadoBoletaPipe,
+    EstadoLicenciaPipe,
+    ZonaInhospitaPipe,
+    ViaticoPipe,
+    TipoBoletaPipe,
+    TipoLicenciaPipe,
+
   ],
   imports: [
     BrowserModule,

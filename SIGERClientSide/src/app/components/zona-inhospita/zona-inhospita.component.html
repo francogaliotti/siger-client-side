@@ -83,6 +83,11 @@
       </div>
 
       <div class="col-9">
+        <input type="text"
+        class="form-control mb-2"
+        placeholder="Buscar Zonas Inhospitas"
+        #txtSearch
+        (keyup)="onSearch( txtSearch.value )" />
         <div class="table-responsive">
           <table class="table text-center">
   
@@ -96,7 +101,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let zona of zonaInhospita">
+              <tr *ngFor="let zona of zonaInhospita | zonaInhospitaPipe:page:search">
                 <td style="display: none;">{{zona.id}}</td>
                 <td>{{zona.codZona}}</td>
                 <td>{{zona.denominacionZona}}</td>
@@ -113,6 +118,13 @@
             </tbody>
   
           </table>
+          <button class="btn btn-primary" (click)="prevPage()" [disabled]="page === 0">
+            Anterior
+          </button>
+          &nbsp;
+          <button class="btn btn-primary" (click)="nextPage()" [disabled]="(zonaInhospita | zonaInhospitaPipe:page:search).length === 1">
+            Siguiente
+          </button>
         </div>
       </div>
 </div>

@@ -25,8 +25,11 @@ export class ZonaInhospitaComponent implements OnInit {
   faTrash = faTrash;
   faPlusCircle = faPlusCircle;
 
-  roles: string[];
   isAdmin = false;
+
+  searchPage = 0;
+  page = 0;
+  search: string = '';
 
   constructor(private _zona: FormBuilder,private _zonaInhospitaService:ZonaInhospitaService, 
     private router: Router, private _editzona:FormBuilder, private _tokenService: TokenService) {
@@ -48,7 +51,7 @@ export class ZonaInhospitaComponent implements OnInit {
   }
 
   cargarZonaInhospita():void{
-    this._zonaInhospitaService.list().subscribe(
+    this._zonaInhospitaService.list(this.searchPage).subscribe(
       data => {
         this.zonaInhospita = data;
       },
@@ -57,6 +60,23 @@ export class ZonaInhospitaComponent implements OnInit {
       }
     );
   }
+
+  nextPage() {
+    this.page += 10;
+    this.searchPage = this.searchPage + 1;
+  }
+
+  prevPage() {
+    if ( this.page > 0 )
+      this.page -= 10;
+      this.searchPage = this.searchPage - 1;
+  }
+
+  onSearch( search: string ) {
+    this.page = 0;
+    this.search = search;
+  }
+  
   borrarZona(id?:number):void{
     this._zonaInhospitaService.delete(id).subscribe(
       data => {
@@ -85,11 +105,11 @@ export class ZonaInhospitaComponent implements OnInit {
           showConfirmButton: false
         });
         this.cargarZonaInhospita();
-        this.router.navigate(['/zonaInhospita']);
+        this.router.navigate(['/zona-inhospita']);
       },
       err => {
         alert(err.console.mensaje);
-        this.router.navigate(['/estadoLicencia']);
+        this.router.navigate(['/zona-inhospita']);
       }
     );
   }

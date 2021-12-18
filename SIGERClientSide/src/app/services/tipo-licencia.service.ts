@@ -14,13 +14,13 @@ export class TipoLicenciaService extends connectionURL{
     super();
    }
 
-   public list(): Observable<TipoLicenciaDTO[]>{
-    this.endpoint = 'tipoLicencia/list';
+   public list(page: number): Observable<TipoLicenciaDTO[]>{
+    this.endpoint = 'tipo-licencia/?page='+ page;
     return this.httpClient.get<TipoLicenciaDTO[]>(this.app_url + this.endpoint);
   }
 
   public detail(id: number): Observable<TipoLicenciaDTO>{
-    this.endpoint = 'tipoLicencia/detail/' + id;
+    this.endpoint = 'tipo-licencia/' + id;
     return this.httpClient.get<TipoLicenciaDTO>(this.app_url + this.endpoint);
   }
 
@@ -30,17 +30,17 @@ export class TipoLicenciaService extends connectionURL{
   }*/
 
   public save(tipoLicencia: TipoLicenciaDTO): Observable<any>{
-    this.endpoint = 'tipoLicencia/create';
+    this.endpoint = 'tipo-licencia/';
     return this.httpClient.post<any>(this.app_url + this.endpoint, tipoLicencia);
   }
 
   public update(id: number, estadoLicencia: TipoLicenciaDTO): Observable<any>{
-    this.endpoint = 'tipoLicencia/update/' + id;
+    this.endpoint = 'tipo-licencia/' + id;
     return this.httpClient.put<any>(this.app_url + this.endpoint, estadoLicencia);
   }
 
   public delete(id?: number): Observable<any>{
-    this.endpoint = 'tipoLicencia/delete/' + id;
+    this.endpoint = 'tipo-licencia/' + id;
     return this.httpClient.delete<any>(this.app_url + this.endpoint);
   }
 

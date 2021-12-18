@@ -13,13 +13,13 @@ export class ViaticoService extends connectionURL {
     super();
    }
 
-   public list(): Observable<Viatico[]>{
-    this.endpoint = 'viatico/list';
+   public list(page: number): Observable<Viatico[]>{
+    this.endpoint = 'viatico/?page='+ page;
     return this.httpClient.get<Viatico[]>(this.app_url + this.endpoint);
   }
 
   public detail(id: number): Observable<Viatico>{
-    this.endpoint = 'viatico/detail/' + id;
+    this.endpoint = 'viatico/' + id;
     return this.httpClient.get<Viatico>(this.app_url + this.endpoint);
   }
 
@@ -29,17 +29,17 @@ export class ViaticoService extends connectionURL {
   }*/
 
   public save(viatico: Viatico): Observable<any>{
-    this.endpoint = 'viatico/create';
+    this.endpoint = 'viatico/';
     return this.httpClient.post<any>(this.app_url + this.endpoint, viatico);
   }
 
   public update(id: number, viatico: Viatico): Observable<any>{
-    this.endpoint = 'viatico/update/' + id;
+    this.endpoint = 'viatico/' + id;
     return this.httpClient.put<any>(this.app_url + this.endpoint, viatico);
   }
 
   public delete(id?: number): Observable<any>{
-    this.endpoint = 'viatico/delete/' + id;
+    this.endpoint = 'viatico/' + id;
     return this.httpClient.delete<any>(this.app_url + this.endpoint);
   }
 

@@ -13,13 +13,13 @@ export class EmpleadoService extends connectionURL{
     super();
   }
 
-  public list(): Observable<Empleado[]>{
-    this.endpoint = 'empleado/list';
+  public list(page: number): Observable<Empleado[]>{
+    this.endpoint = 'empleado/?page='+ page;
     return this.httpClient.get<Empleado[]>(this.app_url + this.endpoint);
   }
 
   public detail(id: number): Observable<Empleado>{
-    this.endpoint = 'empleado/detail/' + id;
+    this.endpoint = 'empleado/' + id;
     return this.httpClient.get<Empleado>(this.app_url + this.endpoint);
   }
 
@@ -29,17 +29,17 @@ export class EmpleadoService extends connectionURL{
   }*/
 
   public save(empleado: Empleado): Observable<any>{
-    this.endpoint = 'empleado/create';
+    this.endpoint = 'empleado/';
     return this.httpClient.post<any>(this.app_url + this.endpoint, empleado);
   }
 
   public update(id: number, empleado: Empleado): Observable<any>{
-    this.endpoint = 'empleado/update/' + id;
+    this.endpoint = 'empleado/' + id;
     return this.httpClient.put<any>(this.app_url + this.endpoint, empleado);
   }
 
   public delete(id?: number): Observable<any>{
-    this.endpoint = 'empleado/delete/' + id;
+    this.endpoint = 'empleado/' + id;
     return this.httpClient.delete<any>(this.app_url + this.endpoint);
   }
 }

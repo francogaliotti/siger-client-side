@@ -14,33 +14,33 @@ export class TipoBoletaService extends connectionURL{
     super();
   }
 
-  public list(): Observable<TipoBoletaDTO[]>{
-    this.endpoint = 'tipoBoleta/list';
+  public list(page: number): Observable<TipoBoletaDTO[]>{
+    this.endpoint = 'tipo-boleta/?page='+ page;
     return this.httpClient.get<TipoBoletaDTO[]>(this.app_url + this.endpoint);
   }
 
   public detail(id: number): Observable<TipoBoletaDTO>{
-    this.endpoint = 'tipoBoleta/detail/' + id;
+    this.endpoint = 'tipo-boleta/' + id;
     return this.httpClient.get<TipoBoletaDTO>(this.app_url + this.endpoint);
   }
 
   /*public detailname(tipoBoletaDenominacion: string): Observable<TipoBoletaDTO>{
-    this.endpoint = 'tipoBoleta/detail/' + tipoBoletaDenominacion;
+    this.endpoint = 'tipo-boleta/detail/' + tipoBoletaDenominacion;
     return this.httpClient.get<TipoBoletaDTO>(this.app_url + this.endpoint);
   }*/
 
   public save(tipoBoleta: TipoBoletaDTO): Observable<any>{
-    this.endpoint = 'tipoBoleta/create';
+    this.endpoint = 'tipo-boleta/';
     return this.httpClient.post<any>(this.app_url + this.endpoint, tipoBoleta);
   }
 
   public update(id: number, tipoBoleta: TipoBoletaDTO): Observable<any>{
-    this.endpoint = 'tipoBoleta/update/' + id;
+    this.endpoint = 'tipo-boleta/' + id;
     return this.httpClient.put<any>(this.app_url + this.endpoint, tipoBoleta);
   }
 
   public delete(id?: number): Observable<any>{
-    this.endpoint = 'tipoBoleta/delete/' + id;
+    this.endpoint = 'tipo-boleta/' + id;
     return this.httpClient.delete<any>(this.app_url + this.endpoint);
   }
 
