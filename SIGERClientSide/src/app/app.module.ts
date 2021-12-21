@@ -27,9 +27,17 @@ import { RegisterComponent } from './auth/register.component';
 import { LoginComponent } from './auth/login.component';
 import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
 import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita.component';
-import { interceptorProvider } from './interceptors/estado-boleta-interceptor.service';
-import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico.component';
-;
+import { ViaticoComponent } from './components/viatico/viatico.component';
+import { TipoLicenciaComponent } from './components/tipo-licencia/tipo-licencia.component';
+import { TipoBoletaComponent } from './components/tipo-boleta/tipo-boleta.component';
+import { EstadoBoletaComponent } from './components/estado-boleta/estado-boleta.component';
+import { EstadoBoletaPipe } from './pipes/estado-boleta.pipe';
+import { EstadoLicenciaPipe } from './pipes/estado-licencia.pipe';
+import { ZonaInhospitaPipe } from './pipes/zona-inhospita.pipe';
+import { ViaticoPipe } from './pipes/viatico.pipe';
+import { TipoBoletaPipe } from './pipes/tipo-boleta.pipe';
+import { TipoLicenciaPipe } from './pipes/tipo-licencia.pipe';
+import { CreateUserRRHHComponent } from './components/users/create-user-rrhh.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +64,18 @@ import { ViewMainViaticoComponent } from './components/viatico/view-main-viatico
     EditRolComponent,
     RegisterComponent,
     HomeAdmComponent,
-    ViewMainViaticoComponent
+    ViaticoComponent,
+    TipoLicenciaComponent,
+    ChangePasswordComponent,
+    TipoBoletaComponent,
+    EstadoBoletaComponent,
+    EstadoBoletaPipe,
+    EstadoLicenciaPipe,
+    ZonaInhospitaPipe,
+    ViaticoPipe,
+    TipoBoletaPipe,
+    TipoLicenciaPipe,
+    CreateUserRRHHComponent
   ],
   imports: [
     BrowserModule,
