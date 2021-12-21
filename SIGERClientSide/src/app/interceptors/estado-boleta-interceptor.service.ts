@@ -1,23 +1,53 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { catchError, concatMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
 import { TokenService } from '../services/token.service';
+import { AuthService } from '../services/auth.service';
+import { JwtDTO } from '../dto/jwt-dto';
+
+const AUTHORIZATION = 'Authorization';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EstadoBoletaInterceptorService implements HttpInterceptor{
+export class EstadoBoletaInterceptorService implements HttpInterceptor {
 
-  constructor(private _tokenService: TokenService) { }
+  constructor(
+    private _tokenService: TokenService,
+    private _authService: AuthService
+  ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let intReq = req;
-    const TOKEN = this._tokenService.getToken();
-    if(TOKEN != null){
-      intReq = req.clone({headers: req.headers.set('Authorization', 'Bearer '+ TOKEN)});
+
+    if (!this._tokenService.isLogged()) {
+      return next.handle(req);
     }
-    return next.handle(intReq);
+
+    let intReq = req;
+    const token = this._tokenService.getToken();
+
+    intReq = this.addToken(req, token);
+
+    return next.handle(intReq).pipe(catchError((err: HttpErrorResponse) => {
+      if (err.status === 401) {
+        const dto: JwtDTO = new JwtDTO(this._tokenService.getToken());
+        return this._authService.refresh(dto).pipe(concatMap((data: any) => {
+          console.log('refreshing....');
+          this._tokenService.setToken(data.token);
+          intReq = this.addToken(req, data.token);
+          return next.handle(intReq);
+        }));
+      } else {
+        this._tokenService.logOut();
+        return throwError(err);
+      }
+    }));
+  }
+
+  private addToken(req: HttpRequest<any>, token: string): HttpRequest<any> {
+    return req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
   }
 }
 
-export const interceptorProvider = [{provide: HTTP_INTERCEPTORS, useClass: EstadoBoletaInterceptorService, multi: true}];
+export const interceptorProvider = [{ provide: HTTP_INTERCEPTORS, useClass: EstadoBoletaInterceptorService, multi: true }];

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  isLogged = false;
+  isAdmin = false;
+
+  constructor(private _tokenService: TokenService) { 
+    document.body.style.backgroundImage = null;
+  }
 
   ngOnInit(): void {
+    this.isLogged = this._tokenService.isLogged();
+    this.isAdmin = this._tokenService.IsAdmin();
+  }
+
+  onLogOut(): void{
+    this._tokenService.logOut();
   }
 
 }

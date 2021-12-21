@@ -40,11 +40,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this._tokenService.getToken()) {
-      this.isLogged = true;
-      this.isLoginFail = false;
-      this.roles = this._tokenService.getAuthorities();
-    }
   }
 
   ChangeBody() {
@@ -72,9 +67,6 @@ export class LoginComponent implements OnInit {
     this._authService.LogIn(this.loginUsuario).subscribe(data => {
       this.isLogged = true;
       this._tokenService.setToken(data.token);
-      this._tokenService.setUsername(data.username);
-      this._tokenService.setAuthorities(data.authorities);
-      this.roles = data.authorities;
 
       console.log(data);
       this.router.navigate(['/home']);

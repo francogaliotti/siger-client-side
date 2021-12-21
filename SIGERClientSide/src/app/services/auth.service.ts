@@ -11,19 +11,24 @@ import { connectionURL } from './connectionURL';
 })
 export class AuthService extends connectionURL{
 
-  constructor(private http : HttpClient) { 
+  constructor(private httpClient : HttpClient) { 
     super();
     this.endpoint = "";
   }
 
   public SignIn(nuevoUsuario: NuevoUsuario) : Observable<any> {
     this.endpoint="auth/register"
-    return this.http.post<any>(this.app_url + this.endpoint, nuevoUsuario);
+    return this.httpClient.post<any>(this.app_url + this.endpoint, nuevoUsuario);
   }
 
   public LogIn(loginUsuario:LoginUsuario) : Observable<JwtDTO> {
     this.endpoint="auth/login"
-    return this.http.post<JwtDTO>(this.app_url + this.endpoint, loginUsuario);
+    return this.httpClient.post<JwtDTO>(this.app_url + this.endpoint, loginUsuario);
+  }
+
+  public refresh(dto: JwtDTO): Observable<JwtDTO> {
+    this.endpoint="auth/refresh"
+    return this.httpClient.post<JwtDTO>(this.app_url + this.endpoint, dto);
   }
   
 }
