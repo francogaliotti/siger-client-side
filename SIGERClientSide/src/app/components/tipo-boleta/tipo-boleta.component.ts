@@ -70,11 +70,11 @@ export class TipoBoletaComponent implements OnInit {
     this.tipoBoletaForm = this._tipoBoleta.group({
       codigo: ['', [Validators.required, Validators.maxLength(10)]],
       tipoBoletaDenominacion: ['', Validators.required],
-      tieneMovilidad: [],
-      tieneZonaInhospita: [],
-      tieneViatico: [],
-      permiteNoFichadaRetorno: [],
-      permiteNoFichadaSalida: []
+      tieneMovilidad: [false],
+      tieneZonaInhospita: [false],
+      tieneViatico: [false],
+      permiteNoFichadaRetorno: [false],
+      permiteNoFichadaSalida: [false]
     });
     this.editTipoBoletaForm = this._editTipoBoleta.group({
       id: ["", Validators.required],

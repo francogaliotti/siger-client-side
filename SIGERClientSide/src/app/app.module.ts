@@ -22,22 +22,24 @@ import { IndexRolComponent } from './components/rol/index-rol.component';
 import { AddPermissionComponent } from './components/rol/add-permission.component';
 import { EditRolComponent } from './components/rol/edit-rol.component';
 import { LoginComponent } from './auth/login.component';
-import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
-import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita.component';
-import { ViaticoComponent } from './components/viatico/viatico.component'; 
-import { TipoLicenciaComponent } from './components/tipo-licencia/tipo-licencia.component'; 
-import { TipoBoletaComponent } from './components/tipo-boleta/tipo-boleta.component'; 
-import { EstadoBoletaComponent } from './components/estado-boleta/estado-boleta.component'; 
-import { EstadoBoletaPipe } from './pipes/estado-boleta.pipe';  
-import { EstadoLicenciaPipe } from './pipes/estado-licencia.pipe';  
-import { ZonaInhospitaPipe } from './pipes/zona-inhospita.pipe';  
-import { ViaticoPipe } from './pipes/viatico.pipe';  
-import { TipoBoletaPipe } from './pipes/tipo-boleta.pipe';  
-import { TipoLicenciaPipe } from './pipes/tipo-licencia.pipe';  
+import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';  
 import { CreateUserRRHHComponent } from './components/users/create-user-rrhh.component';
 import { interceptorProvider } from './interceptors/estado-boleta-interceptor.service';
 import { ChangePasswordComponent } from './components/changepassword/change-password.component';
 import { EstadoLicenciaComponent } from './components/estado-licencia/estado-licencia.component';
+import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita.component';
+import { ViaticoComponent } from './components/viatico/viatico.component';
+import { TipoLicenciaComponent } from './components/tipo-licencia/tipo-licencia.component';
+import { TipoBoletaComponent } from './components/tipo-boleta/tipo-boleta.component';
+import { EstadoBoletaComponent } from './components/estado-boleta/estado-boleta.component';
+import { EstadoBoletaPipe } from './pipes/estado-boleta.pipe';
+import { EstadoLicenciaPipe } from './pipes/estado-licencia.pipe';
+import { ZonaInhospitaPipe } from './pipes/zona-inhospita.pipe';
+import { ViaticoPipe } from './pipes/viatico.pipe';
+import { TipoBoletaPipe } from './pipes/tipo-boleta.pipe';
+import { TipoLicenciaPipe } from './pipes/tipo-licencia.pipe';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -84,7 +86,8 @@ import { EstadoLicenciaComponent } from './components/estado-licencia/estado-lic
     SweetAlert2Module.forRoot(),
     SweetAlert2Module,
     SweetAlert2Module.forChild(),
-    FormsModule
+    FormsModule,
+    NoopAnimationsModule
   ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent]
