@@ -1,0 +1,107 @@
+<app-home></app-home>
+<div class="container mt-5">
+    <form [formGroup]="newUserForm" (ngSubmit)="OnCreate()">
+        <div class="container-fluid create-form">
+            <h2 style="text-align: center;">Crear usuario</h2>
+            <div class="form-group row">
+                <label class="col-sm-3 text-end mt-2" for="name"><b><i>Nombre: </i></b></label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" id="name" formControlName="firstname"
+                    [class.validfield]="this.newUserForm.get('firstname')?.valid"
+                    [class.invalidfield]="this.newUserForm.get('firstname')?.invalid && this.newUserForm.get('firstname')?.touched">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 text-end mt-2" for="surname"><b><i>Apellido: </i></b></label>
+                <div class="col-sm-4">
+                    <input type="text" id="surname" class="form-control" formControlName="surname"
+                    [class.validfield]="this.newUserForm.get('surname')?.value"
+                    [class.invalidfield]="this.newUserForm.get('surname')?.invalid && this.newUserForm.get('surname')?.touched">
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-sm-3 text-end mt-2" for="nationality"><b><i>Nacionalidad: </i></b></label>
+                <div class="col-sm-4">
+                    <select class="form-control text-center" formControlName="nationalitySelected">
+                        <option [ngValue]="0">Seleccione la nacionalidad</option>
+                        <option *ngFor="let nationality of nationalities" [ngValue]="nationality.id">{{nationality.nombre}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 text-end mt-2" for="identitycard"><b><i>DNI: </i></b></label>
+                <div class="col-sm-4">
+                    <input type="text" id="identitycard" class="form-control" formControlName="dni"
+                    [class.validfield]="this.newUserForm.get('dni')?.valid"
+                    [class.invalidfield]="this.newUserForm.get('dni')?.invalid && this.newUserForm.get('dni')?.touched">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 text-end mt-2" for="yearOfEntry"><b><i>Año de ingreso: </i></b></label>
+                <div class="col-sm-4">
+                    <input type="text" id="yearOfEntry" class="form-control" formControlName="yearOfstarted"
+                    [class.validfield]="this.newUserForm.get('yearOfstarted')?.valid"
+                    [class.invalidfield]="this.newUserForm.get('yearOfstarted')?.invalid && this.newUserForm.get('yearOfstarted')?.touched">
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid create-form">
+            <h2 style="text-align: center;">Usuario Institucional</h2>
+            <div class="form-group row">
+                <label class="col-sm-3 text-end mt-2" for="personalEmail"><b><i>E-mail personal: </i></b></label>
+                <div class="col-sm-4">
+                    <input type="text" id="personalEmail" class="form-control" formControlName="personalEmail"
+                    [class.validfield]="this.newUserForm.get('personalEmail')?.valid"
+                    [class.invalidfield]="this.newUserForm.get('personalEmail')?.invalid && this.newUserForm.get('personalEmail')?.touched">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 text-end mt-2" for="DPVemail"><b><i>E-mail DPV: </i></b></label>
+                <div class="col-sm-4">
+                    <input type="text" id="DPVemail" class="form-control" formControlName="DPVEmail"
+                    [class.validfield]="this.newUserForm.get('DPVEmail')?.valid"
+                    [class.invalidfield]="this.newUserForm.get('DPVEmail')?.invalid && this.newUserForm.get('DPVEmail')?.touched">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 text-end mt-2" for="username"><b><i>Usuario: </i></b></label>
+                <div class="col-sm-4">
+                    <input type="text" id="username" class="form-control" formControlName="username"
+                    [class.validfield]="this.newUserForm.get('username')?.valid"
+                    [class.invalidfield]="this.newUserForm.get('username')?.invalid && this.newUserForm.get('username')?.touched">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5 text-center">
+            <div class="form-group col-sm-4 form-check mt-2 offset-sm-2">
+                <label class="form-check-label offset-sm-2" for="specialRole">
+                    <i>¿El usuario necesita roles con privilegios altos?</i>
+                    <input type="checkbox" id="specialRole" class="form-check-input" (change)="EnableSpecialRole()" id="needSpecialRole" formControlName="needSpecialRole"
+                    [class.validfield]="this.newUserForm.get('needSpecialRole')?.valid"
+                    [class.invalidfield]="this.newUserForm.get('needSpecialRole')?.invalid && this.newUserForm.get('needSpecialRole')?.touched">
+                </label>
+    
+            </div>
+            <div class="col-sm-2">
+                <select class="form-control offset-sm-1 text-center" #SpecialRole formControlName="specialRoleSelected">
+                    <option [ngValue]="0">Seleccione el rol especial</option>
+                    <option *ngFor="let role of roles" [ngValue]="role.codigoRol">{{role.nombreRol}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-sm-6 offset-sm-2">
+                <p style="text-align: justify; font-size: 13.5px;" class="offset-sm-1">
+                    Envíe los datos de acceso al usuario, antes asegúrese de que el email ingresado es correcto.
+                    El resto de datos personales lo completará el usuario en su primer inicio de sesión a SIGER.
+                </p>
+            </div>
+            <div class="col-sm-2 ">
+                <button type="submit" class="btn btn-primary">Enviar al usuario</button>
+            </div>
+        </div>
+    </form>
+</div>
