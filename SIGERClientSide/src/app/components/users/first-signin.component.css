@@ -1,0 +1,45 @@
+.create-form{
+    background-color: #EBFFEC;
+    width: 760px;
+    border: 2px solid black;
+    box-shadow: 5px 5px 15px 2px;
+    margin-top: 50px;
+}
+
+div.create-form
+{
+    padding: 10px;
+}
+
+input{
+    padding: 1.5px;
+    margin-top: 5px;
+}
+
+select{
+    padding: 1.5px;
+    margin-top: 5px;
+    width: 200px;
+}
+
+.validfield{
+    border-style: solid 4px;
+    border-color: green;
+}
+
+.invalidfield{
+    border-style: solid 4px;
+    border-color: red;
+}
+
+input{
+    width: 200px;
+}
+
+img{
+    height: 150px;
+    width: 150px;
+    border: 5px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(#8E0800, #EB8C20);
+}
