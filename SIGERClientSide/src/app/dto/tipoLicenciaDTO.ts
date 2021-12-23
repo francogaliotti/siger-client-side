@@ -1,56 +1,62 @@
 import { BaseEntity } from "../models/base-entity";
+import { Empleado } from "../models/empleado";
+import { Sector } from "../models/sector";
 
 export class TipoLicenciaDTO extends BaseEntity{
+    cantidadMaximaAnual: number;
+
+    cantidadMaximaMensual:number;
+    
+    cantidadMaximaDiaria: number;
+   
     codigo: string;
 	
 	denominacion: string;
 
 	justificaPresentismo: boolean;
-	
-	generaRequerimiento: string;
-	
-	justificaRequerimiento: string;
-	
+
 	limiteRangoDias: number;
-	
-	modalidadLicencia: string;
+
+    goceSueldo: boolean;
 	
 	observaciones: string;
-	
-	permiteSolapamiento: string;
-	
-	tipoCalculo: string;
 
     tipoRequerimientoCantNiveles: number;
 
     tipoRequerimientoDenominacion: string;
 
-    constructor(codigo: string,
+    tipoRequerimientoAprueban: Array<Sector>;
+
+    tipoRequerimientoAprobadores: Array<Empleado>;
+
+    constructor(cantidadMaximaAnual: number,
+        cantidadMaximaMensual: number,
+        cantidadMaximaDiaria: number,
+        codigo: string,
         denominacion: string,
         justificaPresentismo: boolean,
-        generaRequerimiento: string,
-        justificaRequerimiento: string,
 	    limiteRangoDias: number,
-	    modalidadLicencia: string,
-	    observaciones: string,
-	    permiteSolapamiento: string,
-	    tipoCalculo: string,
+        goceSueldo: boolean,
+	    observaciones: string,  
         tipoRequerimientoCantNiveles: number,
         tipoRequerimientoDenominacion: string, 
+        tipoRequerimientoAprueban: Array<Sector>,
+        tipoRequerimientoAprobadores: Array<Empleado>,
         id?: number){
             
         super();
+        this.cantidadMaximaAnual=cantidadMaximaAnual;
+        this.cantidadMaximaDiaria=cantidadMaximaDiaria;
+        this.cantidadMaximaMensual=cantidadMaximaMensual;
+        this.goceSueldo=goceSueldo;
         this.denominacion=denominacion;
         this.codigo=codigo;
         this.justificaPresentismo=justificaPresentismo;
-        this.generaRequerimiento=generaRequerimiento;
-        this.justificaRequerimiento= justificaRequerimiento;
         this.limiteRangoDias=limiteRangoDias;
-        this.modalidadLicencia=modalidadLicencia;
         this.observaciones=observaciones;
-        this.permiteSolapamiento=permiteSolapamiento;
-        this.tipoCalculo=tipoCalculo;
         this.tipoRequerimientoCantNiveles=tipoRequerimientoCantNiveles;
         this.tipoRequerimientoDenominacion=tipoRequerimientoDenominacion;
+        this.tipoRequerimientoAprobadores=tipoRequerimientoAprobadores;
+        this.tipoRequerimientoAprueban=tipoRequerimientoAprueban;
     }
 }

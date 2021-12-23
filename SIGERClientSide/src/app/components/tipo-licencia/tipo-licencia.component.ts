@@ -28,7 +28,7 @@ export class TipoLicenciaComponent implements OnInit {
   editTipoLicenciaForm: FormGroup;
   testModal: Modal | undefined;
   modal: Modal | undefined;
-  newTipoLicencia: TipoLicenciaDTO = new TipoLicenciaDTO('','',false,'','',0,'','','','',0,'');
+  newTipoLicencia: TipoLicenciaDTO = new TipoLicenciaDTO(0,0,0,"","",false,0,false,"",0,"",[],[]);
   sectorArray: Sector[] = [];
   empleadoArray: Empleado[] = [];
   nivelesAutorizacionArray: number[]=[0,1,2,3,4];
@@ -49,33 +49,35 @@ export class TipoLicenciaComponent implements OnInit {
     private router: Router, private _editTipoLicencia: FormBuilder, private _tokenService: TokenService,
     private _empleadoService: EmpleadoService, private _sectorService: SectorService) {
     this.tipoLicenciaForm = this._tipoLicencia.group({
+      cantidadMaximaAnual: [0],
+      cantidadMaximaMensual: [0],
+      cantidadMaximaDiaria: [0],
       codigo: ['', [Validators.required, Validators.maxLength(10)]],
       denominacion: ['', Validators.required],
       justificaPresentismo: [false],
-      generaRequerimiento: [""],
-      justificaRequerimiento: [""],
       limiteRangoDias:[0],
-      modalidadLicencia: [""],
       observaciones: [""],
-	    permiteSolapamiento:[""],
-      tipoCalculo: [""],
+      goceSueldo:[false],
       tipoRequerimientoCantNiveles: [0],
-      tipoRequerimientoDenominacion: [""]
+      tipoRequerimientoDenominacion: [""],
+      tipoRequerimientoAprueban: [[]],
+      tipoRequerimientoAprobadores: [[]]
     });
     this.editTipoLicenciaForm = this._editTipoLicencia.group({
       id: ['', Validators.required],
+      cantidadMaximaAnual: [0],
+      cantidadMaximaMensual: [0],
+      cantidadMaximaDiaria: [0],
       codigo: ['', [Validators.required, Validators.maxLength(10)]],
       denominacion: ['', Validators.required],
       justificaPresentismo: [false],
-      generaRequerimiento: [""],
-      justificaRequerimiento: [""],
       limiteRangoDias:[0],
-      modalidadLicencia: [""],
       observaciones: [""],
-	    permiteSolapamiento:[""],
-      tipoCalculo: [""],
+      goceSueldo:[false],
       tipoRequerimientoCantNiveles: [0],
-      tipoRequerimientoDenominacion: [""]
+      tipoRequerimientoDenominacion: [""],
+      tipoRequerimientoAprueban: [[]],
+      tipoRequerimientoAprobadores: [[]]
     });
   }
 
@@ -133,18 +135,19 @@ export class TipoLicenciaComponent implements OnInit {
   }
   onCreate(): void {
     const tipoLicencia = new TipoLicenciaDTO(
+      this.tipoLicenciaForm.get('cantidadMaximaAnual')?.value,
+      this.tipoLicenciaForm.get('cantidadMaximaMensual')?.value,
+      this.tipoLicenciaForm.get('cantidadMaximaDiaria')?.value,
       this.tipoLicenciaForm.get('codigo')?.value,
       this.tipoLicenciaForm.get('denominacion')?.value,
       this.tipoLicenciaForm.get('justificaPresentismo')?.value,
-      this.tipoLicenciaForm.get('generaRequerimiento')?.value,
-      this.tipoLicenciaForm.get('justificaRequerimiento')?.value,
       this.tipoLicenciaForm.get('limiteRangoDias')?.value,
-      this.tipoLicenciaForm.get('modalidadLicencia')?.value,
+      this.tipoLicenciaForm.get('goceSueldo')?.value,
       this.tipoLicenciaForm.get('observaciones')?.value,
-      this.tipoLicenciaForm.get('permiteSolapamiento')?.value,
-      this.tipoLicenciaForm.get('tipoCalculo')?.value,
       this.tipoLicenciaForm.get('tipoRequerimientoCantNiveles')?.value,
-      this.tipoLicenciaForm.get('tipoRequerimientoDenominacion')?.value);
+      this.tipoLicenciaForm.get('tipoRequerimientoDenominacion')?.value,
+      this.tipoLicenciaForm.get('tipoRequerimientoAprueban')?.value,
+      this.tipoLicenciaForm.get('tipoRequerimientoAprobadores')?.value);
       
     this._tipoLicenciaService.save(tipoLicencia).subscribe(
       data => {
@@ -252,7 +255,7 @@ export class TipoLicenciaComponent implements OnInit {
   }
   volver(): void {
     this.modal?.hide();
-    this.router.navigate(['tipoLicencia']);
+    this.router.navigate(['tipo-licencia']);
   }
   
 
