@@ -7,6 +7,7 @@ import { Modal } from 'bootstrap';
 import { faEdit, faFileAlt, faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import * as bootstrap from 'bootstrap';
 import { TokenService } from 'src/app/services/token.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-estado-licencia',
@@ -81,7 +82,12 @@ export class EstadoLicenciaComponent implements OnInit {
   borrarEstadoLicencia(id?: number): void {
     this._estadoLicenciaService.delete(id).subscribe(
       data => {
-        alert('Se ha eliminado el Estado de Licencia satisfactoriamente')
+        Swal.fire({
+          title: "Éxito al eliminar",
+          icon: "success",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
         this.cargarEstadoLicencia();
       },
       err => {
@@ -94,7 +100,12 @@ export class EstadoLicenciaComponent implements OnInit {
       this.estadoLicenciaForm.get('nombreEstadoLicencia')?.value);
     this._estadoLicenciaService.save(estadoLicencia).subscribe(
       data => {
-        alert('Estado de Licencia creado Satisfactoriamente');
+        Swal.fire({
+          title: "Éxito al crear",
+          icon: "success",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
         this.cargarEstadoLicencia();
         this.router.navigate(['/estadoLicencia']);
       },
@@ -137,7 +148,12 @@ export class EstadoLicenciaComponent implements OnInit {
     this.newEstadoLicencia.nombreEstadoLicencia = this.editEstadoLicenciaForm.get('nombreEstadoLicencia')?.value;
     this._estadoLicenciaService.update(id, this.newEstadoLicencia).subscribe(
       data => {
-        alert('Estado de Licencia actualizado Satisfactoriamente');
+        Swal.fire({
+          title: "Éxito al actualizar",
+          icon: "success",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
         this.cargarEstadoLicencia();
         this.testModal?.hide();
       },

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Modal } from 'bootstrap';
-import { faEdit, faFileAlt, faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faArrowAltCircleDown, faEdit, faFileAlt, faPlusCircle, faTrash, faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons';
 import * as bootstrap from 'bootstrap';
 import { TokenService } from 'src/app/services/token.service';
 import { TipoLicencia } from 'src/app/models/tipo-licencia';
@@ -14,6 +14,7 @@ import { Sector } from 'src/app/models/sector';
 import { Empleado } from 'src/app/models/empleado';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { SectorService } from 'src/app/services/sector.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'tipo-licencia',
@@ -26,14 +27,17 @@ export class TipoLicenciaComponent implements OnInit {
   tipoLicenciaForm: FormGroup;
   editTipoLicenciaForm: FormGroup;
   testModal: Modal | undefined;
-  newTipoLicencia: TipoLicenciaDTO = new TipoLicenciaDTO('','',false,'','',0,'','','','',0,'');
+  modal: Modal | undefined;
+  newTipoLicencia: TipoLicenciaDTO = new TipoLicenciaDTO(0,0,0,"","",false,0,false,"",0,"",[],[]);
   sectorArray: Sector[] = [];
   empleadoArray: Empleado[] = [];
   nivelesAutorizacionArray: number[]=[0,1,2,3,4];
 
   faEdit = faEdit;
   faTrash = faTrash;
+  faArrow= faArrowAltCircleLeft;
   faPlusCircle = faPlusCircle;
+  faEye = faEye;
 
   isAdmin = false;
 
@@ -45,33 +49,35 @@ export class TipoLicenciaComponent implements OnInit {
     private router: Router, private _editTipoLicencia: FormBuilder, private _tokenService: TokenService,
     private _empleadoService: EmpleadoService, private _sectorService: SectorService) {
     this.tipoLicenciaForm = this._tipoLicencia.group({
+      cantidadMaximaAnual: [0],
+      cantidadMaximaMensual: [0],
+      cantidadMaximaDiaria: [0],
       codigo: ['', [Validators.required, Validators.maxLength(10)]],
       denominacion: ['', Validators.required],
       justificaPresentismo: [false],
-      generaRequerimiento: [""],
-      justificaRequerimiento: [""],
       limiteRangoDias:[0],
-      modalidadLicencia: [""],
       observaciones: [""],
-	    permiteSolapamiento:[""],
-      tipoCalculo: [""],
+      goceSueldo:[false],
       tipoRequerimientoCantNiveles: [0],
-      tipoRequerimientoDenominacion: [""]
+      tipoRequerimientoDenominacion: [""],
+      tipoRequerimientoAprueban: [[]],
+      tipoRequerimientoAprobadores: [[]]
     });
     this.editTipoLicenciaForm = this._editTipoLicencia.group({
       id: ['', Validators.required],
+      cantidadMaximaAnual: [0],
+      cantidadMaximaMensual: [0],
+      cantidadMaximaDiaria: [0],
       codigo: ['', [Validators.required, Validators.maxLength(10)]],
       denominacion: ['', Validators.required],
       justificaPresentismo: [false],
-      generaRequerimiento: [""],
-      justificaRequerimiento: [""],
       limiteRangoDias:[0],
-      modalidadLicencia: [""],
       observaciones: [""],
-	    permiteSolapamiento:[""],
-      tipoCalculo: [""],
+      goceSueldo:[false],
       tipoRequerimientoCantNiveles: [0],
-      tipoRequerimientoDenominacion: [""]
+      tipoRequerimientoDenominacion: [""],
+      tipoRequerimientoAprueban: [[]],
+      tipoRequerimientoAprobadores: [[]]
     });
   }
 
@@ -114,7 +120,12 @@ export class TipoLicenciaComponent implements OnInit {
   borrarTipoLicencia(id?: number): void {
     this._tipoLicenciaService.delete(id).subscribe(
       data => {
-        alert('Se ha eliminado el Tipo de Licencia satisfactoriamente')
+        Swal.fire({
+          title: "Éxito al eliminar",
+          icon: "success",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
         this.cargarTipoLicencia();
       },
       err => {
@@ -124,22 +135,28 @@ export class TipoLicenciaComponent implements OnInit {
   }
   onCreate(): void {
     const tipoLicencia = new TipoLicenciaDTO(
+      this.tipoLicenciaForm.get('cantidadMaximaAnual')?.value,
+      this.tipoLicenciaForm.get('cantidadMaximaMensual')?.value,
+      this.tipoLicenciaForm.get('cantidadMaximaDiaria')?.value,
       this.tipoLicenciaForm.get('codigo')?.value,
       this.tipoLicenciaForm.get('denominacion')?.value,
       this.tipoLicenciaForm.get('justificaPresentismo')?.value,
-      this.tipoLicenciaForm.get('generaRequerimiento')?.value,
-      this.tipoLicenciaForm.get('justificaRequerimiento')?.value,
       this.tipoLicenciaForm.get('limiteRangoDias')?.value,
-      this.tipoLicenciaForm.get('modalidadLicencia')?.value,
+      this.tipoLicenciaForm.get('goceSueldo')?.value,
       this.tipoLicenciaForm.get('observaciones')?.value,
-      this.tipoLicenciaForm.get('permiteSolapamiento')?.value,
-      this.tipoLicenciaForm.get('tipoCalculo')?.value,
       this.tipoLicenciaForm.get('tipoRequerimientoCantNiveles')?.value,
-      this.tipoLicenciaForm.get('tipoRequerimientoDenominacion')?.value);
+      this.tipoLicenciaForm.get('tipoRequerimientoDenominacion')?.value,
+      this.tipoLicenciaForm.get('tipoRequerimientoAprueban')?.value,
+      this.tipoLicenciaForm.get('tipoRequerimientoAprobadores')?.value);
       
     this._tipoLicenciaService.save(tipoLicencia).subscribe(
       data => {
-        alert('Tipo de Licencia creado Satisfactoriamente');
+        Swal.fire({
+          title: "Éxito al crear",
+          icon: "success",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
         this.cargarTipoLicencia();
         this.router.navigate(['/tipo-licencia']);
       },
@@ -203,7 +220,12 @@ export class TipoLicenciaComponent implements OnInit {
     this.newTipoLicencia.denominacion = this.editTipoLicenciaForm.get('denominacion')?.value;
     this._tipoLicenciaService.update(id, this.newTipoLicencia).subscribe(
       data => {
-        alert('Tipo de Licencia actualizado Satisfactoriamente');
+        Swal.fire({
+          title: "Éxito al actualizar",
+          icon: "success",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
         this.cargarTipoLicencia();
         this.testModal?.hide();
       },
@@ -213,5 +235,28 @@ export class TipoLicenciaComponent implements OnInit {
     );
 
   }
+  openDetail(id?: number): void {
+    this.modal = new bootstrap.Modal(document.getElementById('detalleModal'), {
+      keyboard: false
+    })
+    this.cargarTipoBoletaForDetail(id);
+    this.modal?.show();
+  }
+  cargarTipoBoletaForDetail(id?: number): void {
+    this._tipoLicenciaService.detail(id).subscribe(
+      data => {
+        this.newTipoLicencia = data;
+      },
+      err => {
+        alert(err.error.mensaje);
+        this.volver();
+      }
+    );
+  }
+  volver(): void {
+    this.modal?.hide();
+    this.router.navigate(['tipo-licencia']);
+  }
+  
 
 }

@@ -37,6 +37,7 @@ import { ZonaInhospitaPipe } from './pipes/zona-inhospita.pipe';
 import { ViaticoPipe } from './pipes/viatico.pipe';
 import { TipoBoletaPipe } from './pipes/tipo-boleta.pipe';
 import { TipoLicenciaPipe } from './pipes/tipo-licencia.pipe';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -84,7 +85,8 @@ import { TipoLicenciaPipe } from './pipes/tipo-licencia.pipe';
     SweetAlert2Module.forRoot(),
     SweetAlert2Module,
     SweetAlert2Module.forChild(),
-    FormsModule
+    FormsModule,
+    NoopAnimationsModule
   ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent]
