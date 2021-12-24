@@ -1,4 +1,6 @@
 import { BaseEntity } from "../models/base-entity";
+import { Empleado } from "../models/empleado";
+import { Sector } from "../models/sector";
 
 export class TipoBoletaDTO extends BaseEntity{
 
@@ -16,6 +18,14 @@ export class TipoBoletaDTO extends BaseEntity{
      
      permiteNoFichadaSalida: boolean;
 
+	 tipoRequerimientoCantNiveles: number;
+
+    tipoRequerimientoDenominacion: string;
+
+    tipoRequerimientoAprueban: Array<Sector>;
+
+    tipoRequerimientoAprobadores: Array<Empleado>;
+
      constructor(
 		codigo: string,
 		tipoBoletaDenominacion: string,
@@ -24,6 +34,11 @@ export class TipoBoletaDTO extends BaseEntity{
 		tieneViatico: boolean,
 		permiteNoFichadaRetorno: boolean,
 		permiteNoFichadaSalida: boolean,
+		tipoRequerimientoCantNiveles: number,
+        tipoRequerimientoDenominacion: string, 
+        tipoRequerimientoAprueban: Array<Sector>,
+        tipoRequerimientoAprobadores: Array<Empleado>,
+		id?: number
 		
 	){
 		super();
@@ -34,5 +49,9 @@ export class TipoBoletaDTO extends BaseEntity{
 		this.tieneViatico = tieneViatico;
 		this.permiteNoFichadaRetorno = permiteNoFichadaRetorno;
 		this.permiteNoFichadaSalida = permiteNoFichadaSalida;
+		this.tipoRequerimientoCantNiveles=tipoRequerimientoCantNiveles;
+        this.tipoRequerimientoDenominacion=tipoRequerimientoDenominacion;
+        this.tipoRequerimientoAprobadores=tipoRequerimientoAprobadores;
+        this.tipoRequerimientoAprueban=tipoRequerimientoAprueban;
 	}
 }

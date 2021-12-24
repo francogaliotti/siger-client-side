@@ -26,7 +26,7 @@ h1{
     margin-left: 220px;
     top: 2px; left: 380px;
     width: 880px;
-    height: 610px;
+    height: 900px;
     border: 2px solid black;
     box-shadow: 5px 5px 15px 2px;
 }
@@ -85,8 +85,8 @@ h1{
 .modal-content{
     background: #EBFFEC;
     margin-top: 20px;
-    width: 650px;
-    height: 700px;
+    width: 800px;
+    height: 850px;
     top: 2px;
     border: 2px solid #333333;
 }

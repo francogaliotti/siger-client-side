@@ -28,14 +28,15 @@ export class TipoLicenciaComponent implements OnInit {
   editTipoLicenciaForm: FormGroup;
   testModal: Modal | undefined;
   modal: Modal | undefined;
-  newTipoLicencia: TipoLicenciaDTO = new TipoLicenciaDTO(0,0,0,"","",false,0,false,"",0,"",[],[]);
+  newTipoLicencia: TipoLicenciaDTO = new TipoLicenciaDTO(0, 0, 0, "", "", false, 0, false, "", 0, "", [], []);
   sectorArray: Sector[] = [];
   empleadoArray: Empleado[] = [];
-  nivelesAutorizacionArray: number[]=[0,1,2,3,4];
+  nivelesAutorizacionArray: number[] = [0, 1, 2, 3, 4];
+  success: boolean;
 
   faEdit = faEdit;
   faTrash = faTrash;
-  faArrow= faArrowAltCircleLeft;
+  faArrow = faArrowAltCircleLeft;
   faPlusCircle = faPlusCircle;
   faEye = faEye;
 
@@ -55,9 +56,9 @@ export class TipoLicenciaComponent implements OnInit {
       codigo: ['', [Validators.required, Validators.maxLength(10)]],
       denominacion: ['', Validators.required],
       justificaPresentismo: [false],
-      limiteRangoDias:[0],
+      limiteRangoDias: [0],
       observaciones: [""],
-      goceSueldo:[false],
+      goceSueldo: [false],
       tipoRequerimientoCantNiveles: [0],
       tipoRequerimientoDenominacion: [""],
       tipoRequerimientoAprueban: [[]],
@@ -71,9 +72,9 @@ export class TipoLicenciaComponent implements OnInit {
       codigo: ['', [Validators.required, Validators.maxLength(10)]],
       denominacion: ['', Validators.required],
       justificaPresentismo: [false],
-      limiteRangoDias:[0],
+      limiteRangoDias: [0],
       observaciones: [""],
-      goceSueldo:[false],
+      goceSueldo: [false],
       tipoRequerimientoCantNiveles: [0],
       tipoRequerimientoDenominacion: [""],
       tipoRequerimientoAprueban: [[]],
@@ -87,7 +88,7 @@ export class TipoLicenciaComponent implements OnInit {
     this.SectoresList();
     this.EmpleadosList();
     this.isAdmin = this._tokenService.IsAdmin();
-    
+
   }
 
   cargarTipoLicencia(): void {
@@ -107,12 +108,12 @@ export class TipoLicenciaComponent implements OnInit {
   }
 
   prevPage() {
-    if ( this.page > 0 )
+    if (this.page > 0)
       this.page -= 10;
-      this.searchPage = this.searchPage - 1;
+    this.searchPage = this.searchPage - 1;
   }
 
-  onSearch( search: string ) {
+  onSearch(search: string) {
     this.page = 0;
     this.search = search;
   }
@@ -129,11 +130,17 @@ export class TipoLicenciaComponent implements OnInit {
         this.cargarTipoLicencia();
       },
       err => {
-        alert(err.error.mensaje);
+        Swal.fire({
+          title: "Oops! hubo un problema",
+          icon: "error",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
       }
     );
   }
-  onCreate(): void {
+  onCreate(): boolean {
+    this.success = false;
     const tipoLicencia = new TipoLicenciaDTO(
       this.tipoLicenciaForm.get('cantidadMaximaAnual')?.value,
       this.tipoLicenciaForm.get('cantidadMaximaMensual')?.value,
@@ -148,23 +155,31 @@ export class TipoLicenciaComponent implements OnInit {
       this.tipoLicenciaForm.get('tipoRequerimientoDenominacion')?.value,
       this.tipoLicenciaForm.get('tipoRequerimientoAprueban')?.value,
       this.tipoLicenciaForm.get('tipoRequerimientoAprobadores')?.value);
-      
-    this._tipoLicenciaService.save(tipoLicencia).subscribe(
-      data => {
-        Swal.fire({
-          title: "Éxito al crear",
-          icon: "success",
-          showCloseButton: false,
-          showConfirmButton: false
-        });
-        this.cargarTipoLicencia();
-        this.router.navigate(['/tipo-licencia']);
-      },
-      err => {
-        alert(err.console.mensaje);
-        this.router.navigate(['/tipo-licencia']);
-      }
-    );
+    if (this.tipoLicenciaForm.valid == true) {
+      console.log(tipoLicencia);
+      this._tipoLicenciaService.save(tipoLicencia).subscribe(
+        data => {
+          this.success = true;
+          Swal.fire({
+            title: "Éxito al crear",
+            icon: "success",
+            showCloseButton: false,
+            showConfirmButton: false
+          });
+          this.cargarTipoLicencia();
+          this.router.navigate(['/tipo-licencia']);
+        },
+        err => {
+          Swal.fire({
+            title: "Oops! hubo un problema",
+            icon: "error",
+            showCloseButton: false,
+            showConfirmButton: false
+          })
+        }
+      );
+    }
+    return this.success;
   }
   SectoresList(): void {
     this._sectorService.list(this.searchPage).subscribe(
@@ -230,7 +245,12 @@ export class TipoLicenciaComponent implements OnInit {
         this.testModal?.hide();
       },
       err => {
-        alert(err);
+        Swal.fire({
+          title: "Oops! hubo un problema",
+          icon: "error",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
       }
     );
 
@@ -257,6 +277,6 @@ export class TipoLicenciaComponent implements OnInit {
     this.modal?.hide();
     this.router.navigate(['tipo-licencia']);
   }
-  
+
 
 }

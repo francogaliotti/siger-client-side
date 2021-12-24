@@ -46,10 +46,7 @@
     <div class="col-2">
     </div>
     <div class="col-9">
-      <input type="text"
-        class="form-control mb-2"
-        placeholder="Buscar Estado de Boleta"
-        #txtSearch
+      <input type="text" class="form-control mb-2" placeholder="Buscar Estado de Boleta" #txtSearch
         (keyup)="onSearch( txtSearch.value )" />
       <div class="table-responsive">
         <table class="table text-center">
@@ -145,10 +142,14 @@
           Anterior
         </button>
         &nbsp;
-        <button class="btn btn-primary" (click)="nextPage()" [disabled]="(estadoBoletaArray | estadoBoletaPipe:page:search).length === 1">
+        <button class="btn btn-primary" (click)="nextPage()"
+          [disabled]="(estadoBoletaArray | estadoBoletaPipe:page:search).length === 1">
           Siguiente
         </button>
       </div>
     </div>
   </div>
 </div>
+<footer>
+  <app-footer></app-footer>
+</footer>

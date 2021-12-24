@@ -29,7 +29,7 @@ export class TipoBoletaComponent implements OnInit {
   faEye = faEye;
   faArrow = faArrowAltCircleLeft;
 
-  tipoBoleta: TipoBoletaDTO = new TipoBoletaDTO("", "", false, false, false, false, false);
+  tipoBoleta: TipoBoletaDTO = new TipoBoletaDTO("", "", false, false, false, false, false, 0, "", [], []);
 
   tipoBoletaArray: TipoBoletaDTO[] = [];
 
@@ -74,7 +74,11 @@ export class TipoBoletaComponent implements OnInit {
       tieneZonaInhospita: [false],
       tieneViatico: [false],
       permiteNoFichadaRetorno: [false],
-      permiteNoFichadaSalida: [false]
+      permiteNoFichadaSalida: [false],
+      tipoRequerimientoCantNiveles: [0],
+      tipoRequerimientoDenominacion: [""],
+      tipoRequerimientoAprueban: [[]],
+      tipoRequerimientoAprobadores: [[]]
     });
     this.editTipoBoletaForm = this._editTipoBoleta.group({
       id: ["", Validators.required],
@@ -84,7 +88,11 @@ export class TipoBoletaComponent implements OnInit {
       tieneZonaInhospita: [],
       tieneViatico: [],
       permiteNoFichadaRetorno: [],
-      permiteNoFichadaSalida: []
+      permiteNoFichadaSalida: [],
+      tipoRequerimientoCantNiveles: [0],
+      tipoRequerimientoDenominacion: [""],
+      tipoRequerimientoAprueban: [[]],
+      tipoRequerimientoAprobadores: [[]]
     });
   }
 
@@ -126,7 +134,7 @@ export class TipoBoletaComponent implements OnInit {
     this._tipoBoletaService.delete(id).subscribe(
       data => {
         Swal.fire({
-          title: "Éxito",
+          title: "Éxito al eliminar",
           icon: "success",
           showCloseButton: false,
           showConfirmButton: false
@@ -152,7 +160,12 @@ export class TipoBoletaComponent implements OnInit {
       this.tipoBoletaForm.get('tieneZonaInhospita')?.value,
       this.tipoBoletaForm.get('tieneViatico')?.value,
       this.tipoBoletaForm.get('permiteNoFichadaRetorno')?.value,
-      this.tipoBoletaForm.get('permiteNoFichadaSalida')?.value);
+      this.tipoBoletaForm.get('permiteNoFichadaSalida')?.value,
+      this.tipoBoletaForm.get('tipoRequerimientoCantNiveles')?.value,
+      this.tipoBoletaForm.get('tipoRequerimientoDenominacion')?.value,
+      this.tipoBoletaForm.get('tipoRequerimientoAprueban')?.value,
+      this.tipoBoletaForm.get('tipoRequerimientoAprobadores')?.value);
+      
 
     if (this.tipoBoletaForm.valid == true) {
       console.log(tipoBoleta);
@@ -161,7 +174,7 @@ export class TipoBoletaComponent implements OnInit {
           this.success = true;
 
           Swal.fire({
-            title: "Éxito",
+            title: "Éxito al crear",
             icon: "success",
             showCloseButton: false,
             showConfirmButton: false
@@ -239,7 +252,7 @@ export class TipoBoletaComponent implements OnInit {
     this._tipoBoletaService.update(id, this.tipoBoleta).subscribe(
       data => {
         Swal.fire({
-          title: "Éxito",
+          title: "Éxito al actualizar",
           icon: "success",
           showCloseButton: false,
           showConfirmButton: false
