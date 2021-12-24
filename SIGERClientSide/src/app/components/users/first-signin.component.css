@@ -16,6 +16,14 @@ input{
     margin-top: 5px;
 }
 
+.input-width-300{
+    width: 300px;
+}
+
+.input-width-200{
+    width: 200px;
+}
+
 select{
     padding: 1.5px;
     margin-top: 5px;
@@ -30,10 +38,6 @@ select{
 .invalidfield{
     border-style: solid 4px;
     border-color: red;
-}
-
-input{
-    width: 200px;
 }
 
 img{
