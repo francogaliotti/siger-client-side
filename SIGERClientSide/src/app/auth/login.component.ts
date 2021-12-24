@@ -51,19 +51,7 @@ export class LoginComponent implements OnInit {
   SignIn() {
 
     this.loginUsuario = new LoginUsuario(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value);
-
-    /*const user: Usuario = {
-      username: this.loginForm.get('username')?.value,
-      password: this.loginForm.get('password')?.value,
-      recordarme: this.loginForm.get('rememberme')?.value,
-      correoInstitucional: this.loginForm.get('username')?.value,
-      esPrimerInicio: false,
-      requiereAutorizacion: false,
-      rolNecesario: "",
-      enabled: false,
-      roles: Array()
-    }*/
-
+    
     this._authService.LogIn(this.loginUsuario).subscribe(data => {
       this.isLogged = true;
       this._tokenService.setToken(data.token);

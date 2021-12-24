@@ -2,7 +2,7 @@
 <div class="container" style="font-size: 14px;">
     <form action="">
         <div class="container-fluid create-form ">
-            <h3 class="text-center">Datos personales</h3>
+            <h4 class="text-center">Datos personales</h4>
             <div class="row">
                 <div class="col-6 ">
                     <div class="form-group row">
@@ -12,21 +12,21 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 text-end mt-2"  style="margin-left: 40px;" for="name"><b><i>Apellido: </i></b></label>
+                        <label class="col-sm-3 text-end mt-2"  style="margin-left: 40px;" for="lastname"><b><i>Apellido: </i></b></label>
                         <div class="col-sm-4">
-                            <input class="form-control input-width-300" type="text" id="name" formControlName="lastname">
+                            <input class="form-control input-width-300" type="text" id="lastname" formControlName="lastname">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 text-end mt-2" style="margin-left: 40px;" for="name"><b><i>CUIL: </i></b></label>
+                        <label class="col-sm-3 text-end mt-2" style="margin-left: 40px;" for="CUIL"><b><i>CUIL: </i></b></label>
                         <div class="col-sm-4">
-                            <input class="form-control input-width-300" type="text" id="name" formControlName="CUIL" readonly>
+                            <input class="form-control input-width-300" type="text" id="CUIL" formControlName="CUIL" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 text-end mt-2" style="margin-left: 20px;" for="name"><b><i>Nacionalidad: </i></b></label>
+                        <label class="col-sm-3 text-end mt-2" style="margin-left: 20px;" for="nationality"><b><i>Nacionalidad: </i></b></label>
                         <div class="col-sm-4" style="margin-left: 20px;">
-                            <input class="form-control input-width-300" type="text" id="name" formControlName="CUIL">
+                            <input class="form-control input-width-300" type="text" id="nationality" formControlName="nationality">
                         </div>
                     </div>
                 </div>
@@ -41,29 +41,29 @@
             </div>
         </div>
         <div class="container-fluid create-form">
-            <h3 class="text-center">Usuario DPV</h3>
+            <h4 class="text-center">Usuario DPV</h4>
             <div class="form-group row">
-                <label class="col-sm-3 text-end mt-2" style="margin-left: -55px;" for="name"><b><i>E-mail personal: </i></b></label>
+                <label class="col-sm-3 text-end mt-2" style="margin-left: -55px;" for="personalEmail"><b><i>E-mail personal: </i></b></label>
                 <div class="col-sm-4">
-                    <input class="form-control input-width-300" type="text" id="name" formControlName="firstname">
+                    <input class="form-control input-width-300" type="text" id="personalEmail" formControlName="personalEmail">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-3 text-end mt-2 " style="margin-left: -55px;" for="name"><b><i>E-mail DPV: </i></b></label>
+                <label class="col-sm-3 text-end mt-2 " style="margin-left: -55px;" for="dpvEmail"><b><i>E-mail DPV: </i></b></label>
                 <div class="col-sm-4">
-                    <input class="form-control input-width-300" type="text" id="name" formControlName="lastname" readonly>
+                    <input class="form-control input-width-300" type="text" id="dpvEmail" formControlName="dpvEmail" readonly>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-3 text-end mt-2" style="margin-left: -55px;" for="name"><b><i>Usuario: </i></b></label>
+                <label class="col-sm-3 text-end mt-2" style="margin-left: -55px;" for="username"><b><i>Usuario: </i></b></label>
                 <div class="col-sm-4">
-                    <input class="form-control input-width-300" type="text" id="name" formControlName="CUIL" readonly>
+                    <input class="form-control input-width-300" type="text" id="username" formControlName="username" readonly>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-3 text-end mt-2" style="margin-left: -55px;" for="name"><b><i>Contraseña: </i></b></label>
+                <label class="col-sm-3 text-end mt-2" style="margin-left: -55px;" for="password"><b><i>Contraseña: </i></b></label>
                 <div class="col-sm-4">
-                    <input class="form-control input-width-300" type="text" id="name" formControlName="CUIL">
+                    <input class="form-control input-width-300" type="text" id="password" formControlName="password">
                 </div>
                 <button class="btn btn-primary col-sm-3 offset-sm-2" style="padding: 0px;">
                     Generar contraseña
@@ -72,66 +72,66 @@
             </div>
         </div>
         <div class="container-fluid create-form">
-            <h3 class="text-center">Domicilio</h3>
+            <h4 class="text-center">Domicilio</h4>
             <div class="form-group row">
-                <label class="col-sm-1 text-end mt-2" for="name"><b><i>Provincia: </i></b></label>
+                <label class="col-sm-1 text-end mt-2" for="province"><b><i>Provincia: </i></b></label>
                 <div class="col-sm-4">
-                    <select class="form-control offset-sm-1 text-center" #SpecialRole
+                    <select class="form-control offset-sm-1 text-center" id="province" #SpecialRole
                         formControlName="specialRoleSelected">
                         <option [ngValue]="0">Seleccione una provincia</option>
                         <!--Add provincias-->
                     </select>
                 </div>
-                <label class="col-sm-1 text-end mt-2" style="margin-left: 30px;" for="name"><b><i>Barrio: </i></b></label>
+                <label class="col-sm-1 text-end mt-2" style="margin-left: 30px;" for="neighborhood"><b><i>Barrio: </i></b></label>
                 <div class="col-sm-4" style="margin-left: -5px;">
-                    <input class="form-control input-width-200" type="text" id="name" formControlName="firstname">
+                    <input class="form-control input-width-200" type="text" id="neighborhood" formControlName="neighborhood">
                 </div>
-                <label class="col-sm-1 text-end mt-2" style="margin-left: -35px;" for="name"><b><i>Piso: </i></b></label>
+                <label class="col-sm-1 text-end mt-2" style="margin-left: -35px;" for="floor"><b><i>Piso: </i></b></label>
                 <div class="col-sm-1" style="margin-left: -20px;">
-                    <input class="form-control" style="width: 50px;" type="text" id="name" formControlName="firstname">
+                    <input class="form-control" style="width: 50px;" type="text" id="floor" formControlName="floor">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-1 text-end mt-2" for="name"><b><i>Localidad: </i></b></label>
+                <label class="col-sm-1 text-end mt-2" for="district"><b><i>Localidad: </i></b></label>
                 <div class="col-sm-4">
-                    <select class="form-control offset-sm-1 text-center" #SpecialRole
+                    <select class="form-control offset-sm-1 text-center" id="district" #SpecialRole
                         formControlName="specialRoleSelected">
                         <option [ngValue]="0">Seleccione una localidad</option>
                         <!--Add localidades-->
                     </select>
                 </div>
-                <label class="col-sm-1 text-end mt-2" style="margin-left: 10px;" for="name"><b><i>Manzana: </i></b></label>
+                <label class="col-sm-1 text-end mt-2" style="margin-left: 10px;" for="block"><b><i>Manzana: </i></b></label>
                 <div class="col-sm-4" style="margin-left: 15px;">
-                    <input class="form-control" style="width: 50px;" type="text" id="name" formControlName="firstname">
+                    <input class="form-control" style="width: 50px;" type="text" id="block" formControlName="block">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-1 text-end mt-2" for="name"><b><i>Dirección: </i></b></label>
+                <label class="col-sm-1 text-end mt-2" for="street"><b><i>Calle: </i></b></label>
                 <div class="col-sm-4" style="margin-left: 20px;">
-                    <input class="form-control input-width-200" type="text" id="name" formControlName="lastname">
+                    <input class="form-control input-width-200" type="text" id="street" formControlName="street">
                 </div>
-                <label class="col-sm-1 text-end mt-2" style="margin-left: 15px;" for="name"><b><i>Casa: </i></b></label>
+                <label class="col-sm-1 text-end mt-2" style="margin-left: 15px;" for="house"><b><i>Casa: </i></b></label>
                 <div class="col-sm-4" style="margin-left: -10px;">
-                    <input class="form-control" type="text" style="width: 50px;" id="name" formControlName="firstname">
+                    <input class="form-control" type="text" style="width: 50px;" id="house" formControlName="house">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-1 text-end mt-2" style="margin-left: 20px;" for="name"><b><i>Altura: </i></b></label>
+                <label class="col-sm-1 text-end mt-2" style="margin-left: 20px;" for="height"><b><i>Altura: </i></b></label>
                 <div class="col-sm-4" >
-                    <input class="form-control input-width-200" type="text" id="name" formControlName="lastname">
+                    <input class="form-control input-width-200" type="text" id="height" formControlName="height">
                 </div>
-                <label class="col-sm-1 text-end mt-2" style="margin-left: -42px;" for="name"><b><i>Departamento: </i></b></label>
+                <label class="col-sm-1 text-end mt-2" style="margin-left: -42px;" for="apartment"><b><i>Departamento: </i></b></label>
                 <div class="col-sm-4" style="margin-left: 46px;">
-                    <input class="form-control" style="width: 50px;" type="text" id="name" formControlName="firstname">
+                    <input class="form-control" style="width: 50px;" type="text" id="apartment" formControlName="apartment">
                 </div>
             </div>
         </div>
         <div class="container-fluid create-form">
-            <h3 class="text-center">Sector</h3>
+            <h4 class="text-center">Sector</h4>
             <div class="form-group row">
-                <label class="col-sm-1 text-end mt-2" style="margin-left: 25px;" for="name"><b><i>Sector: </i></b></label>
+                <label class="col-sm-1 text-end mt-2" style="margin-left: 25px;" for="sector"><b><i>Sector: </i></b></label>
                 <div class="col-sm-4" style="margin-left: -5px;">
-                    <input class="form-control input-width-200" type="text" id="name" formControlName="CUIL" readonly>
+                    <input class="form-control input-width-200" type="text" id="sector" formControlName="sector" readonly>
                 </div>
             </div>
         </div>
