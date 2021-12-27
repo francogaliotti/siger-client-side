@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TipoLicenciaDTO } from '../dto/tipoLicenciaDTO';
 import { TipoLicencia } from '../models/tipo-licencia';
+import { Empleado } from '../models/empleado';
 import { connectionURL } from './connectionURL';
 
 @Injectable({
