@@ -42,6 +42,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TipoRegimenHorarioComponent } from './components/tipo-regimen-horario/tipo-regimen-horario.component';
 import { TipoRegimenHorarioPipe } from './pipes/tipo-regimen-horario.pipe';
 import { RegimenHorarioPipe } from './pipes/regimen-horario.pipe';
+import { RegimenHorarioComponent } from './components/regimen-horario/regimen-horario.component';
 
 
 @NgModule({
@@ -81,7 +82,8 @@ import { RegimenHorarioPipe } from './pipes/regimen-horario.pipe';
     CreateUserRRHHComponent,
     TipoRegimenHorarioComponent,
     TipoRegimenHorarioPipe,
-    RegimenHorarioPipe
+    RegimenHorarioPipe,
+    RegimenHorarioComponent
   ],
   imports: [
     BrowserModule,
