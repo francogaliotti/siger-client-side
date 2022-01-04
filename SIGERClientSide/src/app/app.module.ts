@@ -38,6 +38,12 @@ import { ViaticoPipe } from './pipes/viatico.pipe';
 import { TipoBoletaPipe } from './pipes/tipo-boleta.pipe';
 import { TipoLicenciaPipe } from './pipes/tipo-licencia.pipe';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { TipoMovilidadComponent } from './components/tipo-movilidad/tipo-movilidad.component';
+import { MovilidadComponent } from './components/movilidad/movilidad.component';
+import { TipoMovilidadPipe } from './pipes/tipo-movilidad.pipe';
+import { MovilidadPipe } from './pipes/movilidad.pipe';
+import { SectorComponent } from './components/sector/sector.component';
+import { SectorPipe } from './pipes/sector.pipe';
 
 
 @NgModule({
@@ -74,6 +80,12 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     ViaticoPipe,
     TipoBoletaPipe,
     TipoLicenciaPipe,
+    TipoMovilidadComponent,
+    MovilidadComponent,
+    TipoMovilidadPipe,
+    MovilidadPipe,
+    SectorComponent,
+    SectorPipe,
 
   ],
   imports: [

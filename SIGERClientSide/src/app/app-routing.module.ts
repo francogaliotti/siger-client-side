@@ -20,6 +20,11 @@ import { TipoLicenciaComponent } from './components/tipo-licencia/tipo-licencia.
 import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita.component';
 import { ViaticoComponent } from './components/viatico/viatico.component';
 import { TipoBoletaComponent } from './components/tipo-boleta/tipo-boleta.component';
+import { TipoMovilidadComponent } from './components/tipo-movilidad/tipo-movilidad.component';
+import { MovilidadComponent } from './components/movilidad/movilidad.component';
+import { TipoLicenciaGuardService as tipoLicenciaGuard} from './guards/tipo-licencia-guard.service';
+import { TipoMovilidadGuardService as tipoMovilidadGuard} from './guards/tipo-movilidad-guard.service';
+import { MovilidadGuardService as movilidadGuard} from './guards/movilidad-guard.service';
 
 
 const routes: Routes = [
@@ -30,12 +35,14 @@ const routes: Routes = [
   {path: 'change-password/:tokenPassword', component: ChangePasswordComponent, canActivate: [LoginGuard]},
   {path: 'estado-boleta', component: EstadoBoletaComponent, canActivate: [estadoBoletaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'estado-licencia', component: EstadoLicenciaComponent, canActivate: [estadoLicenciaGuard], data: { expectedRol: ['admin', 'user'] }},
-  {path: 'tipo-licencia', component: TipoLicenciaComponent},
+  {path: 'tipo-licencia', component: TipoLicenciaComponent, canActivate:  [tipoLicenciaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'zona-inhospita', component: ZonaInhospitaComponent, canActivate: [zonaInhospitaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'viatico', component: ViaticoComponent, canActivate: [ViaticoGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'permisos', component: ListaPermisoComponent},
   {path: 'roles', component: IndexRolComponent},
   {path: 'tipo-boleta', component: TipoBoletaComponent, canActivate:  [tipoBoletaGuard], data: { expectedRol: ['admin', 'user'] }},
+  {path: 'movilidad', component: MovilidadComponent, canActivate: [movilidadGuard], data: { expectedRol: ['admin', 'user'] }},
+  {path: 'tipo-movilidad', component: TipoMovilidadComponent, canActivate: [tipoMovilidadGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: '**', component: ErrorsComponent}
   
 ];

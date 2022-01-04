@@ -69,12 +69,12 @@ export class EstadoLicenciaComponent implements OnInit {
   }
 
   prevPage() {
-    if ( this.page > 0 )
+    if (this.page > 0)
       this.page -= 10;
-      this.searchPage = this.searchPage - 1;
+    this.searchPage = this.searchPage - 1;
   }
 
-  onSearch( search: string ) {
+  onSearch(search: string) {
     this.page = 0;
     this.search = search;
   }
@@ -91,7 +91,13 @@ export class EstadoLicenciaComponent implements OnInit {
         this.cargarEstadoLicencia();
       },
       err => {
-        alert(err.error.mensaje);
+        Swal.fire({
+          title: "Oops! hubo un problema",
+          icon: "error",
+          showCloseButton: false,
+          showConfirmButton: false
+        }
+        );
       }
     );
   }
@@ -107,11 +113,15 @@ export class EstadoLicenciaComponent implements OnInit {
           showConfirmButton: false
         });
         this.cargarEstadoLicencia();
-        this.router.navigate(['/estadoLicencia']);
+        this.router.navigate(['/estado-licencia']);
       },
       err => {
-        alert(err.console.mensaje);
-        this.router.navigate(['/estado-licencia']);
+        Swal.fire({
+          title: "Oops! hubo un problema",
+          icon: "error",
+          showCloseButton: false,
+          showConfirmButton: false
+        })
       }
     );
   }
