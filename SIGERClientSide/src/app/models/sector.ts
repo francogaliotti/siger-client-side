@@ -10,7 +10,7 @@ export class Sector extends BaseEntity{
 	
 	fechaBaja: Date;
 	
-	validaFueraDeHorario: string;
+	validaFueraDeHorario: boolean;
 	
 	detenerCargaBoletas: string;
 	
@@ -30,8 +30,23 @@ export class Sector extends BaseEntity{
 
 	domicilio: Domicilio;
 
-	constructor(){
+	constructor(codigo: string, denominacion: string, validaFueraDeHorario: boolean,
+		permiteTrabajarHorasExtras: boolean, permiteTrabajarFinDeSemana: boolean,
+		maximoSerenoDiurno: number, maximoSerenoNocturno: number, sectorSuperior: Sector,
+		tipoSector: TipoSector, id?:number){
 		super();
+		this.id=id;
+		this.codigo=codigo;
+		this.denominacion=denominacion;
+		this.validaFueraDeHorario=validaFueraDeHorario;
+		this.permiteTrabajarFinDeSemana=permiteTrabajarFinDeSemana;
+		this.permiteTrabajarHorasExtras=permiteTrabajarHorasExtras;
+		this.maximoSerenoDiurno=maximoSerenoDiurno;
+		this.maximoSerenoNocturno=maximoSerenoNocturno;
+		this.sectorSuperior=sectorSuperior;
+		this.tipoSector=tipoSector;
+		
+		
 	}
 	
 }
