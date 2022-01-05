@@ -7,6 +7,7 @@ import { Planilla } from "./planilla";
 import { RemanenteDiasLicencia } from "./remanente-dias-licencia";
 import { Remuneracion } from "./remuneracion";
 import { Usuario } from "./usuario";
+import { Nacionalidad } from "./nacionalidad";
 
 export class Empleado extends BaseEntity{
 
@@ -22,13 +23,11 @@ export class Empleado extends BaseEntity{
 	
 	estadoCivil: number;
 	
-	nacionalidad: string;
+	nacionalidad: Nacionalidad;
 	
 	legajo: number;
 	
 	cuil: string;
-	
-	tipoDocumento: number;
 	
 	nroIdentificacionPersonal: string;
 	

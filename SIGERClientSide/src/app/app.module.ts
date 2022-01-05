@@ -22,7 +22,8 @@ import { IndexRolComponent } from './components/rol/index-rol.component';
 import { AddPermissionComponent } from './components/rol/add-permission.component';
 import { EditRolComponent } from './components/rol/edit-rol.component';
 import { LoginComponent } from './auth/login.component';
-import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
+import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';  
+import { CreateUserRRHHComponent } from './components/users/create-user-rrhh.component';
 import { interceptorProvider } from './interceptors/estado-boleta-interceptor.service';
 import { ChangePasswordComponent } from './components/changepassword/change-password.component';
 import { EstadoLicenciaComponent } from './components/estado-licencia/estado-licencia.component';
@@ -87,6 +88,7 @@ import { SectorPipe } from './pipes/sector.pipe';
     SectorComponent,
     SectorPipe,
 
+    CreateUserRRHHComponent
   ],
   imports: [
     BrowserModule,
