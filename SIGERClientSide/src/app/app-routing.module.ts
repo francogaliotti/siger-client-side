@@ -7,7 +7,6 @@ import { ErrorsComponent } from './layouts/errors/errors.component';
 import { HomeComponent } from './layouts/home/home.component';
 import { RecoveryPasswordComponent } from './layouts/recovery-password/recovery-password.component';
 import { HomeAdmComponent } from './layouts/home-adm/home-adm.component';
-import { EstadoBoletaGuardService as guard} from './guards/estado-boleta-guard.service';
 import { EstadoLicenciaGuardService as estadoLicenciaGuard} from './guards/estado-licencia-guard.service';
 import { ZonaInhospitaGuardService as zonaInhospitaGuard} from './guards/zona-inhospita-guard.service';
 import { EstadoBoletaGuardService as estadoBoletaGuard} from './guards/estado-boleta-guard.service';
@@ -26,6 +25,8 @@ import { EmpleadoGuardService as EmpleadoGuard } from './guards/empleado-guard.s
 import { TipoRegimenHorarioComponent } from './components/tipo-regimen-horario/tipo-regimen-horario.component';
 import { RegimenHorarioComponent } from './components/regimen-horario/regimen-horario.component';
 import { RemuneracionComponent } from './components/remuneracion/remuneracion.component';
+import { TipoSectorComponent } from './components/tipo-sector/tipo-sector.component';
+import { TipoSectorGuardService as TipoSectorGuard} from './guards/tipo-sector-guard.service';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -44,6 +45,7 @@ const routes: Routes = [
   {path: 'roles', component: IndexRolComponent},
   {path: 'regimen-horario', component: RegimenHorarioComponent},
   {path: 'remuneracion', component: RemuneracionComponent},
+  {path: 'tipo-sector', component: TipoSectorComponent, canActivate: [TipoSectorGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'altaEmpleado', component: CreateUserRRHHComponent, canActivate: [EmpleadoGuard], data: {expectedRol: ['admin']}},
   {path: '**', component: ErrorsComponent}
 ];

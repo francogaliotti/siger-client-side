@@ -5,7 +5,7 @@
       <h1>Configure los Regimenes Horarios</h1>
     </div>
   </header>
-  <div class="container altaTipoBoleta mt-4" *ngIf="isAdmin">
+  <div class="container altaRegimenHorario mt-4" *ngIf="isAdmin">
     <form [formGroup]="regimenHorarioForm" (ngSubmit)="onCreate()">
       <header>
         <div class="row justify-content-center mt-auto">
@@ -100,7 +100,7 @@
 
   <div class="row mt-4">
     <div class="col-9">
-      <input type="text" class="form-control mb-2" placeholder="Buscar Tipos de Boleta" #txtSearch
+      <input type="text" class="form-control mb-2" placeholder="Buscar Regimenes Horarios" #txtSearch
         (keyup)="onSearch( txtSearch.value )" />
       <div class="table-responsive">
         <table class="table text-center">
@@ -154,7 +154,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body edit-form">
-        <h5 class="text-center">Detalle del Tipo de Boleta</h5>
+        <h5 class="text-center">Detalle del Regimen Horario</h5>
 
         <div class="container">
           <ul class="list-group list-group-flush">

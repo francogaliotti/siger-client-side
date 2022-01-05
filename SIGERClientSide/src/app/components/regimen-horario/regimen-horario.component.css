@@ -20,7 +20,7 @@ h1{
     text-align: center;
 }
 
-.altaTipoBoleta{
+.altaRegimenHorario{
     background: #EBFFEC;
     margin-top: 20px;
     margin-left: 220px;
@@ -49,7 +49,7 @@ h1{
     top: 268px; left: 576px;
 }
 
-.tipoBoletaDenominacion-inputs{
+.horaMinutoFinJornadaLaboral-inputs{
 
     width: 300px; 
     height: 25px;
