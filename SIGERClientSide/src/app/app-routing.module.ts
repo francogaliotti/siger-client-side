@@ -25,6 +25,7 @@ import { CreateUserRRHHComponent } from './components/users/create-user-rrhh.com
 import { EmpleadoGuardService as EmpleadoGuard } from './guards/empleado-guard.service';  
 import { TipoRegimenHorarioComponent } from './components/tipo-regimen-horario/tipo-regimen-horario.component';
 import { RegimenHorarioComponent } from './components/regimen-horario/regimen-horario.component';
+import { RemuneracionComponent } from './components/remuneracion/remuneracion.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -42,6 +43,7 @@ const routes: Routes = [
   {path: 'permisos', component: ListaPermisoComponent},
   {path: 'roles', component: IndexRolComponent},
   {path: 'regimen-horario', component: RegimenHorarioComponent},
+  {path: 'remuneracion', component: RemuneracionComponent},
   {path: 'altaEmpleado', component: CreateUserRRHHComponent, canActivate: [EmpleadoGuard], data: {expectedRol: ['admin']}},
   {path: '**', component: ErrorsComponent}
 ];
