@@ -45,6 +45,8 @@ import { RegimenHorarioPipe } from './pipes/regimen-horario.pipe';
 import { RegimenHorarioComponent } from './components/regimen-horario/regimen-horario.component';
 import { RemuneracionPipe } from './pipes/remuneracion.pipe';
 import { RemuneracionComponent } from './components/remuneracion/remuneracion.component';
+import { TipoSectorPipe } from './pipes/tipo-sector.pipe';
+import { TipoSectorComponent } from './components/tipo-sector/tipo-sector.component';
 
 
 @NgModule({
@@ -87,7 +89,9 @@ import { RemuneracionComponent } from './components/remuneracion/remuneracion.co
     RegimenHorarioPipe,
     RegimenHorarioComponent,
     RemuneracionPipe,
-    RemuneracionComponent
+    RemuneracionComponent,
+    TipoSectorPipe,
+    TipoSectorComponent
   ],
   imports: [
     BrowserModule,
