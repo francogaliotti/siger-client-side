@@ -72,14 +72,15 @@
             inhospitas</i>
         </div>
       </div>
-      <div class="form-group mt-3">
+      <div class="form-group mt-4">
         <div class="row">
           <div class="col-12">
             <p>¿Para que sector es?
-              <select>
+              <select multiple formControlName="tipoRequerimientoAprueban">
                 <option values="0">Seleccione un Sector</option>
-                <option *ngFor="let sector of sectorArray" [ngValue]="sector.id">{{sector.denominacion}}</option>
+                <option *ngFor="let sector of sectorArray" [ngValue]="sector">{{sector.denominacion}}</option>
               </select>
+              <i> (Seleccione uno o más)</i>
             </p>
           </div>
         </div>
@@ -88,7 +89,7 @@
         <div class="row">
           <div class="col-12">
             <p>¿Qué niveles de autorización necesita?
-              <select>
+              <select formControlName="tipoRequerimientoCantNiveles">
                 <option values="0">Seleccione un nivel de autorización</option>
                 <option *ngFor="let nivel of nivelesAutorizacionArray" [ngValue]="nivel">{{nivel}}</option>
               </select>
@@ -109,9 +110,10 @@
         <div class="row">
           <div class="col-12">
             <p>Seleccione personas necesarias en la aprobación
-              <select>
+              <select multiple formControlName="tipoRequerimientoAprobadores">
                 <option values="0">Aprobadores</option>
-                <option *ngFor="let empleado of empleadoArray" [ngValue]="empleado.id">{{empleado.apellido}}, {{empleado.nombre}}</option>
+                <option *ngFor="let empleado of empleadoArray" [ngValue]="empleado">{{empleado.apellido}},
+                  {{empleado.nombre}}</option>
               </select>
               <i> (Seleccione uno o más)</i>
             </p>
@@ -209,6 +211,16 @@ aria-hidden="true">
           <li class="list-group-item" *ngIf="tipoBoleta.permiteNoFichadaSalida==false"><b>Permite no Fichada Salida: </b>No</li>
           <li class="list-group-item" *ngIf="tipoBoleta.tieneZonaInhospita==true"><b>Es para zonas inhospitas: </b>Si</li>
           <li class="list-group-item" *ngIf="tipoBoleta.tieneZonaInhospita==false"><b>Es para zonas inhospitas: </b>No</li>
+          <li class="list-group-item"><b>Niveles de autorización: </b>{{tipoBoleta.tipoRequerimientoCantNiveles}}
+          </li>
+          <li class="list-group-item"><b>Sectores: </b>
+            <div *ngFor="let sector of tipoBoleta.tipoRequerimientoAprueban">{{sector.denominacion}}
+            </div>
+          </li>
+          <li class="list-group-item"><b>Aprobadores: </b>
+            <div *ngFor="let em of tipoBoleta.tipoRequerimientoAprobadores">{{em.apellido}}, {{em.nombre}}
+            </div>
+          </li>
         </ul>
       </div>
       <div class="modal-footer mt-4">
@@ -292,14 +304,15 @@ aria-hidden="true">
                 inhospitas</i>
             </div>
           </div>
-          <div class="form-group mt-3">
+          <div class="form-group mt-4">
             <div class="row">
               <div class="col-12">
                 <p>¿Para que sector es?
-                  <select>
+                  <select multiple formControlName="tipoRequerimientoAprueban">
                     <option values="0">Seleccione un Sector</option>
-                    <option *ngFor="let sector of sectorArray" [ngValue]="sector.id">{{sector.denominacion}}</option>
+                    <option *ngFor="let sector of sectorArray" [ngValue]="sector">{{sector.denominacion}}</option>
                   </select>
+                  <i> (Seleccione uno o más)</i>
                 </p>
               </div>
             </div>
@@ -308,7 +321,7 @@ aria-hidden="true">
             <div class="row">
               <div class="col-12">
                 <p>¿Qué niveles de autorización necesita?
-                  <select>
+                  <select formControlName="tipoRequerimientoCantNiveles">
                     <option values="0">Seleccione un nivel de autorización</option>
                     <option *ngFor="let nivel of nivelesAutorizacionArray" [ngValue]="nivel">{{nivel}}</option>
                   </select>
@@ -329,9 +342,10 @@ aria-hidden="true">
             <div class="row">
               <div class="col-12">
                 <p>Seleccione personas necesarias en la aprobación
-                  <select>
+                  <select multiple formControlName="tipoRequerimientoAprobadores">
                     <option values="0">Aprobadores</option>
-                    <option *ngFor="let empleado of empleadoArray" [ngValue]="empleado.id">{{empleado.apellido}}, {{empleado.nombre}}</option>
+                    <option *ngFor="let empleado of empleadoArray" [ngValue]="empleado">{{empleado.apellido}},
+                      {{empleado.nombre}}</option>
                   </select>
                   <i> (Seleccione uno o más)</i>
                 </p>
@@ -351,3 +365,7 @@ aria-hidden="true">
     </div>
   </div>
 </div>
+
+<footer>
+  <app-footer></app-footer>
+</footer>

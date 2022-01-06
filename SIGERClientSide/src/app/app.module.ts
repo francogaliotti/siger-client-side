@@ -40,6 +40,15 @@ import { TipoBoletaPipe } from './pipes/tipo-boleta.pipe';
 import { TipoLicenciaPipe } from './pipes/tipo-licencia.pipe';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FirstSigninComponent } from './components/users/first-signin.component';
+import { TipoRegimenHorarioComponent } from './components/tipo-regimen-horario/tipo-regimen-horario.component';
+import { TipoRegimenHorarioPipe } from './pipes/tipo-regimen-horario.pipe';
+import { RegimenHorarioPipe } from './pipes/regimen-horario.pipe';
+import { RegimenHorarioComponent } from './components/regimen-horario/regimen-horario.component';
+import { RemuneracionPipe } from './pipes/remuneracion.pipe';
+import { RemuneracionComponent } from './components/remuneracion/remuneracion.component';
+import { TipoSectorPipe } from './pipes/tipo-sector.pipe';
+import { TipoSectorComponent } from './components/tipo-sector/tipo-sector.component';
+
 
 @NgModule({
   declarations: [
@@ -77,6 +86,14 @@ import { FirstSigninComponent } from './components/users/first-signin.component'
     TipoLicenciaPipe,
     CreateUserRRHHComponent,
     FirstSigninComponent
+    TipoRegimenHorarioComponent,
+    TipoRegimenHorarioPipe,
+    RegimenHorarioPipe,
+    RegimenHorarioComponent,
+    RemuneracionPipe,
+    RemuneracionComponent,
+    TipoSectorPipe,
+    TipoSectorComponent
   ],
   imports: [
     BrowserModule,

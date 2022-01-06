@@ -20,7 +20,7 @@ h1{
     text-align: center;
 }
 
-.altaTipoLicencia{
+.altaRegimenHorario{
     background: #EBFFEC;
     margin-top: 20px;
     margin-left: 220px;
@@ -44,19 +44,15 @@ h1{
 
 .codigo-inputs{
    
-    
     width: 300px; 
     height: 25px;
-    
     top: 268px; left: 576px;
 }
 
-.denominacion-inputs{
+.horaMinutoFinJornadaLaboral-inputs{
 
-    
     width: 300px; 
     height: 25px;
-    
     top: 300px; left: 576px;
 }
 .btn-outline-success{
@@ -153,15 +149,4 @@ table > tbody > tr > td > button{
 .table-responsive{
     margin-left: 200px;
     width: 700px;
-}
-.textarea{
-    resize: none;
-}
-.cantidad{
-    display: inline-block;
-    margin-left: 5px;
-    margin-right: 5px;
-}
-input[type="number"]{
-    width: 40px;
 }
