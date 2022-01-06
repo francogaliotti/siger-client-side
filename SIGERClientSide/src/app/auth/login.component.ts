@@ -56,12 +56,19 @@ export class LoginComponent implements OnInit {
       this.isLogged = true;
       this._tokenService.setToken(data.token);
 
-      console.log(data);
-      this.router.navigate(['/home']);
     }, error => {
       this.isLogged = false;
       
       console.log(error);
+    });
+
+
+    this._authService.isFirstSignIn(this._tokenService.getUsername()).subscribe(data => {
+      if(data){
+        this.router.navigate(['/firstSignIn']);
+      }else{
+        this.router.navigate(['/home']);
+      }
     });
 
   }
