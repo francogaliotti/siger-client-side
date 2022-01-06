@@ -22,6 +22,7 @@ import { ViaticoComponent } from './components/viatico/viatico.component';
 import { TipoBoletaComponent } from './components/tipo-boleta/tipo-boleta.component';
 import { CreateUserRRHHComponent } from './components/users/create-user-rrhh.component';  
 import { EmpleadoGuardService as EmpleadoGuard } from './guards/empleado-guard.service';  
+import { FirstSigninComponent } from './components/users/first-signin.component';
 import { TipoRegimenHorarioComponent } from './components/tipo-regimen-horario/tipo-regimen-horario.component';
 import { RegimenHorarioComponent } from './components/regimen-horario/regimen-horario.component';
 import { RemuneracionComponent } from './components/remuneracion/remuneracion.component';
@@ -47,6 +48,7 @@ const routes: Routes = [
   {path: 'remuneracion', component: RemuneracionComponent},
   {path: 'tipo-sector', component: TipoSectorComponent, canActivate: [TipoSectorGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'altaEmpleado', component: CreateUserRRHHComponent, canActivate: [EmpleadoGuard], data: {expectedRol: ['admin']}},
+  {path: 'firstSignIn', component: FirstSigninComponent},
   {path: '**', component: ErrorsComponent}
 ];
 

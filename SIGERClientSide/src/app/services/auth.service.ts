@@ -30,5 +30,10 @@ export class AuthService extends connectionURL{
     this.endpoint="auth/refresh"
     return this.httpClient.post<JwtDTO>(this.app_url + this.endpoint, dto);
   }
+
+  public isFirstSignIn(id : string) : Observable<boolean>{
+    this.endpoint = "auth/" + id;
+    return this.httpClient.get<boolean>(this.app_url + this.endpoint);
+  }
   
 }
