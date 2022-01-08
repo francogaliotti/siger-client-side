@@ -220,8 +220,19 @@ export class TipoLicenciaComponent implements OnInit {
         console.log(this.newTipoLicencia);
         this.editTipoLicenciaForm = this._editTipoLicencia.group({
           id: [this.newTipoLicencia.id, Validators.required],
+          cantidadMaximaAnual: [this.newTipoLicencia.cantidadMaximaAnual],
+          cantidadMaximaMensual: [this.newTipoLicencia.cantidadMaximaMensual],
+          cantidadMaximaDiaria: [this.newTipoLicencia.cantidadMaximaDiaria],
           codigo: [this.newTipoLicencia.codigo, [Validators.required, Validators.maxLength(10)]],
-          denominacion: [this.newTipoLicencia.denominacion, Validators.required]
+          denominacion: [this.newTipoLicencia.denominacion, Validators.required],
+          justificaPresentismo: [this.newTipoLicencia.justificaPresentismo],
+          limiteRangoDias: [this.newTipoLicencia.limiteRangoDias],
+          observaciones: [this.newTipoLicencia.observaciones],
+          goceSueldo: [this.newTipoLicencia.goceSueldo],
+          tipoRequerimientoCantNiveles: [this.newTipoLicencia.tipoRequerimientoCantNiveles],
+          tipoRequerimientoDenominacion: [this.newTipoLicencia.tipoRequerimientoDenominacion],
+          tipoRequerimientoAprueban: [this.newTipoLicencia.tipoRequerimientoAprueban],
+          tipoRequerimientoAprobadores: [this.newTipoLicencia.tipoRequerimientoAprobadores]
         });
       },
       err => {
@@ -233,6 +244,16 @@ export class TipoLicenciaComponent implements OnInit {
   onUpdate(id?: number): void {
     this.newTipoLicencia.codigo = this.editTipoLicenciaForm.get('codigo')?.value;
     this.newTipoLicencia.denominacion = this.editTipoLicenciaForm.get('denominacion')?.value;
+    this.newTipoLicencia.observaciones= this.editTipoLicenciaForm.get('observaciones')?.value;
+    this.newTipoLicencia.cantidadMaximaAnual = this.editTipoLicenciaForm.get('cantidadMaximaAnual')?.value;
+    this.newTipoLicencia.cantidadMaximaMensual = this.editTipoLicenciaForm.get('cantidadMaximaMensual')?.value;
+    this.newTipoLicencia.cantidadMaximaDiaria = this.editTipoLicenciaForm.get('cantidadMaximaDiaria')?.value;
+    this.newTipoLicencia.justificaPresentismo = this.editTipoLicenciaForm.get('justificaPresentismo')?.value;
+    this.newTipoLicencia.tipoRequerimientoAprobadores = this.editTipoLicenciaForm.get('tipoRequerimientoAprobadores')?.value;
+    this.newTipoLicencia.tipoRequerimientoAprueban = this.editTipoLicenciaForm.get('tipoRequerimientoAprueban')?.value;
+    this.newTipoLicencia.limiteRangoDias = this.editTipoLicenciaForm.get('limiteRangoDias')?.value;
+    this.newTipoLicencia.goceSueldo = this.editTipoLicenciaForm.get('goceSueldo')?.value;
+    this.newTipoLicencia.tipoRequerimientoCantNiveles = this.editTipoLicenciaForm.get('tipoRequerimientoCantNiveles')?.value;
     this._tipoLicenciaService.update(id, this.newTipoLicencia).subscribe(
       data => {
         Swal.fire({
@@ -251,6 +272,8 @@ export class TipoLicenciaComponent implements OnInit {
           showCloseButton: false,
           showConfirmButton: false
         });
+        this.cargarTipoLicencia();
+        this.testModal?.hide();
       }
     );
 

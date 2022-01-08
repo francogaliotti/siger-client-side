@@ -39,6 +39,12 @@ import { ViaticoPipe } from './pipes/viatico.pipe';
 import { TipoBoletaPipe } from './pipes/tipo-boleta.pipe';
 import { TipoLicenciaPipe } from './pipes/tipo-licencia.pipe';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { TipoMovilidadComponent } from './components/tipo-movilidad/tipo-movilidad.component';
+import { MovilidadComponent } from './components/movilidad/movilidad.component';
+import { TipoMovilidadPipe } from './pipes/tipo-movilidad.pipe';
+import { MovilidadPipe } from './pipes/movilidad.pipe';
+import { SectorComponent } from './components/sector/sector.component';
+import { SectorPipe } from './pipes/sector.pipe';
 import { FirstSigninComponent } from './components/users/first-signin.component';
 import { TipoRegimenHorarioComponent } from './components/tipo-regimen-horario/tipo-regimen-horario.component';
 import { TipoRegimenHorarioPipe } from './pipes/tipo-regimen-horario.pipe';
@@ -84,8 +90,15 @@ import { TipoSectorComponent } from './components/tipo-sector/tipo-sector.compon
     ViaticoPipe,
     TipoBoletaPipe,
     TipoLicenciaPipe,
+    TipoMovilidadComponent,
+    MovilidadComponent,
+    TipoMovilidadPipe,
+    MovilidadPipe,
+    SectorComponent,
+    SectorPipe,
+
     CreateUserRRHHComponent,
-    FirstSigninComponent
+    FirstSigninComponent,
     TipoRegimenHorarioComponent,
     TipoRegimenHorarioPipe,
     RegimenHorarioPipe,
