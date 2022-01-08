@@ -6,4 +6,10 @@ export class TipoSector extends BaseEntity{
 	
 	nombreTipoSector: string;
     
+    constructor(codTipoSector: string, nombreTipoSector: string, id?: number){
+        super();
+        this.id = id;
+        this.codTipoSector = codTipoSector;
+        this.nombreTipoSector = nombreTipoSector;
+    }
 }

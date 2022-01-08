@@ -154,7 +154,8 @@ export class TipoBoletaComponent implements OnInit {
 
   onCreate(): boolean {
     this.success = false;
-    const tipoBoleta = new TipoBoletaDTO(this.tipoBoletaForm.get('codigo')?.value,
+    const tipoBoleta = new TipoBoletaDTO(
+      this.tipoBoletaForm.get('codigo')?.value,
       this.tipoBoletaForm.get('tipoBoletaDenominacion')?.value,
       this.tipoBoletaForm.get('tieneMovilidad')?.value,
       this.tipoBoletaForm.get('tieneZonaInhospita')?.value,
@@ -164,7 +165,8 @@ export class TipoBoletaComponent implements OnInit {
       this.tipoBoletaForm.get('tipoRequerimientoCantNiveles')?.value,
       this.tipoBoletaForm.get('tipoRequerimientoDenominacion')?.value,
       this.tipoBoletaForm.get('tipoRequerimientoAprueban')?.value,
-      this.tipoBoletaForm.get('tipoRequerimientoAprobadores')?.value);
+      this.tipoBoletaForm.get('tipoRequerimientoAprobadores')?.value
+      );
       
 
     if (this.tipoBoletaForm.valid == true) {
