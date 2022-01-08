@@ -45,6 +45,7 @@ import { TipoMovilidadPipe } from './pipes/tipo-movilidad.pipe';
 import { MovilidadPipe } from './pipes/movilidad.pipe';
 import { SectorComponent } from './components/sector/sector.component';
 import { SectorPipe } from './pipes/sector.pipe';
+import { FirstSigninComponent } from './components/users/first-signin.component';
 import { TipoRegimenHorarioComponent } from './components/tipo-regimen-horario/tipo-regimen-horario.component';
 import { TipoRegimenHorarioPipe } from './pipes/tipo-regimen-horario.pipe';
 import { RegimenHorarioPipe } from './pipes/regimen-horario.pipe';
@@ -97,6 +98,7 @@ import { TipoSectorComponent } from './components/tipo-sector/tipo-sector.compon
     SectorPipe,
 
     CreateUserRRHHComponent,
+    FirstSigninComponent,
     TipoRegimenHorarioComponent,
     TipoRegimenHorarioPipe,
     RegimenHorarioPipe,

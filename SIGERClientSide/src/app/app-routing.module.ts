@@ -31,6 +31,7 @@ import { CreateUserRRHHComponent } from './components/users/create-user-rrhh.com
 import { EmpleadoGuardService as EmpleadoGuard } from './guards/empleado-guard.service';  
 import { SectorComponent } from './components/sector/sector.component';
 import { SectorGuardService as sectorGuard} from './guards/sector-guard.service';
+import { FirstSigninComponent } from './components/users/first-signin.component';
 import { TipoRegimenHorarioComponent } from './components/tipo-regimen-horario/tipo-regimen-horario.component';
 import { RegimenHorarioComponent } from './components/regimen-horario/regimen-horario.component';
 import { RemuneracionComponent } from './components/remuneracion/remuneracion.component';
@@ -61,6 +62,7 @@ const routes: Routes = [
   {path: 'tipo-sector', component: TipoSectorComponent, canActivate: [TipoSectorGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'altaEmpleado', component: CreateUserRRHHComponent, canActivate: [EmpleadoGuard], data: {expectedRol: ['admin']}},
   {path: 'sector', component: SectorComponent, canActivate: [sectorGuard], data: { expectedRol: ['admin', 'user'] }},
+  {path: 'firstSignIn', component: FirstSigninComponent},
   {path: '**', component: ErrorsComponent}
 ];
 
