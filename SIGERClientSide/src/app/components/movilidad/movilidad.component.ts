@@ -23,7 +23,7 @@ export class MovilidadComponent implements OnInit {
   editmovilidadForm: FormGroup;
   testModal: Modal | undefined;
   modal: Modal | undefined;
-  newMovilidad: Movilidad = new Movilidad('', '', new TipoMovilidad("", ""));
+  newMovilidad: Movilidad = new Movilidad('', '', new TipoMovilidad('',''));
   tipoMovilidadArray: TipoMovilidad[] = [];
 
   faEdit = faEdit;
@@ -36,6 +36,7 @@ export class MovilidadComponent implements OnInit {
   searchPage = 0;
   page = 0;
   search: string = '';
+  success: boolean;
 
 
   constructor(private _movilidad: FormBuilder, private _movilidadService: MovilidadService, private _tipoMovilidadService: TipoMovilidadService,
@@ -43,13 +44,13 @@ export class MovilidadComponent implements OnInit {
     this.movilidadForm = this._movilidad.group({
       codigo: ['', [Validators.required, Validators.maxLength(10)]],
       patente: ['', Validators.required],
-      tipoMovilidad: ['']
+      tipoMovilidad: ['', [Validators.required]]
     })
     this.editmovilidadForm = this._editMovilidad.group({
       id: ['', Validators.required],
       codigo: ['', [Validators.required, Validators.maxLength(10)]],
       patente: ['', Validators.required],
-      tipoMovilidad: ['']
+      tipoMovilidad: ['', [Validators.required]]
     })
   }
 
@@ -118,32 +119,38 @@ export class MovilidadComponent implements OnInit {
         );
       });
   }
-  onCreate(): void {
-    const movilidad = new Movilidad(this.movilidadForm.get('codigo')?.value, this.movilidadForm.get('patente')?.value, this.movilidadForm.get('tipoMovilidad')?.value);
-    this._movilidadService.save(movilidad).subscribe(
-      data => {
-        Swal.fire({
-          title: "Éxito al crear",
-          icon: "success",
-          showCloseButton: false,
-          showConfirmButton: false
-        });
-        this.cargarMovilidad();
-        this.router.navigate(['/movilidad']);
-      },
-      err => {
-        Swal.fire({
-          title: "Oops! hubo un problema",
-          icon: "error",
-          showCloseButton: false,
-          showConfirmButton: false
-        });
-        this.cargarMovilidad();
-        this.router.navigate(['/movilidad']);
-      }
-    );
+  onCreate(): boolean {
+    this.success = false;
+    const movilidad = new Movilidad(this.movilidadForm.get('codigo')?.value, 
+    this.movilidadForm.get('patente')?.value, 
+    this.movilidadForm.get('tipoMovilidad')?.value);
+    if (this.movilidadForm.valid == true) {
+      console.log(movilidad);
+      this._movilidadService.save(movilidad).subscribe(
+        data => {
+          this.success = true;
+
+          Swal.fire({
+            title: "Éxito al crear",
+            icon: "success",
+            showCloseButton: false,
+            showConfirmButton: false
+          });
+          this.cargarMovilidad();
+        },
+        err => {
+          Swal.fire({
+            title: "Oops! hubo un problema",
+            icon: "error",
+            showCloseButton: false,
+            showConfirmButton: false
+          });
+        }
+      );
+    }
+    return this.success;
   }
-  cargarMovilidadForUpdate(id?: number) {
+  cargarMovilidadForUpdate(id?: number): void {
     this._movilidadService.detail(id).subscribe(
       data => {
         this.newMovilidad = data;
@@ -167,6 +174,7 @@ export class MovilidadComponent implements OnInit {
     this.cargarMovilidadForUpdate(id);
     this.testModal?.show();
   }
+
   onUpdate(id?: number): void {
     this.newMovilidad.codigo = this.editmovilidadForm.get('codigo')?.value;
     this.newMovilidad.patente = this.editmovilidadForm.get('patente')?.value;
@@ -189,6 +197,8 @@ export class MovilidadComponent implements OnInit {
           showCloseButton: false,
           showConfirmButton: false
         });
+        console.log(err)
+        this.testModal?.hide();
       }
     );
   }

@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Sector } from '../models/sector';
 
 @Pipe({
-  name: 'sector'
+  name: 'sectorPipe'
 })
 export class SectorPipe implements PipeTransform {
 

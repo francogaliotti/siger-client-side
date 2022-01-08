@@ -91,7 +91,7 @@
                           <td style="display: none;">{{mov.id}}</td>
                           <td>{{mov.codigo}}</td>
                           <td>{{mov.patente}}</td>
-                          <td>{{mov.tipoMovilidad.denominacion}}</td>
+                          <td *ngIf="mov.tipoMovilidad != null">{{mov.tipoMovilidad.denominacion}}</td>
                           <td><button class="btn bg-secondary" (click)="open(mov.id)" *ngIf="isAdmin">
                             <fa-icon [icon]="faEdit"></fa-icon>
                               Editar</button>
@@ -126,12 +126,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form [formGroup]="editmovilidadForm" (ngSubmit)="onUpdate()">
-                    <header>
-                        <div class="row justify-content-center mt-auto">
-                            Actualizar Movilidad
-                        </div>
-                    </header>
+                <form [formGroup]="editmovilidadForm" (ngSubmit)="onUpdate(newMovilidad.id)">
+                  <input type="hidden" formControlName="id" value="{{newMovilidad.id}}">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-5">

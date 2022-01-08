@@ -32,8 +32,8 @@ export class Sector extends BaseEntity{
 
 	constructor(codigo: string, denominacion: string, validaFueraDeHorario: boolean,
 		permiteTrabajarHorasExtras: boolean, permiteTrabajarFinDeSemana: boolean,
-		maximoSerenoDiurno: number, maximoSerenoNocturno: number, sectorSuperior: Sector,
-		tipoSector: TipoSector, id?:number){
+		maximoSerenoDiurno: number, maximoSerenoNocturno: number, tipoSector: TipoSector,
+		sectorSuperior: Sector, id?:number){
 		super();
 		this.id=id;
 		this.codigo=codigo;
