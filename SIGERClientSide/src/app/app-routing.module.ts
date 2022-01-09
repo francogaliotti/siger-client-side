@@ -20,8 +20,18 @@ import { TipoLicenciaComponent } from './components/tipo-licencia/tipo-licencia.
 import { ZonaInhospitaComponent } from './components/zona-inhospita/zona-inhospita.component';  
 import { ViaticoComponent } from './components/viatico/viatico.component';  
 import { TipoBoletaComponent } from './components/tipo-boleta/tipo-boleta.component';
+import { TipoMovilidadComponent } from './components/tipo-movilidad/tipo-movilidad.component';
+import { MovilidadComponent } from './components/movilidad/movilidad.component';
+import { TipoLicenciaGuardService as tipoLicenciaGuard} from './guards/tipo-licencia-guard.service';
+import { TipoMovilidadGuardService as tipoMovilidadGuard} from './guards/tipo-movilidad-guard.service';
+import { MovilidadGuardService as movilidadGuard} from './guards/movilidad-guard.service';
+
+
 import { CreateUserRRHHComponent } from './components/users/create-user-rrhh.component';  
 import { EmpleadoGuardService as EmpleadoGuard } from './guards/empleado-guard.service';  
+import { SectorComponent } from './components/sector/sector.component';
+import { SectorGuardService as sectorGuard} from './guards/sector-guard.service';
+import { FirstSigninComponent } from './components/users/first-signin.component';
 import { TipoRegimenHorarioComponent } from './components/tipo-regimen-horario/tipo-regimen-horario.component';
 import { RegimenHorarioComponent } from './components/regimen-horario/regimen-horario.component';
 import { RemuneracionComponent } from './components/remuneracion/remuneracion.component';
@@ -36,6 +46,7 @@ const routes: Routes = [
   {path: 'change-password/:tokenPassword', component: ChangePasswordComponent, canActivate: [LoginGuard]},
   {path: 'estado-boleta', component: EstadoBoletaComponent, canActivate: [estadoBoletaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'estado-licencia', component: EstadoLicenciaComponent, canActivate: [estadoLicenciaGuard], data: { expectedRol: ['admin', 'user'] }},
+  {path: 'tipo-licencia', component: TipoLicenciaComponent, canActivate:  [tipoLicenciaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'tipo-boleta', component: TipoBoletaComponent, canActivate:  [tipoBoletaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'tipo-licencia', component: TipoLicenciaComponent},
   {path: 'tipo-regimen-horario', component: TipoRegimenHorarioComponent},
@@ -43,10 +54,15 @@ const routes: Routes = [
   {path: 'viatico', component: ViaticoComponent, canActivate: [ViaticoGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'permisos', component: ListaPermisoComponent},
   {path: 'roles', component: IndexRolComponent},
+  {path: 'tipo-boleta', component: TipoBoletaComponent, canActivate:  [tipoBoletaGuard], data: { expectedRol: ['admin', 'user'] }},
+  {path: 'movilidad', component: MovilidadComponent, canActivate: [movilidadGuard], data: { expectedRol: ['admin', 'user'] }},
+  {path: 'tipo-movilidad', component: TipoMovilidadComponent, canActivate: [tipoMovilidadGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'regimen-horario', component: RegimenHorarioComponent},
   {path: 'remuneracion', component: RemuneracionComponent},
   {path: 'tipo-sector', component: TipoSectorComponent, canActivate: [TipoSectorGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'altaEmpleado', component: CreateUserRRHHComponent, canActivate: [EmpleadoGuard], data: {expectedRol: ['admin']}},
+  {path: 'sector', component: SectorComponent, canActivate: [sectorGuard], data: { expectedRol: ['admin', 'user'] }},
+  {path: 'firstSignIn', component: FirstSigninComponent},
   {path: '**', component: ErrorsComponent}
 ];
 

@@ -7,9 +7,13 @@ export class Domicilio extends BaseEntity{
 	
 	nroCalle: number;
 	
-	nroDepartamento: number;
+	nroDepartamento: string;
 	
-	nroPiso: number;
+	nroPiso: string;
+
+	barrio: string;
+	manzana: string;
+	casa: string;
 
 	//Relation
 

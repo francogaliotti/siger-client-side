@@ -15,7 +15,7 @@ export class NacionalidadService extends connectionURL{
   }
 
   public GetAll(): Observable<Nacionalidad[]>{
-    this.endpoint = 'nationality/getAll';
+    this.endpoint = 'nationality/';
     return this._httpClient.get<Nacionalidad[]>(this.app_url + this.endpoint);
   }
 
