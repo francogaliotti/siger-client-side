@@ -1,0 +1,134 @@
+.conteiner{
+    background-color: #EBFFEC;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 7px;
+}
+
+.row{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    text-align: left;
+}
+
+.searcher{
+    float: right;
+    height: 34px;
+    width: 475px;
+}
+h1{
+    font-size: 20px;
+    text-align: center;
+}
+
+.altaLicencia{
+    background: #EBFFEC;
+    margin-top: 20px;
+    margin-left: 220px;
+    top: 2px; left: 380px;
+    width: 880px;
+    height: 400px;
+    border: 2px solid black;
+    box-shadow: 5px 5px 15px 2px;
+    
+    
+}
+p, i{
+    font-size: 15px;
+}
+.header{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    margin-top: 229px;
+    text-align: center;
+}
+
+.btn-outline-success{
+    background-color: #169BD5;
+    float: right;
+    margin-right: 35px;
+    z-index: 0;
+    color: #fff;
+    border: none
+}
+
+.titulo{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    margin-top: 10px;
+    text-align: center;
+}
+.small{
+    margin-top: 1px;
+}
+
+.modal-content{
+    background: #EBFFEC;
+    margin-top: 20px;
+    width: 800px;
+    height: 850px;
+    top: 2px;
+    border: 2px solid #333333;
+}
+.modal-title{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    margin-left: 150px;
+}
+small{
+    font-size: 11px;
+    z-index: 1;
+    margin-right: 200px;
+}
+.initial-position{
+    margin-top: 20px;
+}
+
+th:nth-child(1){
+    display: none;
+}
+
+td:nth-child(1){
+    display: none;
+}
+
+th:nth-child(2){
+    width: 4%;
+}
+
+td:nth-child(2){
+    width: 4%;
+}
+
+th:nth-child(3){
+    width: 15%;
+}
+
+td:nth-child(3){
+    width: 15%;
+}
+
+th:nth-child(4){
+    width: 15%;
+}
+
+td:nth-child(4){
+    width: 15%;
+}
+
+td:nth-child(7) > button{
+    margin-left: 20px;
+    color: white;
+}
+table > tbody > tr > td > button{
+    font-size: 11px;
+    width: 77.5px;
+    height: 22px;
+    padding: 0.5px;
+}
+.table-responsive{
+    margin-left: 200px;
+    width: 830px;
+}
+.textarea{
+    resize: none;
+}
