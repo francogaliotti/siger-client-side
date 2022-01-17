@@ -20,7 +20,7 @@ import { TipoLicenciaDTO } from 'src/app/dto/tipoLicenciaDTO';
 export class SolicitarLicenciaComponent implements OnInit {
 
   tipoLicenciaArray: TipoLicenciaDTO[] = [];
-  licenciaArray: Licencia[]=[];
+  licenciaArray: Licencia[] = [];
   licenciaForm: FormGroup;
   editLicenciaForm: FormGroup;
   testModal: Modal | undefined;
@@ -41,41 +41,41 @@ export class SolicitarLicenciaComponent implements OnInit {
   search: string = '';
 
   constructor(private _licencia: FormBuilder, private _licenciaService: LicenciaService,
-    private router: Router, private _editLicencia: FormBuilder, private _tokenService: TokenService, private _tipoLicenciaService: TipoLicenciaService) { 
-      this.licenciaForm = this._licencia.group({
-        fechaAlta : [],
-        fechaBaja : [],
-        fechaInicioLicencia:  [],
-        fechaFinLicencia: [],
-        fechaFrancoCompensatorio: [],
-        fechaCierre: [],
-        fechaControl: [],
-        fechaSincronizacion: [],
-        observacionesLicencia:[""],
-        comentarios:[[]],
-        documentosAdjuntosLicencia:[[]],
-        tipoLicencia: [],
-        fechasCambiEstadoLicencia:[[]],
-        empleado: []
-      })
-      this.editLicenciaForm = this._editLicencia.group({
-        id: ['', Validators.required],
-        fechaAlta : [],
-        fechaBaja : [],
-        fechaInicioLicencia:  [],
-        fechaFinLicencia: [],
-        fechaFrancoCompensatorio: [],
-        fechaCierre: [],
-        fechaControl: [],
-        fechaSincronizacion: [],
-        observacionesLicencia:[""],
-        comentarios:[[]],
-        documentosAdjuntosLicencia:[[]],
-        tipoLicencia: [],
-        fechasCambioEstadoLicencia:[[]],
-        empleado: []
-      })
-    }
+    private router: Router, private _editLicencia: FormBuilder, private _tokenService: TokenService, private _tipoLicenciaService: TipoLicenciaService) {
+    this.licenciaForm = this._licencia.group({
+      fechaAlta: [],
+      fechaBaja: [],
+      fechaInicioLicencia: [],
+      fechaFinLicencia: [],
+      fechaFrancoCompensatorio: [],
+      fechaCierre: [],
+      fechaControl: [],
+      fechaSincronizacion: [],
+      observacionesLicencia: [""],
+      comentarios: [[]],
+      documentosAdjuntosLicencia: [[]],
+      tipoLicencia: [],
+      fechasCambiEstadoLicencia: [[]],
+      empleado: []
+    })
+    this.editLicenciaForm = this._editLicencia.group({
+      id: ['', Validators.required],
+      fechaAlta: [],
+      fechaBaja: [],
+      fechaInicioLicencia: [],
+      fechaFinLicencia: [],
+      fechaFrancoCompensatorio: [],
+      fechaCierre: [],
+      fechaControl: [],
+      fechaSincronizacion: [],
+      observacionesLicencia: [""],
+      comentarios: [[]],
+      documentosAdjuntosLicencia: [[]],
+      tipoLicencia: [],
+      fechasCambioEstadoLicencia: [[]],
+      empleado: []
+    })
+  }
 
   ngOnInit(): void {
     this.cargarLicencia();
@@ -142,7 +142,7 @@ export class SolicitarLicenciaComponent implements OnInit {
       }
     );
   }
-  
+
   onCreate(): boolean {
     this.success = false;
     const licencia = new Licencia();
@@ -150,7 +150,7 @@ export class SolicitarLicenciaComponent implements OnInit {
     licencia.fechaFinLicencia = this.licenciaForm.get('fechaFinLicencia')?.value;
     licencia.observacionesLicencia = this.licenciaForm.get('observacionesLicencia')?.value;
     licencia.tipoLicencia = this.licenciaForm.get('tipoLicencia')?.value;
-    if ((licencia.fechaFinLicencia && licencia.fechaInicioLicencia) == undefined){
+    if ((licencia.fechaFinLicencia && licencia.fechaInicioLicencia) == undefined) {
       Swal.fire({
         title: "Debe llevar un rango de fechas",
         icon: "error",
@@ -159,7 +159,7 @@ export class SolicitarLicenciaComponent implements OnInit {
       })
       return this.success;
     }
-    if (licencia.tipoLicencia == null){
+    if (licencia.tipoLicencia == null) {
       Swal.fire({
         title: "Debe llevar un tipo de licencia",
         icon: "error",
@@ -168,7 +168,16 @@ export class SolicitarLicenciaComponent implements OnInit {
       })
       return this.success;
     }
-    if (((new Date(licencia.fechaFinLicencia)).getTime() - (new Date(licencia.fechaInicioLicencia)).getTime())/(1000*60*60*24) > licencia.tipoLicencia.limiteRangoDias){
+    if ((new Date(licencia.fechaFinLicencia)).getTime() < (new Date(licencia.fechaInicioLicencia)).getTime()){
+      Swal.fire({
+        title: "La fecha Fin debe ser posterior a la fecha Inicio",
+        icon: "error",
+        showCloseButton: false,
+        showConfirmButton: false
+      })
+      return this.success;
+    }
+    if (((new Date(licencia.fechaFinLicencia)).getTime() - (new Date(licencia.fechaInicioLicencia)).getTime()) / (1000 * 60 * 60 * 24) > licencia.tipoLicencia.limiteRangoDias) {
       Swal.fire({
         title: "El rango de fechas supera el límite",
         icon: "error",
@@ -178,7 +187,7 @@ export class SolicitarLicenciaComponent implements OnInit {
       return this.success;
     }
     if (this.licenciaForm.valid == true) {
-      console.log(licencia); 
+      console.log(licencia);
       this._licenciaService.save(licencia).subscribe(
         data => {
           this.success = true;
@@ -204,7 +213,7 @@ export class SolicitarLicenciaComponent implements OnInit {
     return this.success;
   }
   open(id?: number): void {
-    this.testModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
+    this.testModal = new bootstrap.Modal(document.getElementById('editModal'), {
       keyboard: false
     })
     this.cargarLicenciaForUpdate(id);
@@ -217,24 +226,36 @@ export class SolicitarLicenciaComponent implements OnInit {
         console.log(this.newLicencia);
         this.editLicenciaForm = this._editLicencia.group({
           id: [this.newLicencia.id, Validators.required],
+          fechaAlta: [],
+          fechaBaja: [],
           fechaInicioLicencia: [this.newLicencia.fechaInicioLicencia],
           fechaFinLicencia: [this.newLicencia.fechaFinLicencia],
           tipoLicencia: [this.newLicencia.tipoLicencia],
-          observacionesLicencia: [this.newLicencia.observacionesLicencia]
+          observacionesLicencia: [this.newLicencia.observacionesLicencia],
+          fechaFrancoCompensatorio: [],
+          fechaCierre: [],
+          fechaControl: [],
+          fechaSincronizacion: [],
+          comentarios: [[]],
+          documentosAdjuntosLicencia: [[]],
+          fechasCambioEstadoLicencia: [[]],
+          empleado: []
         });
+        
+        
       },
       err => {
         alert(err);
       }
     );
   }
-  
+
   onUpdate(id?: number): boolean {
     this.newLicencia.fechaInicioLicencia = this.editLicenciaForm.get('fechaInicioLicencia')?.value;
     this.newLicencia.fechaFinLicencia = this.editLicenciaForm.get('fechaFinLicencia')?.value;
     this.newLicencia.tipoLicencia = this.editLicenciaForm.get('tipoLicencia')?.value;
     this.newLicencia.observacionesLicencia = this.editLicenciaForm.get('observacionesLicencia')?.value;
-    if ((this.newLicencia.fechaFinLicencia && this.newLicencia.fechaInicioLicencia) == undefined){
+    if ((this.newLicencia.fechaFinLicencia && this.newLicencia.fechaInicioLicencia) == undefined) {
       Swal.fire({
         title: "Debe llevar un rango de fechas",
         icon: "error",
@@ -243,7 +264,16 @@ export class SolicitarLicenciaComponent implements OnInit {
       })
       return this.success;
     }
-    if (this.newLicencia.tipoLicencia == null){
+    if ((new Date(this.newLicencia.fechaFinLicencia)).getTime() < (new Date(this.newLicencia.fechaInicioLicencia)).getTime()){
+      Swal.fire({
+        title: "La fecha Fin debe ser posterior a la fecha Inicio",
+        icon: "error",
+        showCloseButton: false,
+        showConfirmButton: false
+      })
+      return this.success;
+    }
+    if (this.newLicencia.tipoLicencia == null) {
       Swal.fire({
         title: "Debe llevar un tipo de licencia",
         icon: "error",
@@ -252,7 +282,7 @@ export class SolicitarLicenciaComponent implements OnInit {
       })
       return this.success;
     }
-    if (((new Date(this.newLicencia.fechaFinLicencia)).getTime() - (new Date(this.newLicencia.fechaInicioLicencia)).getTime())/(1000*60*60*24) > this.newLicencia.tipoLicencia.limiteRangoDias){
+    if (((new Date(this.newLicencia.fechaFinLicencia)).getTime() - (new Date(this.newLicencia.fechaInicioLicencia)).getTime()) / (1000 * 60 * 60 * 24) > this.newLicencia.tipoLicencia.limiteRangoDias) {
       Swal.fire({
         title: "El rango de fechas supera el límite",
         icon: "error",
@@ -270,7 +300,7 @@ export class SolicitarLicenciaComponent implements OnInit {
           showCloseButton: false,
           showConfirmButton: false
         });
-        this.cargarTipoLicencia();
+        this.cargarLicencia();
         this.testModal?.hide();
       },
       err => {
@@ -307,6 +337,6 @@ export class SolicitarLicenciaComponent implements OnInit {
     this.modal?.hide();
     this.router.navigate(['solicitar-licencia']);
   }
-  
+
 
 }

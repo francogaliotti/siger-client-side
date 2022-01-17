@@ -56,6 +56,8 @@ import { TipoSectorPipe } from './pipes/tipo-sector.pipe';
 import { TipoSectorComponent } from './components/tipo-sector/tipo-sector.component';
 import { SolicitarLicenciaComponent } from './components/solicitar-licencia/solicitar-licencia.component';
 import { LicenciaPipe } from './pipes/licencia.pipe';
+import { SolicitarBoletaComponent } from './components/solicitar-boleta/solicitar-boleta.component';
+import { BoletaPipe } from './pipes/boleta.pipe';
 
 
 @NgModule({
@@ -110,7 +112,9 @@ import { LicenciaPipe } from './pipes/licencia.pipe';
     TipoSectorPipe,
     TipoSectorComponent,
     SolicitarLicenciaComponent,
-    LicenciaPipe
+    LicenciaPipe,
+    SolicitarBoletaComponent,
+    BoletaPipe
   ],
   imports: [
     BrowserModule,

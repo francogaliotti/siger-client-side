@@ -1,0 +1,322 @@
+<app-home></app-home>
+
+<div class="container initial-position">
+    <header>
+        <div class="row justify-content-center mt-3">
+            <h1>Solicite una Boleta</h1>
+        </div>
+    </header>
+    <div class="container altaBoleta mt-4">
+        <form [formGroup]="boletaForm" (ngSubmit)="onCreate()">
+            <div class="form-group mt-3">
+                <div class="row">
+                    <div class="col-5">
+                        <p> Seleccione Tipo de Boleta
+                            <select formControlName="tipoBoleta">
+                                <option *ngFor="let tipo of tipoBoletaArray" [ngValue]="tipo">{{tipo.tipoBoletaDenominacion}}
+                                </option>
+                            </select>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <div class="row">
+                    <div class="col-5">
+                        <i>Fecha y Hora de posible Salida: </i>
+                        <input formControlName="fechaHoraPosibleSalida" type="datetime-local">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <div class="row">
+                    <div class="col-5">
+                        <i>Fecha y Hora de posible Llegada: </i>
+                        <input formControlName="fechaHoraPosibleLlegada" type="datetime-local">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <div class="row">
+                    <div class="col-5">
+                        <textarea formControlName="observacionesBoleta" class="textarea" rows="5" cols="50"
+                            placeholder="Descripción"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12" *ngIf="this.boletaForm.get('tipoBoleta')?.value != null">
+                  <input formControlName="sinFichadaRetorno" type="checkbox" id="sinFichadaRetorno" *ngIf="this.boletaForm.get('tipoBoleta')?.value.permiteNoFichadaRetorno">
+                  <i *ngIf="this.boletaForm.get('tipoBoleta')?.value.permiteNoFichadaRetorno"> Sin Fichada Retorno</i>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-12" *ngIf="this.boletaForm.get('tipoBoleta')?.value != null">
+                  <input formControlName="sinFichadaSalida" type="checkbox" id="sinFichadaSalida" *ngIf="this.boletaForm.get('tipoBoleta')?.value.permiteNoFichadaSalida">
+                  <i *ngIf="this.boletaForm.get('tipoBoleta')?.value.permiteNoFichadaSalida"> Sin Fichada Salida</i>
+                </div>
+              </div>
+            <div class="form-group mt-3">
+                <div class="row">
+                    <div class="col-5" *ngIf="this.boletaForm.get('tipoBoleta')?.value != null">
+                        <p *ngIf="this.boletaForm.get('tipoBoleta')?.value.tieneZonaInhospita"> Seleccione Zona Inhospita
+                            <select formControlName="zonaInhospita" *ngIf="this.boletaForm.get('tipoBoleta')?.value.tieneZonaInhospita">
+                                <option *ngFor="let zona of zonaInhospita" [ngValue]="zona">{{zona.denominacionZona}}
+                                </option>
+                            </select>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <div class="row">
+                    <div class="col-5" *ngIf="this.boletaForm.get('tipoBoleta')?.value != null">
+                        <p *ngIf="this.boletaForm.get('tipoBoleta')?.value.tieneViatico"> Seleccione Viatico
+                            <select formControlName="viatico" *ngIf="this.boletaForm.get('tipoBoleta')?.value.tieneViatico">
+                                <option *ngFor="let zona of viaticoArray" [ngValue]="zona">{{zona.denominacionViatico}}
+                                </option>
+                            </select>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <div class="row">
+                    <div class="col-5" *ngIf="this.boletaForm.get('tipoBoleta')?.value != null">
+                        <p *ngIf="boletaForm.get('tipoBoleta')?.value.tieneMovilidad"> Seleccione Movilidades
+                            <select multiple formControlName="movilidades" *ngIf="boletaForm.get('tipoBoleta')?.value.tieneMovilidad">
+                                <option *ngFor="let zona of movilidadArray" [ngValue]="zona">{{zona.tipoMovilidad.denominacion}},  Patente: {{zona.patente}}
+                                </option>
+                            </select>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row justify-content-center mt-2">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn block btn-outline-success">
+                            <fa-icon [icon]="faPlusCircle"></fa-icon> Enviar Solicitud
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <div class="row justify-content-center mt-3">
+          <h1>Boletas Solicitadas</h1>
+        </div>
+      </div>
+      
+      <div class="row mt-4">
+        <div class="col-9">
+            <input type="text" class="form-control mb-2" placeholder="Buscar por Tipo de Boleta" #txtSearch
+        (keyup)="onSearch( txtSearch.value )" />
+        </div>
+        <div class="table-responsive">
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                      <th scope="col" style="display: none;">ID</th>
+                      <th scope="col">Fecha Solicitud</th>
+                      <th scope="col">Tipo de Boleta</th>
+                      <th scope="col">Fecha y Hora Salida</th>
+                      <th scope="col">Fecha y Hora Llegada</th>
+                      <th scope="col">Estado</th>
+                      <th scope="col">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let l of boletaArray | boletaPipe:page:search">
+                      <td style="display: none;">{{l.id}}</td>
+                      <td>{{l.fechaAlta}}</td>
+                      <td>{{l.tipoBoleta.tipoBoletaDenominacion}}</td>
+                      <td>{{l.fechaHoraPosibleSalida}}</td>
+                      <td>{{l.fechaHoraPosibleLlegada}}</td>
+                      <td *ngFor="let f of l.fechasCambioEstadoBoleta">{{f.estadoBoleta.nombreEstadoBoleta}}</td>
+                      <td>
+                        <button class="btn bg-primary" (click)="openDetail(l.id)">
+                          <fa-icon [icon]="faEye"></fa-icon> Detalles
+                        </button>
+                        <button class="btn bg-secondary" (click)="open(l.id)">
+                          <fa-icon [icon]="faEdit"></fa-icon>
+                          Editar
+                        </button>
+                        <button class="btn bg-danger" (click)="borrarBoleta(l.id)">
+                          <fa-icon [icon]="faTrash"></fa-icon>
+                          Eliminar
+                        </button>
+                      </td>
+        
+                    </tr>
+                  </tbody>
+            </table>
+            <button class="btn btn-primary" (click)="prevPage()" [disabled]="page === 0">
+                Anterior
+              </button>
+              &nbsp;
+              <button class="btn btn-primary" (click)="nextPage()"
+                [disabled]="(boletaArray | boletaPipe:page:search).length === 1">
+                Siguiente
+              </button>
+        </div>
+      </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="editModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+            Editar Solicitud
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="editBoletaForm" (ngSubmit)="onUpdate(newBoleta.id)">
+                <input type="hidden" formControlName="id" value="{{newBoleta.id}}">
+                
+                <div class="form-group mt-3">
+                    <div class="row">
+                        <div class="col-5">
+                            <p> Seleccione Tipo de Boleta
+                                <select formControlName="tipoBoleta">
+                                    <option *ngFor="let tipo of tipoBoletaArray" [ngValue]="tipo">{{tipo.tipoBoletaDenominacion}}
+                                    </option>
+                                </select>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <div class="row">
+                        <div class="col-5">
+                            <i>Fecha y Hora de posible Salida: </i>
+                            <input formControlName="fechaHoraPosibleSalida" type="datetime-local">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <div class="row">
+                        <div class="col-5">
+                            <i>Fecha y Hora de posible Llegada: </i>
+                            <input formControlName="fechaHoraPosibleLlegada" type="datetime-local">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <div class="row">
+                        <div class="col-5">
+                            <textarea formControlName="observacionesBoleta" class="textarea" rows="5" cols="50"
+                                placeholder="Descripción"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12" *ngIf="this.editBoletaForm.get('tipoBoleta')?.value != null">
+                      <input formControlName="sinFichadaRetorno" type="checkbox" id="sinFichadaRetorno" *ngIf="this.editBoletaForm.get('tipoBoleta')?.value.permiteNoFichadaRetorno">
+                      <i *ngIf="this.editBoletaForm.get('tipoBoleta')?.value.permiteNoFichadaRetorno"> Sin Fichada Retorno</i>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-12" *ngIf="this.editBoletaForm.get('tipoBoleta')?.value != null">
+                      <input formControlName="sinFichadaSalida" type="checkbox" id="sinFichadaSalida" *ngIf="this.editBoletaForm.get('tipoBoleta')?.value.permiteNoFichadaSalida">
+                      <i *ngIf="this.editBoletaForm.get('tipoBoleta')?.value.permiteNoFichadaSalida"> Sin Fichada Salida</i>
+                    </div>
+                  </div>
+                <div class="form-group mt-3">
+                    <div class="row">
+                        <div class="col-5" *ngIf="this.editBoletaForm.get('tipoBoleta')?.value != null">
+                            <p *ngIf="this.editBoletaForm.get('tipoBoleta')?.value.tieneZonaInhospita"> Seleccione Zona Inhospita
+                                <select formControlName="zonaInhospita" *ngIf="this.editBoletaForm.get('tipoBoleta')?.value.tieneZonaInhospita">
+                                    <option *ngFor="let zona of zonaInhospita" [ngValue]="zona">{{zona.denominacionZona}}
+                                    </option>
+                                </select>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <div class="row">
+                        <div class="col-5" *ngIf="this.editBoletaForm.get('tipoBoleta')?.value != null">
+                            <p *ngIf="this.editBoletaForm.get('tipoBoleta')?.value.tieneViatico"> Seleccione Viatico
+                                <select formControlName="viatico" *ngIf="this.editBoletaForm.get('tipoBoleta')?.value.tieneViatico">
+                                    <option *ngFor="let zona of viaticoArray" [ngValue]="zona">{{zona.denominacionViatico}}
+                                    </option>
+                                </select>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <div class="row">
+                        <div class="col-5" *ngIf="this.editBoletaForm.get('tipoBoleta')?.value != null">
+                            <p *ngIf="editBoletaForm.get('tipoBoleta')?.value.tieneMovilidad"> Seleccione Movilidades
+                                <select multiple formControlName="movilidades" *ngIf="editBoletaForm.get('tipoBoleta')?.value.tieneMovilidad">
+                                    <option *ngFor="let zona of movilidadArray" [ngValue]="zona">{{zona.tipoMovilidad.denominacion}},  Patente: {{zona.patente}}
+                                    </option>
+                                </select>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row justify-content-center mt-2">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn block btn-outline-success">
+                                <fa-icon [icon]="faPlusCircle"></fa-icon> Actualizar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+  
+      </div>
+    </div>
+  
+  </div>
+
+  <!--Detail Modal-->
+<div class="modal fade" id="detalleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog">
+  <div class="modal-content">
+      <div class="modal-body edit-form">
+          <h5 class="text-center">Detalle de Solicitud</h5>
+          <div class="container">
+              <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><b>Fecha Solicitud: </b>{{newBoleta.fechaAlta}}</li>
+                  <li class="list-group-item" *ngIf="newBoleta.tipoBoleta != null"><b>Tipo: </b>{{newBoleta.tipoBoleta.tipoBoletaDenominacion}}</li>
+                  <li class="list-group-item"><b>Fecha y Hora posible salida: </b>{{newBoleta.fechaHoraPosibleSalida}}</li>
+                  <li class="list-group-item"><b>Fecha y Hora posible llegada: </b>{{newBoleta.fechaHoraPosibleLlegada}}</li>
+                  <li class="list-group-item"><b>Observaciones: </b>{{newBoleta.observacionesBoleta}}</li>
+                  <li class="list-group-item" *ngFor="let f of newBoleta.fechasCambioEstadoBoleta"><b>Estado: </b>{{f.estadoBoleta.nombreEstadoBoleta}}</li>
+                  <li class="list-group-item" *ngIf="newBoleta.viatico != null"><b>Viatico: </b>{{newBoleta.viatico.denominacionViatico}}</li>
+                  <li class="list-group-item" *ngIf="newBoleta.zonaInhospita != null"><b>Zona Inhóspita: </b>{{newBoleta.zonaInhospita.denominacionZona}}</li>
+                  <li class="list-group-item"><b>Movilidades: </b>
+                    <div *ngFor="let zona of newBoleta.movilidades">{{zona.tipoMovilidad.denominacion}},  Patente: {{zona.patente}}
+                    </div>
+                  </li>
+                  <li class="list-group-item" *ngIf="newBoleta.sinFichadaRetorno==true"><b>Sin fichada retorno: </b>Si</li>
+                  <li class="list-group-item" *ngIf="newBoleta.sinFichadaRetorno==false"><b>Sin fichada retorno: </b>No</li>
+                  <li class="list-group-item" *ngIf="newBoleta.sinFichadaSalida==true"><b>Sin fichada salida: </b>Si</li>
+                  <li class="list-group-item" *ngIf="newBoleta.sinFichadaSalida==false"><b>Sin fichada salida: </b>No</li>
+                </ul>
+          </div>
+          <div class="modal-footer mt-4">
+              <button class="btn btn-outline-primary btn-block" (click)="volver()">
+                <fa-icon [icon]="faArrow"></fa-icon> Volver
+              </button>
+      </div>
+  </div>
+</div>
+</div>
+</div>
+
+<footer>
+    <app-footer></app-footer>
+</footer>

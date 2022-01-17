@@ -46,7 +46,7 @@ export class Boleta extends BaseEntity{
 
 	empleado: Empleado;
 
-	fechasCambioBoleta: Array<FechaCambioEstadoBoleta>;
+	fechasCambioEstadoBoleta: Array<FechaCambioEstadoBoleta>;
 
 	documentosAdjuntosBoleta: Array<DocumentoAdjuntoBoleta>
 

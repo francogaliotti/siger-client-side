@@ -22,16 +22,16 @@
             <div class="form-group mt-3">
                 <div class="row">
                     <div class="col-5">
-                        <i>Fecha Inicio de Licencia: </i>
-                        <input formControlName="fechaInicioLicencia" type="date">
+                        <i>Fecha y Hora Inicio de Licencia: </i>
+                        <input formControlName="fechaInicioLicencia" type="datetime-local">
                     </div>
                 </div>
             </div>
             <div class="form-group mt-3">
                 <div class="row">
                     <div class="col-5">
-                        <i>Fecha Fin de Licencia: </i>
-                        <input formControlName="fechaFinLicencia" type="date">
+                        <i>Fecha y Hora Fin de Licencia: </i>
+                        <input formControlName="fechaFinLicencia" type="datetime-local">
                     </div>
                 </div>
             </div>
@@ -71,8 +71,8 @@
                       <th scope="col" style="display: none;">ID</th>
                       <th scope="col">Fecha Solicitud</th>
                       <th scope="col">Tipo de Licencia</th>
-                      <th scope="col">Fecha Inicio</th>
-                      <th scope="col">Fecha Fin</th>
+                      <th scope="col">Fecha y Hora Inicio</th>
+                      <th scope="col">Fecha y Hora Fin</th>
                       <th scope="col">Estado</th>
                       <th scope="col">Acciones</th>
                     </tr>
@@ -114,38 +114,12 @@
       </div>
 </div>
 
-<!--Detail Modal-->
-<div class="modal fade" id="detalleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-body edit-form">
-            <h5 class="text-center">Detalle de Solicitud</h5>
-            <div class="container">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><b>Fecha Solicitud: </b>{{newLicencia.fechaAlta}}</li>
-                    <li class="list-group-item" *ngIf="newLicencia.tipoLicencia != null"><b>Tipo: </b>{{newLicencia.tipoLicencia.denominacion}}</li>
-                    <li class="list-group-item"><b>Fecha Inicio: </b>{{newLicencia.fechaInicioLicencia}}</li>
-                    <li class="list-group-item"><b>Fecha Fin: </b>{{newLicencia.fechaFinLicencia}}</li>
-                    <li class="list-group-item"><b>Observaciones: </b>{{newLicencia.observacionesLicencia}}</li>
-                    <li class="list-group-item" *ngFor="let f of newLicencia.fechasCambioEstadoLicencia"><b>Observaciones: </b>{{f.estadoLicencia.nombreEstadoLicencia}}</li>
-                  </ul>
-            </div>
-            <div class="modal-footer mt-4">
-                <button class="btn btn-outline-primary btn-block" (click)="volver()">
-                  <fa-icon [icon]="faArrow"></fa-icon> Volver
-                </button>
-        </div>
-    </div>
-  </div>
-</div>
-
 <!-- Modal -->
-<div class="modal fade" id="exampleModal">
+<div class="modal fade" id="editModal">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <div class="modal-title">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
             Editar Solicitud
           </div>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -168,16 +142,16 @@
                 <div class="form-group mt-3">
                     <div class="row">
                         <div class="col-5">
-                            <i>Fecha Inicio de Licencia: </i>
-                            <input formControlName="fechaInicioLicencia" type="date">
+                            <i>Fecha y Hora Inicio de Licencia: </i>
+                            <input formControlName="fechaInicioLicencia" type="datetime-local">
                         </div>
                     </div>
                 </div>
                 <div class="form-group mt-3">
                     <div class="row">
                         <div class="col-5">
-                            <i>Fecha Fin de Licencia: </i>
-                            <input formControlName="fechaFinLicencia" type="date">
+                            <i>Fecha y Hora Fin de Licencia: </i>
+                            <input formControlName="fechaFinLicencia" type="datetime-local">
                         </div>
                     </div>
                 </div>
@@ -205,6 +179,35 @@
     </div>
   
   </div>
+
+<!--Detail Modal-->
+<div class="modal fade" id="detalleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body edit-form">
+            <h5 class="text-center">Detalle de Solicitud</h5>
+            <div class="container">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><b>Fecha Solicitud: </b>{{newLicencia.fechaAlta}}</li>
+                    <li class="list-group-item" *ngIf="newLicencia.tipoLicencia != null"><b>Tipo: </b>{{newLicencia.tipoLicencia.denominacion}}</li>
+                    <li class="list-group-item"><b>Fecha Inicio: </b>{{newLicencia.fechaInicioLicencia}}</li>
+                    <li class="list-group-item"><b>Fecha Fin: </b>{{newLicencia.fechaFinLicencia}}</li>
+                    <li class="list-group-item"><b>Observaciones: </b>{{newLicencia.observacionesLicencia}}</li>
+                    <li class="list-group-item" *ngFor="let f of newLicencia.fechasCambioEstadoLicencia"><b>Observaciones: </b>{{f.estadoLicencia.nombreEstadoLicencia}}</li>
+                  </ul>
+            </div>
+            <div class="modal-footer mt-4">
+                <button class="btn btn-outline-primary btn-block" (click)="volver()">
+                  <fa-icon [icon]="faArrow"></fa-icon> Volver
+                </button>
+        </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
 
 <footer>
     <app-footer></app-footer>

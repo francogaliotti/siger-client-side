@@ -20,7 +20,7 @@ h1{
     text-align: center;
 }
 
-.altaLicencia{
+.altaBoleta{
     background: #EBFFEC;
     margin-top: 20px;
     margin-left: 220px;
@@ -128,7 +128,7 @@ table > tbody > tr > td > button{
 }
 .table-responsive{
     margin-left: 200px;
-    width: 830px;
+    width: 870px;
 }
 .textarea{
     resize: none;
