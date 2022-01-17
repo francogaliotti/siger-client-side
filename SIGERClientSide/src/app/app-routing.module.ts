@@ -28,6 +28,7 @@ import { RegimenHorarioComponent } from './components/regimen-horario/regimen-ho
 import { RemuneracionComponent } from './components/remuneracion/remuneracion.component';
 import { TipoSectorComponent } from './components/tipo-sector/tipo-sector.component';
 import { TipoSectorGuardService as TipoSectorGuard} from './guards/tipo-sector-guard.service';
+import { EditUserProfileComponent } from './components/users/edit-user-profile.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -47,7 +48,8 @@ const routes: Routes = [
   {path: 'regimen-horario', component: RegimenHorarioComponent},
   {path: 'remuneracion', component: RemuneracionComponent},
   {path: 'tipo-sector', component: TipoSectorComponent, canActivate: [TipoSectorGuard], data: { expectedRol: ['admin', 'user'] }},
-  {path: 'altaEmpleado', component: CreateUserRRHHComponent, canActivate: [EmpleadoGuard], data: {expectedRol: ['admin']}},
+  {path: 'createEmployee', component: CreateUserRRHHComponent, canActivate: [EmpleadoGuard], data: {expectedRol: ['admin']}},
+  {path: 'editEmployeeProfile', component: EditUserProfileComponent},
   {path: 'firstSignIn', component: FirstSigninComponent},
   {path: '**', component: ErrorsComponent}
 ];

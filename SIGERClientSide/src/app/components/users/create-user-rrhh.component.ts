@@ -111,17 +111,13 @@ export class CreateUserRRHHComponent implements OnInit {
         nombre: this.newUserForm.get('firstname')?.value,
         apellido: this.newUserForm.get('surname')?.value,
         nacionalidad: nationality,
-        nroIdentificacionPersonal: this.newUserForm.get('dni')?.value,
         correoPersonal: this.newUserForm.get('personalEmail')?.value,
         fechaIngreso: this.newUserForm.get('yearOfstarted')?.value,
         computoDiasLicencia: null,
-        cuil: null,
         diasLicenciaAnualFija: null,
         domicilio: null,
         esEncargado: false,
         estadoCivil: null,
-        fechaAlta: null,
-        fechaBaja: null,
         fechaLimiteReemplazo: null,
         fechaNacimiento: null,
         historialSectorEmpleado: null,
@@ -137,7 +133,8 @@ export class CreateUserRRHHComponent implements OnInit {
         rompeReglaFichadaReloj: null,
         rompeReglaFichadaSupervisor: null,
         usuario: account,
-        id: null  
+        id: null,
+        documentoIdentidad: []
       }
 
       console.log(employee);

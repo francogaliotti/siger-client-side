@@ -8,12 +8,9 @@ import { RemanenteDiasLicencia } from "./remanente-dias-licencia";
 import { Remuneracion } from "./remuneracion";
 import { Usuario } from "./usuario";
 import { Nacionalidad } from "./nacionalidad";
+import { DocumentoIdentidad } from "./documentoidentidad";
 
 export class Empleado extends BaseEntity{
-
-    fechaAlta: Date;
-	
-	fechaBaja: Date;
 	
 	nombre: string;
 	
@@ -23,13 +20,7 @@ export class Empleado extends BaseEntity{
 	
 	estadoCivil: number;
 	
-	nacionalidad: Nacionalidad;
-	
 	legajo: number;
-	
-	cuil: string;
-	
-	nroIdentificacionPersonal: string;
 	
 	fechaLimiteReemplazo: Date;
 	
@@ -53,8 +44,6 @@ export class Empleado extends BaseEntity{
 	
 	nroTelefonoCelular: string;
 
-	//Relations
-
 	remuneraciones: Array<Remuneracion>;
 
 	regimenesHorario: Array<RegimenHorario>;
@@ -70,5 +59,9 @@ export class Empleado extends BaseEntity{
 	computoDiasLicencia: Array<ComputoDiasLicencia>;
 
 	remanenteDiasLicencia: Array<RemanenteDiasLicencia>;
+
+	nacionalidad: Nacionalidad;
+
+	documentoIdentidad: Array<DocumentoIdentidad>
 
 }

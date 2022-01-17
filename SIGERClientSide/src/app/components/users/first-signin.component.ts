@@ -28,26 +28,25 @@ export class FirstSigninComponent implements OnInit {
 
   loadForm(): void {
     this.firstSigninForm = this._formBuilder.group({
-      firstname : [this.employee.nombre,[Validators.required, Validators.maxLength(40)]],
-      lastname: [this.employee.apellido,[Validators.required, Validators.maxLength(40)]],
-      CUIL: [this.employee.cuil,[Validators.required, Validators.maxLength(40)]],
-      nationality: [this.employee.nacionalidad, Validators.required],
-      personalEmail: [this.employee.correoPersonal,[Validators.required, Validators.email, Validators.maxLength(150)]],
-      dpvEmail: [this.employee.usuario.correoInstitucional,[Validators.required, Validators.email, Validators.maxLength(150)]],
-      username: [this.employee.usuario.username,[Validators.required, Validators.maxLength(40)]],
-      password: [this.employee.usuario.password,[Validators.required, Validators.maxLength(30)]],
-      neighborhood: [this.employee.domicilio.barrio, Validators.maxLength(30)],
-      floor: [this.employee.domicilio.nroPiso, Validators.maxLength(4)],
-      block: [this.employee.domicilio.manzana, Validators.maxLength(3)],
-      street: [this.employee.domicilio.calle, Validators.maxLength(50)],
-      house: [this.employee.domicilio.casa,Validators.maxLength(3)],
-      height: [this.employee.domicilio.nroCalle, Validators.maxLength(6)],
-      apartment: [this.employee.domicilio.nroDepartamento,Validators.maxLength(3)],
-      sector: [this.employee.historialSectorEmpleado.find(x => x.vigente).sector.denominacion,Validators.maxLength(3)],
+      firstname : ['',[Validators.required, Validators.maxLength(40)]],
+      lastname: ['',[Validators.required, Validators.maxLength(40)]],
+      CUIL: ['',[Validators.required, Validators.maxLength(40)]],
+      nationality: ['', Validators.required],
+      personalEmail: ['',[Validators.required, Validators.email, Validators.maxLength(150)]],
+      dpvEmail: ['',[Validators.required, Validators.email, Validators.maxLength(150)]],
+      username: ['',[Validators.required, Validators.maxLength(40)]],
+      password: ['',[Validators.required, Validators.maxLength(30)]],
+      neighborhood: ['', Validators.maxLength(30)],
+      floor: ['', Validators.maxLength(4)],
+      block: ['', Validators.maxLength(3)],
+      street: ['', Validators.maxLength(50)],
+      house: ['',Validators.maxLength(3)],
+      height: ['', Validators.maxLength(6)],
+      apartment: ['',Validators.maxLength(3)],
+      sector: ['',Validators.required],
     });
   }
 
   ngOnInit(): void {
   }
-
 }

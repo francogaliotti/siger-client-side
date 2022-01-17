@@ -40,7 +40,7 @@ import { TipoBoletaPipe } from './pipes/tipo-boleta.pipe';
 import { TipoLicenciaPipe } from './pipes/tipo-licencia.pipe';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FirstSigninComponent } from './components/users/first-signin.component';
-import { TipoRegimenHorarioComponent } from './components/tipo-regimen-horario/tipo-regimen-horario.component';
+import { TipoRegimenHorarioComponent } from './components/tipo-regimen-horario/tipo-regimen-horario.component'; 
 import { TipoRegimenHorarioPipe } from './pipes/tipo-regimen-horario.pipe';
 import { RegimenHorarioPipe } from './pipes/regimen-horario.pipe';
 import { RegimenHorarioComponent } from './components/regimen-horario/regimen-horario.component';
@@ -48,7 +48,11 @@ import { RemuneracionPipe } from './pipes/remuneracion.pipe';
 import { RemuneracionComponent } from './components/remuneracion/remuneracion.component';
 import { TipoSectorPipe } from './pipes/tipo-sector.pipe';
 import { TipoSectorComponent } from './components/tipo-sector/tipo-sector.component';
-
+import { EditUserProfileComponent } from './components/users/edit-user-profile.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker'
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from "@angular/material/form-field";
 
 @NgModule({
   declarations: [
@@ -85,7 +89,7 @@ import { TipoSectorComponent } from './components/tipo-sector/tipo-sector.compon
     TipoBoletaPipe,
     TipoLicenciaPipe,
     CreateUserRRHHComponent,
-    FirstSigninComponent
+    FirstSigninComponent,
     TipoRegimenHorarioComponent,
     TipoRegimenHorarioPipe,
     RegimenHorarioPipe,
@@ -93,7 +97,8 @@ import { TipoSectorComponent } from './components/tipo-sector/tipo-sector.compon
     RemuneracionPipe,
     RemuneracionComponent,
     TipoSectorPipe,
-    TipoSectorComponent
+    TipoSectorComponent,
+    EditUserProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,9 +110,14 @@ import { TipoSectorComponent } from './components/tipo-sector/tipo-sector.compon
     SweetAlert2Module,
     SweetAlert2Module.forChild(),
     FormsModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule
+    
   ],
   providers: [interceptorProvider],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, EditUserProfileComponent]
 })
 export class AppModule { }
