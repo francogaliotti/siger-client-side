@@ -113,6 +113,9 @@ export class SolicitarBoletaComponent implements OnInit {
     this._boletaService.list(this.searchPage).subscribe(
       data => {
         this.boletaArray = data;
+        for (let tipo of this.boletaArray){
+          tipo.estadoActual = tipo.fechasCambioEstadoBoleta.find(e => e.fechaFinEstadoBoleta == null).estadoBoleta.nombreEstadoBoleta;
+        }
       },
       err => {
         console.log(err);
@@ -276,6 +279,7 @@ export class SolicitarBoletaComponent implements OnInit {
       data => {
         this.newBoleta = data;
         console.log(this.newBoleta);
+        console.log(this.newBoleta.fechasCambioEstadoBoleta.find(e => e.fechaFinEstadoBoleta == null).estadoBoleta.nombreEstadoBoleta);
         this.editBoletaForm = this._editBoleta.group({
           id: [this.newBoleta.id, Validators.required],
           fechaAlta: [],
@@ -382,6 +386,7 @@ export class SolicitarBoletaComponent implements OnInit {
     this._boletaService.detail(id).subscribe(
       data => {
         this.newBoleta = data;
+        this.newBoleta.estadoActual = this.newBoleta.fechasCambioEstadoBoleta.find(e => e.fechaFinEstadoBoleta == null).estadoBoleta.nombreEstadoBoleta;
       },
       err => {
         alert(err.error.mensaje);

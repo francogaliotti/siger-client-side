@@ -98,6 +98,9 @@ export class SolicitarLicenciaComponent implements OnInit {
     this._licenciaService.list(this.searchPage).subscribe(
       data => {
         this.licenciaArray = data;
+        for (let tipo of this.licenciaArray){
+          tipo.estadoActual = tipo.fechasCambioEstadoLicencia.find(e => e.fechaFinEstadoLicencia == null).estadoLicencia.nombreEstadoLicencia;
+        }
       },
       err => {
         console.log(err);
@@ -326,6 +329,7 @@ export class SolicitarLicenciaComponent implements OnInit {
     this._licenciaService.detail(id).subscribe(
       data => {
         this.newLicencia = data;
+        this.newLicencia.estadoActual = this.newLicencia.fechasCambioEstadoLicencia.find(e => e.fechaFinEstadoLicencia == null).estadoLicencia.nombreEstadoLicencia;
       },
       err => {
         alert(err.error.mensaje);

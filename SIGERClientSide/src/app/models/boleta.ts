@@ -2,6 +2,7 @@ import { BaseEntity } from "./base-entity";
 import { Comentario } from "./comentario";
 import { DocumentoAdjuntoBoleta } from "./documento-adjunto-boleta";
 import { Empleado } from "./empleado";
+import { EstadoBoleta } from "./estado-boleta";
 import { FechaCambioEstadoBoleta } from "./fecha-cambio-estado-boleta";
 import { Movilidad } from "./movilidad";
 import { TipoBoleta } from "./tipo-boleta";
@@ -55,5 +56,8 @@ export class Boleta extends BaseEntity{
 	tipoBoleta: TipoBoleta;
 
 	comentarios: Array<Comentario>;
+
+	estadoActual: string;
+
 
 }

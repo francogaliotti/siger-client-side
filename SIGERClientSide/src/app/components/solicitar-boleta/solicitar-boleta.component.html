@@ -134,7 +134,7 @@
                       <td>{{l.tipoBoleta.tipoBoletaDenominacion}}</td>
                       <td>{{l.fechaHoraPosibleSalida}}</td>
                       <td>{{l.fechaHoraPosibleLlegada}}</td>
-                      <td *ngFor="let f of l.fechasCambioEstadoBoleta">{{f.estadoBoleta.nombreEstadoBoleta}}</td>
+                      <td >{{l.estadoActual}}</td>
                       <td>
                         <button class="btn bg-primary" (click)="openDetail(l.id)">
                           <fa-icon [icon]="faEye"></fa-icon> Detalles
@@ -294,7 +294,7 @@ aria-hidden="true">
                   <li class="list-group-item"><b>Fecha y Hora posible salida: </b>{{newBoleta.fechaHoraPosibleSalida}}</li>
                   <li class="list-group-item"><b>Fecha y Hora posible llegada: </b>{{newBoleta.fechaHoraPosibleLlegada}}</li>
                   <li class="list-group-item"><b>Observaciones: </b>{{newBoleta.observacionesBoleta}}</li>
-                  <li class="list-group-item" *ngFor="let f of newBoleta.fechasCambioEstadoBoleta"><b>Estado: </b>{{f.estadoBoleta.nombreEstadoBoleta}}</li>
+                  <li class="list-group-item"><b>Estado: </b>{{newBoleta.estadoActual}}</li>
                   <li class="list-group-item" *ngIf="newBoleta.viatico != null"><b>Viatico: </b>{{newBoleta.viatico.denominacionViatico}}</li>
                   <li class="list-group-item" *ngIf="newBoleta.zonaInhospita != null"><b>Zona Inhóspita: </b>{{newBoleta.zonaInhospita.denominacionZona}}</li>
                   <li class="list-group-item"><b>Movilidades: </b>
