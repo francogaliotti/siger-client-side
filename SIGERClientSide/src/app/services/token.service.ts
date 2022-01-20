@@ -32,6 +32,18 @@ export class TokenService{
     return false;
   }
 
+  public getUserId(): number {
+    if (!this.isLogged()) {
+      return 0;
+    }
+    const token = this.getToken();
+    const payload = token.split(".")[1];
+    const payloadDecoded = atob(payload);
+    const values = JSON.parse(payloadDecoded);
+    const id = values.jti;
+    return id;
+  }
+
   public getUsername(): string {
     if (!this.isLogged()) {
       return '';

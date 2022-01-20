@@ -119,9 +119,11 @@
               <td>{{regimenesHorarios.horaMinutoInicioJornadaLaboral}}</td>
               <td>{{regimenesHorarios.horaMinutoFinJornadaLaboral}}</td>
               <td>
+                
                 <button class="btn bg-primary" (click)="openDetail(regimenesHorarios.id)">
                   <fa-icon [icon]="faEye"></fa-icon> Detalles
                 </button>
+               
                 <button class="btn bg-secondary" (click)="open(regimenesHorarios.id)" *ngIf="isAdmin">
                   <fa-icon [icon]="faEdit"></fa-icon>
                   Editar
@@ -168,7 +170,7 @@
             <li class="list-group-item" *ngIf="regimenHorario.isActive==true"><b>Movilidad: </b>Si</li>
             <li class="list-group-item" *ngIf="regimenHorario.isActive==false"><b>Movilidad: </b>No</li>
 
-            <li class="list-group-item"><b>Tipo de Regimen:
+            <li *ngIf ="regimenHorario.tipoRegimenHorario != null" class="list-group-item"><b>Tipo de Regimen:
               </b>{{regimenHorario.tipoRegimenHorario.denominacionTipoRegimenHorario}}
             </li>
           </ul>
