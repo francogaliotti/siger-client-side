@@ -39,6 +39,8 @@ import { ViaticoPipe } from './pipes/viatico.pipe';
 import { TipoBoletaPipe } from './pipes/tipo-boleta.pipe';
 import { TipoLicenciaPipe } from './pipes/tipo-licencia.pipe';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { AsistenciaPipe } from './pipes/asistencia.pipe';
+import { AsistenciaComponent } from './components/asistencia/asistencia.component';
 
 
 @NgModule({
@@ -75,7 +77,9 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     ViaticoPipe,
     TipoBoletaPipe,
     TipoLicenciaPipe,
-    CreateUserRRHHComponent
+    CreateUserRRHHComponent,
+    AsistenciaPipe,
+    AsistenciaComponent
   ],
   imports: [
     BrowserModule,

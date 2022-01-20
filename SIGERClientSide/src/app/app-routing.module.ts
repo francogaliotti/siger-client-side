@@ -23,6 +23,8 @@ import { ViaticoComponent } from './components/viatico/viatico.component';
 import { TipoBoletaComponent } from './components/tipo-boleta/tipo-boleta.component';
 import { CreateUserRRHHComponent } from './components/users/create-user-rrhh.component';  
 import { EmpleadoGuardService as EmpleadoGuard } from './guards/empleado-guard.service';  
+import { AsistenciaComponent } from './components/asistencia/asistencia.component';
+import { AsistenciaGuardService as AsistenciaGuard } from './guards/asistencia-guard.service';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -39,6 +41,7 @@ const routes: Routes = [
   {path: 'roles', component: IndexRolComponent},
   {path: 'tipo-boleta', component: TipoBoletaComponent, canActivate:  [tipoBoletaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'altaEmpleado', component: CreateUserRRHHComponent, canActivate: [EmpleadoGuard], data: {expectedRol: ['admin']}},
+  {path: 'asistencia', component: AsistenciaComponent, canActivate: [AsistenciaGuard], data: {expectedRol: ['admin']}},
   {path: '**', component: ErrorsComponent}
 ];
 
