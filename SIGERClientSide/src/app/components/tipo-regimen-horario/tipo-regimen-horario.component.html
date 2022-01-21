@@ -32,7 +32,7 @@
           </div>
         </div>
         <button class="btn text-white mt-4 btn-sm" #CreatePermission disabled>
-          <fa-icon [icon]="fapluscircle"> </fa-icon>Aceptar
+          <fa-icon [icon]="fapluscircle"> </fa-icon> Crear
         </button>
       </form>
     </div>
@@ -46,7 +46,7 @@
     <div class="col-2">
     </div>
     <div class="col-9">
-      <input type="text" class="form-control mb-2" placeholder="Buscar Tipo de Regimen Horario" #txtSearch
+      <input type="text" class="form-control mb-2" id="search" placeholder="Buscar Tipo de Regimen Horario" #txtSearch
         (keyup)="onSearch( txtSearch.value )" />
       <div class="table-responsive">
         <table class="table text-center">

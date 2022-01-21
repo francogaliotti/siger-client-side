@@ -3,12 +3,7 @@ import { Empleado } from "../models/empleado";
 import { Sector } from "../models/sector";
 
 export class TipoLicenciaDTO extends BaseEntity{
-    cantidadMaximaAnual: number;
 
-    cantidadMaximaMensual:number;
-    
-    cantidadMaximaDiaria: number;
-   
     codigo: string;
 	
 	denominacion: string;
@@ -29,9 +24,7 @@ export class TipoLicenciaDTO extends BaseEntity{
 
     tipoRequerimientoAprobadores: Array<Empleado>;
 
-    constructor(cantidadMaximaAnual: number,
-        cantidadMaximaMensual: number,
-        cantidadMaximaDiaria: number,
+    constructor(
         codigo: string,
         denominacion: string,
         justificaPresentismo: boolean,
@@ -45,9 +38,7 @@ export class TipoLicenciaDTO extends BaseEntity{
         id?: number){
             
         super();
-        this.cantidadMaximaAnual=cantidadMaximaAnual;
-        this.cantidadMaximaDiaria=cantidadMaximaDiaria;
-        this.cantidadMaximaMensual=cantidadMaximaMensual;
+
         this.goceSueldo=goceSueldo;
         this.denominacion=denominacion;
         this.codigo=codigo;

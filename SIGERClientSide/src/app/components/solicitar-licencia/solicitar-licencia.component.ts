@@ -11,6 +11,8 @@ import { LicenciaService } from 'src/app/services/licencia.service';
 import { TipoLicencia } from 'src/app/models/tipo-licencia';
 import { TipoLicenciaService } from 'src/app/services/tipo-licencia.service';
 import { TipoLicenciaDTO } from 'src/app/dto/tipoLicenciaDTO';
+import { Empleado } from 'src/app/models/empleado';
+import { EmpleadoService } from 'src/app/services/empleado.service';
 
 @Component({
   selector: 'app-solicitar-licencia',
@@ -28,6 +30,9 @@ export class SolicitarLicenciaComponent implements OnInit {
   newLicencia: Licencia = new Licencia();
   success: boolean;
 
+  id: number;
+  empleado: Empleado = new Empleado();
+
   faEdit = faEdit;
   faTrash = faTrash;
   faArrow = faArrowAltCircleLeft;
@@ -41,7 +46,8 @@ export class SolicitarLicenciaComponent implements OnInit {
   search: string = '';
 
   constructor(private _licencia: FormBuilder, private _licenciaService: LicenciaService,
-    private router: Router, private _editLicencia: FormBuilder, private _tokenService: TokenService, private _tipoLicenciaService: TipoLicenciaService) {
+    private router: Router, private _editLicencia: FormBuilder, private _tokenService: TokenService, private _tipoLicenciaService: TipoLicenciaService,
+    private _empleadoService: EmpleadoService) {
     this.licenciaForm = this._licencia.group({
       fechaAlta: [],
       fechaBaja: [],
@@ -78,6 +84,7 @@ export class SolicitarLicenciaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.cargarEmpleado();
     this.cargarLicencia();
     this.cargarTipoLicencia();
     this.isAdmin = this._tokenService.IsAdmin();
@@ -97,7 +104,15 @@ export class SolicitarLicenciaComponent implements OnInit {
   cargarLicencia(): void {
     this._licenciaService.list(this.searchPage).subscribe(
       data => {
-        this.licenciaArray = data;
+        const bol: Licencia[] = [];
+        for (let b of data) {
+          if (b.empleado != null) {
+            if (b.empleado.id == this.empleado.id) {
+              bol.push(b);
+            }
+          }
+        }
+        this.licenciaArray = bol;
         for (let tipo of this.licenciaArray){
           tipo.estadoActual = tipo.fechasCambioEstadoLicencia.find(e => e.fechaFinEstadoLicencia == null).estadoLicencia.nombreEstadoLicencia;
         }
@@ -107,7 +122,18 @@ export class SolicitarLicenciaComponent implements OnInit {
       }
     );
   }
+  cargarEmpleado(): void {
+    const id = this._tokenService.getUserId();
+    this._empleadoService.getByUsuarioId(id).subscribe(
+      data => {
+        this.empleado = data;
+      },
+      err => {
+        console.log(err);
+      }
+    );
 
+  }
   nextPage() {
     this.page += 10;
     this.searchPage = this.searchPage + 1;
@@ -149,6 +175,7 @@ export class SolicitarLicenciaComponent implements OnInit {
   onCreate(): boolean {
     this.success = false;
     const licencia = new Licencia();
+    licencia.empleado = this.empleado;
     licencia.fechaInicioLicencia = this.licenciaForm.get('fechaInicioLicencia')?.value;
     licencia.fechaFinLicencia = this.licenciaForm.get('fechaFinLicencia')?.value;
     licencia.observacionesLicencia = this.licenciaForm.get('observacionesLicencia')?.value;

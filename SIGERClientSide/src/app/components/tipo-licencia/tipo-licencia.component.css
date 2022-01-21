@@ -10,11 +10,7 @@
     text-align: left;
 }
 
-.searcher{
-    float: right;
-    height: 34px;
-    width: 475px;
-}
+
 h1{
     font-size: 20px;
     text-align: center;
@@ -165,4 +161,10 @@ table > tbody > tr > td > button{
 }
 input[type="number"]{
     width: 40px;
+}
+#search{
+    margin-left: 200px;
+    margin-bottom: 20px;
+    width: 450px;
+    height: 25px;
 }

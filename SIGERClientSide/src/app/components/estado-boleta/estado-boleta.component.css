@@ -1,7 +1,12 @@
 .altaEstadoBoleta{
     margin-top: 40px;
 }
-
+#search{
+    margin-bottom: 20px;
+    margin-left: 200px;
+    width: 450px;
+    height: 25px;
+}
 th:nth-child(1){
     display: none;
 }

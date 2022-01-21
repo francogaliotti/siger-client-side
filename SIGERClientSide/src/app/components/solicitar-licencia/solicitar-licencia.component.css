@@ -62,6 +62,12 @@ p, i{
     margin-top: 1px;
 }
 
+#search{
+    margin-bottom: 20px;
+    margin-left: 200px;
+    width: 450px;
+    height: 25px;
+}
 .modal-content{
     background: #EBFFEC;
     margin-top: 20px;
