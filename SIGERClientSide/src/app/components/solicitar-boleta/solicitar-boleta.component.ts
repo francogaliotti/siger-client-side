@@ -7,6 +7,7 @@ import { faEye, faArrowAltCircleDown, faEdit, faFileAlt, faPlusCircle, faTrash, 
 import * as bootstrap from 'bootstrap';
 import { ZonaInhospita } from 'src/app/models/zona-inhospita';
 import { Viatico } from 'src/app/models/viatico';
+import { Empleado } from 'src/app/models/empleado';
 import { Movilidad } from 'src/app/models/movilidad';
 import { Router } from '@angular/router';
 import { BoletaService } from 'src/app/services/boleta.service';
@@ -17,6 +18,7 @@ import { ZonaInhospitaService } from 'src/app/services/zona-inhospita.service';
 import { ViaticoService } from 'src/app/services/viatico.service';
 import Swal from 'sweetalert2';
 import { EmpleadoService } from 'src/app/services/empleado.service';
+
 
 @Component({
   selector: 'app-solicitar-boleta',
@@ -30,6 +32,7 @@ export class SolicitarBoletaComponent implements OnInit {
   viaticoArray: Viatico[] = [];
   zonaInhospita: ZonaInhospita[] = [];
   boletaArray: Boleta[] = [];
+
   boletaForm: FormGroup;
   editBoletaForm: FormGroup;
   testModal: Modal | undefined;
@@ -44,6 +47,7 @@ export class SolicitarBoletaComponent implements OnInit {
   faEye = faEye;
 
   id: number;
+  empleado: Empleado = new Empleado();
 
   isAdmin = false;
 
@@ -76,7 +80,8 @@ export class SolicitarBoletaComponent implements OnInit {
       documentosAdjuntosBoleta: [[]],
       movilidades: [[]],
       tipoBoleta: [],
-      comentarios: [[]]
+      comentarios: [[]],
+      empleado: []
     })
     this.editBoletaForm = this._editBoleta.group({
       id: ['', Validators.required],
@@ -100,26 +105,35 @@ export class SolicitarBoletaComponent implements OnInit {
       documentosAdjuntosBoleta: [[]],
       movilidades: [[]],
       tipoBoleta: [],
-      comentarios: [[]]
+      comentarios: [[]],
+      empleado: []
     })
   }
 
   ngOnInit(): void {
     this.isAdmin = this._tokenService.IsAdmin();
+    this.cargarEmpleado();
     this.cargarBoleta();
     this.cargarMovilidad();
     this.cargarTipoBoleta();
     this.cargarViatico();
     this.cargarZonaInhospita();
     this.id = this._tokenService.getUserId();
-    console.log("id: "+ this.id);
-  }
 
+  }
   cargarBoleta(): void {
     this._boletaService.list(this.searchPage).subscribe(
       data => {
-        this.boletaArray = data;
-        for (let tipo of this.boletaArray){
+        const bol: Boleta[] = [];
+        for (let b of data) {
+          if (b.empleado != null) {
+            if (b.empleado.id == this.empleado.id) {
+              bol.push(b);
+            }
+          }
+        }
+        this.boletaArray = bol;
+        for (let tipo of this.boletaArray) {
           tipo.estadoActual = tipo.fechasCambioEstadoBoleta.find(e => e.fechaFinEstadoBoleta == null).estadoBoleta.nombreEstadoBoleta;
         }
       },
@@ -127,6 +141,18 @@ export class SolicitarBoletaComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+  cargarEmpleado(): void {
+    const id = this._tokenService.getUserId();
+    this._empleadoService.getByUsuarioId(id).subscribe(
+      data => {
+        this.empleado = data;
+      },
+      err => {
+        console.log(err);
+      }
+    );
+
   }
   cargarTipoBoleta(): void {
     this._tipoBoletaService.list(this.searchPage).subscribe(
@@ -208,16 +234,7 @@ export class SolicitarBoletaComponent implements OnInit {
   onCreate(): boolean {
     this.success = false;
     const boleta = new Boleta();
-    const id = this._tokenService.getUserId();
-    this._empleadoService.getByUsuarioId(id).subscribe(
-      data =>{
-        boleta.empleado = data;
-      },
-      err => {
-        console.log(err)
-        return this.success
-      }
-    );
+    boleta.empleado = this.empleado;
     boleta.tipoBoleta = this.boletaForm.get('tipoBoleta')?.value;
     boleta.fechaHoraPosibleSalida = this.boletaForm.get('fechaHoraPosibleSalida')?.value;
     boleta.fechaHoraPosibleLlegada = this.boletaForm.get('fechaHoraPosibleLlegada')?.value;
@@ -228,7 +245,7 @@ export class SolicitarBoletaComponent implements OnInit {
     boleta.sinFichadaRetorno = this.boletaForm.get('sinFichadaRetorno')?.value;
     boleta.sinFichadaSalida = this.boletaForm.get('sinFichadaSalida')?.value;
 
-    
+
     if ((boleta.fechaHoraPosibleLlegada && boleta.fechaHoraPosibleSalida) == undefined) {
       Swal.fire({
         title: "Debe llevar un rango de fechas",
@@ -257,7 +274,6 @@ export class SolicitarBoletaComponent implements OnInit {
       return this.success;
     }
     if (this.boletaForm.valid == true) {
-      console.log(boleta);
       this._boletaService.save(boleta).subscribe(
         data => {
           this.success = true;
@@ -269,6 +285,7 @@ export class SolicitarBoletaComponent implements OnInit {
           });
           this.cargarBoleta();
           this.router.navigate(['/solicitar-boleta']);
+          console.log(boleta);
         },
         err => {
           Swal.fire({
@@ -294,7 +311,6 @@ export class SolicitarBoletaComponent implements OnInit {
       data => {
         this.newBoleta = data;
         console.log(this.newBoleta);
-        console.log(this.newBoleta.fechasCambioEstadoBoleta.find(e => e.fechaFinEstadoBoleta == null).estadoBoleta.nombreEstadoBoleta);
         this.editBoletaForm = this._editBoleta.group({
           id: [this.newBoleta.id, Validators.required],
           fechaAlta: [],
@@ -307,6 +323,7 @@ export class SolicitarBoletaComponent implements OnInit {
           periodo: 0,
           fechaCierre: [],
           fechaControl: [],
+          empleado: [this.newBoleta.empleado],
           observacionesBoleta: [this.newBoleta.observacionesBoleta],
           fechaSincronizacion: [],
           sinFichadaRetorno: [this.newBoleta.sinFichadaRetorno],
@@ -338,7 +355,7 @@ export class SolicitarBoletaComponent implements OnInit {
     this.newBoleta.movilidades = this.editBoletaForm.get('movilidades')?.value;
     this.newBoleta.sinFichadaRetorno = this.editBoletaForm.get('sinFichadaRetorno')?.value;
     this.newBoleta.sinFichadaSalida = this.editBoletaForm.get('sinFichadaSalida')?.value;
-    
+
     if ((this.newBoleta.fechaHoraPosibleLlegada && this.newBoleta.fechaHoraPosibleSalida) == undefined) {
       Swal.fire({
         title: "Debe llevar un rango de fechas",
