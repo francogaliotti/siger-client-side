@@ -42,6 +42,8 @@ export class SolicitarBoletaComponent implements OnInit {
   faPlusCircle = faPlusCircle;
   faEye = faEye;
 
+  id: number;
+
   isAdmin = false;
 
   searchPage = 0;
@@ -107,6 +109,8 @@ export class SolicitarBoletaComponent implements OnInit {
     this.cargarTipoBoleta();
     this.cargarViatico();
     this.cargarZonaInhospita();
+    this.id = this._tokenService.getUserId();
+    console.log("id: "+ this.id);
   }
 
   cargarBoleta(): void {
@@ -144,7 +148,6 @@ export class SolicitarBoletaComponent implements OnInit {
     );
   }
   cargarViatico(): void {
-    console.log(this.searchPage);
     this.viaticoService.list(this.searchPage).subscribe(
       data => {
         this.viaticoArray = data;
