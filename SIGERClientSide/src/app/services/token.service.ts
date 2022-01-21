@@ -40,7 +40,6 @@ export class TokenService{
     const payload = token.split(".")[1];
     const payloadDecoded = atob(payload);
     const values = JSON.parse(payloadDecoded);
-    console.log(values)
     const id = values.jti;
     return id;
   }

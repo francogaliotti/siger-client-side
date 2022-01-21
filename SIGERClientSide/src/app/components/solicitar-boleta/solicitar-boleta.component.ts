@@ -16,6 +16,7 @@ import { MovilidadService } from 'src/app/services/movilidad.service';
 import { ZonaInhospitaService } from 'src/app/services/zona-inhospita.service';
 import { ViaticoService } from 'src/app/services/viatico.service';
 import Swal from 'sweetalert2';
+import { EmpleadoService } from 'src/app/services/empleado.service';
 
 @Component({
   selector: 'app-solicitar-boleta',
@@ -52,7 +53,8 @@ export class SolicitarBoletaComponent implements OnInit {
 
   constructor(private _boleta: FormBuilder, private _boletaService: BoletaService,
     private router: Router, private _editBoleta: FormBuilder, private _tokenService: TokenService, private _tipoBoletaService: TipoBoletaService,
-    private _movilidadService: MovilidadService, private _zonaInhospitaService: ZonaInhospitaService, private viaticoService: ViaticoService) {
+    private _movilidadService: MovilidadService, private _zonaInhospitaService: ZonaInhospitaService, private viaticoService: ViaticoService,
+    private _empleadoService: EmpleadoService) {
     this.boletaForm = this._boleta.group({
       fechaAlta: [],
       fechaBaja: [],
@@ -206,6 +208,16 @@ export class SolicitarBoletaComponent implements OnInit {
   onCreate(): boolean {
     this.success = false;
     const boleta = new Boleta();
+    const id = this._tokenService.getUserId();
+    this._empleadoService.getByUsuarioId(id).subscribe(
+      data =>{
+        boleta.empleado = data;
+      },
+      err => {
+        console.log(err)
+        return this.success
+      }
+    );
     boleta.tipoBoleta = this.boletaForm.get('tipoBoleta')?.value;
     boleta.fechaHoraPosibleSalida = this.boletaForm.get('fechaHoraPosibleSalida')?.value;
     boleta.fechaHoraPosibleLlegada = this.boletaForm.get('fechaHoraPosibleLlegada')?.value;
