@@ -1,4 +1,4 @@
-.altaEstadoBoleta{
+.altaViatico{
     margin-top: 40px;
 }
 
@@ -116,4 +116,12 @@ small{
     background-color: #EBFFEC;
     border: 2px solid black;
     box-shadow: 5px 5px 15px 2px;
+}
+
+#search{
+    margin-top: 20px;
+    
+    margin-bottom: 20px;
+    width: 450px;
+    height: 25px;
 }

@@ -37,4 +37,10 @@ export class Licencia extends BaseEntity{
 
 	empleado: Empleado;
 
+	estadoActual: string;
+
+	constructor(){
+		super();
+	}
+
 }

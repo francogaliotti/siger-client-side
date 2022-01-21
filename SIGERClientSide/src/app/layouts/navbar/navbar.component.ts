@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit {
   isLogged = false;
   username: string | null = '';
   role: string = '';
+  id: number| null = 0;
 
   constructor(private router: Router, private _tokenService: TokenService) { }
 
@@ -22,6 +23,7 @@ export class NavbarComponent implements OnInit {
     if (this._tokenService.getToken()) {
       this.isLogged = true;
       this.role = 'Usuario';
+      this.id = this._tokenService.getUserId();
       this.username = this._tokenService.getUsername();
       if(this._tokenService.IsAdmin()){
         this.role = 'Administrador'

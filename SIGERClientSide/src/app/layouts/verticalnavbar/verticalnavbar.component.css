@@ -51,12 +51,14 @@ ul, ol {
         position: absolute;
         min-width: 140px;
         left: 50px;
-        top: 100px;
+        top: 60px;
         background-color: #358FDA;
         box-shadow:  2.5px 2.5px 15px 3px;
         border-radius: 0px 15px 0px 15px;   
 }
-
+#regimenes{
+    top: -12px;
+}
 .nav li:hover > ul {
     display:block;
 }
@@ -68,4 +70,6 @@ ul, ol {
 .nav li ul li ul {
     left: 120px;
     top:0px;
+    z-index: auto;
 }
+

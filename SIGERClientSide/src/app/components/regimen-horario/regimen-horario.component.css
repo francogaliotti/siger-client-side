@@ -9,6 +9,12 @@
     font-size: 15px;
     text-align: left;
 }
+#search{
+    margin-bottom: 20px;
+    margin-left: 200px;
+    width: 450px;
+    height: 25px;
+}
 
 .searcher{
     float: right;
@@ -26,9 +32,10 @@ h1{
     margin-left: 220px;
     top: 2px; left: 380px;
     width: 880px;
-    height: 900px;
+    height: fit-content;
     border: 2px solid black;
     box-shadow: 5px 5px 15px 2px;
+    padding-bottom: 10px;
 }
 .header{
     font-family: 'Times New Roman', Times, serif;
@@ -42,7 +49,7 @@ h1{
     text-align: center;
 }
 
-.codigo-inputs{
+input{
    
     width: 300px; 
     height: 25px;
