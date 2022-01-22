@@ -11,6 +11,8 @@ import { TokenService } from 'src/app/services/token.service';
 import Swal from 'sweetalert2';
 import { Empleado } from 'src/app/models/empleado';
 import { EmpleadoService } from 'src/app/services/empleado.service';
+import { SectorService } from 'src/app/services/sector.service';
+import { Sector } from 'src/app/models/sector';
 
 @Component({
   selector: 'app-asistencia',
@@ -27,6 +29,10 @@ export class AsistenciaComponent implements OnInit {
   faArrow = faArrowAltCircleLeft;
 
   empleado: Empleado = new Empleado();
+
+  empleadoArray: Empleado[] = [];
+
+  sectorArray: Sector[] = [];
 
   asistencia: Asistencia = new Asistencia('', '',this.empleado,0);
 
@@ -46,6 +52,8 @@ export class AsistenciaComponent implements OnInit {
 
   isAdmin = false;
 
+  tipoMovimientoArray: string[] = ['Entrada','Salida'];
+
   searchPage = 0;
   page = 0;
   search: string = '';
@@ -54,6 +62,7 @@ export class AsistenciaComponent implements OnInit {
     private _asistencia: FormBuilder,
     private _editAsistencia: FormBuilder,
     private _asistenciaService: AsistenciaService,
+    private _sectorService: SectorService,
     private _empleadoService: EmpleadoService,
     private router: Router,
     private renderer: Renderer2,
@@ -75,6 +84,8 @@ export class AsistenciaComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarAsistencia();
+    this.SectoresList();
+    this.EmpleadosList();
     this.isAdmin = this._tokenService.IsAdmin();
   }
 
@@ -158,6 +169,28 @@ export class AsistenciaComponent implements OnInit {
       );
     }
     return this.success;
+  }
+
+  SectoresList(): void {
+    this._sectorService.list(this.searchPage).subscribe(
+      data => {
+        this.sectorArray = data;
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  EmpleadosList(): void {
+    this._empleadoService.list(this.searchPage).subscribe(
+      data => {
+        this.empleadoArray = data;
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 
   openEdit(id?: number): void {

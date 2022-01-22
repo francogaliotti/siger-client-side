@@ -8,38 +8,37 @@
             <label class="col-md-3 offset-1 text-end mt-3">
               <b>Fecha y Hora *</b>
             </label>
-            <input formControlName="fechaHora" class="form-control fechaHora-inputs mt-3" type="text"
-              placeholder="Ingrese Codigo del Viatico" [class.validfield]="this.asistenciaForm.get('fechaHora')?.valid"
+            <input formControlName="fechaHora" class="form-control fechaHora-inputs mt-3" type="datetime-local"
+              placeholder="Ingrese Fecha y Hora" [class.validfield]="this.asistenciaForm.get('fechaHora')?.valid"
               [class.invalidfield]="this.asistenciaForm.get('fechaHora')?.invalid && this.asistenciaForm.get('fechaHora')?.touched"
               (focusout)="checkAsistenciaForm()">
             <small class="text-danger"
               *ngIf="this.asistenciaForm.get('fechaHora')?.touched && this.asistenciaForm.get('fechaHora')?.invalid">El
               campo es obligatorio</small>
           </div>
-          <div class="row mt-1">
-            <label class="col-md-3 offset-1 text-end mt-3">
-              <b>Tipo de Movimiento *</b>
-            </label>
-            <input formControlName="tipoMovimiento" class="form-control tipoMovimiento-inputs mt-3"
-              type="text" placeholder="Ingrese Nombre del Viatico"
-              [class.validfield]="this.asistenciaForm.get('tipoMovimiento')?.valid"
-              [class.invalidfield]="this.asistenciaForm.get('tipoMovimiento')?.invalid && this.asistenciaForm.get('tipoMovimiento')?.touched"
-              (focusout)="checkAsistenciaForm()">
-            <small class="text-danger"
-              *ngIf="this.asistenciaForm.get('tipoMovimiento')?.touched && this.asistenciaForm.get('tipoMovimiento')?.invalid">El
-              campo es obligatorio</small>
+          <div class="form-group mt-3">
+            <div class="row">
+              <div class="col-12">
+                <b>Entrada o Salida *</b>
+                <select formControlName="tipoMovimiento">
+                  <option value="" disabled selected>Seleccione Tipo de movimiento</option>
+                  <option *ngFor="let tipoMovimiento of tipoMovimientoArray" [ngValue]="tipoMovimiento">
+                    {{tipoMovimiento}}</option>
+                </select>
+              </div>
+            </div>
           </div>
-          <div class="row mt-1">
-            <label class="col-md-3 offset-1 text-end mt-3">
-              <b>Empleado *</b>
-            </label>
-            <input formControlName="empleado" class="form-control empleado-inputs mt-3" type="text"
-              placeholder="Ingrese empleado del Viatico" [class.validfield]="this.asistenciaForm.get('empleado')?.valid"
-              [class.invalidfield]="this.asistenciaForm.get('empleado')?.invalid && this.asistenciaForm.get('empleado')?.touched"
-              (focusout)="checkAsistenciaForm()">
-            <small class="text-danger"
-              *ngIf="this.asistenciaForm.get('empleado')?.touched && this.asistenciaForm.get('empleado')?.invalid">El campo es
-              obligatorio</small>
+          <div class="form-group mt-3">
+            <div class="row">
+              <div class="col-12">
+                <b>Para qué empleado *</b>
+                <select formControlName="empleado">
+                  <option value="" disabled selected>Seleccione empleado</option>
+                  <option *ngFor="let empleado of empleadoArray" [ngValue]="empleado">{{empleado.apellido}},
+                    {{empleado.nombre}}</option>
+                </select>
+              </div>
+            </div>
           </div>
         </div>
         <button class="btn text-white mt-4 btn-sm" #CreatePermission disabled>
@@ -57,18 +56,15 @@
     <div class="col-2">
     </div>
     <div class="col-9">
-      <input type="text"
-        class="form-control mb-2"
-        placeholder="Buscar Asistencias"
-        #txtSearch
+      <input type="text" class="form-control mb-2" placeholder="Buscar Asistencias" #txtSearch
         (keyup)="onSearch( txtSearch.value )" />
       <div class="table-responsive">
         <table class="table text-center">
           <thead>
             <tr>
               <th scope="col" style="display: none;">ID</th>
-              <th scope="col">Codigo</th>
-              <th scope="col">Descripcion</th>
+              <th scope="col">Fecha y Hora</th>
+              <th scope="col">Movimiento</th>
               <th scope="col">Acciones</th>
             </tr>
           </thead>
@@ -102,9 +98,9 @@
                   <h5 class="text-center">Detalle de la Asistencia</h5>
                   <div class="container">
                     <ul class="list-group list-group-flush">
-                      <li class="list-group-item"><b>Codigo: </b>{{asistencia.fechaHora}}</li>
-                      <li class="list-group-item"><b>Denominacion: </b>{{asistencia.tipoMovimiento}}</li>
-                      <li class="list-group-item"><b>empleado: </b>${{asistencia.empleado}}</li>
+                      <li class="list-group-item"><b>Fecha: </b>{{asistencia.fechaHora}}</li>
+                      <li class="list-group-item"><b>Movimiento: </b>{{asistencia.tipoMovimiento}}</li>
+                      <li class="list-group-item"><b>Empleado: </b>${{asistencia.empleado}}</li>
                     </ul>
                   </div>
                   <div class="modal-footer mt-4">
@@ -137,40 +133,34 @@
                             class="form-control fechaHora-inputs mt-3" maxlength="10"
                             [class.validfield]="this.editAsistenciaForm.get('fechaHora')?.valid"
                             [class.invalidfield]="this.editAsistenciaForm.get('fechaHora')?.invalid && this.editAsistenciaForm.get('fechaHora')?.touched"
-                            type="text" />
+                            type="datetime-local" />
                           <small class="text-danger"
                             *ngIf="!editAsistenciaForm.get('fechaHora').valid && this.editAsistenciaForm.get('fechaHora')?.touched">El
                             campo es obligatorio</small>
                         </div>
                       </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-3">
                       <div class="row">
-                        <label class="col-md-3 offset-1 text-end mt-3" for="Codigo"><b>Denominación* </b></label>
-                        <div class="col-7">
-                          <input formControlName="tipoMovimiento" (focusout)="checkEditAsistenciaForm()"
-                            class="form-control tipoMovimiento-inputs mt-3"
-                            [class.validfield]="this.editAsistenciaForm.get('tipoMovimiento')?.valid"
-                            [class.invalidfield]="this.editAsistenciaForm.get('tipoMovimiento')?.invalid && this.editAsistenciaForm.get('tipoMovimiento')?.touched"
-                            type="text" />
-                          <small class="text-danger"
-                            *ngIf="!editAsistenciaForm.get('tipoMovimiento').valid && this.editAsistenciaForm.get('tipoMovimiento')?.touched">El
-                            campo es obligatorio</small>
+                        <div class="col-12">
+                          <b>Entrada o Salida *</b>
+                          <select formControlName="tipoMovimiento">
+                            <option value="" disabled selected>Seleccione Tipo de movimiento</option>
+                            <option *ngFor="let tipoMovimiento of tipoMovimientoArray" [ngValue]="tipoMovimiento">
+                              {{tipoMovimiento}}</option>
+                          </select>
                         </div>
                       </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-3">
                       <div class="row">
-                        <label class="col-md-3 offset-1 text-end mt-3" for="Codigo"><b>empleado* </b></label>
-                        <div class="col-7">
-                          <input formControlName="empleado" (focusout)="checkEditAsistenciaForm()"
-                            class="form-control empleado-inputs mt-3"
-                            [class.validfield]="this.editAsistenciaForm.get('empleado')?.valid"
-                            [class.invalidfield]="this.editAsistenciaForm.get('empleado')?.invalid && this.editAsistenciaForm.get('empleado')?.touched"
-                            type="text" />
-                          <small class="text-danger"
-                            *ngIf="!editAsistenciaForm.get('empleado').valid && this.editAsistenciaForm.get('empleado')?.touched">El
-                            campo es obligatorio</small>
+                        <div class="col-12">
+                          <b>Para qué empleado *</b>
+                          <select formControlName="empleado">
+                            <option value="" disabled selected>Seleccione empleado</option>
+                            <option *ngFor="let empleado of empleadoArray" [ngValue]="empleado">{{empleado.apellido}},
+                              {{empleado.nombre}}</option>
+                          </select>
                         </div>
                       </div>
                     </div>
@@ -193,7 +183,8 @@
           Anterior
         </button>
         &nbsp;
-        <button class="btn btn-primary" (click)="nextPage()" [disabled]="(asistenciaArray | asistenciaPipe:page:search).length === 1">
+        <button class="btn btn-primary" (click)="nextPage()"
+          [disabled]="(asistenciaArray | asistenciaPipe:page:search).length === 1">
           Siguiente
         </button>
       </div>
