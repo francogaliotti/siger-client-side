@@ -20,15 +20,20 @@ h1{
     text-align: center;
 }
 
-.altaSector{
+.altaLicencia{
     background: #EBFFEC;
     margin-top: 20px;
     margin-left: 220px;
     top: 2px; left: 380px;
     width: 880px;
-    height: 550px;
+    height: fit-content;
     border: 2px solid black;
     box-shadow: 5px 5px 15px 2px;
+    
+    
+}
+p, i{
+    font-size: 15px;
 }
 .header{
     font-family: 'Times New Roman', Times, serif;
@@ -36,46 +41,17 @@ h1{
     margin-top: 229px;
     text-align: center;
 }
-.codigo{
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 18px;
-    text-align: center;
-}
 
-.codigo-inputs{
-   
-    
-    width: 300px; 
-    height: 25px;
-    
-    top: 268px; left: 576px;
-}
-
-.denominacion-inputs{
-
-    
-    width: 300px; 
-    height: 25px;
-    
-    top: 300px; left: 576px;
-}
 .btn-outline-success{
     background-color: #169BD5;
     float: right;
     margin-right: 35px;
     z-index: 0;
     color: #fff;
-    border: none
-}
-.validfield{
-    border-style: solid 4px;
-    border-color: green;
+    border: none;
+    margin-bottom: 20px;
 }
 
-.invalidfield{
-    border-style: solid 4px;
-    border-color: red;
-}
 .titulo{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 18px;
@@ -86,11 +62,17 @@ h1{
     margin-top: 1px;
 }
 
+#search{
+    margin-bottom: 20px;
+    margin-left: 200px;
+    width: 450px;
+    height: 25px;
+}
 .modal-content{
     background: #EBFFEC;
     margin-top: 20px;
     width: 800px;
-    height: 850px;
+    height: fit-content;
     top: 2px;
     border: 2px solid #333333;
 }
@@ -140,7 +122,7 @@ td:nth-child(4){
     width: 15%;
 }
 
-td:nth-child(4) > button{
+td:nth-child(7) > button{
     margin-left: 20px;
     color: white;
 }
@@ -152,23 +134,8 @@ table > tbody > tr > td > button{
 }
 .table-responsive{
     margin-left: 200px;
-    width: 700px;
+    width: 830px;
 }
 .textarea{
     resize: none;
-}
-.cantidad{
-    display: inline-block;
-    margin-left: 5px;
-    margin-right: 5px;
-}
-input[type="number"]{
-    width: 40px;
-}
-
-#search{
-    margin-bottom: 20px;
-    margin-left: 200px;
-    width: 450px;
-    height: 25px;
 }

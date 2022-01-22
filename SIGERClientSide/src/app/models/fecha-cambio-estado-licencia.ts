@@ -6,6 +6,8 @@ export class FechaCambioEstadoLicencia extends BaseEntity{
 
     fechaCambioEstadoLicencia: Date;
 
+    fechaFinEstadoLicencia: Date;
+
     //Relations
 
     estadoLicencia: EstadoLicencia;

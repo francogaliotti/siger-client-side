@@ -10,11 +10,7 @@
     text-align: left;
 }
 
-.searcher{
-    float: right;
-    height: 34px;
-    width: 475px;
-}
+
 h1{
     font-size: 20px;
     text-align: center;
@@ -26,7 +22,7 @@ h1{
     margin-left: 220px;
     top: 2px; left: 380px;
     width: 880px;
-    height: 900px;
+    height: fit-content;
     border: 2px solid black;
     box-shadow: 5px 5px 15px 2px;
 }
@@ -65,7 +61,8 @@ h1{
     margin-right: 35px;
     z-index: 0;
     color: #fff;
-    border: none
+    border: none;
+    margin-bottom: 20px;
 }
 .validfield{
     border-style: solid 4px;
@@ -90,7 +87,7 @@ h1{
     background: #EBFFEC;
     margin-top: 20px;
     width: 800px;
-    height: 850px;
+    height: fit-content;
     top: 2px;
     border: 2px solid #333333;
 }
@@ -164,4 +161,10 @@ table > tbody > tr > td > button{
 }
 input[type="number"]{
     width: 40px;
+}
+#search{
+    margin-left: 200px;
+    margin-bottom: 20px;
+    width: 450px;
+    height: 25px;
 }

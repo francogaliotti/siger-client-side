@@ -1,5 +1,17 @@
-.altaEstadoBoleta{
+.altaRemuneracion{
     margin-top: 40px;
+    background-color: #EBFFEC;
+    width: 650px;
+    height: fit-content;
+    border: 2px solid black;
+    box-shadow: 5px 5px 15px 2px;
+    padding-bottom: 10px;
+}
+#search{
+    margin-bottom: 20px;
+    margin-left: 200px;
+    width: 450px;
+    height: 25px;
 }
 
 th:nth-child(1){
@@ -39,19 +51,19 @@ td:nth-child(4) > button{
     color: white;
 }
 
-.create-form{
-    background-color: #EBFFEC;
-    width: 650px;
-    height: 200px;
-    border: 2px solid black;
-    box-shadow: 5px 5px 15px 2px;
+.form-control{
+    width: 300px; 
+    height: 25px;
+    margin-left: 50px;
+    top: 300px; left: 576px;
 }
-
-.create-form > button{
+.btn-outline-success{
     background-color: #169BD5;
     float: right;
     margin-right: 35px;
     z-index: 0;
+    color: #fff;
+    border: none
 }
 
 table > tbody > tr > td > button{

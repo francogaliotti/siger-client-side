@@ -39,6 +39,11 @@ import { RegimenHorarioComponent } from './components/regimen-horario/regimen-ho
 import { RemuneracionComponent } from './components/remuneracion/remuneracion.component';
 import { TipoSectorComponent } from './components/tipo-sector/tipo-sector.component';
 import { TipoSectorGuardService as TipoSectorGuard} from './guards/tipo-sector-guard.service';
+import { SolicitarLicenciaComponent } from './components/solicitar-licencia/solicitar-licencia.component';
+import { SolicitarLicenciaGuardService as solicitarLicenciaGuard} from './guards/solicitar-licencia-guard.service';
+import { SolicitarBoletaComponent } from './components/solicitar-boleta/solicitar-boleta.component';
+import { SolicitarBoletaGuardService as solicitarBoletaGuard} from './guards/solicitar-boleta-guard.service';
+
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -65,6 +70,8 @@ const routes: Routes = [
   {path: 'altaEmpleado', component: CreateUserRRHHComponent, canActivate: [EmpleadoGuard], data: {expectedRol: ['admin']}},
   {path: 'asistencia', component: AsistenciaComponent, canActivate: [AsistenciaGuard], data: {expectedRol: ['admin']}},
   {path: 'sector', component: SectorComponent, canActivate: [sectorGuard], data: { expectedRol: ['admin', 'user'] }},
+  {path: 'solicitar-licencia', component: SolicitarLicenciaComponent, canActivate: [solicitarLicenciaGuard], data: { expectedRol: ['admin', 'user'] }},
+  {path: 'solicitar-boleta', component: SolicitarBoletaComponent, canActivate: [solicitarBoletaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'firstSignIn', component: FirstSigninComponent},
   {path: '**', component: ErrorsComponent}
 ];

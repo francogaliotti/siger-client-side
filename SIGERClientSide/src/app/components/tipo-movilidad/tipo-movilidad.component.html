@@ -63,12 +63,13 @@
       <div class="row mt-4">
     
         <div class="col-9">
-          <input type="text"
-            class="form-control mb-2"
+          
+          <div class="table-responsive">
+            <input type="text"
+            class="form-control mb-2" id="search"
             placeholder="Buscar Tipo de Movilidad"
             #txtSearch
             (keyup)="onSearch( txtSearch.value )" />
-          <div class="table-responsive">
             <table class="table text-center">
     
               <thead>

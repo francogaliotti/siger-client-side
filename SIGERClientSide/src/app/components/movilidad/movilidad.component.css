@@ -15,6 +15,12 @@
     height: 34px;
     width: 475px;
 }
+#search{
+    margin-bottom: 20px;
+    margin-left: 300px;
+    width: 450px;
+    height: 25px;
+}
 
 
 .altaMovilidad{
@@ -150,6 +156,6 @@ table > tbody > tr > td > button{
     padding: 0.5px;
 }
 .table-responsive{
-    margin-left: 200px;
+    margin-left: 300px;
     width: 700px;
 }

@@ -28,7 +28,7 @@ export class TipoLicenciaComponent implements OnInit {
   editTipoLicenciaForm: FormGroup;
   testModal: Modal | undefined;
   modal: Modal | undefined;
-  newTipoLicencia: TipoLicenciaDTO = new TipoLicenciaDTO(0, 0, 0, "", "", false, 0, false, "", 0, "", [], []);
+  newTipoLicencia: TipoLicenciaDTO = new TipoLicenciaDTO("", "", false, 0, false, "", 0, "", [], []);
   sectorArray: Sector[] = [];
   empleadoArray: Empleado[] = [];
   nivelesAutorizacionArray: number[] = [0, 1, 2, 3, 4];
@@ -50,9 +50,6 @@ export class TipoLicenciaComponent implements OnInit {
     private router: Router, private _editTipoLicencia: FormBuilder, private _tokenService: TokenService,
     private _empleadoService: EmpleadoService, private _sectorService: SectorService) {
     this.tipoLicenciaForm = this._tipoLicencia.group({
-      cantidadMaximaAnual: [0],
-      cantidadMaximaMensual: [0],
-      cantidadMaximaDiaria: [0],
       codigo: ['', [Validators.required, Validators.maxLength(10)]],
       denominacion: ['', Validators.required],
       justificaPresentismo: [false],
@@ -66,9 +63,6 @@ export class TipoLicenciaComponent implements OnInit {
     });
     this.editTipoLicenciaForm = this._editTipoLicencia.group({
       id: ['', Validators.required],
-      cantidadMaximaAnual: [0],
-      cantidadMaximaMensual: [0],
-      cantidadMaximaDiaria: [0],
       codigo: ['', [Validators.required, Validators.maxLength(10)]],
       denominacion: ['', Validators.required],
       justificaPresentismo: [false],
@@ -142,9 +136,6 @@ export class TipoLicenciaComponent implements OnInit {
   onCreate(): boolean {
     this.success = false;
     const tipoLicencia = new TipoLicenciaDTO(
-      this.tipoLicenciaForm.get('cantidadMaximaAnual')?.value,
-      this.tipoLicenciaForm.get('cantidadMaximaMensual')?.value,
-      this.tipoLicenciaForm.get('cantidadMaximaDiaria')?.value,
       this.tipoLicenciaForm.get('codigo')?.value,
       this.tipoLicenciaForm.get('denominacion')?.value,
       this.tipoLicenciaForm.get('justificaPresentismo')?.value,
@@ -220,9 +211,6 @@ export class TipoLicenciaComponent implements OnInit {
         console.log(this.newTipoLicencia);
         this.editTipoLicenciaForm = this._editTipoLicencia.group({
           id: [this.newTipoLicencia.id, Validators.required],
-          cantidadMaximaAnual: [this.newTipoLicencia.cantidadMaximaAnual],
-          cantidadMaximaMensual: [this.newTipoLicencia.cantidadMaximaMensual],
-          cantidadMaximaDiaria: [this.newTipoLicencia.cantidadMaximaDiaria],
           codigo: [this.newTipoLicencia.codigo, [Validators.required, Validators.maxLength(10)]],
           denominacion: [this.newTipoLicencia.denominacion, Validators.required],
           justificaPresentismo: [this.newTipoLicencia.justificaPresentismo],
@@ -245,9 +233,6 @@ export class TipoLicenciaComponent implements OnInit {
     this.newTipoLicencia.codigo = this.editTipoLicenciaForm.get('codigo')?.value;
     this.newTipoLicencia.denominacion = this.editTipoLicenciaForm.get('denominacion')?.value;
     this.newTipoLicencia.observaciones= this.editTipoLicenciaForm.get('observaciones')?.value;
-    this.newTipoLicencia.cantidadMaximaAnual = this.editTipoLicenciaForm.get('cantidadMaximaAnual')?.value;
-    this.newTipoLicencia.cantidadMaximaMensual = this.editTipoLicenciaForm.get('cantidadMaximaMensual')?.value;
-    this.newTipoLicencia.cantidadMaximaDiaria = this.editTipoLicenciaForm.get('cantidadMaximaDiaria')?.value;
     this.newTipoLicencia.justificaPresentismo = this.editTipoLicenciaForm.get('justificaPresentismo')?.value;
     this.newTipoLicencia.tipoRequerimientoAprobadores = this.editTipoLicenciaForm.get('tipoRequerimientoAprobadores')?.value;
     this.newTipoLicencia.tipoRequerimientoAprueban = this.editTipoLicenciaForm.get('tipoRequerimientoAprueban')?.value;

@@ -26,6 +26,7 @@ export class NavbarComponent implements OnInit {
     if (this._tokenService.getToken()) {
       this.isLogged = true;
       this.role = 'Usuario';
+      this.id = this._tokenService.getUserId();
       this.username = this._tokenService.getUsername();
       this.id = this._tokenService.getUserId();
       this._authService.getByUserId(this.id).subscribe(
