@@ -29,7 +29,7 @@ export class TipoBoletaComponent implements OnInit {
   faEye = faEye;
   faArrow = faArrowAltCircleLeft;
 
-  tipoBoleta: TipoBoletaDTO = new TipoBoletaDTO("", "", false, false, false, false, false);
+  tipoBoleta: TipoBoletaDTO = new TipoBoletaDTO("", "", false, false, false, false, false, 0, "", [], []);
 
   tipoBoletaArray: TipoBoletaDTO[] = [];
 
@@ -74,7 +74,11 @@ export class TipoBoletaComponent implements OnInit {
       tieneZonaInhospita: [false],
       tieneViatico: [false],
       permiteNoFichadaRetorno: [false],
-      permiteNoFichadaSalida: [false]
+      permiteNoFichadaSalida: [false],
+      tipoRequerimientoCantNiveles: [0],
+      tipoRequerimientoDenominacion: [""],
+      tipoRequerimientoAprueban: [[]],
+      tipoRequerimientoAprobadores: [[]]
     });
     this.editTipoBoletaForm = this._editTipoBoleta.group({
       id: ["", Validators.required],
@@ -84,7 +88,11 @@ export class TipoBoletaComponent implements OnInit {
       tieneZonaInhospita: [],
       tieneViatico: [],
       permiteNoFichadaRetorno: [],
-      permiteNoFichadaSalida: []
+      permiteNoFichadaSalida: [],
+      tipoRequerimientoCantNiveles: [0],
+      tipoRequerimientoDenominacion: [""],
+      tipoRequerimientoAprueban: [[]],
+      tipoRequerimientoAprobadores: [[]]
     });
   }
 
@@ -112,12 +120,12 @@ export class TipoBoletaComponent implements OnInit {
   }
 
   prevPage() {
-    if ( this.page > 0 )
+    if (this.page > 0)
       this.page -= 10;
-      this.searchPage = this.searchPage - 1;
+    this.searchPage = this.searchPage - 1;
   }
 
-  onSearch( search: string ) {
+  onSearch(search: string) {
     this.page = 0;
     this.search = search;
   }
@@ -126,7 +134,7 @@ export class TipoBoletaComponent implements OnInit {
     this._tipoBoletaService.delete(id).subscribe(
       data => {
         Swal.fire({
-          title: "Éxito",
+          title: "Éxito al eliminar",
           icon: "success",
           showCloseButton: false,
           showConfirmButton: false
@@ -146,13 +154,20 @@ export class TipoBoletaComponent implements OnInit {
 
   onCreate(): boolean {
     this.success = false;
-    const tipoBoleta = new TipoBoletaDTO(this.tipoBoletaForm.get('codigo')?.value,
+    const tipoBoleta = new TipoBoletaDTO(
+      this.tipoBoletaForm.get('codigo')?.value,
       this.tipoBoletaForm.get('tipoBoletaDenominacion')?.value,
       this.tipoBoletaForm.get('tieneMovilidad')?.value,
       this.tipoBoletaForm.get('tieneZonaInhospita')?.value,
       this.tipoBoletaForm.get('tieneViatico')?.value,
       this.tipoBoletaForm.get('permiteNoFichadaRetorno')?.value,
-      this.tipoBoletaForm.get('permiteNoFichadaSalida')?.value);
+      this.tipoBoletaForm.get('permiteNoFichadaSalida')?.value,
+      this.tipoBoletaForm.get('tipoRequerimientoCantNiveles')?.value,
+      this.tipoBoletaForm.get('tipoRequerimientoDenominacion')?.value,
+      this.tipoBoletaForm.get('tipoRequerimientoAprueban')?.value,
+      this.tipoBoletaForm.get('tipoRequerimientoAprobadores')?.value
+    );
+
 
     if (this.tipoBoletaForm.valid == true) {
       console.log(tipoBoleta);
@@ -161,7 +176,7 @@ export class TipoBoletaComponent implements OnInit {
           this.success = true;
 
           Swal.fire({
-            title: "Éxito",
+            title: "Éxito al crear",
             icon: "success",
             showCloseButton: false,
             showConfirmButton: false
@@ -224,7 +239,10 @@ export class TipoBoletaComponent implements OnInit {
           tieneViatico: [this.tipoBoleta.tieneViatico],
           tieneZonaInhospita: [this.tipoBoleta.tieneZonaInhospita],
           permiteNoFichadaRetorno: [this.tipoBoleta.permiteNoFichadaRetorno],
-          permiteNoFichadaSalida: [this.tipoBoleta.permiteNoFichadaSalida]
+          permiteNoFichadaSalida: [this.tipoBoleta.permiteNoFichadaSalida],
+          tipoRequerimientoAprobadores: [this.tipoBoleta.tipoRequerimientoAprobadores],
+          tipoRequerimientoAprueban: [this.tipoBoleta.tipoRequerimientoAprueban],
+          tipoRequerimientoCantNiveles: [this.tipoBoleta.tipoRequerimientoCantNiveles]
         });
       },
       err => {
@@ -236,10 +254,18 @@ export class TipoBoletaComponent implements OnInit {
   onUpdate(id?: number): void {
     this.tipoBoleta.codigo = this.editTipoBoletaForm.get('codigo')?.value;
     this.tipoBoleta.tipoBoletaDenominacion = this.editTipoBoletaForm.get('tipoBoletaDenominacion')?.value;
+    this.tipoBoleta.permiteNoFichadaRetorno = this.editTipoBoletaForm.get('permiteNoFichadaRetorno')?.value;
+    this.tipoBoleta.permiteNoFichadaSalida = this.editTipoBoletaForm.get('permiteNoFichadaSalida')?.value;
+    this.tipoBoleta.tieneMovilidad = this.editTipoBoletaForm.get('tieneMovilidad')?.value;
+    this.tipoBoleta.tieneViatico = this.editTipoBoletaForm.get('tieneViatico')?.value;
+    this.tipoBoleta.tieneZonaInhospita = this.editTipoBoletaForm.get('tieneZonaInhospita')?.value;
+    this.tipoBoleta.tipoRequerimientoAprobadores = this.editTipoBoletaForm.get('tipoRequerimientoAprobadores')?.value;
+    this.tipoBoleta.tipoRequerimientoAprueban = this.editTipoBoletaForm.get('tipoRequerimientoAprueban')?.value;
+    this.tipoBoleta.tipoRequerimientoCantNiveles = this.editTipoBoletaForm.get('tipoRequerimientoCantNiveles')?.value;
     this._tipoBoletaService.update(id, this.tipoBoleta).subscribe(
       data => {
         Swal.fire({
-          title: "Éxito",
+          title: "Éxito al actualizar",
           icon: "success",
           showCloseButton: false,
           showConfirmButton: false

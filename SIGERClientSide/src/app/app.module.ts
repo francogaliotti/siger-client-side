@@ -41,6 +41,22 @@ import { TipoLicenciaPipe } from './pipes/tipo-licencia.pipe';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { AsistenciaPipe } from './pipes/asistencia.pipe';
 import { AsistenciaComponent } from './components/asistencia/asistencia.component';
+import { TipoMovilidadComponent } from './components/tipo-movilidad/tipo-movilidad.component';
+import { MovilidadComponent } from './components/movilidad/movilidad.component';
+import { TipoMovilidadPipe } from './pipes/tipo-movilidad.pipe';
+import { MovilidadPipe } from './pipes/movilidad.pipe';
+import { SectorComponent } from './components/sector/sector.component';
+import { SectorPipe } from './pipes/sector.pipe';
+import { FirstSigninComponent } from './components/users/first-signin.component';
+import { TipoRegimenHorarioComponent } from './components/tipo-regimen-horario/tipo-regimen-horario.component';
+import { TipoRegimenHorarioPipe } from './pipes/tipo-regimen-horario.pipe';
+import { RegimenHorarioPipe } from './pipes/regimen-horario.pipe';
+import { RegimenHorarioComponent } from './components/regimen-horario/regimen-horario.component';
+import { RemuneracionPipe } from './pipes/remuneracion.pipe';
+import { RemuneracionComponent } from './components/remuneracion/remuneracion.component';
+import { TipoSectorPipe } from './pipes/tipo-sector.pipe';
+import { TipoSectorComponent } from './components/tipo-sector/tipo-sector.component';
+import { MisAsistenciasComponent } from './components/mis-asistencias/mis-asistencias.component';
 
 
 @NgModule({
@@ -79,7 +95,25 @@ import { AsistenciaComponent } from './components/asistencia/asistencia.componen
     TipoLicenciaPipe,
     CreateUserRRHHComponent,
     AsistenciaPipe,
-    AsistenciaComponent
+    AsistenciaComponent,
+    TipoMovilidadComponent,
+    MovilidadComponent,
+    TipoMovilidadPipe,
+    MovilidadPipe,
+    SectorComponent,
+    SectorPipe,
+
+    CreateUserRRHHComponent,
+    FirstSigninComponent,
+    TipoRegimenHorarioComponent,
+    TipoRegimenHorarioPipe,
+    RegimenHorarioPipe,
+    RegimenHorarioComponent,
+    RemuneracionPipe,
+    RemuneracionComponent,
+    TipoSectorPipe,
+    TipoSectorComponent,
+    MisAsistenciasComponent
   ],
   imports: [
     BrowserModule,

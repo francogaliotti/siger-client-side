@@ -23,6 +23,11 @@ export class EmpleadoService extends connectionURL{
     return this.httpClient.get<Empleado>(this.app_url + this.endpoint);
   }
 
+  public getByUserName(username: string): Observable<Empleado>{
+    this.endpoint = 'empleado/employee/' + username;
+    return this.httpClient.get<Empleado>(this.app_url + this.endpoint);
+  }
+
   /*public detailname(nombre: string): Observable<Empleado>{
     this.endpoint = 'empleado/detail/' + nombre;
     return this.httpClient.get<Empleado>(this.app_url + this.endpoint);
