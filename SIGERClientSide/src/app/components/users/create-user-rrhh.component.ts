@@ -153,9 +153,9 @@ export class CreateUserRRHHComponent implements OnInit {
 
         this.instantiateForm();
 
-      }, error => {
+      }, err => {
 
-          console.log(console.error());
+          console.log(err);
 
           Swal.fire({
             title: "Oops! hubo un problema",

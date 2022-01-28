@@ -23,10 +23,10 @@ export class RolService extends connectionURL {
     return this.httpClient.get<Rol>(this.app_url + this.endpoint);
   }
 
-  public detailname(nombreRol: string): Observable<Rol>{
+  /*public detailname(nombreRol: string): Observable<Rol>{
     this.endpoint = 'rol/detail/' + nombreRol;
     return this.httpClient.get<Rol>(this.app_url + this.endpoint);
-  }
+  }*/
 
   public save(rol: Rol): Observable<any>{
     this.endpoint = 'rol/create';
