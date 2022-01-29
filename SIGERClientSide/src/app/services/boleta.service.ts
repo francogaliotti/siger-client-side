@@ -38,4 +38,14 @@ export class BoletaService extends connectionURL{
     this.endpoint = 'boleta/' + id;
     return this.httpClient.delete<any>(this.app_url + this.endpoint);
   }
+
+  public authorize(id?: number): Observable<any>{
+    this.endpoint = 'boleta/authorize/' + id;
+    return this.httpClient.put<any>(this.app_url + this.endpoint, null);
+  }
+
+  public reject(id?: number): Observable<any>{
+    this.endpoint = 'boleta/reject/' + id;
+    return this.httpClient.put<any>(this.app_url + this.endpoint, null);
+  }
 }

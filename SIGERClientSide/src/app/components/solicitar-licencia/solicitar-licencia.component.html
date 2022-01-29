@@ -84,7 +84,7 @@
                       <td>{{l.tipoLicencia.denominacion}}</td>
                       <td>{{l.fechaInicioLicencia}}</td>
                       <td>{{l.fechaFinLicencia}}</td>
-                      <td *ngFor="let f of l.fechasCambioEstadoLicencia">{{f.estadoLicencia.nombreEstadoLicencia}}</td>
+                      <td>{{l.estadoActual}}</td>
                       <td>
                         <button class="btn bg-primary" (click)="openDetail(l.id)">
                           <fa-icon [icon]="faEye"></fa-icon> Detalles

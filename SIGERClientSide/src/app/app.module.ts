@@ -58,6 +58,8 @@ import { SolicitarLicenciaComponent } from './components/solicitar-licencia/soli
 import { LicenciaPipe } from './pipes/licencia.pipe';
 import { SolicitarBoletaComponent } from './components/solicitar-boleta/solicitar-boleta.component';
 import { BoletaPipe } from './pipes/boleta.pipe';
+import { AutorizarBoletaComponent } from './components/autorizar-boleta/autorizar-boleta.component';
+import { AutorizarLicenciaComponent } from './components/autorizar-licencia/autorizar-licencia.component';
 
 
 @NgModule({
@@ -114,7 +116,9 @@ import { BoletaPipe } from './pipes/boleta.pipe';
     SolicitarLicenciaComponent,
     LicenciaPipe,
     SolicitarBoletaComponent,
-    BoletaPipe
+    BoletaPipe,
+    AutorizarBoletaComponent,
+    AutorizarLicenciaComponent
   ],
   imports: [
     BrowserModule,

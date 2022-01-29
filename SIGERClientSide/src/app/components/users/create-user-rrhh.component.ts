@@ -10,6 +10,8 @@ import { Empleado } from 'src/app/models/empleado';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import Swal from 'sweetalert2';
 import { data } from 'jquery';
+import { TipoDocumentoService } from 'src/app/services/tipo-documento.service';
+import { TipoDocumento } from 'src/app/models/tipo-documento';
 
 @Component({
   selector: 'app-create-user-rrhh',
@@ -21,6 +23,7 @@ export class CreateUserRRHHComponent implements OnInit {
   roles: Rol[];
   nationalities: Nacionalidad[];
   success: boolean;
+  docTypes: TipoDocumento[];
 
   newUserForm : FormGroup;
 
@@ -30,11 +33,12 @@ export class CreateUserRRHHComponent implements OnInit {
     private _nationality: NacionalidadService, 
     private renderer: Renderer2, 
     private _formBuilder: FormBuilder,
-    private _employee: EmpleadoService) {
+    private _employee: EmpleadoService,
+    private _docType: TipoDocumentoService) {
     this.instantiateForm(); 
     this.getRoles();
     this.getNationality();
-
+    this.getDocType();
     
   }
 
@@ -47,6 +51,7 @@ export class CreateUserRRHHComponent implements OnInit {
       firstname: ['', [Validators.required, Validators.maxLength(30)]],
       surname: ['',[Validators.required, Validators.maxLength(30)]],
       dni: ['', [Validators.required, Validators.maxLength(10)]],
+      docType: [],
       yearOfstarted: ['', [Validators.required, Validators.maxLength(4)]],
       personalEmail: ['', [Validators.required,Validators.email]],
       DPVEmail: ['',[Validators.required, Validators.email]],
@@ -59,9 +64,17 @@ export class CreateUserRRHHComponent implements OnInit {
     this.newUserForm.get('specialRoleSelected').disable();
   } 
 
+  getDocType(): void{
+    this._docType.list().subscribe(data => {
+      this.docTypes = data;
+    }, err => {
+      console.log(err);
+    })
+  }
+
   getNationality(): void{
     this._nationality.GetAll().subscribe(data => {
-      this.nationalities = data;;
+      this.nationalities = data;
     }, error => {
       console.log(error);
     })
@@ -100,6 +113,7 @@ export class CreateUserRRHHComponent implements OnInit {
         enabled: true,
         esPrimerInicio: true,
         password: '',
+        image: "",
         recordarme: false,
         requiereAutorizacion: this.newUserForm.get('needSpecialRole')?.value,
         rolNecesario: this.newUserForm.get('specialRoleSelected').value,
@@ -137,7 +151,11 @@ export class CreateUserRRHHComponent implements OnInit {
         rompeReglaFichadaReloj: null,
         rompeReglaFichadaSupervisor: null,
         usuario: account,
-        id: null  
+        id: null,
+        documentoIdentidad: {
+          nroIdentidad: this.newUserForm.get('dni')?.value,
+          tipoDocumento:this.newUserForm.get('docType')?.value
+        }
       }
 
       console.log(employee);
@@ -153,9 +171,9 @@ export class CreateUserRRHHComponent implements OnInit {
 
         this.instantiateForm();
 
-      }, error => {
+      }, err => {
 
-          console.log(console.error());
+          console.log(err);
 
           Swal.fire({
             title: "Oops! hubo un problema",

@@ -186,7 +186,15 @@ export class TipoLicenciaComponent implements OnInit {
   EmpleadosList(): void {
     this._empleadoService.list(this.searchPage).subscribe(
       data => {
-        this.empleadoArray = data;
+        const admins: Empleado[] = [];
+        for(let e of data){
+          for(let r of e.usuario.roles){
+            if(r.id == 2){
+              admins.push(e);
+            }
+          } 
+        }
+        this.empleadoArray = admins;
       },
       err => {
         console.log(err);
