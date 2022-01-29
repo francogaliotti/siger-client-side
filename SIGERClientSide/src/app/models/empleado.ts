@@ -8,6 +8,7 @@ import { RemanenteDiasLicencia } from "./remanente-dias-licencia";
 import { Remuneracion } from "./remuneracion";
 import { Usuario } from "./usuario";
 import { Nacionalidad } from "./nacionalidad";
+import { DocumentoIdentidad } from "./documento-identidad";
 
 export class Empleado extends BaseEntity{
 
@@ -60,6 +61,8 @@ export class Empleado extends BaseEntity{
 	regimenesHorario: Array<RegimenHorario>;
 
 	usuario: Usuario;
+
+	documentoIdentidad: DocumentoIdentidad;
 
 	domicilio: Domicilio;
 
