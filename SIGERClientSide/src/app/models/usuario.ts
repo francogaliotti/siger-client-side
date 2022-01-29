@@ -9,6 +9,8 @@ export class Usuario extends BaseEntity{
     
     correoInstitucional: string;
 
+    image: string;
+
     rolNecesario: string;
     
     esPrimerInicio: boolean;

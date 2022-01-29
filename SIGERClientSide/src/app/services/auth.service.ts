@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { JwtDTO } from '../dto/jwt-dto';
 import { LoginUsuario } from '../dto/login-usuario';
 import { NuevoUsuario } from '../dto/nuevo-usuario';
+import { Usuario } from '../models/usuario';
 import { connectionURL } from './connectionURL';
 
 @Injectable({
@@ -34,6 +35,11 @@ export class AuthService extends connectionURL{
   public isFirstSignIn(id : string) : Observable<boolean>{
     this.endpoint = "auth/" + id;
     return this.httpClient.get<boolean>(this.app_url + this.endpoint);
+  }
+
+  public getByUserId(id: number): Observable<Usuario>{
+    this.endpoint = "auth/getUser/" + id;
+    return this.httpClient.get<Usuario>(this.app_url + this.endpoint);
   }
   
 }
