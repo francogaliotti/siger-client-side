@@ -56,9 +56,9 @@ export class Empleado extends BaseEntity{
 
 	//Relations
 
-	remuneraciones: Array<Remuneracion>;
+	remuneracion:Remuneracion;
 
-	regimenesHorario: Array<RegimenHorario>;
+	regimenHorario: RegimenHorario;
 
 	usuario: Usuario;
 
