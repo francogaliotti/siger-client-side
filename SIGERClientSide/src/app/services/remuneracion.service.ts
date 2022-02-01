@@ -13,7 +13,12 @@ export class RemuneracionService extends connectionURL {
     super();
   }
 
-  public list(page: number): Observable<Remuneracion[]> {
+  public list(): Observable<Remuneracion[]> {
+    this.endpoint = 'remuneracion/list';
+    return this.httpClient.get<Remuneracion[]>(this.app_url + this.endpoint)
+  }
+
+  public page(page: number): Observable<Remuneracion[]> {
     this.endpoint = 'remuneracion/?page=' + page;
     return this.httpClient.get<Remuneracion[]>(this.app_url + this.endpoint)
   }

@@ -11,6 +11,13 @@ div.create-form
     padding: 10px;
 }
 
+.select-button > button{
+    background-color: #169BD5;
+    padding-top: 0;
+    margin-right: 35px;
+    z-index: 1 !important;
+    height: 25px;
+}
 input{
     padding: 1.5px;
     margin-top: 5px;

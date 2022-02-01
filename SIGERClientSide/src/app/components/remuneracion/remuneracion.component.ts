@@ -74,7 +74,7 @@ export class RemuneracionComponent implements OnInit {
   }
 
   cargarRemuneraciones(): void {
-    this._remuneracionService.list(this.searchPage)
+    this._remuneracionService.page(this.searchPage)
       .subscribe(data => {
         this.remuneracionArray = data;
       },

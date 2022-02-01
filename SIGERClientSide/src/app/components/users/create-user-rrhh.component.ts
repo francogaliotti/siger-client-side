@@ -12,6 +12,16 @@ import Swal from 'sweetalert2';
 import { data } from 'jquery';
 import { TipoDocumentoService } from 'src/app/services/tipo-documento.service';
 import { TipoDocumento } from 'src/app/models/tipo-documento';
+import { RemuneracionService } from 'src/app/services/remuneracion.service';
+import { Remuneracion } from 'src/app/models/remuneracion';
+import { RegimenHorarioService } from 'src/app/services/regimen-horario.service';
+import { RegimenHorario } from 'src/app/models/regimen-horario';
+import { DatosGobArService } from 'src/app/services/datos-gob-ar.service';
+import { Departamento } from 'src/app/models/departamento';
+import { Provincia } from 'src/app/models/provincia';
+import { Localidad } from 'src/app/models/localidad';
+import { SectorService } from 'src/app/services/sector.service';
+import { Sector } from 'src/app/models/sector';
 
 @Component({
   selector: 'app-create-user-rrhh',
@@ -24,6 +34,14 @@ export class CreateUserRRHHComponent implements OnInit {
   nationalities: Nacionalidad[];
   success: boolean;
   docTypes: TipoDocumento[];
+  remuneraciones: Remuneracion[];
+  regimenesHorario: RegimenHorario[];
+  provincias: Provincia[];
+  idProv: number;
+  departamentos: Departamento[];
+  idDpto:number;
+  localidades: Localidad[];
+  sectores: Sector[];
 
   newUserForm : FormGroup;
 
@@ -34,12 +52,20 @@ export class CreateUserRRHHComponent implements OnInit {
     private renderer: Renderer2, 
     private _formBuilder: FormBuilder,
     private _employee: EmpleadoService,
-    private _docType: TipoDocumentoService) {
+    private _docType: TipoDocumentoService,
+    private _remun: RemuneracionService,
+    private _regimenH: RegimenHorarioService,
+    private _datosGob: DatosGobArService,
+    private _sector: SectorService) {
     this.instantiateForm(); 
     this.getRoles();
     this.getNationality();
     this.getDocType();
-    
+    this.getRemuneracion();
+    this.getRegimenHorario();
+    this.getProvincias();
+    this.getSector();
+
   }
 
   ngOnInit(): void {
@@ -52,18 +78,100 @@ export class CreateUserRRHHComponent implements OnInit {
       surname: ['',[Validators.required, Validators.maxLength(30)]],
       dni: ['', [Validators.required, Validators.maxLength(10)]],
       docType: [],
-      yearOfstarted: ['', [Validators.required, Validators.maxLength(4)]],
+      yearOfstarted: ['', [Validators.required]],
       personalEmail: ['', [Validators.required,Validators.email]],
       DPVEmail: ['',[Validators.required, Validators.email]],
       username: ['',[Validators.required, Validators.maxLength(30)]],
       needSpecialRole: [false],
       nationalitySelected: [0, Validators.required],
-      specialRoleSelected: [0]
+      specialRoleSelected: [0],
+      remuneraciones: [],
+      regimenesHorario: [],
+      provincia: [''],
+      departamento: [''],
+      localidad: [''],
+      calle: [''],
+      nroCalle:[''],
+      nroPiso:[''],
+      nroDepartamento:[''],
+      sector:['']
+
     });
 
     this.newUserForm.get('specialRoleSelected').disable();
   } 
 
+  getSector(): void{
+    this._sector.listAll().subscribe(data=>{
+      this.sectores = data;
+    },err =>{
+      console.log(err);
+    })
+  }
+
+  getProvincias(): void{
+    this._datosGob.listProvincias().subscribe(data=>{
+      this.provincias = data;
+    },err =>{
+      console.log(err);
+    })
+  }
+  getDepartamentos(id: number): boolean{
+    this.success = false;
+    if(id == null){
+      Swal.fire({
+        title: "Seleccione una Provincia",
+        icon: "error",
+        showCloseButton: false,
+        showConfirmButton: false
+      });
+      return this.success
+    }
+    this._datosGob.listDepartamentosByProvincia(id).subscribe(data=>{
+      this.success = true;
+      this.departamentos = data;
+    },err =>{
+
+      console.log(err);
+    })
+    return this.success;
+  }
+  getLocalidades(id: number): boolean{
+    this.success = false;
+    if(id == null){
+      Swal.fire({
+        title: "Seleccione un Departamento",
+        icon: "error",
+        showCloseButton: false,
+        showConfirmButton: false
+      });
+      return this.success
+    }
+    this._datosGob.listLocalidadesByDepartamento(id).subscribe(data=>{
+      this.success = true;
+      this.localidades = data;
+    },err =>{
+
+      console.log(err);
+    })
+    return this.success;
+  }
+  getRemuneracion(): void{
+    this._remun.list().subscribe(data => {
+      this.remuneraciones = data;
+    },
+     err => {
+       console.log(err);
+     })
+  }
+  getRegimenHorario(): void{
+    this._regimenH.list().subscribe(data => {
+      this.regimenesHorario = data;
+    },
+     err => {
+       console.log(err);
+     })
+  }
   getDocType(): void{
     this._docType.list().subscribe(data => {
       this.docTypes = data;
@@ -102,12 +210,13 @@ export class CreateUserRRHHComponent implements OnInit {
 
     if(this.newUserForm.valid){
 
-      const nationality: Nacionalidad = {
+      /*const nationality: Nacionalidad = {
         id: this.newUserForm.get('nationalitySelected')?.value,
         nombre: ''
-      }
+      }*/
 
       const account: Usuario = {
+        nombre: this.newUserForm.get('username')?.value,
         username: this.newUserForm.get('username')?.value,
         correoInstitucional: this.newUserForm.get('DPVEmail')?.value,
         enabled: true,
@@ -124,29 +233,46 @@ export class CreateUserRRHHComponent implements OnInit {
       const employee: Empleado = {
         nombre: this.newUserForm.get('firstname')?.value,
         apellido: this.newUserForm.get('surname')?.value,
-        nacionalidad: nationality,
+        nacionalidad: this.newUserForm.get('nationalitySelected')?.value,
         nroIdentificacionPersonal: this.newUserForm.get('dni')?.value,
         correoPersonal: this.newUserForm.get('personalEmail')?.value,
         fechaIngreso: this.newUserForm.get('yearOfstarted')?.value,
         computoDiasLicencia: null,
         cuil: null,
         diasLicenciaAnualFija: null,
-        domicilio: null,
+        domicilio: {
+          calle: this.newUserForm.get('calle')?.value,
+          nroCalle: this.newUserForm.get('nroCalle')?.value,
+          nroDepartamento: this.newUserForm.get('nroDepartamento')?.value,
+          nroPiso: this.newUserForm.get('nroPiso')?.value,
+
+          provincia: this.newUserForm.get('provincia')?.value,
+          departamento: this.newUserForm.get('departamento')?.value,
+          localidad: this.newUserForm.get('localidad')?.value
+        },
         esEncargado: false,
         estadoCivil: null,
         fechaAlta: null,
         fechaBaja: null,
         fechaLimiteReemplazo: null,
         fechaNacimiento: null,
-        historialSectorEmpleado: null,
+        historialSectorEmpleado: [{
+          fechaIngreso: null,
+	
+          fechaSalida: null,
+          
+          vigente: null,
+        
+          sector: this.newUserForm.get('sector')?.value
+        }],
         legajo: null,
         nroTelefonoCelular: null,
         nroTelefonoFijo: null,
         planillas: null,
         puedeAprobarRequerimiento: null,
-        regimenesHorario: null,
+        regimenHorario: this.newUserForm.get('regimenesHorario')?.value,
         remanenteDiasLicencia: null,
-        remuneraciones: null,
+        remuneracion: this.newUserForm.get('remuneraciones')?.value,
         rompeReglaComisionDia: null,
         rompeReglaFichadaReloj: null,
         rompeReglaFichadaSupervisor: null,
@@ -158,7 +284,7 @@ export class CreateUserRRHHComponent implements OnInit {
         }
       }
 
-      console.log(employee);
+      console.log(JSON.stringify(employee) );
 
       this._employee.save(employee).subscribe(data => {
 

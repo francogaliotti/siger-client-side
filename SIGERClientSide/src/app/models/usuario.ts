@@ -2,6 +2,8 @@ import { BaseEntity } from "./base-entity";
 import { Rol } from "./rol";
 
 export class Usuario extends BaseEntity{
+
+    nombre: string;
     
     username: string;
     

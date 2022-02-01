@@ -24,17 +24,9 @@
                 <div class="col-sm-4">
                     <select class="form-control text-center" formControlName="nationalitySelected">
                         <option [ngValue]="0">Seleccione la nacionalidad</option>
-                        <option *ngFor="let nationality of nationalities" [ngValue]="nationality.id">
+                        <option *ngFor="let nationality of nationalities" [ngValue]="nationality">
                             {{nationality.nombre}}</option>
                     </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-3 text-end mt-2" for="identitycard"><b><i>DNI: </i></b></label>
-                <div class="col-sm-4">
-                    <input type="text" id="identitycard" class="form-control" formControlName="dni"
-                        [class.validfield]="this.newUserForm.get('dni')?.valid"
-                        [class.invalidfield]="this.newUserForm.get('dni')?.invalid && this.newUserForm.get('dni')?.touched">
                 </div>
             </div>
             <div class="form-group row">
@@ -48,11 +40,108 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-3 text-end mt-2" for="yearOfEntry"><b><i>Año de ingreso: </i></b></label>
+                <label class="col-sm-3 text-end mt-2" for="identitycard"><b><i>Numero de documento: </i></b></label>
                 <div class="col-sm-4">
-                    <input type="text" id="yearOfEntry" class="form-control" formControlName="yearOfstarted"
+                    <input type="text" id="identitycard" class="form-control" formControlName="dni"
+                        [class.validfield]="this.newUserForm.get('dni')?.valid"
+                        [class.invalidfield]="this.newUserForm.get('dni')?.invalid && this.newUserForm.get('dni')?.touched">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 text-end mt-2" for="remuneraciones"><b><i>Remuneracion: </i></b></label>
+                <div class="col-sm-4">
+                    <select class="form-control" formControlName="remuneraciones">
+                        <option values="0">Seleccione</option>
+                        <option *ngFor="let doc of remuneraciones" [ngValue]="doc">{{doc.valorHora}}</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 text-end mt-2" for="regimenesHorario"><b><i>Régimen Horario: </i></b></label>
+                <div class="col-sm-4">
+                    <select class="form-control" formControlName="regimenesHorario">
+                        <option values="0">Seleccione</option>
+                        <option *ngFor="let doc of regimenesHorario" [ngValue]="doc">{{doc.horaMinutoInicioJornadaLaboral}} - {{doc.horaMinutoFinJornadaLaboral}}</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row select-searcher">
+                <label class="col-sm-3 text-end mt-2" for="provincia"><b><i>Provincia: </i></b></label>
+                <div class="col-sm-4">
+                    <select class="form-control" formControlName="provincia">
+                        <option values="0">Seleccione</option>
+                        <option *ngFor="let prov of provincias" [ngValue]="prov" (click)="getDepartamentos(prov.id)">{{prov.nombre}}</option>
+                    </select>
+                    <div class="select-button" *ngIf="this.newUserForm.get('provincia')?.value != undefined">
+                        <button class= "btn btn-primary" (click)="getDepartamentos(this.newUserForm.get('provincia')?.value.id)">Buscar Departamentos</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row select-searcher">
+                <label class="col-sm-3 text-end mt-2" for="departamento"><b><i>Departamentos: </i></b></label>
+                <div class="col-sm-4">
+                    <select class="form-control" formControlName="departamento">
+                        <option values="0">Seleccione</option>
+                        <option *ngFor="let prov of departamentos" [ngValue]="prov">{{prov.nombre}}</option>
+                    </select>
+                    <div class="select-button" *ngIf="this.newUserForm.get('departamento')?.value != undefined">
+                        <button class= "btn btn-primary"(click)="getLocalidades(this.newUserForm.get('departamento')?.value.id)">Buscar Localidades</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-3 text-end mt-2" for="localidad"><b><i>Localidad: </i></b></label>
+                <div class="col-sm-4">
+                    <select class="form-control" formControlName="localidad">
+                        <option values="0">Seleccione</option>
+                        <option *ngFor="let prov of localidades" [ngValue]="prov">{{prov.nombre}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 text-end mt-2" for="calle"><b><i>Calle: </i></b></label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" id="calle" formControlName="calle">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 text-end mt-2" for="nroCalle"><b><i>Numeración: </i></b></label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" id="nroCalle" formControlName="nroCalle">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 text-end mt-2" for="nroPiso"><b><i>Numero de Piso (opcional): </i></b></label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" id="nroPiso" formControlName="nroPiso">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 text-end mt-2" for="nroDepartamento"><b><i>Numero de Departamento (opcional): </i></b></label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" id="nroDepartamento" formControlName="nroDepartamento">
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label class="col-sm-3 text-end mt-2" for="yearOfEntry"><b><i>Fecha de ingreso: </i></b></label>
+                <div class="col-sm-4">
+                    <input type="date" id="yearOfEntry" class="form-control" formControlName="yearOfstarted"
                         [class.validfield]="this.newUserForm.get('yearOfstarted')?.valid"
                         [class.invalidfield]="this.newUserForm.get('yearOfstarted')?.invalid && this.newUserForm.get('yearOfstarted')?.touched">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 text-end mt-2" for="sector"><b><i>Sector al que pertenece: </i></b></label>
+                <div class="col-sm-4">
+                    <select class="form-control" formControlName="sector">
+                        <option values="0">Seleccione</option>
+                        <option *ngFor="let sec of sectores" [ngValue]="sec">{{sec.denominacion}}</option>
+                    </select>
                 </div>
             </div>
         </div>

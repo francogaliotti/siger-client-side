@@ -3,15 +3,25 @@ import { Departamento } from "./departamento";
 
 export class Provincia extends BaseEntity{
 
-    codigo: string;
-	
-	denominacion: string;
-    constructor(codigo: string,denominacion: string, id?:number){
+    categoria: string;
+
+    latitud: string;
+
+    longitud: string;
+
+    fuente:string;
+
+    iso_id: string;
+
+    iso_nombre: string;
+
+    nombre: string;
+
+    nombre_completo: string;
+
+    constructor(){
         super();
-        this.codigo=codigo;
-        
-        this.denominacion=denominacion;
-        this.id=id;
+
     }
 
 }
