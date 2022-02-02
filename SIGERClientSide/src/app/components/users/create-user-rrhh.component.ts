@@ -22,6 +22,7 @@ import { Provincia } from 'src/app/models/provincia';
 import { Localidad } from 'src/app/models/localidad';
 import { SectorService } from 'src/app/services/sector.service';
 import { Sector } from 'src/app/models/sector';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-create-user-rrhh',
@@ -56,7 +57,8 @@ export class CreateUserRRHHComponent implements OnInit {
     private _remun: RemuneracionService,
     private _regimenH: RegimenHorarioService,
     private _datosGob: DatosGobArService,
-    private _sector: SectorService) {
+    private _sector: SectorService
+    ) {
     this.instantiateForm(); 
     this.getRoles();
     this.getNationality();
@@ -94,7 +96,8 @@ export class CreateUserRRHHComponent implements OnInit {
       nroCalle:[''],
       nroPiso:[''],
       nroDepartamento:[''],
-      sector:['']
+      sector:[''],
+      rol:[]
 
     });
 
@@ -225,9 +228,9 @@ export class CreateUserRRHHComponent implements OnInit {
         image: "",
         recordarme: false,
         requiereAutorizacion: this.newUserForm.get('needSpecialRole')?.value,
-        rolNecesario: this.newUserForm.get('specialRoleSelected').value,
-        roles: [],
-        id: null
+        roles: this.newUserForm.get('specialRoleSelected').value,
+        //roles: [],
+        //id: null
       }
 
       const employee: Empleado = {
@@ -277,7 +280,7 @@ export class CreateUserRRHHComponent implements OnInit {
         rompeReglaFichadaReloj: null,
         rompeReglaFichadaSupervisor: null,
         usuario: account,
-        id: null,
+        //id: null,
         documentoIdentidad: {
           nroIdentidad: this.newUserForm.get('dni')?.value,
           tipoDocumento:this.newUserForm.get('docType')?.value

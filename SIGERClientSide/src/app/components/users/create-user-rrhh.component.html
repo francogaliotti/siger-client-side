@@ -186,9 +186,9 @@
 
             </div>
             <div class="col-sm-2">
-                <select class="form-control offset-sm-1 text-center" #SpecialRole formControlName="specialRoleSelected">
+                <select multiple class="form-control offset-sm-1 text-center" #SpecialRole formControlName="specialRoleSelected">
                     <option [ngValue]="0">Seleccione el rol especial</option>
-                    <option *ngFor="let role of roles" [ngValue]="role.codigoRol">{{role.nombreRol}}</option>
+                    <option *ngFor="let role of roles" [ngValue]="role">{{role.nombreRol}}</option>
                 </select>
             </div>
         </div>

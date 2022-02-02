@@ -13,7 +13,7 @@ export class Usuario extends BaseEntity{
 
     image: string;
 
-    rolNecesario: string;
+    //rolNecesario: string;
     
     esPrimerInicio: boolean;
     
@@ -33,7 +33,7 @@ export class Usuario extends BaseEntity{
         this.username = username;
         this.password = password;
         this.correoInstitucional = correoInstitucional;
-        this.rolNecesario = rolNecesario;
+        //this.rolNecesario = rolNecesario;
     }
 
 }
