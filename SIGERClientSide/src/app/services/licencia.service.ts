@@ -33,13 +33,23 @@ export class LicenciaService extends connectionURL{
     return this.httpClient.post<any>(this.app_url + this.endpoint, licencia);
   }
 
-  public update(id: number, estadoLicencia: Licencia): Observable<any>{
+  public update(id: number, licencia: Licencia): Observable<any>{
     this.endpoint = 'licencia/' + id;
-    return this.httpClient.put<any>(this.app_url + this.endpoint, estadoLicencia);
+    return this.httpClient.put<any>(this.app_url + this.endpoint, licencia);
   }
 
   public delete(id?: number): Observable<any>{
     this.endpoint = 'licencia/' + id;
     return this.httpClient.delete<any>(this.app_url + this.endpoint);
+  }
+
+  public authorize(id?: number): Observable<any>{
+    this.endpoint = 'licencia/authorize/' + id;
+    return this.httpClient.put<any>(this.app_url + this.endpoint, null);
+  }
+
+  public reject(id?: number): Observable<any>{
+    this.endpoint = 'licencia/reject/' + id;
+    return this.httpClient.put<any>(this.app_url + this.endpoint, null);
   }
 }

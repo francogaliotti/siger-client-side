@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-verticalnavbar',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VerticalnavbarComponent implements OnInit {
 
-  constructor() { }
+  isAdmin = false;
+
+  constructor(private _tokenService: TokenService) { }
 
   ngOnInit(): void {
+    this.isAdmin = this._tokenService.IsAdmin();
   }
 
 }

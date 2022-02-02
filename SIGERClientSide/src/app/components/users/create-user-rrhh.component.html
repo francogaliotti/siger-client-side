@@ -7,16 +7,16 @@
                 <label class="col-sm-3 text-end mt-2" for="name"><b><i>Nombre: </i></b></label>
                 <div class="col-sm-4">
                     <input class="form-control" type="text" id="name" formControlName="firstname"
-                    [class.validfield]="this.newUserForm.get('firstname')?.valid"
-                    [class.invalidfield]="this.newUserForm.get('firstname')?.invalid && this.newUserForm.get('firstname')?.touched">
+                        [class.validfield]="this.newUserForm.get('firstname')?.valid"
+                        [class.invalidfield]="this.newUserForm.get('firstname')?.invalid && this.newUserForm.get('firstname')?.touched">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-3 text-end mt-2" for="surname"><b><i>Apellido: </i></b></label>
                 <div class="col-sm-4">
                     <input type="text" id="surname" class="form-control" formControlName="surname"
-                    [class.validfield]="this.newUserForm.get('surname')?.value"
-                    [class.invalidfield]="this.newUserForm.get('surname')?.invalid && this.newUserForm.get('surname')?.touched">
+                        [class.validfield]="this.newUserForm.get('surname')?.value"
+                        [class.invalidfield]="this.newUserForm.get('surname')?.invalid && this.newUserForm.get('surname')?.touched">
                 </div>
             </div>
             <div class="row">
@@ -24,7 +24,8 @@
                 <div class="col-sm-4">
                     <select class="form-control text-center" formControlName="nationalitySelected">
                         <option [ngValue]="0">Seleccione la nacionalidad</option>
-                        <option *ngFor="let nationality of nationalities" [ngValue]="nationality.id">{{nationality.nombre}}</option>
+                        <option *ngFor="let nationality of nationalities" [ngValue]="nationality.id">
+                            {{nationality.nombre}}</option>
                     </select>
                 </div>
             </div>
@@ -32,16 +33,26 @@
                 <label class="col-sm-3 text-end mt-2" for="identitycard"><b><i>DNI: </i></b></label>
                 <div class="col-sm-4">
                     <input type="text" id="identitycard" class="form-control" formControlName="dni"
-                    [class.validfield]="this.newUserForm.get('dni')?.valid"
-                    [class.invalidfield]="this.newUserForm.get('dni')?.invalid && this.newUserForm.get('dni')?.touched">
+                        [class.validfield]="this.newUserForm.get('dni')?.valid"
+                        [class.invalidfield]="this.newUserForm.get('dni')?.invalid && this.newUserForm.get('dni')?.touched">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 text-end mt-2" for="docType"><b><i>Tipo Documento: </i></b></label>
+                <div class="col-sm-4">
+                    <select class="form-control" formControlName="docType">
+                        <option values="0">Seleccione</option>
+                        <option *ngFor="let doc of docTypes" [ngValue]="doc">{{doc.tipoDocumento}}</option>
+
+                    </select>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-3 text-end mt-2" for="yearOfEntry"><b><i>Año de ingreso: </i></b></label>
                 <div class="col-sm-4">
                     <input type="text" id="yearOfEntry" class="form-control" formControlName="yearOfstarted"
-                    [class.validfield]="this.newUserForm.get('yearOfstarted')?.valid"
-                    [class.invalidfield]="this.newUserForm.get('yearOfstarted')?.invalid && this.newUserForm.get('yearOfstarted')?.touched">
+                        [class.validfield]="this.newUserForm.get('yearOfstarted')?.valid"
+                        [class.invalidfield]="this.newUserForm.get('yearOfstarted')?.invalid && this.newUserForm.get('yearOfstarted')?.touched">
                 </div>
             </div>
         </div>
@@ -52,24 +63,24 @@
                 <label class="col-sm-3 text-end mt-2" for="personalEmail"><b><i>E-mail personal: </i></b></label>
                 <div class="col-sm-4">
                     <input type="text" id="personalEmail" class="form-control" formControlName="personalEmail"
-                    [class.validfield]="this.newUserForm.get('personalEmail')?.valid"
-                    [class.invalidfield]="this.newUserForm.get('personalEmail')?.invalid && this.newUserForm.get('personalEmail')?.touched">
+                        [class.validfield]="this.newUserForm.get('personalEmail')?.valid"
+                        [class.invalidfield]="this.newUserForm.get('personalEmail')?.invalid && this.newUserForm.get('personalEmail')?.touched">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-3 text-end mt-2" for="DPVemail"><b><i>E-mail DPV: </i></b></label>
                 <div class="col-sm-4">
                     <input type="text" id="DPVemail" class="form-control" formControlName="DPVEmail"
-                    [class.validfield]="this.newUserForm.get('DPVEmail')?.valid"
-                    [class.invalidfield]="this.newUserForm.get('DPVEmail')?.invalid && this.newUserForm.get('DPVEmail')?.touched">
+                        [class.validfield]="this.newUserForm.get('DPVEmail')?.valid"
+                        [class.invalidfield]="this.newUserForm.get('DPVEmail')?.invalid && this.newUserForm.get('DPVEmail')?.touched">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-3 text-end mt-2" for="username"><b><i>Usuario: </i></b></label>
                 <div class="col-sm-4">
                     <input type="text" id="username" class="form-control" formControlName="username"
-                    [class.validfield]="this.newUserForm.get('username')?.valid"
-                    [class.invalidfield]="this.newUserForm.get('username')?.invalid && this.newUserForm.get('username')?.touched">
+                        [class.validfield]="this.newUserForm.get('username')?.valid"
+                        [class.invalidfield]="this.newUserForm.get('username')?.invalid && this.newUserForm.get('username')?.touched">
                 </div>
             </div>
         </div>
@@ -78,11 +89,12 @@
             <div class="form-group col-sm-4 form-check mt-2 offset-sm-2">
                 <label class="form-check-label offset-sm-2" for="specialRole">
                     <i>¿El usuario necesita roles con privilegios altos?</i>
-                    <input type="checkbox" id="specialRole" class="form-check-input" (change)="EnableSpecialRole()" id="needSpecialRole" formControlName="needSpecialRole"
-                    [class.validfield]="this.newUserForm.get('needSpecialRole')?.valid"
-                    [class.invalidfield]="this.newUserForm.get('needSpecialRole')?.invalid && this.newUserForm.get('needSpecialRole')?.touched">
+                    <input type="checkbox" id="specialRole" class="form-check-input" (change)="EnableSpecialRole()"
+                        id="needSpecialRole" formControlName="needSpecialRole"
+                        [class.validfield]="this.newUserForm.get('needSpecialRole')?.valid"
+                        [class.invalidfield]="this.newUserForm.get('needSpecialRole')?.invalid && this.newUserForm.get('needSpecialRole')?.touched">
                 </label>
-    
+
             </div>
             <div class="col-sm-2">
                 <select class="form-control offset-sm-1 text-center" #SpecialRole formControlName="specialRoleSelected">

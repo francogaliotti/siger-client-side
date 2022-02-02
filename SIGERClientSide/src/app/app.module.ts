@@ -65,6 +65,8 @@ import { MisAsistenciasPipe } from './pipes/mis-asistencias.pipe';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
+import { AutorizarBoletaComponent } from './components/autorizar-boleta/autorizar-boleta.component';
+import { AutorizarLicenciaComponent } from './components/autorizar-licencia/autorizar-licencia.component';
 
 
 @NgModule({
@@ -126,7 +128,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     LicenciaPipe,
     SolicitarBoletaComponent,
     BoletaPipe,
-    MisAsistenciasPipe
+    MisAsistenciasPipe,
+    AutorizarBoletaComponent,
+    AutorizarLicenciaComponent
   ],
   imports: [
     BrowserModule,
