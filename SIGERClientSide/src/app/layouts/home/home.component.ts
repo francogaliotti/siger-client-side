@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EmpleadoService } from 'src/app/services/empleado.service';
 import { TokenService } from 'src/app/services/token.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class HomeComponent implements OnInit {
   isLogged = false;
   isAdmin = false;
 
-  constructor(private _tokenService: TokenService) { 
+  constructor(private _tokenService: TokenService, private _empleadoService: EmpleadoService) { 
     document.body.style.backgroundImage = null;
   }
 

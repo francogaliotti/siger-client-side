@@ -61,6 +61,10 @@ import { SolicitarLicenciaComponent } from './components/solicitar-licencia/soli
 import { LicenciaPipe } from './pipes/licencia.pipe';
 import { SolicitarBoletaComponent } from './components/solicitar-boleta/solicitar-boleta.component';
 import { BoletaPipe } from './pipes/boleta.pipe';
+import { MisAsistenciasPipe } from './pipes/mis-asistencias.pipe';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -121,7 +125,8 @@ import { BoletaPipe } from './pipes/boleta.pipe';
     SolicitarLicenciaComponent,
     LicenciaPipe,
     SolicitarBoletaComponent,
-    BoletaPipe
+    BoletaPipe,
+    MisAsistenciasPipe
   ],
   imports: [
     BrowserModule,
@@ -133,7 +138,10 @@ import { BoletaPipe } from './pipes/boleta.pipe';
     SweetAlert2Module,
     SweetAlert2Module.forChild(),
     FormsModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule
   ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent]

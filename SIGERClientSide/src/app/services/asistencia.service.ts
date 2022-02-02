@@ -18,8 +18,9 @@ export class AsistenciaService extends connectionURL{
     return this.httpClient.get<Asistencia[]>(this.app_url + this.endpoint)
   }
 
-  public listMyAttendance(id: number, page: number): Observable<Asistencia[]>{
-    this.endpoint = 'asistencia/?page='+ page+ '&id='+id;
+  public listMyAttendance(page: number, id: number): Observable<Asistencia[]>{
+    this.endpoint = 'asistencia/mis-asistencias/?page='+ page+ '&id='+id;
+    console.log(this.endpoint);
     return this.httpClient.get<Asistencia[]>(this.app_url + this.endpoint)
   }
 

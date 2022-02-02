@@ -7,7 +7,7 @@ export class Asistencia extends BaseEntity {
 
     fechaBaja: Date;
 
-    fechaHora: string;
+    fechaHora: Date;
 
     fechaCierre: Date;
 
@@ -31,7 +31,7 @@ export class Asistencia extends BaseEntity {
 
     empleado: Empleado
 
-    constructor(fechaHora: string, tipoMovimiento: string, empleado: Empleado, id?: number){
+    constructor(fechaHora: Date, tipoMovimiento: string, empleado: Empleado, id?: number){
         super();
         this.id = id;
         this.fechaHora = fechaHora;

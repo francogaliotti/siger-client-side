@@ -43,6 +43,7 @@ import { SolicitarLicenciaComponent } from './components/solicitar-licencia/soli
 import { SolicitarLicenciaGuardService as solicitarLicenciaGuard} from './guards/solicitar-licencia-guard.service';
 import { SolicitarBoletaComponent } from './components/solicitar-boleta/solicitar-boleta.component';
 import { SolicitarBoletaGuardService as solicitarBoletaGuard} from './guards/solicitar-boleta-guard.service';
+import { MisAsistenciasComponent } from './components/mis-asistencias/mis-asistencias.component';
 
 
 const routes: Routes = [
@@ -69,6 +70,7 @@ const routes: Routes = [
   {path: 'tipo-sector', component: TipoSectorComponent, canActivate: [TipoSectorGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'altaEmpleado', component: CreateUserRRHHComponent, canActivate: [EmpleadoGuard], data: {expectedRol: ['admin']}},
   {path: 'asistencia', component: AsistenciaComponent, canActivate: [AsistenciaGuard], data: {expectedRol: ['admin']}},
+  {path: 'mis-asistencias', component: MisAsistenciasComponent},
   {path: 'sector', component: SectorComponent, canActivate: [sectorGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'solicitar-licencia', component: SolicitarLicenciaComponent, canActivate: [solicitarLicenciaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'solicitar-boleta', component: SolicitarBoletaComponent, canActivate: [solicitarBoletaGuard], data: { expectedRol: ['admin', 'user'] }},

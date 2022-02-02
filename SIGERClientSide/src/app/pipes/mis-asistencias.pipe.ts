@@ -2,17 +2,14 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Asistencia } from '../models/asistencia';
 
 @Pipe({
-  name: 'asistenciaPipe'
+  name: 'misAsistenciasPipe'
 })
-export class AsistenciaPipe implements PipeTransform {
+export class MisAsistenciasPipe implements PipeTransform {
 
-  transform(asistencias: Asistencia[], page: number = 0, start: Date, end: Date, search: string = ''): Asistencia[] {
+  transform(asistencias: Asistencia[], page: number = 0, search: string = ''): Asistencia[] {
 
     if (search.length === 0)
       return asistencias.slice(page, page + 10);
-
-    /*if (start == null && end == null)
-      return asistencias.slice(page, page + 10);*/
 
     const filtered_Asistencias = asistencias.filter(resp => resp.tipoMovimiento.includes(search));
 

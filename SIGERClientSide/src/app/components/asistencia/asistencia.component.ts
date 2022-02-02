@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import { Router } from '@angular/router';
 import { faArrowAltCircleLeft, faEdit, faEye, faFileAlt, faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Modal } from 'bootstrap';
@@ -34,7 +34,7 @@ export class AsistenciaComponent implements OnInit {
 
   sectorArray: Sector[] = [];
 
-  asistencia: Asistencia = new Asistencia('', '',this.empleado,0);
+  asistencia: Asistencia = new Asistencia(null, '',this.empleado);
 
   asistenciaArray: Asistencia[] = [];
 
@@ -56,7 +56,12 @@ export class AsistenciaComponent implements OnInit {
 
   searchPage = 0;
   page = 0;
-  search: string = '';
+  search: string;
+
+  dateRange = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
 
   constructor(
     private _asistencia: FormBuilder,
@@ -69,14 +74,14 @@ export class AsistenciaComponent implements OnInit {
     private _tokenService: TokenService
   ) {
     this.asistenciaForm = this._asistencia.group({
-      fechaHora: ['', [Validators.required, Validators.maxLength(10)]],
+      fechaHora: ['', Validators.required],
       tipoMovimiento: ['', Validators.required],
       empleado: ['', Validators.required]
     });
     this.editAsistenciaForm = this._editAsistencia.group({
       id: ["", Validators.required],
-      fechaHora: ["", [Validators.required, Validators.maxLength(10)]],
-      tipoMovimiento: ["", Validators.required],
+      fechaHora: ['', Validators.required],
+      tipoMovimiento: ['', Validators.required],
       empleado: ['', Validators.required]
     });
 
@@ -143,13 +148,12 @@ export class AsistenciaComponent implements OnInit {
     this.success = false;
     const asistencia = new Asistencia(this.asistenciaForm.get('fechaHora')?.value,
       this.asistenciaForm.get('tipoMovimiento')?.value, this.asistenciaForm.get('empleado')?.value);
-
+      console.log(asistencia)
     if (this.asistenciaForm.valid == true) {
       this._asistenciaService.save(asistencia).subscribe(
         data => {
           this.success = true;
           this.cargarAsistencia();
-
           Swal.fire({
             title: "Éxito",
             icon: "success",
@@ -208,7 +212,7 @@ export class AsistenciaComponent implements OnInit {
         console.log(this.asistencia);
         this.editAsistenciaForm = this._editAsistencia.group({
           id: [this.asistencia.id, Validators.required],
-          fechaHora: [this.asistencia.fechaHora, [Validators.required, Validators.maxLength(10)]],
+          fechaHora: [this.asistencia.fechaHora, [Validators.required]],
           tipoMovimiento: [this.asistencia.tipoMovimiento, Validators.required],
           empleado: [this.asistencia.empleado, Validators.required]
         });
@@ -237,6 +241,7 @@ export class AsistenciaComponent implements OnInit {
       },
       err => {
         alert(err);
+        alert(err.console.mensaje);
         Swal.fire({
           title: "Oops! hubo un problema",
           icon: "error",
@@ -270,7 +275,7 @@ export class AsistenciaComponent implements OnInit {
 
   volver(): void {
     this.modal?.hide();
-    this.router.navigate(['viatico']);
+    this.router.navigate(['asistencia']);
   }
 
   checkAsistenciaForm(): void {

@@ -9,7 +9,8 @@
               <b>Fecha y Hora *</b>
             </label>
             <input formControlName="fechaHora" class="form-control fechaHora-inputs mt-3" type="datetime-local"
-              placeholder="Ingrese Fecha y Hora" [class.validfield]="this.asistenciaForm.get('fechaHora')?.valid"
+              placeholder="Ingrese Fecha y Hora" 
+              [class.validfield]="this.asistenciaForm.get('fechaHora')?.valid"
               [class.invalidfield]="this.asistenciaForm.get('fechaHora')?.invalid && this.asistenciaForm.get('fechaHora')?.touched"
               (focusout)="checkAsistenciaForm()">
             <small class="text-danger"
@@ -20,7 +21,10 @@
             <div class="row">
               <div class="col-12">
                 <b>Entrada o Salida *</b>
-                <select formControlName="tipoMovimiento">
+                <select formControlName="tipoMovimiento" class="form-control tipoMovimiento-inputs mt-3"
+                [class.validfield]="this.asistenciaForm.get('tipoMovimiento')?.valid"
+                [class.invalidfield]="this.asistenciaForm.get('tipoMovimiento')?.invalid && this.asistenciaForm.get('tipoMovimiento')?.touched"
+                (focusout)="checkAsistenciaForm()">
                   <option value="" disabled selected>Seleccione Tipo de movimiento</option>
                   <option *ngFor="let tipoMovimiento of tipoMovimientoArray" [ngValue]="tipoMovimiento">
                     {{tipoMovimiento}}</option>
@@ -32,7 +36,10 @@
             <div class="row">
               <div class="col-12">
                 <b>Para qué empleado *</b>
-                <select formControlName="empleado">
+                <select formControlName="empleado" class="form-control empleado-inputs mt-3"
+                [class.validfield]="this.asistenciaForm.get('empleado')?.valid"
+                [class.invalidfield]="this.asistenciaForm.get('empleado')?.invalid && this.asistenciaForm.get('empleado')?.touched"
+                (focusout)="checkAsistenciaForm()">
                   <option value="" disabled selected>Seleccione empleado</option>
                   <option *ngFor="let empleado of empleadoArray" [ngValue]="empleado">{{empleado.apellido}},
                     {{empleado.nombre}}</option>
@@ -55,6 +62,28 @@
   <div class="row mt-4">
     <div class="col-2">
     </div>
+    <h2>Angular 12 Date Range Picker Demo</h2>
+
+<mat-form-field appearance="legacy">
+
+  <mat-label>Choose Date Range</mat-label>
+
+  <mat-date-range-input [rangePicker]="picker" [formGroup]="dateRange">
+    <input matStartDate formControlName="start" placeholder="Start Date">
+    <input matEndDate formControlName="end" placeholder="End Date">
+  </mat-date-range-input>
+
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+
+  <mat-date-range-picker #picker></mat-date-range-picker>
+
+</mat-form-field>
+
+<h2>
+  Start: {{dateRange.value.start | date}}
+  End: {{dateRange.value.end | date}}
+</h2>
+
     <div class="col-9">
       <input type="text" class="form-control mb-2" placeholder="Buscar Asistencias" #txtSearch
         (keyup)="onSearch( txtSearch.value )" />
@@ -69,7 +98,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let asistencias of asistenciaArray | asistenciaPipe:page:search">
+            <tr *ngFor="let asistencias of asistenciaArray | asistenciaPipe:page:dateRange.value.start:dateRange.value.end:search">
               <td style="display: none;">{{asistencias.id}}</td>
               <td>{{asistencias.fechaHora}}</td>
               <td>{{asistencias.tipoMovimiento}}</td>
@@ -100,7 +129,7 @@
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item"><b>Fecha: </b>{{asistencia.fechaHora}}</li>
                       <li class="list-group-item"><b>Movimiento: </b>{{asistencia.tipoMovimiento}}</li>
-                      <li class="list-group-item"><b>Empleado: </b>${{asistencia.empleado}}</li>
+                      <li class="list-group-item"><b>Empleado: </b>${{asistencia.empleado.legajo}}</li>
                     </ul>
                   </div>
                   <div class="modal-footer mt-4">
@@ -127,24 +156,27 @@
                     <input type="hidden" formControlName="id">
                     <div class="form-group">
                       <div class="row">
-                        <label class="col-md-3 offset-1 text-end mt-3" for="Codigo"><b>Código* </b></label>
-                        <div class="col-7">
-                          <input formControlName="fechaHora" (focusout)="checkEditAsistenciaForm()"
-                            class="form-control fechaHora-inputs mt-3" maxlength="10"
-                            [class.validfield]="this.editAsistenciaForm.get('fechaHora')?.valid"
-                            [class.invalidfield]="this.editAsistenciaForm.get('fechaHora')?.invalid && this.editAsistenciaForm.get('fechaHora')?.touched"
-                            type="datetime-local" />
-                          <small class="text-danger"
-                            *ngIf="!editAsistenciaForm.get('fechaHora').valid && this.editAsistenciaForm.get('fechaHora')?.touched">El
-                            campo es obligatorio</small>
-                        </div>
+                        <label class="col-md-3 offset-1 text-end mt-3">
+                          <b>Fecha y Hora *</b>
+                        </label>
+                        <input formControlName="fechaHora" class="form-control fechaHora-inputs mt-3" type="datetime-local"
+                          placeholder="Ingrese Fecha y Hora" 
+                          [class.validfield]="this.editAsistenciaForm.get('fechaHora')?.valid"
+                          [class.invalidfield]="this.editAsistenciaForm.get('fechaHora')?.invalid && this.editAsistenciaForm.get('fechaHora')?.touched"
+                          (focusout)="checkEditAsistenciaForm()">
+                        <small class="text-danger"
+                          *ngIf="this.editAsistenciaForm.get('fechaHora')?.touched && this.editAsistenciaForm.get('fechaHora')?.invalid">El
+                          campo es obligatorio</small>
                       </div>
                     </div>
                     <div class="form-group mt-3">
                       <div class="row">
                         <div class="col-12">
                           <b>Entrada o Salida *</b>
-                          <select formControlName="tipoMovimiento">
+                          <select formControlName="tipoMovimiento" class="form-control tipoMovimiento-inputs mt-3"
+                          [class.validfield]="this.editAsistenciaForm.get('tipoMovimiento')?.valid"
+                          [class.invalidfield]="this.editAsistenciaForm.get('tipoMovimiento')?.invalid && this.editAsistenciaForm.get('tipoMovimiento')?.touched"
+                          (focusout)="checkEditAsistenciaForm()">
                             <option value="" disabled selected>Seleccione Tipo de movimiento</option>
                             <option *ngFor="let tipoMovimiento of tipoMovimientoArray" [ngValue]="tipoMovimiento">
                               {{tipoMovimiento}}</option>
@@ -156,7 +188,10 @@
                       <div class="row">
                         <div class="col-12">
                           <b>Para qué empleado *</b>
-                          <select formControlName="empleado">
+                          <select formControlName="empleado" class="form-control empleado-inputs mt-3"
+                          [class.validfield]="this.editAsistenciaForm.get('empleado')?.valid"
+                          [class.invalidfield]="this.editAsistenciaForm.get('empleado')?.invalid && this.editAsistenciaForm.get('empleado')?.touched"
+                          (focusout)="checkEditAsistenciaForm()">
                             <option value="" disabled selected>Seleccione empleado</option>
                             <option *ngFor="let empleado of empleadoArray" [ngValue]="empleado">{{empleado.apellido}},
                               {{empleado.nombre}}</option>
@@ -184,7 +219,7 @@
         </button>
         &nbsp;
         <button class="btn btn-primary" (click)="nextPage()"
-          [disabled]="(asistenciaArray | asistenciaPipe:page:search).length === 1">
+          [disabled]="(asistenciaArray | asistenciaPipe:page:dateRange.value.start:dateRange.value.end:search).length === 1">
           Siguiente
         </button>
       </div>
