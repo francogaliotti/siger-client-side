@@ -31,4 +31,12 @@ export class Asistencia extends BaseEntity {
 
     empleado: Empleado
 
+    constructor(fechaHora: Date, tipoMovimiento: string, empleado: Empleado, id?: number){
+        super();
+        this.id = id;
+        this.fechaHora = fechaHora;
+        this.tipoMovimiento = tipoMovimiento;
+        this.empleado = empleado;
+    }
+
 }

@@ -113,7 +113,7 @@ export class CreateUserRRHHComponent implements OnInit {
         enabled: true,
         esPrimerInicio: true,
         password: '',
-        image: "",
+        image:'',
         recordarme: false,
         requiereAutorizacion: this.newUserForm.get('needSpecialRole')?.value,
         rolNecesario: this.newUserForm.get('specialRoleSelected').value,

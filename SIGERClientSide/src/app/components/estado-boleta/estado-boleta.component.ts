@@ -120,7 +120,7 @@ export class EstadoBoletaComponent implements OnInit {
     this.success = false;
     const estadoBoleta = new EstadoBoleta(this.estadoBoletaForm.get('codEstadoBoleta')?.value,
     this.estadoBoletaForm.get('nombreEstadoBoleta')?.value);
-    
+    console.log(estadoBoleta);
     if (this.estadoBoletaForm.valid == true) {
     this._estadoBoletaService.save(estadoBoleta).subscribe(
       data => {

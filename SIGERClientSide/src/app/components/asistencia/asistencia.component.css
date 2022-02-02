@@ -1,0 +1,119 @@
+.altaEstadoBoleta{
+    margin-top: 40px;
+}
+
+th:nth-child(1){
+    display: none;
+}
+
+td:nth-child(1){
+    display: none;
+}
+
+th:nth-child(2){
+    width: 4%;
+}
+
+td:nth-child(2){
+    width: 4%;
+}
+
+th:nth-child(3){
+    width: 15%;
+}
+
+td:nth-child(3){
+    width: 15%;
+}
+
+th:nth-child(4){
+    width: 15%;
+}
+
+td:nth-child(4){
+    width: 15%;
+}
+
+td:nth-child(4) > button{
+    margin-left: 20px;
+    color: white;
+}
+
+.create-form{
+    background-color: #EBFFEC;
+    width: 650px;
+    height: 200px;
+    border: 2px solid black;
+    box-shadow: 5px 5px 15px 2px;
+}
+
+.create-form > button{
+    background-color: #169BD5;
+    float: right;
+    margin-right: 35px;
+    z-index: 0;
+}
+
+table > tbody > tr > td > button{
+    font-size: 11px;
+    width: 77.5px;
+    height: 22px;
+    padding: 0.5px;
+}
+
+small{
+    font-size: 11px;
+    margin-left: 220px;
+    margin-top: 55px;
+    position: absolute;
+    z-index: 1;
+}
+.modal-content{
+    background: #EBFFEC;
+    margin-top: 20px;
+    width: 600px;
+    height: 250px;
+    top: 2px;
+    border: 2px solid #333333;
+}
+.modal-title{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    margin-left: 150px;
+}
+.fechaHora-inputs{   
+    width: 300px; 
+    height: 25px;   
+    top: 268px; left: 576px;
+}
+
+.tipoMovimiento-inputs{  
+    width: 300px; 
+    height: 25px;
+    top: 300px; left: 576px;
+}
+
+.empleado-inputs{  
+    width: 300px; 
+    height: 25px;
+    top: 300px; left: 576px;
+}
+
+.small{
+    margin-top: 1px;
+}
+.validfield{
+    border-style: solid 4px;
+    border-color: green;
+}
+
+.invalidfield{
+    border-style: solid 4px;
+    border-color: red;
+}
+
+.edit-form{
+    background-color: #EBFFEC;
+    border: 2px solid black;
+    box-shadow: 5px 5px 15px 2px;
+}
