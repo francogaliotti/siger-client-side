@@ -35,6 +35,8 @@ import { ViaticoPipe } from './pipes/viatico.pipe';
 import { TipoBoletaPipe } from './pipes/tipo-boleta.pipe';
 import { TipoLicenciaPipe } from './pipes/tipo-licencia.pipe';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { AsistenciaPipe } from './pipes/asistencia.pipe';
+import { AsistenciaComponent } from './components/asistencia/asistencia.component';
 import { TipoMovilidadComponent } from './components/tipo-movilidad/tipo-movilidad.component';
 import { MovilidadComponent } from './components/movilidad/movilidad.component';
 import { TipoMovilidadPipe } from './pipes/tipo-movilidad.pipe';
@@ -50,10 +52,15 @@ import { RemuneracionPipe } from './pipes/remuneracion.pipe';
 import { RemuneracionComponent } from './components/remuneracion/remuneracion.component';
 import { TipoSectorPipe } from './pipes/tipo-sector.pipe';
 import { TipoSectorComponent } from './components/tipo-sector/tipo-sector.component';
+import { MisAsistenciasComponent } from './components/mis-asistencias/mis-asistencias.component';
 import { SolicitarLicenciaComponent } from './components/solicitar-licencia/solicitar-licencia.component';
 import { LicenciaPipe } from './pipes/licencia.pipe';
 import { SolicitarBoletaComponent } from './components/solicitar-boleta/solicitar-boleta.component';
 import { BoletaPipe } from './pipes/boleta.pipe';
+import { MisAsistenciasPipe } from './pipes/mis-asistencias.pipe';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
 import { AutorizarBoletaComponent } from './components/autorizar-boleta/autorizar-boleta.component';
 import { AutorizarLicenciaComponent } from './components/autorizar-licencia/autorizar-licencia.component';
 
@@ -88,6 +95,9 @@ import { AutorizarLicenciaComponent } from './components/autorizar-licencia/auto
     ViaticoPipe,
     TipoBoletaPipe,
     TipoLicenciaPipe,
+    CreateUserRRHHComponent,
+    AsistenciaPipe,
+    AsistenciaComponent,
     TipoMovilidadComponent,
     MovilidadComponent,
     TipoMovilidadPipe,
@@ -105,10 +115,12 @@ import { AutorizarLicenciaComponent } from './components/autorizar-licencia/auto
     RemuneracionComponent,
     TipoSectorPipe,
     TipoSectorComponent,
+    MisAsistenciasComponent,
     SolicitarLicenciaComponent,
     LicenciaPipe,
     SolicitarBoletaComponent,
     BoletaPipe,
+    MisAsistenciasPipe,
     AutorizarBoletaComponent,
     AutorizarLicenciaComponent
   ],
@@ -122,7 +134,10 @@ import { AutorizarLicenciaComponent } from './components/autorizar-licencia/auto
     SweetAlert2Module,
     SweetAlert2Module.forChild(),
     FormsModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule
   ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent]

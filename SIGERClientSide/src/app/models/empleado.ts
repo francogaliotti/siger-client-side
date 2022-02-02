@@ -74,4 +74,9 @@ export class Empleado extends BaseEntity{
 
 	remanenteDiasLicencia: Array<RemanenteDiasLicencia>;
 
+	constructor(id?: number){
+		super();
+		this.id = id;
+	}
+
 }

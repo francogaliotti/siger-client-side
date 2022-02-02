@@ -29,6 +29,8 @@ import { MovilidadGuardService as movilidadGuard} from './guards/movilidad-guard
 
 import { CreateUserRRHHComponent } from './components/users/create-user-rrhh.component';  
 import { EmpleadoGuardService as EmpleadoGuard } from './guards/empleado-guard.service';  
+import { AsistenciaComponent } from './components/asistencia/asistencia.component';
+import { AsistenciaGuardService as AsistenciaGuard } from './guards/asistencia-guard.service';
 import { SectorComponent } from './components/sector/sector.component';
 import { SectorGuardService as sectorGuard} from './guards/sector-guard.service';
 import { FirstSigninComponent } from './components/users/first-signin.component';
@@ -41,6 +43,7 @@ import { SolicitarLicenciaComponent } from './components/solicitar-licencia/soli
 import { SolicitarLicenciaGuardService as solicitarLicenciaGuard} from './guards/solicitar-licencia-guard.service';
 import { SolicitarBoletaComponent } from './components/solicitar-boleta/solicitar-boleta.component';
 import { SolicitarBoletaGuardService as solicitarBoletaGuard} from './guards/solicitar-boleta-guard.service';
+import { MisAsistenciasComponent } from './components/mis-asistencias/mis-asistencias.component';
 import { AutorizarBoletaComponent } from './components/autorizar-boleta/autorizar-boleta.component';
 import { AutorizarLicenciaComponent } from './components/autorizar-licencia/autorizar-licencia.component';
 import { AutorizarLicenciaGuardService as autorizarLicenciaGuard} from './guards/autorizar-licencia-guard.service';
@@ -69,6 +72,8 @@ const routes: Routes = [
   {path: 'remuneracion', component: RemuneracionComponent},
   {path: 'tipo-sector', component: TipoSectorComponent, canActivate: [TipoSectorGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'altaEmpleado', component: CreateUserRRHHComponent, canActivate: [EmpleadoGuard], data: {expectedRol: ['admin']}},
+  {path: 'asistencia', component: AsistenciaComponent, canActivate: [AsistenciaGuard], data: {expectedRol: ['admin']}},
+  {path: 'mis-asistencias', component: MisAsistenciasComponent},
   {path: 'sector', component: SectorComponent, canActivate: [sectorGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'solicitar-licencia', component: SolicitarLicenciaComponent, canActivate: [solicitarLicenciaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'solicitar-boleta', component: SolicitarBoletaComponent, canActivate: [solicitarBoletaGuard], data: { expectedRol: ['admin', 'user'] }},
