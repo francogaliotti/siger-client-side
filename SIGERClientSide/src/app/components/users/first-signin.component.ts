@@ -36,11 +36,11 @@ export class FirstSigninComponent implements OnInit {
       dpvEmail: [this.employee.usuario.correoInstitucional,[Validators.required, Validators.email, Validators.maxLength(150)]],
       username: [this.employee.usuario.username,[Validators.required, Validators.maxLength(40)]],
       password: [this.employee.usuario.password,[Validators.required, Validators.maxLength(30)]],
-      floor: [this.employee.domicilio.nroPiso, Validators.maxLength(4)],
+      /*floor: [this.employee.domicilio.nroPiso, Validators.maxLength(4)],
       street: [this.employee.domicilio.calle, Validators.maxLength(50)],
       height: [this.employee.domicilio.nroCalle, Validators.maxLength(6)],
       apartment: [this.employee.domicilio.nroDepartamento,Validators.maxLength(3)],
-      sector: [this.employee.historialSectorEmpleado.find(x => x.vigente).sector.denominacion,Validators.maxLength(3)],
+      sector: [this.employee.historialSectorEmpleado.find(x => x.vigente).sector.denominacion,Validators.maxLength(3)],*/
     });
   }
 

@@ -15,11 +15,11 @@ export class Usuario extends BaseEntity{
 
     //rolNecesario: string;
     
-    esPrimerInicio: boolean;
+    isFirstSignin: boolean;
     
     enabled: boolean;
 
-    requiereAutorizacion: boolean;
+  //  requiereAutorizacion: boolean;
 
     recordarme: boolean;
 

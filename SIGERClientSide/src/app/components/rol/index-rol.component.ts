@@ -76,6 +76,7 @@ export class IndexRolComponent implements OnInit {
         const rol: Rol = {
           codigoRol: "23",
           nombreRol: this.newRolForm.get('nameRol').value,
+          rolNombre: this.newRolForm.get('nameRol').value,
           permisos: permissions,
           id: null
         }

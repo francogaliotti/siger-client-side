@@ -17,7 +17,15 @@ div.create-form
     margin-right: 35px;
     z-index: 1 !important;
     height: 25px;
+    font-size: 14px;
+    width: fit-content;
 }
+.role-select{
+    width: 200px;
+    margin-left: 10px;
+    height: 50px;
+}
+
 input{
     padding: 1.5px;
     margin-top: 5px;

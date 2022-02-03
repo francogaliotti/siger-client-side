@@ -37,6 +37,11 @@ export class AuthService extends connectionURL{
     return this.httpClient.get<boolean>(this.app_url + this.endpoint);
   }
 
+  public existByUsername(username: string): Observable<boolean>{
+    this.endpoint = "auth/exist/" + username;
+    return this.httpClient.get<boolean>(this.app_url + this.endpoint);
+  }
+
   /*public getByUserId(id: number): Observable<Usuario>{
     this.endpoint = "auth/getUser/" + id;
     return this.httpClient.get<Usuario>(this.app_url + this.endpoint);
