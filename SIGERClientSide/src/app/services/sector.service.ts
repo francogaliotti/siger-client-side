@@ -18,6 +18,11 @@ export class SectorService extends connectionURL{
     return this.httpClient.get<Sector[]>(this.app_url + this.endpoint);
   }
 
+  public listAll(): Observable<Sector[]>{
+    this.endpoint = 'sector/list/';
+    return this.httpClient.get<Sector[]>(this.app_url + this.endpoint);
+  }
+
   public detail(id: number): Observable<Sector>{
     this.endpoint = 'sector/' + id;
     return this.httpClient.get<Sector>(this.app_url + this.endpoint);

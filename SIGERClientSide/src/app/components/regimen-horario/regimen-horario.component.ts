@@ -82,7 +82,7 @@ export class RegimenHorarioComponent implements OnInit {
   }
 
   cargarRegimenHorario(): void {
-    this._regimenHorarioService.list(this.searchPage).subscribe(
+    this._regimenHorarioService.page(this.searchPage).subscribe(
       data => {
         this.regimenHorarioArray = data;
       },
@@ -160,6 +160,7 @@ export class RegimenHorarioComponent implements OnInit {
             showCloseButton: false,
             showConfirmButton: false
           });
+          console.log(err);
         }
       );
     }

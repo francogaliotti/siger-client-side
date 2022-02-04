@@ -9,6 +9,7 @@ import { Remuneracion } from "./remuneracion";
 import { Usuario } from "./usuario";
 import { Nacionalidad } from "./nacionalidad";
 import { DocumentoIdentidad } from "./documento-identidad";
+import { Sector } from "./sector";
 
 export class Empleado extends BaseEntity{
 
@@ -56,9 +57,9 @@ export class Empleado extends BaseEntity{
 
 	//Relations
 
-	remuneraciones: Array<Remuneracion>;
+	remuneracion:Remuneracion;
 
-	regimenesHorario: Array<RegimenHorario>;
+	regimenHorario: RegimenHorario;
 
 	usuario: Usuario;
 
@@ -66,7 +67,9 @@ export class Empleado extends BaseEntity{
 
 	domicilio: Domicilio;
 
-	historialSectorEmpleado: Array<HistorialSectorEmpleado>;
+	//historialSectorEmpleado: Array<HistorialSectorEmpleado>;
+
+	sector: Sector;
 
 	planillas: Array<Planilla>;
 

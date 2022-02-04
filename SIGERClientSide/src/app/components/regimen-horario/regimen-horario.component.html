@@ -22,7 +22,7 @@
               class="form-control horaMinutoInicioJornadaLaboral-inputs mt-3" maxlength="10"
               [class.validfield]="this.regimenHorarioForm.get('horaMinutoInicioJornadaLaboral')?.valid"
               [class.invalidfield]="this.regimenHorarioForm.get('horaMinutoInicioJornadaLaboral')?.invalid && this.regimenHorarioForm.get('horaMinutoInicioJornadaLaboral')?.touched"
-              type="text" placeholder="Ingrese hora y minuto de Inicio de Jornada Laboral" />
+              type="time" placeholder="Ingrese hora y minuto de Inicio de Jornada Laboral" />
             <small class="text-danger"
               *ngIf="!regimenHorarioForm.get('horaMinutoInicioJornadaLaboral').valid && regimenHorarioForm.get('horaMinutoInicioJornadaLaboral').touched">
               El campo es obligatorio </small>
@@ -40,7 +40,7 @@
               class="form-control horaMinutoFinJornadaLaboral-inputs mt-3"
               [class.validfield]="this.regimenHorarioForm.get('horaMinutoFinJornadaLaboral')?.valid"
               [class.invalidfield]="this.regimenHorarioForm.get('horaMinutoFinJornadaLaboral')?.invalid && this.regimenHorarioForm.get('horaMinutoFinJornadaLaboral')?.touched"
-              type="text" placeholder="Ingrese hora y minuto de Finalización de Jornada Laboral" />
+              type="time" placeholder="Ingrese hora y minuto de Finalización de Jornada Laboral" />
             <small class="text-danger"
               *ngIf="!regimenHorarioForm.get('horaMinutoFinJornadaLaboral').valid && regimenHorarioForm.get('horaMinutoFinJornadaLaboral').touched">
               El campo es obligatorio </small>

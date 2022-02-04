@@ -12,6 +12,18 @@ import Swal from 'sweetalert2';
 import { data } from 'jquery';
 import { TipoDocumentoService } from 'src/app/services/tipo-documento.service';
 import { TipoDocumento } from 'src/app/models/tipo-documento';
+import { RemuneracionService } from 'src/app/services/remuneracion.service';
+import { Remuneracion } from 'src/app/models/remuneracion';
+import { RegimenHorarioService } from 'src/app/services/regimen-horario.service';
+import { RegimenHorario } from 'src/app/models/regimen-horario';
+import { DatosGobArService } from 'src/app/services/datos-gob-ar.service';
+import { Departamento } from 'src/app/models/departamento';
+import { Provincia } from 'src/app/models/provincia';
+import { Localidad } from 'src/app/models/localidad';
+import { SectorService } from 'src/app/services/sector.service';
+import { Sector } from 'src/app/models/sector';
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-create-user-rrhh',
@@ -23,48 +35,180 @@ export class CreateUserRRHHComponent implements OnInit {
   roles: Rol[];
   nationalities: Nacionalidad[];
   success: boolean;
+  existe: boolean;
   docTypes: TipoDocumento[];
+  remuneraciones: Remuneracion[];
+  regimenesHorario: RegimenHorario[];
+  provincias: Provincia[];
+  idProv: number;
+  departamentos: Departamento[];
+  idDpto: number;
+  localidades: Localidad[];
+  sectores: Sector[];
+  faSearch = faSearch;
 
-  newUserForm : FormGroup;
+  newUserForm: FormGroup;
 
-  @ViewChild('SpecialRole') specialRole : ElementRef;
+  @ViewChild('SpecialRole') specialRole: ElementRef;
 
-  constructor(private _role: RolService, 
-    private _nationality: NacionalidadService, 
-    private renderer: Renderer2, 
+  constructor(private _role: RolService,
+    private _nationality: NacionalidadService,
+    //private renderer: Renderer2,
     private _formBuilder: FormBuilder,
     private _employee: EmpleadoService,
-    private _docType: TipoDocumentoService) {
-    this.instantiateForm(); 
+    private _docType: TipoDocumentoService,
+    private _remun: RemuneracionService,
+    private _regimenH: RegimenHorarioService,
+    private _datosGob: DatosGobArService,
+    private _sector: SectorService,
+    private _auth: AuthService
+  ) {
+    this.instantiateForm();
     this.getRoles();
     this.getNationality();
     this.getDocType();
-    
+    this.getRemuneracion();
+    this.getRegimenHorario();
+    this.getProvincias();
+    this.getSector();
+
   }
 
   ngOnInit(): void {
   }
 
-  instantiateForm(): void{
+  instantiateForm(): void {
 
     this.newUserForm = this._formBuilder.group({
       firstname: ['', [Validators.required, Validators.maxLength(30)]],
-      surname: ['',[Validators.required, Validators.maxLength(30)]],
+      surname: ['', [Validators.required, Validators.maxLength(30)]],
       dni: ['', [Validators.required, Validators.maxLength(10)]],
-      docType: [],
-      yearOfstarted: ['', [Validators.required, Validators.maxLength(4)]],
-      personalEmail: ['', [Validators.required,Validators.email]],
-      DPVEmail: ['',[Validators.required, Validators.email]],
-      username: ['',[Validators.required, Validators.maxLength(30)]],
-      needSpecialRole: [false],
+      docType: [0, [Validators.required]],
+      yearOfstarted: ['', [Validators.required]],
+      personalEmail: ['', [Validators.required, Validators.email]],
+      DPVEmail: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required, Validators.maxLength(30)]],
+      //needSpecialRole: [false],
       nationalitySelected: [0, Validators.required],
-      specialRoleSelected: [0]
+      specialRoleSelected: [0, [Validators.required]],
+      remuneraciones: [0, [Validators.required]],
+      regimenesHorario: [0, [Validators.required]],
+      provincia: [0, [Validators.required]],
+      departamento: [0, [Validators.required]],
+      localidad: [0, [Validators.required]],
+      calle: ['', [Validators.required]],
+      nroCalle: ['', [Validators.required]],
+      nroPiso: [''],
+      nroDepartamento: [''],
+      sector: ['', [Validators.required]],
+      fechaNacimiento: ['', [Validators.required]],
+      nroTelefonoCelular: ['', [Validators.required]]
     });
 
-    this.newUserForm.get('specialRoleSelected').disable();
-  } 
+   // this.newUserForm.get('specialRoleSelected').disable();
+  }
 
-  getDocType(): void{
+  getSector(): void {
+    this._sector.listAll().subscribe(data => {
+      this.sectores = data;
+    }, err => {
+      console.log(err);
+    })
+  }
+
+  existUsuario(username: string): void {
+    this._auth.existByUsername(username).subscribe(
+      data => {
+        console.log(data);
+        if (data) {
+          Swal.fire({
+            title: "El nombre de usuario ya existe",
+            icon: "error",
+            showCloseButton: false,
+            showConfirmButton: false
+          });
+        } else {
+          Swal.fire({
+            title: "El nombre de usuario esta disponible",
+            icon: "success",
+            showCloseButton: false,
+            showConfirmButton: false
+          });
+        }
+
+      },
+      err => {
+        console.log(err);
+
+      }
+    )
+
+  }
+
+  getProvincias(): void {
+    this._datosGob.listProvincias().subscribe(data => {
+      this.provincias = data;
+    }, err => {
+      console.log(err);
+    })
+  }
+  getDepartamentos(id: number): boolean {
+    this.success = false;
+    if (id == null) {
+      Swal.fire({
+        title: "Seleccione una Provincia",
+        icon: "error",
+        showCloseButton: false,
+        showConfirmButton: false
+      });
+      return this.success
+    }
+    this._datosGob.listDepartamentosByProvincia(id).subscribe(data => {
+      this.success = true;
+      this.departamentos = data;
+    }, err => {
+
+      console.log(err);
+    })
+    return this.success;
+  }
+  getLocalidades(id: number): boolean {
+    this.success = false;
+    if (id == null) {
+      Swal.fire({
+        title: "Seleccione un Departamento",
+        icon: "error",
+        showCloseButton: false,
+        showConfirmButton: false
+      });
+      return this.success
+    }
+    this._datosGob.listLocalidadesByDepartamento(id).subscribe(data => {
+      this.success = true;
+      this.localidades = data;
+    }, err => {
+
+      console.log(err);
+    })
+    return this.success;
+  }
+  getRemuneracion(): void {
+    this._remun.list().subscribe(data => {
+      this.remuneraciones = data;
+    },
+      err => {
+        console.log(err);
+      })
+  }
+  getRegimenHorario(): void {
+    this._regimenH.list().subscribe(data => {
+      this.regimenesHorario = data;
+    },
+      err => {
+        console.log(err);
+      })
+  }
+  getDocType(): void {
     this._docType.list().subscribe(data => {
       this.docTypes = data;
     }, err => {
@@ -72,7 +216,7 @@ export class CreateUserRRHHComponent implements OnInit {
     })
   }
 
-  getNationality(): void{
+  getNationality(): void {
     this._nationality.GetAll().subscribe(data => {
       this.nationalities = data;
     }, error => {
@@ -80,7 +224,7 @@ export class CreateUserRRHHComponent implements OnInit {
     })
   }
 
-  getRoles(): void{
+  getRoles(): void {
     this._role.list().subscribe(data => {
       this.roles = data;
     }, error => {
@@ -88,65 +232,75 @@ export class CreateUserRRHHComponent implements OnInit {
     })
   }
 
-  EnableSpecialRole(): void{
+  /*EnableSpecialRole(): void {
     if ($('#needSpecialRole').is(':checked')) {
       this.renderer.setProperty(this.specialRole.nativeElement, 'disabled', false);
     } else {
       this.renderer.setProperty(this.specialRole.nativeElement, 'disabled', true);
     }
-  }
+  }*/
 
-  OnCreate(): boolean{
+  OnCreate(): boolean {
 
     this.success = false;
 
-    if(this.newUserForm.valid){
 
-      const nationality: Nacionalidad = {
+    if (this.newUserForm.valid) {
+
+      /*const nationality: Nacionalidad = {
         id: this.newUserForm.get('nationalitySelected')?.value,
         nombre: ''
-      }
+      }*/
 
       const account: Usuario = {
+        nombre: this.newUserForm.get('username')?.value,
         username: this.newUserForm.get('username')?.value,
         correoInstitucional: this.newUserForm.get('DPVEmail')?.value,
         enabled: true,
-        esPrimerInicio: true,
+        isFirstSignin: true,
         password: '',
-        image:'',
+        image: "",
         recordarme: false,
-        requiereAutorizacion: this.newUserForm.get('needSpecialRole')?.value,
-        rolNecesario: this.newUserForm.get('specialRoleSelected').value,
-        roles: [],
+       // requiereAutorizacion: this.newUserForm.get('needSpecialRole')?.value,
+        roles: this.newUserForm.get('specialRoleSelected')?.value,
         id: null
       }
 
       const employee: Empleado = {
         nombre: this.newUserForm.get('firstname')?.value,
         apellido: this.newUserForm.get('surname')?.value,
-        nacionalidad: nationality,
+        nacionalidad: this.newUserForm.get('nationalitySelected')?.value,
         nroIdentificacionPersonal: this.newUserForm.get('dni')?.value,
         correoPersonal: this.newUserForm.get('personalEmail')?.value,
         fechaIngreso: this.newUserForm.get('yearOfstarted')?.value,
         computoDiasLicencia: null,
         cuil: null,
         diasLicenciaAnualFija: null,
-        domicilio: null,
+        domicilio: {
+          calle: this.newUserForm.get('calle')?.value,
+          nroCalle: this.newUserForm.get('nroCalle')?.value,
+          nroDepartamento: this.newUserForm.get('nroDepartamento')?.value,
+          nroPiso: this.newUserForm.get('nroPiso')?.value,
+
+          provincia: this.newUserForm.get('provincia')?.value,
+          departamento: this.newUserForm.get('departamento')?.value,
+          localidad: this.newUserForm.get('localidad')?.value
+        },
         esEncargado: false,
         estadoCivil: null,
         fechaAlta: null,
         fechaBaja: null,
         fechaLimiteReemplazo: null,
-        fechaNacimiento: null,
-        historialSectorEmpleado: null,
+        fechaNacimiento: this.newUserForm.get('fechaNacimiento')?.value,
+        sector: this.newUserForm.get('sector')?.value,
         legajo: null,
-        nroTelefonoCelular: null,
+        nroTelefonoCelular: this.newUserForm.get('nroTelefonoCelular')?.value,
         nroTelefonoFijo: null,
         planillas: null,
         puedeAprobarRequerimiento: null,
-        regimenesHorario: null,
+        regimenHorario: this.newUserForm.get('regimenesHorario')?.value,
         remanenteDiasLicencia: null,
-        remuneraciones: null,
+        remuneracion: this.newUserForm.get('remuneraciones')?.value,
         rompeReglaComisionDia: null,
         rompeReglaFichadaReloj: null,
         rompeReglaFichadaSupervisor: null,
@@ -154,16 +308,13 @@ export class CreateUserRRHHComponent implements OnInit {
         id: null,
         documentoIdentidad: {
           nroIdentidad: this.newUserForm.get('dni')?.value,
-          tipoDocumento:this.newUserForm.get('docType')?.value
+          tipoDocumento: this.newUserForm.get('docType')?.value
         }
       }
-
-      console.log(employee);
-
       this._employee.save(employee).subscribe(data => {
 
         Swal.fire({
-          title: "Éxito",
+          title: "Usuario creado",
           icon: "success",
           showCloseButton: false,
           showConfirmButton: false
@@ -173,14 +324,14 @@ export class CreateUserRRHHComponent implements OnInit {
 
       }, err => {
 
-          console.log(err);
+        console.log(err);
 
-          Swal.fire({
-            title: "Oops! hubo un problema",
-            icon: "error",
-            showCloseButton: false,
-            showConfirmButton: false
-          });
+        Swal.fire({
+          title: "Oops! hubo un problema",
+          icon: "error",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
       })
     }
 

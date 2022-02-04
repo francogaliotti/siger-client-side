@@ -113,6 +113,7 @@ export class EditRolComponent implements OnInit {
         const rol: Rol = {
           id: this.editRolForm.get('idRol').value,
           nombreRol: this.editRolForm.get('rolName').value,
+          rolNombre: this.editRolForm.get('rolName').value,
           permisos: permissions,
           codigoRol: ''
         }

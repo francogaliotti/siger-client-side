@@ -95,6 +95,7 @@ small{
 
 .empleado-inputs{  
     width: 300px; 
+    padding-top: 0;
     height: 25px;
     top: 300px; left: 576px;
 }
