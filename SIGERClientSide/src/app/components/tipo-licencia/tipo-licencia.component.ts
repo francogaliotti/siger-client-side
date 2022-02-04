@@ -187,12 +187,16 @@ export class TipoLicenciaComponent implements OnInit {
     this._empleadoService.list(this.searchPage).subscribe(
       data => {
         const admins: Empleado[] = [];
-        for(let e of data){
-          for(let r of e.usuario.roles){
-            if(r.id == 2){
-              admins.push(e);
+        for (let e of data) {
+          if (e.usuario != null) {
+            for (let r of e.usuario.roles) {
+              if (r.id != null) {
+                if (r.id == 2) {
+                  admins.push(e);
+                }
+              }
             }
-          } 
+          }
         }
         this.empleadoArray = admins;
       },
@@ -240,7 +244,7 @@ export class TipoLicenciaComponent implements OnInit {
   onUpdate(id?: number): void {
     this.newTipoLicencia.codigo = this.editTipoLicenciaForm.get('codigo')?.value;
     this.newTipoLicencia.denominacion = this.editTipoLicenciaForm.get('denominacion')?.value;
-    this.newTipoLicencia.observaciones= this.editTipoLicenciaForm.get('observaciones')?.value;
+    this.newTipoLicencia.observaciones = this.editTipoLicenciaForm.get('observaciones')?.value;
     this.newTipoLicencia.justificaPresentismo = this.editTipoLicenciaForm.get('justificaPresentismo')?.value;
     this.newTipoLicencia.tipoRequerimientoAprobadores = this.editTipoLicenciaForm.get('tipoRequerimientoAprobadores')?.value;
     this.newTipoLicencia.tipoRequerimientoAprueban = this.editTipoLicenciaForm.get('tipoRequerimientoAprueban')?.value;

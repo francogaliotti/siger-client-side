@@ -211,12 +211,16 @@ export class TipoBoletaComponent implements OnInit {
     this._empleadoService.list(this.searchPage).subscribe(
       data => {
         const admins: Empleado[] = [];
-        for(let e of data){
-          for(let r of e.usuario.roles){
-            if(r.id == 2){
-              admins.push(e);
+        for (let e of data) {
+          if (e.usuario != null) {
+            for (let r of e.usuario.roles) {
+              if (r.id != null) {
+                if (r.id == 2) {
+                  admins.push(e);
+                }
+              }
             }
-          } 
+          }
         }
         this.empleadoArray = admins;
       },
