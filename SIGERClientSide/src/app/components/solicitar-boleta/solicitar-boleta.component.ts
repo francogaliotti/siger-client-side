@@ -157,7 +157,15 @@ export class SolicitarBoletaComponent implements OnInit {
   cargarTipoBoleta(): void {
     this._tipoBoletaService.list(this.searchPage).subscribe(
       data => {
-        this.tipoBoletaArray = data;
+        const tip: TipoBoletaDTO[] = [];
+        for(let t of data){
+          for(let s of t.tipoRequerimientoAprueban){
+            if(s.id == this.empleado.sector.id){
+              tip.push(t);
+            }
+          }
+        }
+        this.tipoBoletaArray = tip;
       },
       err => {
         console.log(err);

@@ -32,6 +32,9 @@ h1{
     
     
 }
+.multiselect{
+    width: 400px;
+}
 p, i{
     font-size: 15px;
 }

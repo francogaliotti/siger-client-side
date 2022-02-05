@@ -34,17 +34,18 @@ td:nth-child(4){
     width: 15%;
 }
 
-td:nth-child(4) > button{
+td:nth-child(5) > button{
     margin-left: 20px;
     color: white;
 }
-
-.create-form{
+.altaAsistencia{
     background-color: #EBFFEC;
     width: 650px;
-    height: 200px;
+    padding: 20px;
+    height: fit-content;
     border: 2px solid black;
     box-shadow: 5px 5px 15px 2px;
+    margin-top: 25px;
 }
 
 .create-form > button{
@@ -117,4 +118,14 @@ small{
     background-color: #EBFFEC;
     border: 2px solid black;
     box-shadow: 5px 5px 15px 2px;
+}
+.table-responsive{
+    width: fit-content;
+    margin-left: 300px;
+}
+#search{
+    margin-bottom: 20px;
+    margin-left: 200px;
+    width: 450px;
+    height: 25px;
 }

@@ -1,0 +1,9 @@
+.container{
+    margin-top: 25px;
+    background-color: #EBFFEC;
+    width: 650px;
+    height: fit-content;
+    border: 2px solid black;
+    box-shadow: 5px 5px 15px 2px;
+    text-align: center;
+}

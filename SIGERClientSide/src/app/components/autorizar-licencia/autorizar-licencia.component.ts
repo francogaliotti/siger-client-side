@@ -51,7 +51,9 @@ export class AutorizarLicenciaComponent implements OnInit {
         for (let l of data) {
           for (let e of l.tipoLicencia.tipoRequerimiento.aprobadores) {
             if (e.id == this.empleado.id) {
-              lic.push(l);
+                if (l.empleado.sector.id == this.empleado.sector.id){
+                  lic.push(l);
+                }
             }
           }
         }

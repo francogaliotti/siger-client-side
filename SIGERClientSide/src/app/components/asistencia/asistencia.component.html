@@ -1,13 +1,11 @@
 <app-home></app-home>
 <div class="container initial-position">
   <div class="row justify-content-center" *ngIf="isAdmin">
-    <div class="col-6">
+    <div class="col-6 altaAsistencia">
       <form [formGroup]="asistenciaForm" (ngSubmit)="onCreate()" class="create-form">
         <div class="form-group">
           <div class="row">
-            <label class="col-md-3 offset-1 text-end mt-3">
               <b>Fecha y Hora *</b>
-            </label>
             <input formControlName="fechaHora" class="form-control fechaHora-inputs mt-3" type="datetime-local"
               placeholder="Ingrese Fecha y Hora" 
               [class.validfield]="this.asistenciaForm.get('fechaHora')?.valid"
@@ -84,8 +82,8 @@
   End: {{dateRange.value.end | date}}
 </h2> -->
 
-    <div class="col-9">
-      <input type="text" class="form-control mb-2" placeholder="Buscar Asistencias" #txtSearch
+    <div class="col-25">
+      <input type="text" class="form-control" id="search" placeholder="Buscar Asistencias" #txtSearch
         (keyup)="onSearch( txtSearch.value )" />
       <div class="table-responsive">
         <table class="table text-center">
@@ -94,6 +92,7 @@
               <th scope="col" style="display: none;">ID</th>
               <th scope="col">Fecha y Hora</th>
               <th scope="col">Movimiento</th>
+              <th scope="col">Empleado</th>
               <th scope="col">Acciones</th>
             </tr>
           </thead>
@@ -102,14 +101,11 @@
               <td style="display: none;">{{asistencias.id}}</td>
               <td>{{asistencias.fechaHora}}</td>
               <td>{{asistencias.tipoMovimiento}}</td>
+              <td>{{asistencias.empleado.apellido}}, {{asistencias.empleado.nombre}}</td>
               <td>
-                <button class="btn bg-primary" (click)="openDetail(asistencias.id)">
+                <!--<button class="btn bg-primary" (click)="openDetail(asistencias.id)">
                   <fa-icon [icon]="faEye"></fa-icon> Detalles
-                </button>
-                <button class="btn bg-secondary" (click)="openEdit(asistencias.id)" *ngIf="isAdmin">
-                  <fa-icon [icon]="faEdit"></fa-icon>
-                  Editar
-                </button>
+                </button>-->
                 <button class="btn bg-danger" (click)="borrarAsistencia(asistencias.id)" *ngIf="isAdmin">
                   <fa-icon [icon]="faTrash"></fa-icon>Eliminar
                 </button>
@@ -129,7 +125,7 @@
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item"><b>Fecha: </b>{{asistencia.fechaHora}}</li>
                       <li class="list-group-item"><b>Movimiento: </b>{{asistencia.tipoMovimiento}}</li>
-                      <li class="list-group-item"><b>Empleado: </b>${{asistencia.empleado.legajo}}</li>
+                      <li class="list-group-item"><b>Empleado: </b>{{asistencia.empleado.apellido}}, {{asistencia.empleado.nombre}}</li>
                     </ul>
                   </div>
                   <div class="modal-footer mt-4">
@@ -225,3 +221,7 @@
       </div>
     </div>
   </div>
+
+  <footer>
+    <app-footer></app-footer>
+</footer>
