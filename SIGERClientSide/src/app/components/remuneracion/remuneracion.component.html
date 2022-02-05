@@ -6,6 +6,18 @@
         <div class="form-group">
           <div class="row">
             <label class="col-md-3 offset-1 text-end mt-3">
+              <b>Denominación *</b>
+            </label>
+            <input formControlName="denominacion" class="form-control valorHora-inputs mt-3" type="text"
+              placeholder="Ingrese la denominacion" [class.validfield]="this.remuneracionForm.get('denominacion')?.valid"
+              [class.invalidfield]="this.remuneracionForm.get('denominacion')?.invalid && this.remuneracionForm.get('denominacion')?.touched"
+              (focusout)="checkRemuneracionForm()">
+            <small class="text-danger"
+              *ngIf="this.remuneracionForm.get('denominacion')?.touched && this.remuneracionForm.get('denominacion')?.invalid">El
+              campo es obligatorio</small>
+          </div>
+          <div class="row">
+            <label class="col-md-3 offset-1 text-end mt-3">
               <b>Valor Hora *</b>
             </label>
             <input formControlName="valorHora" class="form-control valorHora-inputs mt-3" type="text"
@@ -80,6 +92,7 @@
           <thead>
             <tr>
               <th scope="col" style="display: none;">ID</th>
+              <th scope="col">Denominación</th>
               <th scope="col">Valor Hora</th>
               <th scope="col">Valor Viatico por Dia</th>
               <th scope="col">Acciones</th>
@@ -88,6 +101,7 @@
           <tbody>
             <tr *ngFor="let remuneraciones of remuneracionArray | remuneracionPipe:page:search">
               <td style="display: none;">{{remuneraciones.id}}</td>
+              <td>{{remuneraciones.denominacion}}</td>
               <td>{{remuneraciones.valorHora}}</td>
               <td>{{remuneraciones.valorViaticoDia}}</td>
               <td>
@@ -115,6 +129,7 @@
                   <h5 class="text-center">Detalle de la Remuneració</h5>
                   <div class="container">
                     <ul class="list-group list-group-flush">
+                      <li class="list-group-item"><b>Denominación: </b>{{remuneracion.denominacion}}</li>
                       <li class="list-group-item"><b>Valor por Hora: </b>{{remuneracion.valorHora}}</li>
                       <li class="list-group-item"><b>Valor de Viatico por Dia: </b>{{remuneracion.valorViaticoDia}}</li>
                       <li class="list-group-item"><b>Importe por Horas Adicionales: </b>${{remuneracion.importeHorasAdicionales}}</li>

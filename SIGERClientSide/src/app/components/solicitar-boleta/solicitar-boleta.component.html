@@ -84,7 +84,7 @@
                 <div class="row">
                     <div class="col-5" *ngIf="this.boletaForm.get('tipoBoleta')?.value != null">
                         <p *ngIf="boletaForm.get('tipoBoleta')?.value.tieneMovilidad"> Seleccione Movilidades
-                            <select multiple formControlName="movilidades" *ngIf="boletaForm.get('tipoBoleta')?.value.tieneMovilidad">
+                            <select class="multiselect" multiple formControlName="movilidades" *ngIf="boletaForm.get('tipoBoleta')?.value.tieneMovilidad">
                                 <option *ngFor="let zona of movilidadArray" [ngValue]="zona">{{zona.tipoMovilidad.denominacion}},  Patente: {{zona.patente}}
                                 </option>
                             </select>

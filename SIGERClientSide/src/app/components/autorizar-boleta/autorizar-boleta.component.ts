@@ -51,7 +51,9 @@ export class AutorizarBoletaComponent implements OnInit {
         for (let b of data) {
           for (let e of b.tipoBoleta.tipoRequerimiento.aprobadores) {
             if (e.id == this.empleado.id) {
-              bol.push(b);
+              if (b.empleado.sector.id == this.empleado.sector.id) {
+                bol.push(b);
+              }
             }
           }
         }

@@ -93,16 +93,16 @@ export class CreateUserRRHHComponent implements OnInit {
       specialRoleSelected: [0, [Validators.required]],
       remuneraciones: [0, [Validators.required]],
       regimenesHorario: [0, [Validators.required]],
-      provincia: [0, [Validators.required]],
-      departamento: [0, [Validators.required]],
-      localidad: [0, [Validators.required]],
-      calle: ['', [Validators.required]],
-      nroCalle: ['', [Validators.required]],
+      provincia: [0],
+      departamento: [0],
+      localidad: [0],
+      calle: [''],
+      nroCalle: [''],
       nroPiso: [''],
       nroDepartamento: [''],
       sector: ['', [Validators.required]],
       fechaNacimiento: ['', [Validators.required]],
-      nroTelefonoCelular: ['', [Validators.required]]
+      nroTelefonoCelular: ['']
     });
 
    // this.newUserForm.get('specialRoleSelected').disable();

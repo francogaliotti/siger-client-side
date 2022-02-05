@@ -29,14 +29,14 @@ export class NavbarComponent implements OnInit {
       this.id = this._tokenService.getUserId();
       this.username = this._tokenService.getUsername();
       this.id = this._tokenService.getUserId();
-      /*this._authService.getByUserId(this.id).subscribe(
+      this._authService.getByUserId(this.id).subscribe(
         data => {
           this.usuario = data;
           },
         err => {
           alert(err);
         }
-      );*/
+      );
       if(this._tokenService.IsAdmin()){
         this.role = 'Administrador'
       }

@@ -63,6 +63,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AutorizarBoletaComponent } from './components/autorizar-boleta/autorizar-boleta.component';
 import { AutorizarLicenciaComponent } from './components/autorizar-licencia/autorizar-licencia.component';
+import { MyProfileComponent } from './layouts/my-profile/my-profile.component';
 
 
 @NgModule({
@@ -122,7 +123,8 @@ import { AutorizarLicenciaComponent } from './components/autorizar-licencia/auto
     BoletaPipe,
     MisAsistenciasPipe,
     AutorizarBoletaComponent,
-    AutorizarLicenciaComponent
+    AutorizarLicenciaComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,

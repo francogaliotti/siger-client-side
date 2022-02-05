@@ -48,6 +48,7 @@ import { AutorizarBoletaComponent } from './components/autorizar-boleta/autoriza
 import { AutorizarLicenciaComponent } from './components/autorizar-licencia/autorizar-licencia.component';
 import { AutorizarLicenciaGuardService as autorizarLicenciaGuard} from './guards/autorizar-licencia-guard.service';
 import { AutorizarBoletaGuardService as autorizarBoletaGuard} from './guards/autorizar-boleta-guard.service';
+import { MyProfileComponent } from './layouts/my-profile/my-profile.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -80,6 +81,7 @@ const routes: Routes = [
   {path: 'autorizar-boleta', component: AutorizarBoletaComponent, canActivate: [autorizarBoletaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'autorizar-licencia', component: AutorizarLicenciaComponent, canActivate: [autorizarLicenciaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'firstSignIn', component: FirstSigninComponent},
+  {path: 'my-profile', component: MyProfileComponent},
   {path: '**', component: ErrorsComponent}
 ];
 
