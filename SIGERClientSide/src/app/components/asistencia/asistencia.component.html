@@ -21,7 +21,7 @@
             <div class="row">
               <div class="col-12">
                 <b>Entrada o Salida *</b>
-                <select formControlName="tipoMovimiento" class="form-control tipoMovimiento-inputs mt-3"
+                <select formControlName="tipoMovimiento" class="form-control empleado-inputs mt-3"
                 [class.validfield]="this.asistenciaForm.get('tipoMovimiento')?.valid"
                 [class.invalidfield]="this.asistenciaForm.get('tipoMovimiento')?.invalid && this.asistenciaForm.get('tipoMovimiento')?.touched"
                 (focusout)="checkAsistenciaForm()">
@@ -60,7 +60,7 @@
     </div>
   </div>
   <div class="row mt-4">
-    <div class="col-2">
+    <!-- <div class="col-2">
     </div>
     <h2>Angular 12 Date Range Picker Demo</h2>
 
@@ -82,7 +82,7 @@
 <h2>
   Start: {{dateRange.value.start | date}}
   End: {{dateRange.value.end | date}}
-</h2>
+</h2> -->
 
     <div class="col-9">
       <input type="text" class="form-control mb-2" placeholder="Buscar Asistencias" #txtSearch

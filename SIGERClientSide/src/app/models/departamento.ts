@@ -1,12 +1,30 @@
 import { BaseEntity } from "./base-entity";
 import { Provincia } from "./provincia";
 
-export class Departamento extends BaseEntity{
+export class Departamento{
 
-	denominacion: string;
+	categoria: string;
 
-	//Relation
+	id: string;
 
-	provincia: Provincia;
+	latitud: string;
+
+	longitud: string;
+
+	fuente: string;
+
+	nombre: string;
+
+	nombre_completo: string;
+
+	provincia: string;
+
+	provincia_interseccion: string;
+
+	provincia_nombre: string;
+
+	constructor(){
+		;
+	}
 	
 }

@@ -1,5 +1,8 @@
 import { BaseEntity } from "./base-entity";
+import { Departamento } from "./departamento";
 import { Localidad } from "./localidad";
+import { Municipio } from "./municipio";
+import { Provincia } from "./provincia";
 
 export class Domicilio extends BaseEntity{
 
@@ -11,12 +14,13 @@ export class Domicilio extends BaseEntity{
 	
 	nroPiso: string;
 
-	barrio: string;
-	manzana: string;
-	casa: string;
-
 	//Relation
 
 	localidad: Localidad;
+	provincia: Provincia;
+	departamento: Departamento;
+	constructor(){
+		super();
+	}
 
 }

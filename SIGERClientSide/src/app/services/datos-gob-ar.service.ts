@@ -36,5 +36,19 @@ export class DatosGobArService extends connectionURL{
     return this.httpClient.get<Localidad[]>(this.app_url + this.endpoint)
   }
 
+  public listProvincias(): Observable<Provincia[]>{
+    this.endpoint = 'datos-gob-ar/provincias/list';
+    return this.httpClient.get<Provincia[]>(this.app_url + this.endpoint)
+  }
+
+  public listDepartamentosByProvincia(idProv: number): Observable<Departamento[]>{
+    this.endpoint = 'datos-gob-ar/departamentos/list/?id='+ idProv;
+    return this.httpClient.get<Departamento[]>(this.app_url + this.endpoint)
+  }
+
+  public listLocalidadesByDepartamento(idDpto: number): Observable<Localidad[]>{
+    this.endpoint = 'datos-gob-ar/localidades/list/?id='+ idDpto;
+    return this.httpClient.get<Localidad[]>(this.app_url + this.endpoint)
+  }
 
 }
