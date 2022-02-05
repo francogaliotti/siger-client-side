@@ -1,0 +1,189 @@
+<app-home></app-home>
+<div class="container initial-position">
+    <header>
+        <div class="row justify-content-center mt-3">
+            Configure las Movilidades
+        </div>
+    </header>
+    <div class="container altaMovilidad mt-4" *ngIf="isAdmin">
+        <form [formGroup]="movilidadForm" (ngSubmit)="onCreate()">
+            <header>
+                <div class="row justify-content-center mt-auto">
+                    Crear Movilidad
+                </div>
+            </header>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-5">
+                        <label class="mt-3" for="Codigo"><b>Codigo Movilidad</b></label>
+                    </div>
+                    <div class="col-7">
+                        <input formControlName="codigo" class="form-control codigo-inputs mt-3" maxlength="30"
+                            [class.validfield]="this.movilidadForm.get('codigo')?.valid"
+                            [class.invalidfield]="this.movilidadForm.get('codigo')?.invalid && this.movilidadForm.get('codigo')?.touched"
+                            type="text" placeholder="Ingrese Codigo de Movilidad" />
+                        <small class="text-danger"
+                            *ngIf="!movilidadForm.get('codigo').valid && movilidadForm.get('codigo').touched">
+                            El campo es obligatorio </small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-5">
+                        <label class="mt-3" for="Patente"><b>Patente Movilidad</b></label>
+                    </div>
+                    <div class="col-7">
+                        <input formControlName="patente" class="form-control patente-inputs mt-3" maxlength="30"
+                            [class.validfield]="this.movilidadForm.get('patente')?.valid"
+                            [class.invalidfield]="this.movilidadForm.get('patente')?.invalid && this.movilidadForm.get('patente')?.touched"
+                            type="text" placeholder="Ingrese Patente de Movilidad" />
+                        <small class="text-danger"
+                            *ngIf="!movilidadForm.get('patente').valid && movilidadForm.get('patente').touched">
+                            El campo es obligatorio </small>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <div class="row">
+                      <div class="col-12">
+                        <p>
+                            Seleccione Tipo de Movilidad 
+                          <select formControlName="tipoMovilidad">
+                            <option *ngFor="let tipo of tipoMovilidadArray" [ngValue]="tipo">{{tipo.denominacion}}</option>
+                          </select>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="form-group">
+                <div class="row justify-content-center mt-3">
+                  <div class="col-12">
+                    <button type="submit" class="btn btn block btn-outline-success">
+                      <fa-icon [icon]="faPlusCircle"></fa-icon> Crear</button>
+                  </div>
+                </div>
+              </div>
+        </form>
+    </div>
+    <div>
+        <div class="row justify-content-center mt-3">
+          Movilidades Existentes
+        </div>
+        <div class="row mt-4">
+            <div class="col-9">
+                <input type="text"
+            class="form-control mb-2" id="search" 
+            placeholder="Buscar Movilidad"
+            #txtSearch
+            (keyup)="onSearch( txtSearch.value )" />
+            <div class="table-responsive">
+                <table class="table text-center">
+                    <thead>
+                        <tr>
+                          <th scope="col" style="display: none;">ID</th>
+                          <th scope="col">Codigo</th>
+                          <th scope="col">Patente</th>
+                          <th scope="col">Tipo de Movilidad</th>
+                          <th scope="col" *ngIf="isAdmin">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let mov of movilidad | movilidadPipe:page:search">
+                          <td style="display: none;">{{mov.id}}</td>
+                          <td>{{mov.codigo}}</td>
+                          <td>{{mov.patente}}</td>
+                          <td *ngIf="mov.tipoMovilidad != null">{{mov.tipoMovilidad.denominacion}}</td>
+                          <td><button class="btn bg-secondary" (click)="open(mov.id)" *ngIf="isAdmin">
+                            <fa-icon [icon]="faEdit"></fa-icon>
+                              Editar</button>
+                            <button class="btn bg-danger" (click)="borrarMovilidad(mov.id)" *ngIf="isAdmin">
+                              <fa-icon [icon]="faTrash"></fa-icon>
+                              Eliminar</button>
+                          </td>
+            
+                        </tr>
+                      </tbody>
+                </table>
+                <button class="btn btn-primary" (click)="prevPage()" [disabled]="page === 0">
+              Anterior
+            </button>
+            &nbsp;
+            <button class="btn btn-primary" (click)="nextPage()" [disabled]="(movilidad | movilidadPipe:page:search).length === 1">
+              Siguiente
+            </button>
+            </div>
+            </div>
+        </div>
+      </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    Actualizar Movilidad
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="editmovilidadForm" (ngSubmit)="onUpdate(newMovilidad.id)">
+                  <input type="hidden" formControlName="id" value="{{newMovilidad.id}}">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-5">
+                                <label class="mt-3" for="Codigo"><b>Codigo Movilidad</b></label>
+                            </div>
+                            <div class="col-7">
+                                <input formControlName="codigo" class="form-control codigo-inputs mt-3" maxlength="30"
+                                    [class.validfield]="this.movilidadForm.get('codigo')?.valid"
+                                    [class.invalidfield]="this.movilidadForm.get('codigo')?.invalid && this.movilidadForm.get('codigo')?.touched"
+                                    type="text" placeholder="Ingrese Codigo de Movilidad" />
+                                <small class="text-danger"
+                                    *ngIf="!movilidadForm.get('codigo').valid && movilidadForm.get('codigo').touched">
+                                    El campo es obligatorio </small>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5">
+                                <label class="mt-3" for="Patente"><b>Patente Movilidad</b></label>
+                            </div>
+                            <div class="col-7">
+                                <input formControlName="patente" class="form-control patente-inputs mt-3" maxlength="30"
+                                    [class.validfield]="this.movilidadForm.get('patente')?.valid"
+                                    [class.invalidfield]="this.movilidadForm.get('patente')?.invalid && this.movilidadForm.get('patente')?.touched"
+                                    type="text" placeholder="Ingrese Patente de Movilidad" />
+                                <small class="text-danger"
+                                    *ngIf="!movilidadForm.get('patente').valid && movilidadForm.get('patente').touched">
+                                    El campo es obligatorio </small>
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <div class="row">
+                              <div class="col-12">
+                                <p>
+                                    Seleccione Tipo de Movilidad 
+                                  <select formControlName="tipoMovilidad">
+                                    <option *ngFor="let tipo of tipoMovilidadArray" [ngValue]="tipo">{{tipo.denominacion}}</option>
+                                  </select>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row justify-content-center mt-3">
+                          <div class="col-12">
+                            <button type="submit" class="btn btn block btn-outline-success">
+                              <fa-icon [icon]="faPlusCircle"></fa-icon> Actualizar</button>
+                          </div>
+                        </div>
+                      </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <app-footer></app-footer>
+</footer>

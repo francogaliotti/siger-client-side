@@ -1,15 +1,27 @@
 <app-home></app-home>
 <div class="container initial-position">
   <div class="row justify-content-center" *ngIf="isAdmin">
-    <div class="col-6">
+    <div class="col-6 altaRemuneracion">
       <form [formGroup]="remuneracionForm" (ngSubmit)="onCreate()" class="create-form">
         <div class="form-group">
           <div class="row">
             <label class="col-md-3 offset-1 text-end mt-3">
-              <b>Código *</b>
+              <b>Denominación *</b>
+            </label>
+            <input formControlName="denominacion" class="form-control valorHora-inputs mt-3" type="text"
+              placeholder="Ingrese la denominacion" [class.validfield]="this.remuneracionForm.get('denominacion')?.valid"
+              [class.invalidfield]="this.remuneracionForm.get('denominacion')?.invalid && this.remuneracionForm.get('denominacion')?.touched"
+              (focusout)="checkRemuneracionForm()">
+            <small class="text-danger"
+              *ngIf="this.remuneracionForm.get('denominacion')?.touched && this.remuneracionForm.get('denominacion')?.invalid">El
+              campo es obligatorio</small>
+          </div>
+          <div class="row">
+            <label class="col-md-3 offset-1 text-end mt-3">
+              <b>Valor Hora *</b>
             </label>
             <input formControlName="valorHora" class="form-control valorHora-inputs mt-3" type="text"
-              placeholder="Ingrese Codigo del Viatico" [class.validfield]="this.remuneracionForm.get('valorHora')?.valid"
+              placeholder="Ingrese Valor" [class.validfield]="this.remuneracionForm.get('valorHora')?.valid"
               [class.invalidfield]="this.remuneracionForm.get('valorHora')?.invalid && this.remuneracionForm.get('valorHora')?.touched"
               (focusout)="checkRemuneracionForm()">
             <small class="text-danger"
@@ -18,10 +30,10 @@
           </div>
           <div class="row mt-1">
             <label class="col-md-3 offset-1 text-end mt-3">
-              <b>Descripción *</b>
+              <b>Valor Viático Día *</b>
             </label>
             <input formControlName="valorViaticoDia" class="form-control valorViaticoDia-inputs mt-3"
-              type="text" placeholder="Ingrese Nombre del Viatico"
+              type="text" placeholder="Ingrese Valor"
               [class.validfield]="this.remuneracionForm.get('valorViaticoDia')?.valid"
               [class.invalidfield]="this.remuneracionForm.get('valorViaticoDia')?.invalid && this.remuneracionForm.get('valorViaticoDia')?.touched"
               (focusout)="checkRemuneracionForm()">
@@ -31,10 +43,10 @@
           </div>
           <div class="row">
             <label class="col-md-3 offset-1 text-end mt-3">
-              <b>Código *</b>
+              <b>Importe Horas Adicionales *</b>
             </label>
             <input formControlName="importeHorasAdicionales" class="form-control importeHorasAdicionales-inputs mt-3" type="text"
-              placeholder="Ingrese Codigo del Viatico" [class.validfield]="this.remuneracionForm.get('importeHorasAdicionales')?.valid"
+            placeholder="Ingrese Importe" [class.validfield]="this.remuneracionForm.get('importeHorasAdicionales')?.valid"
               [class.invalidfield]="this.remuneracionForm.get('importeHorasAdicionales')?.invalid && this.remuneracionForm.get('importeHorasAdicionales')?.touched"
               (focusout)="checkRemuneracionForm()">
             <small class="text-danger"
@@ -43,10 +55,10 @@
           </div>
           <div class="row mt-1">
             <label class="col-md-3 offset-1 text-end mt-3">
-              <b>Descripción *</b>
+              <b>Importe Zona Desarraigo *</b>
             </label>
             <input formControlName="importeZonaDesarraigo" class="form-control importeZonaDesarraigo-inputs mt-3"
-              type="text" placeholder="Ingrese Nombre del Viatico"
+              type="text" placeholder="Ingrese Importe"
               [class.validfield]="this.remuneracionForm.get('importeZonaDesarraigo')?.valid"
               [class.invalidfield]="this.remuneracionForm.get('importeZonaDesarraigo')?.invalid && this.remuneracionForm.get('importeZonaDesarraigo')?.touched"
               (focusout)="checkRemuneracionForm()">
@@ -55,8 +67,8 @@
               campo es obligatorio</small>
           </div>
         </div>
-        <button class="btn text-white mt-4 btn-sm" #CreatePermission disabled>
-          <fa-icon [icon]="fapluscircle"> </fa-icon>Aceptar
+        <button class="text-white mt-4 btn-sm btn-outline-success" #CreatePermission disabled>
+          <fa-icon [icon]="fapluscircle"> </fa-icon> Crear
         </button>
       </form>
     </div>
@@ -80,6 +92,7 @@
           <thead>
             <tr>
               <th scope="col" style="display: none;">ID</th>
+              <th scope="col">Denominación</th>
               <th scope="col">Valor Hora</th>
               <th scope="col">Valor Viatico por Dia</th>
               <th scope="col">Acciones</th>
@@ -88,6 +101,7 @@
           <tbody>
             <tr *ngFor="let remuneraciones of remuneracionArray | remuneracionPipe:page:search">
               <td style="display: none;">{{remuneraciones.id}}</td>
+              <td>{{remuneraciones.denominacion}}</td>
               <td>{{remuneraciones.valorHora}}</td>
               <td>{{remuneraciones.valorViaticoDia}}</td>
               <td>
@@ -115,6 +129,7 @@
                   <h5 class="text-center">Detalle de la Remuneració</h5>
                   <div class="container">
                     <ul class="list-group list-group-flush">
+                      <li class="list-group-item"><b>Denominación: </b>{{remuneracion.denominacion}}</li>
                       <li class="list-group-item"><b>Valor por Hora: </b>{{remuneracion.valorHora}}</li>
                       <li class="list-group-item"><b>Valor de Viatico por Dia: </b>{{remuneracion.valorViaticoDia}}</li>
                       <li class="list-group-item"><b>Importe por Horas Adicionales: </b>${{remuneracion.importeHorasAdicionales}}</li>

@@ -14,5 +14,13 @@ export class Movilidad extends BaseEntity{
 	//Relation
 
 	tipoMovilidad: TipoMovilidad;
+
+	constructor(codigo:string,patente:string,tipoMovilidad:TipoMovilidad,id?:number){
+		super();
+		this.codigo=codigo;
+		this.patente=patente;
+		this.tipoMovilidad=tipoMovilidad;
+		this.id=id;
+	}
 	
 }

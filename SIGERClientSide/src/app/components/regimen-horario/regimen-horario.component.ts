@@ -65,24 +65,24 @@ export class RegimenHorarioComponent implements OnInit {
     this.regimenHorarioForm = this._regimenHorario.group({
       horaMinutoInicioJornadaLaboral: ['', [Validators.required, Validators.maxLength(10)]],
       horaMinutoFinJornadaLaboral: ['', [Validators.required, Validators.maxLength(10)]],
-      tipoRegimenHorario:null
+      tipoRegimenHorario:['', [Validators.required]]
     });
     this.editRegimenHorarioForm = this._editRegimenHorario.group({
       id: ["", Validators.required],
       horaMinutoInicioJornadaLaboral: ['', [Validators.required, Validators.maxLength(10)]],
       horaMinutoFinJornadaLaboral: ['', [Validators.required, Validators.maxLength(10)]],
-      tipoRegimenHorario:null
+      tipoRegimenHorario:['', [Validators.required]]
     });
   }
 
   ngOnInit(): void {
-    this.cargarRegimenHorario();
     this.tipoRegimenHorarioList();
+    this.cargarRegimenHorario();
     this.isAdmin = this._tokenService.IsAdmin();
   }
 
   cargarRegimenHorario(): void {
-    this._regimenHorarioService.list(this.searchPage).subscribe(
+    this._regimenHorarioService.page(this.searchPage).subscribe(
       data => {
         this.regimenHorarioArray = data;
       },
@@ -160,6 +160,7 @@ export class RegimenHorarioComponent implements OnInit {
             showCloseButton: false,
             showConfirmButton: false
           });
+          console.log(err);
         }
       );
     }
@@ -266,7 +267,7 @@ export class RegimenHorarioComponent implements OnInit {
   }
 
   checkEditRegimenHorarioForm(): void {
-    if (this.editRegimenHorarioForm.get('horaMinutoInicioJornadaLaboral')?.valid && this.editRegimenHorarioForm.get('horaMinutoFinJornadaLaboral')?.valid ) {
+    if (this.editRegimenHorarioForm.get('horaMinutoInicioJornadaLaboral')?.valid && this.editRegimenHorarioForm.get('horaMinutoFinJornadaLaboral')?.valid && this.regimenHorarioForm.get('tipoRegimenHorario')?.valid) {
       this.renderer.setProperty(this.EditPermission.nativeElement, 'disabled', false);
     } else {
       this.renderer.setProperty(this.EditPermission.nativeElement, 'disabled', true);

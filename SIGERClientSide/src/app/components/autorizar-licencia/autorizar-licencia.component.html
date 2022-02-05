@@ -1,0 +1,101 @@
+<app-home></app-home>
+<div class="container initial-position" *ngIf="isAdmin">
+    <header>
+        <div class="row justify-content-center mt-3">
+            <h1>Licencias a Aprobar</h1>
+        </div>
+    </header>
+    <div class="row mt-4">
+        <div class="col-9">
+            <input type="text" class="form-control mb-2" id="search" placeholder="Buscar por Tipo de Licencia" #txtSearch
+            (keyup)="onSearch( txtSearch.value )" />
+        </div>
+        <div class="table-responsive">
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                      <th scope="col" style="display: none;">ID</th>
+                      <th scope="col">Empleado</th>
+                      <th scope="col">Tipo de Licencia</th>
+                      <th scope="col">Estado</th>
+                      <th scope="col">Fecha Solicitud</th>
+                      <th scope="col">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let l of licenciaArray | licenciaPipe:page:search">
+                      <td style="display: none;">{{l.id}}</td>
+                      <td>{{l.empleado.apellido}} {{l.empleado.nombre}}</td>
+                      <td>{{l.tipoLicencia.denominacion}}</td>
+                      <td >{{l.estadoActual}}</td>
+                      <td >{{l.fechaAlta}}</td>
+                      <td>     
+                        <button class="btn bg-success" (click)="onAuthorize(l.id)" *ngIf='l.estadoActual=="Aprobada"' disabled>
+                          <fa-icon [icon]="faCheck"></fa-icon>
+                          Autorizar
+                        </button>
+                        <button class="btn bg-success" (click)="onAuthorize(l.id)" *ngIf='l.estadoActual!="Aprobada"'>
+                            <fa-icon [icon]="faCheck"></fa-icon>
+                            Autorizar
+                          </button>
+                          <button class="btn bg-danger" (click)="onReject(l.id)" *ngIf='l.estadoActual=="Rechazada"' disabled>
+                            <fa-icon [icon]="faTimes"></fa-icon>
+                            Rechazar
+                          </button>
+                        <button class="btn bg-danger" (click)="onReject(l.id)" *ngIf='l.estadoActual!="Rechazada"'>
+                          <fa-icon [icon]="faTimes"></fa-icon>
+                          Rechazar
+                        </button>
+                        <button class="btn bg-primary" (click)="openDetail(l.id)">
+                            <fa-icon [icon]="faEye"></fa-icon> Detalles
+                          </button>
+                      </td>
+        
+                    </tr>
+                  </tbody>
+            </table>
+            <button class="btn btn-primary" (click)="prevPage()" [disabled]="page === 0">
+                Anterior
+              </button>
+              &nbsp;
+              <button class="btn btn-primary" (click)="nextPage()"
+                [disabled]="(licenciaArray | licenciaPipe:page:search).length === 1">
+                Siguiente
+              </button>
+        </div>
+      </div>
+</div>
+
+
+<!--Detail Modal-->
+<div class="modal fade" id="detalleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-body edit-form">
+            <h5 class="text-center">Detalle de Solicitud</h5>
+            <div class="container">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><b>Fecha Solicitud: </b>{{newLicencia.fechaAlta}}</li>
+                    <li class="list-group-item" *ngIf="newLicencia.tipoLicencia != null"><b>Tipo: </b>{{newLicencia.tipoLicencia.denominacion}}</li>
+                    <li class="list-group-item"><b>Fecha Inicio: </b>{{newLicencia.fechaInicioLicencia}}</li>
+                    <li class="list-group-item"><b>Fecha Fin: </b>{{newLicencia.fechaFinLicencia}}</li>
+                    <li class="list-group-item"><b>Observaciones: </b>{{newLicencia.observacionesLicencia}}</li>
+                    <li class="list-group-item"><b>Estado: </b>{{newLicencia.estadoActual}}</li>
+                  </ul>
+            </div>
+            <div class="modal-footer mt-4">
+                <button class="btn btn-outline-primary btn-block" (click)="volver()">
+                  <fa-icon [icon]="faArrow"></fa-icon> Volver
+                </button>
+        </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<footer>
+    <app-footer></app-footer>
+</footer>

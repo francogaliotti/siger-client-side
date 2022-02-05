@@ -22,7 +22,7 @@
               class="form-control horaMinutoInicioJornadaLaboral-inputs mt-3" maxlength="10"
               [class.validfield]="this.regimenHorarioForm.get('horaMinutoInicioJornadaLaboral')?.valid"
               [class.invalidfield]="this.regimenHorarioForm.get('horaMinutoInicioJornadaLaboral')?.invalid && this.regimenHorarioForm.get('horaMinutoInicioJornadaLaboral')?.touched"
-              type="text" placeholder="Ingrese hora y minuto de Inicio de Jornada Laboral" />
+              type="time" placeholder="Ingrese hora y minuto de Inicio de Jornada Laboral" />
             <small class="text-danger"
               *ngIf="!regimenHorarioForm.get('horaMinutoInicioJornadaLaboral').valid && regimenHorarioForm.get('horaMinutoInicioJornadaLaboral').touched">
               El campo es obligatorio </small>
@@ -40,7 +40,7 @@
               class="form-control horaMinutoFinJornadaLaboral-inputs mt-3"
               [class.validfield]="this.regimenHorarioForm.get('horaMinutoFinJornadaLaboral')?.valid"
               [class.invalidfield]="this.regimenHorarioForm.get('horaMinutoFinJornadaLaboral')?.invalid && this.regimenHorarioForm.get('horaMinutoFinJornadaLaboral')?.touched"
-              type="text" placeholder="Ingrese hora y minuto de Finalización de Jornada Laboral" />
+              type="time" placeholder="Ingrese hora y minuto de Finalización de Jornada Laboral" />
             <small class="text-danger"
               *ngIf="!regimenHorarioForm.get('horaMinutoFinJornadaLaboral').valid && regimenHorarioForm.get('horaMinutoFinJornadaLaboral').touched">
               El campo es obligatorio </small>
@@ -100,7 +100,7 @@
 
   <div class="row mt-4">
     <div class="col-9">
-      <input type="text" class="form-control mb-2" placeholder="Buscar Regimenes Horarios" #txtSearch
+      <input type="text" id="search"  class="form-control mb-2" placeholder="Buscar Regimenes Horarios" #txtSearch
         (keyup)="onSearch( txtSearch.value )" />
       <div class="table-responsive">
         <table class="table text-center">
@@ -119,9 +119,11 @@
               <td>{{regimenesHorarios.horaMinutoInicioJornadaLaboral}}</td>
               <td>{{regimenesHorarios.horaMinutoFinJornadaLaboral}}</td>
               <td>
+                
                 <button class="btn bg-primary" (click)="openDetail(regimenesHorarios.id)">
                   <fa-icon [icon]="faEye"></fa-icon> Detalles
                 </button>
+               
                 <button class="btn bg-secondary" (click)="open(regimenesHorarios.id)" *ngIf="isAdmin">
                   <fa-icon [icon]="faEdit"></fa-icon>
                   Editar
@@ -168,7 +170,7 @@
             <li class="list-group-item" *ngIf="regimenHorario.isActive==true"><b>Movilidad: </b>Si</li>
             <li class="list-group-item" *ngIf="regimenHorario.isActive==false"><b>Movilidad: </b>No</li>
 
-            <li class="list-group-item"><b>Tipo de Regimen:
+            <li *ngIf ="regimenHorario.tipoRegimenHorario != null" class="list-group-item"><b>Tipo de Regimen:
               </b>{{regimenHorario.tipoRegimenHorario.denominacionTipoRegimenHorario}}
             </li>
           </ul>

@@ -47,24 +47,6 @@
           </div>
         </div>
       </div>
-      <div class="row mt-4 cantidad">
-        <div class="col-12">
-          <i>Cantidad Máxima Anual: </i>
-          <input formControlName="cantidadMaximaAnual" type="number" id="cantidadMaximaAnual">
-        </div>
-      </div>
-      <div class="row mt-4 cantidad">
-        <div class="col-12">
-          <i>Cantidad Máxima Mensual: </i>
-          <input formControlName="cantidadMaximaMensual" type="number" id="cantidadMaximaMensual">
-        </div>
-      </div>
-      <div class="row mt-4 cantidad">
-        <div class="col-12">
-          <i>Cantidad Máxima Diaria: </i>
-          <input formControlName="cantidadMaximaDiaria" type="number" id="cantidadMaximaDiaria">
-        </div>
-      </div>
       <div class="row mt-3">
         <div class="col-12">
           <input formControlName="justificaPresentismo" type="checkbox" id="justificaPresentismo"><i> Justifica
@@ -159,7 +141,7 @@
   <div class="row mt-4">
 
     <div class="col-9">
-      <input type="text" class="form-control mb-2" placeholder="Buscar Tipos de Licencia" #txtSearch
+      <input type="text" class="form-control mb-2" id="search" placeholder="Buscar Tipos de Licencia" #txtSearch
         (keyup)="onSearch( txtSearch.value )" />
       <div class="table-responsive">
         <table class="table text-center">
@@ -219,9 +201,6 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item"><b>Codigo: </b>{{newTipoLicencia.codigo}}</li>
             <li class="list-group-item"><b>Denominacion: </b>{{newTipoLicencia.denominacion}}</li>
-            <li class="list-group-item"><b>Cantidad Máxima Anual: </b>{{newTipoLicencia.cantidadMaximaAnual}}</li>
-            <li class="list-group-item"><b>Cantidad Máxima Mensual: </b>{{newTipoLicencia.cantidadMaximaMensual}}</li>
-            <li class="list-group-item"><b>Cantidad Máxima Diaria: </b>{{newTipoLicencia.cantidadMaximaDiaria}}</li>
             <li class="list-group-item" *ngIf="newTipoLicencia.justificaPresentismo==true"><b>Justifica Presentismo:
               </b>Si</li>
             <li class="list-group-item" *ngIf="newTipoLicencia.justificaPresentismo==false"><b>Justifica Presentismo:
@@ -294,24 +273,6 @@
               </div>
             </div>
 
-          </div>
-          <div class="row mt-4 cantidad">
-            <div class="col-12">
-              <i>Cantidad Máxima Anual: </i>
-              <input formControlName="cantidadMaximaAnual" type="number" id="cantidadMaximaAnual">
-            </div>
-          </div>
-          <div class="row mt-4 cantidad">
-            <div class="col-12">
-              <i>Cantidad Máxima Mensual: </i>
-              <input formControlName="cantidadMaximaMensual" type="number" id="cantidadMaximaMensual">
-            </div>
-          </div>
-          <div class="row mt-4 cantidad">
-            <div class="col-12">
-              <i>Cantidad Máxima Diaria: </i>
-              <input formControlName="cantidadMaximaDiaria" type="number" id="cantidadMaximaDiaria">
-            </div>
           </div>
           <div class="row mt-3">
             <div class="col-12">

@@ -8,7 +8,8 @@ import { RemanenteDiasLicencia } from "./remanente-dias-licencia";
 import { Remuneracion } from "./remuneracion";
 import { Usuario } from "./usuario";
 import { Nacionalidad } from "./nacionalidad";
-import { DocumentoIdentidad } from "./documentoidentidad";
+import { DocumentoIdentidad } from "./documento-identidad";
+import { Sector } from "./sector";
 
 export class Empleado extends BaseEntity{
 	
@@ -44,15 +45,19 @@ export class Empleado extends BaseEntity{
 	
 	nroTelefonoCelular: string;
 
-	remuneraciones: Array<Remuneracion>;
+	//Relations
 
-	regimenesHorario: Array<RegimenHorario>;
+	remuneracion:Remuneracion;
+
+	regimenHorario: RegimenHorario;
 
 	usuario: Usuario;
 
 	domicilio: Domicilio;
 
-	historialSectorEmpleado: Array<HistorialSectorEmpleado>;
+	//historialSectorEmpleado: Array<HistorialSectorEmpleado>;
+
+	sector: Sector;
 
 	planillas: Array<Planilla>;
 

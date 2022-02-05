@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Empleado } from '../models/empleado';
 import { connectionURL } from './connectionURL';
 
@@ -22,6 +23,11 @@ export class EmpleadoService extends connectionURL{
     this.endpoint = 'empleado/' + id;
     return this.httpClient.get<Empleado>(this.app_url + this.endpoint);
   }
+
+  public getByUsuarioId(id: number): Observable<Empleado>{
+    this.endpoint = 'empleado/buscar-empleado-por-usuario/' + id;
+    return this.httpClient.get<Empleado>(this.app_url + this.endpoint);
+  } 
 
   public getByUserName(username: string): Observable<Empleado>{
     this.endpoint = 'empleado/employee/' + username;

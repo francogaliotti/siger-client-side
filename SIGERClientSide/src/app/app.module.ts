@@ -8,10 +8,6 @@ import { RecoveryPasswordComponent } from './layouts/recovery-password/recovery-
 import { HttpClientModule } from '@angular/common/http';
 import { ListaPermisoComponent } from './components/permiso/lista-permiso.component';
 import { EditarPermisoComponent } from './components/permiso/editar-permiso.component'
-import { ListaProvinciaComponent } from './components/provincia/lista-provincia.component';
-import { DetalleProvinciaComponent } from './components/provincia/detalle-provincia.component';
-import { EditarProvinciaComponent } from './components/provincia/editar-provincia.component';
-import { NuevoProvinciaComponent } from './components/provincia/nuevo-provincia.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { VerticalnavbarComponent } from './layouts/verticalnavbar/verticalnavbar.component';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
@@ -39,6 +35,14 @@ import { ViaticoPipe } from './pipes/viatico.pipe';
 import { TipoBoletaPipe } from './pipes/tipo-boleta.pipe';
 import { TipoLicenciaPipe } from './pipes/tipo-licencia.pipe';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { AsistenciaPipe } from './pipes/asistencia.pipe';
+import { AsistenciaComponent } from './components/asistencia/asistencia.component';
+import { TipoMovilidadComponent } from './components/tipo-movilidad/tipo-movilidad.component';
+import { MovilidadComponent } from './components/movilidad/movilidad.component';
+import { TipoMovilidadPipe } from './pipes/tipo-movilidad.pipe';
+import { MovilidadPipe } from './pipes/movilidad.pipe';
+import { SectorComponent } from './components/sector/sector.component';
+import { SectorPipe } from './pipes/sector.pipe';
 import { FirstSigninComponent } from './components/users/first-signin.component';
 import { TipoRegimenHorarioComponent } from './components/tipo-regimen-horario/tipo-regimen-horario.component'; 
 import { TipoRegimenHorarioPipe } from './pipes/tipo-regimen-horario.pipe';
@@ -49,10 +53,20 @@ import { RemuneracionComponent } from './components/remuneracion/remuneracion.co
 import { TipoSectorPipe } from './pipes/tipo-sector.pipe';
 import { TipoSectorComponent } from './components/tipo-sector/tipo-sector.component';
 import { EditUserProfileComponent } from './components/users/edit-user-profile.component';
-import { MatNativeDateModule } from '@angular/material/core';
-import {MatDatepickerModule} from '@angular/material/datepicker'
 import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from "@angular/material/form-field";
+import { MisAsistenciasComponent } from './components/mis-asistencias/mis-asistencias.component';
+import { SolicitarLicenciaComponent } from './components/solicitar-licencia/solicitar-licencia.component';
+import { LicenciaPipe } from './pipes/licencia.pipe';
+import { SolicitarBoletaComponent } from './components/solicitar-boleta/solicitar-boleta.component';
+import { BoletaPipe } from './pipes/boleta.pipe';
+import { MisAsistenciasPipe } from './pipes/mis-asistencias.pipe';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import { AutorizarBoletaComponent } from './components/autorizar-boleta/autorizar-boleta.component';
+import { AutorizarLicenciaComponent } from './components/autorizar-licencia/autorizar-licencia.component';
+import { MyProfileComponent } from './layouts/my-profile/my-profile.component';
+
 
 @NgModule({
   declarations: [
@@ -62,10 +76,6 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     ListaPermisoComponent,
     EditarPermisoComponent,
     EstadoLicenciaComponent,
-    ListaProvinciaComponent,
-    DetalleProvinciaComponent,
-    EditarProvinciaComponent,
-    NuevoProvinciaComponent,
     FooterComponent,
     NavbarComponent,
     VerticalnavbarComponent,
@@ -89,6 +99,16 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     TipoBoletaPipe,
     TipoLicenciaPipe,
     CreateUserRRHHComponent,
+    AsistenciaPipe,
+    AsistenciaComponent,
+    TipoMovilidadComponent,
+    MovilidadComponent,
+    TipoMovilidadPipe,
+    MovilidadPipe,
+    SectorComponent,
+    SectorPipe,
+
+    CreateUserRRHHComponent,
     FirstSigninComponent,
     TipoRegimenHorarioComponent,
     TipoRegimenHorarioPipe,
@@ -99,6 +119,15 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     TipoSectorPipe,
     TipoSectorComponent,
     EditUserProfileComponent,
+    MisAsistenciasComponent,
+    SolicitarLicenciaComponent,
+    LicenciaPipe,
+    SolicitarBoletaComponent,
+    BoletaPipe,
+    MisAsistenciasPipe,
+    AutorizarBoletaComponent,
+    AutorizarLicenciaComponent,
+    MyProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -114,8 +143,11 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     MatNativeDateModule,
     MatDatepickerModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
     
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatNativeDateModule
   ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent, EditUserProfileComponent]

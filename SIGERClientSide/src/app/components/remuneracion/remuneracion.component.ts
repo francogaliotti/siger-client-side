@@ -23,7 +23,7 @@ export class RemuneracionComponent implements OnInit {
   faArrow = faArrowAltCircleLeft;
   faEye = faEye;
 
-  remuneracion: Remuneracion = new Remuneracion(0, 0, 0, 0);
+  remuneracion: Remuneracion = new Remuneracion("",0, 0, 0, 0);
 
   remuneracionArray: Remuneracion[] = [];
 
@@ -54,6 +54,7 @@ export class RemuneracionComponent implements OnInit {
     private _tokenService: TokenService
   ) {
     this.remuneracionForm = this._remuneracion.group({
+      denominacion: ['', [Validators.required]],
       valorHora: ['', [Validators.required]],
       valorViaticoDia: ['', Validators.required],
       importeHorasAdicionales: ['', [Validators.required]],
@@ -61,6 +62,7 @@ export class RemuneracionComponent implements OnInit {
     });
     this.editRemuneracionForm = this._editRemuneracion.group({
       id: ["", Validators.required],
+      denominacion: ['', [Validators.required]],
       valorHora: ['', [Validators.required]],
       valorViaticoDia: ['', Validators.required],
       importeHorasAdicionales: ['', [Validators.required]],
@@ -74,7 +76,7 @@ export class RemuneracionComponent implements OnInit {
   }
 
   cargarRemuneraciones(): void {
-    this._remuneracionService.list(this.searchPage)
+    this._remuneracionService.page(this.searchPage)
       .subscribe(data => {
         this.remuneracionArray = data;
       },
@@ -125,6 +127,7 @@ export class RemuneracionComponent implements OnInit {
   onCreate(): boolean {
     this.success = false;
     const remuneracion = new Remuneracion(
+      this.remuneracionForm.get('denominacion')?.value,
       this.remuneracionForm.get('valorHora')?.value,
       this.remuneracionForm.get('valorViaticoDia')?.value,
       this.remuneracionForm.get('importeHorasAdicionales')?.value,

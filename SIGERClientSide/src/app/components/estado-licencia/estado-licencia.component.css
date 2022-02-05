@@ -151,6 +151,12 @@ table > tbody > tr > td > button{
     margin-left: 200px;
     width: 700px;
 }
+#search{
+    margin-bottom: 20px;
+    margin-left: 200px;
+    width: 450px;
+    height: 25px;
+}
 
 
 

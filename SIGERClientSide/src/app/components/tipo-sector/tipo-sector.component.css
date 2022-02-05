@@ -105,3 +105,10 @@ small{
     border-style: solid 4px;
     border-color: red;
 }
+#search{
+    margin-top: 20px;
+    
+    margin-bottom: 20px;
+    width: 450px;
+    height: 25px;
+}

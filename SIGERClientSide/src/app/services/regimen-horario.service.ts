@@ -13,8 +13,13 @@ export class RegimenHorarioService extends connectionURL{
     super();
   }
 
-  public list(page: number): Observable<RegimenHorario[]>{
+  public page(page: number): Observable<RegimenHorario[]>{
     this.endpoint = 'regimen-horario/?page='+ page;
+    return this.httpClient.get<RegimenHorario[]>(this.app_url + this.endpoint)
+  }
+
+  public list(): Observable<RegimenHorario[]>{
+    this.endpoint = 'regimen-horario/list';
     return this.httpClient.get<RegimenHorario[]>(this.app_url + this.endpoint)
   }
 

@@ -69,7 +69,7 @@
     
     <div class="col-9">
       <input type="text"
-        class="form-control mb-2"
+        class="form-control mb-2" id="search" 
         placeholder="Buscar Estado de Licencia"
         #txtSearch
         (keyup)="onSearch( txtSearch.value )" />
@@ -89,10 +89,10 @@
               <td style="display: none;">{{estadosLicencia.id}}</td>
               <td>{{estadosLicencia.codEstadoLicencia}}</td>
               <td>{{estadosLicencia.nombreEstadoLicencia}}</td>
-              <td><button class="btn bg-secondary" (click)="open(estadosLicencia.id)" *ngIf="isAdmin">
+              <td *ngIf="isAdmin"><button class="btn bg-secondary" (click)="open(estadosLicencia.id)" *ngIf='estadosLicencia.id >= 4'>
                 <fa-icon [icon]="faEdit"></fa-icon>
                   Editar</button>
-                <button class="btn bg-danger" (click)="borrarEstadoLicencia(estadosLicencia.id)" *ngIf="isAdmin">
+                <button class="btn bg-danger" (click)="borrarEstadoLicencia(estadosLicencia.id)" *ngIf='estadosLicencia.id >= 4'>
                   <fa-icon [icon]="faTrash"></fa-icon>
                   Eliminar</button>
               </td>

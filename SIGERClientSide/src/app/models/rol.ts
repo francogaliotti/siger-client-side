@@ -7,6 +7,8 @@ export class Rol extends BaseEntity{
 	
 	nombreRol: string;
 
+    rolNombre: string;
+
     permisos: Permiso[];
 
     constructor(){

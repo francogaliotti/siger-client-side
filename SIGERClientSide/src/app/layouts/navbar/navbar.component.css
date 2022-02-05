@@ -3,6 +3,8 @@
     height: 115px;
     background-color: #358FDA;
     color: black;
+    z-index: 10 !important;
+    position: sticky !important;
 }
 
 label {

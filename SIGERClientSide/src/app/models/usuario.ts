@@ -2,6 +2,8 @@ import { BaseEntity } from "./base-entity";
 import { Rol } from "./rol";
 
 export class Usuario extends BaseEntity{
+
+    nombre: string;
     
     username: string;
     
@@ -9,13 +11,15 @@ export class Usuario extends BaseEntity{
     
     correoInstitucional: string;
 
-    rolNecesario: string;
+    image: string;
+
+    //rolNecesario: string;
     
-    esPrimerInicio: boolean;
+    isFirstSignin: boolean;
     
     enabled: boolean;
 
-    requiereAutorizacion: boolean;
+  //  requiereAutorizacion: boolean;
 
     recordarme: boolean;
 
@@ -29,7 +33,7 @@ export class Usuario extends BaseEntity{
         this.username = username;
         this.password = password;
         this.correoInstitucional = correoInstitucional;
-        this.rolNecesario = rolNecesario;
+        //this.rolNecesario = rolNecesario;
     }
 
 }

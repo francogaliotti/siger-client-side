@@ -46,7 +46,7 @@
     <div class="col-2">
     </div>
     <div class="col-9">
-      <input type="text" class="form-control mb-2" placeholder="Buscar Estado de Boleta" #txtSearch
+      <input type="text" class="form-control mb-2" id="search" placeholder="Buscar Estado de Boleta" #txtSearch
         (keyup)="onSearch( txtSearch.value )" />
       <div class="table-responsive">
         <table class="table text-center">
@@ -63,15 +63,15 @@
               <td style="display: none;">{{estadosBoleta.id}}</td>
               <td>{{estadosBoleta.codEstadoBoleta}}</td>
               <td>{{estadosBoleta.nombreEstadoBoleta}}</td>
-              <td>
+              <td *ngIf="isAdmin">
                 <!--<button class="btn bg-primary" routerLink="/permiso/detalle/{{permiso.id}}">
                   <fa-icon [icon]="faFileAlt"></fa-icon> Detalles
                 </button>-->
-                <button class="btn bg-secondary" (click)="open(estadosBoleta.id)" *ngIf="isAdmin">
+                <button class="btn bg-secondary" (click)="open(estadosBoleta.id)" *ngIf='estadosBoleta.id >= 4'>
                   <fa-icon [icon]="faEdit"></fa-icon>
                   Editar
                 </button>
-                <button class="btn bg-danger" (click)="borrarEstadoBoleta(estadosBoleta.id)" *ngIf="isAdmin">
+                <button class="btn bg-danger" (click)="borrarEstadoBoleta(estadosBoleta.id)" *ngIf='estadosBoleta.id >= 4'>
                   <fa-icon [icon]="faTrash"></fa-icon>Eliminar
                 </button>
               </td>
