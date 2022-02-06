@@ -6,4 +6,18 @@
     border: 2px solid black;
     box-shadow: 5px 5px 15px 2px;
     text-align: center;
+    padding-bottom: 10px;
+}
+.modal-content{
+    background: #EBFFEC;
+    margin-top: 20px;
+    width: 700px;
+    height: fit-content;
+    top: 2px;
+    border: 2px solid #333333;
+}
+.modal-title{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    margin-left: 150px;
 }

@@ -12,61 +12,74 @@ import { DocumentoIdentidad } from "./documento-identidad";
 import { Sector } from "./sector";
 
 export class Empleado extends BaseEntity{
-	
-	nombre: string;
-	
-	apellido: string;
-	
-	correoPersonal: string;
-	
-	estadoCivil: number;
-	
-	legajo: number;
-	
-	fechaLimiteReemplazo: Date;
-	
-	fechaNacimiento: Date;
-	
-	diasLicenciaAnualFija: number;
-	
-	fechaIngreso: Date;
-	
-	rompeReglaComisionDia: boolean;
-	
-	rompeReglaFichadaReloj: boolean;
-	
-	puedeAprobarRequerimiento: boolean;
-	
-	rompeReglaFichadaSupervisor: boolean;
-	
-	esEncargado: boolean;
-	
-	nroTelefonoFijo: string;
-	
-	nroTelefonoCelular: string;
 
-	//Relations
+    fechaAlta: Date;
 
-	remuneracion:Remuneracion;
+    fechaBaja: Date;
 
-	regimenHorario: RegimenHorario;
+    nombre: string;
 
-	usuario: Usuario;
+    apellido: string;
 
-	domicilio: Domicilio;
+    correoPersonal: string;
 
-	//historialSectorEmpleado: Array<HistorialSectorEmpleado>;
+    estadoCivil: number;
 
-	sector: Sector;
+    nacionalidad: Nacionalidad;
 
-	planillas: Array<Planilla>;
+    legajo: number;
 
-	computoDiasLicencia: Array<ComputoDiasLicencia>;
+    cuil: string;
 
-	remanenteDiasLicencia: Array<RemanenteDiasLicencia>;
+    nroIdentificacionPersonal: string;
 
-	nacionalidad: Nacionalidad;
+    fechaLimiteReemplazo: Date;
 
-	documentoIdentidad: Array<DocumentoIdentidad>
+    fechaNacimiento: Date;
+
+    diasLicenciaAnualFija: number;
+
+    fechaIngreso: Date;
+
+    rompeReglaComisionDia: boolean;
+
+    rompeReglaFichadaReloj: boolean;
+
+    puedeAprobarRequerimiento: boolean;
+
+    rompeReglaFichadaSupervisor: boolean;
+
+    esEncargado: boolean;
+
+    nroTelefonoFijo: string;
+
+    nroTelefonoCelular: string;
+
+    //Relations
+
+    remuneracion:Remuneracion;
+
+    regimenHorario: RegimenHorario;
+
+    usuario: Usuario;
+
+    documentoIdentidad: DocumentoIdentidad;
+
+    domicilio: Domicilio;
+
+    //historialSectorEmpleado: Array<HistorialSectorEmpleado>;
+
+    sector: Sector;
+
+    planillas: Array<Planilla>;
+
+    computoDiasLicencia: Array<ComputoDiasLicencia>;
+
+    remanenteDiasLicencia: Array<RemanenteDiasLicencia>;
+
+    constructor(id?: number){
+        super();
+        this.id = id;
+    }
 
 }

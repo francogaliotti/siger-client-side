@@ -304,10 +304,14 @@ export class CreateUserRRHHComponent implements OnInit {
         rompeReglaFichadaSupervisor: null,
         usuario: account,
         id: null,
-        documentoIdentidad: [{
+        documentoIdentidad: {
           nroIdentidad: this.newUserForm.get('dni')?.value,
           tipoDocumento: this.newUserForm.get('docType')?.value
-        }]
+        },
+        fechaAlta: undefined,
+        fechaBaja: undefined,
+        cuil: '',
+        nroIdentificacionPersonal: ''
       }
       this._employee.save(employee).subscribe(data => {
 

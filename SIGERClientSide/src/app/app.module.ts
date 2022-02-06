@@ -52,7 +52,7 @@ import { RemuneracionPipe } from './pipes/remuneracion.pipe';
 import { RemuneracionComponent } from './components/remuneracion/remuneracion.component';
 import { TipoSectorPipe } from './pipes/tipo-sector.pipe';
 import { TipoSectorComponent } from './components/tipo-sector/tipo-sector.component';
-import { EditUserProfileComponent } from './components/users/edit-user-profile.component';
+//import { EditUserProfileComponent } from './components/users/edit-user-profile.component';
 import { MatInputModule } from '@angular/material/input';
 import { MisAsistenciasComponent } from './components/mis-asistencias/mis-asistencias.component';
 import { SolicitarLicenciaComponent } from './components/solicitar-licencia/solicitar-licencia.component';
@@ -120,7 +120,7 @@ import { EmpleadoPipe } from './pipes/empleado.pipe';
     RemuneracionComponent,
     TipoSectorPipe,
     TipoSectorComponent,
-    EditUserProfileComponent,
+    //EditUserProfileComponent,
     MisAsistenciasComponent,
     SolicitarLicenciaComponent,
     LicenciaPipe,
@@ -154,6 +154,6 @@ import { EmpleadoPipe } from './pipes/empleado.pipe';
     MatNativeDateModule
   ],
   providers: [interceptorProvider],
-  bootstrap: [AppComponent, EditUserProfileComponent]
+  bootstrap: [AppComponent/*, EditUserProfileComponent*/]
 })
 export class AppModule { }

@@ -124,6 +124,7 @@ export class ListUsersComponent implements OnInit {
     this._employee.detail(id).subscribe(
       data =>{
         this.newEmpleado = data
+        console.log(this.newEmpleado)
         this.editEmpleadoForm = this._editForm.group({
           id: [this.newEmpleado.id],
           remuneracion: [this.newEmpleado.remuneracion],

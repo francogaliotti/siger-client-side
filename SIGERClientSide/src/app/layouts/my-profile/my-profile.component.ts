@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faSearch } from '@fortawesome/free-solid-svg-icons';
 import * as bootstrap from 'bootstrap';
 import { Modal } from 'bootstrap';
 import { Departamento } from 'src/app/models/departamento';
@@ -25,10 +25,12 @@ export class MyProfileComponent implements OnInit {
   testModal: Modal | undefined;
   editEmpleadoForm: FormGroup;
   faEdit = faEdit;
+  faSearch = faSearch;
   provincias: Provincia[];
   success: boolean;
   departamentos: Departamento[];
   localidades: Localidad[];
+  newEmpleado: Empleado = new Empleado();;
 
 
   constructor(
@@ -41,10 +43,10 @@ export class MyProfileComponent implements OnInit {
       id: ['', Validators.required],
       correoPersonal: [],
       nroTelefonoCelular: [],
-      calle: [],
-      nroCalle: [],
-      nroDepartamento: [], 
-      nroPiso: [],
+      calle: [""],
+      nroCalle: [""],
+      nroDepartamento: [""],
+      nroPiso: [""],
       localidad: [],
       provincia: [],
       departamento: []
@@ -120,8 +122,63 @@ export class MyProfileComponent implements OnInit {
     this.testModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
       keyboard: false
     })
-    //this.cargarTipoLicenciaForUpdate(id);
+    this.cargarEmpleadoForUpdate(id);
     this.testModal?.show();
+  }
+  cargarEmpleadoForUpdate(id: number) {
+    this._empleado.detail(id).subscribe(
+      data => {
+        this.newEmpleado = data
+        console.log(this.newEmpleado)
+        this.editEmpleadoForm = this._editForm.group({
+          id: [this.newEmpleado.id],
+          correoPersonal: [this.newEmpleado.correoPersonal],
+          nroTelefonoCelular: [this.newEmpleado.nroTelefonoCelular],
+          calle: [this.newEmpleado.domicilio.calle],
+          nroCalle: [this.newEmpleado.domicilio.nroCalle],
+          nroDepartamento: [this.newEmpleado.domicilio.nroDepartamento],
+          nroPiso: [this.newEmpleado.domicilio.nroPiso],
+          localidad: [this.newEmpleado.domicilio.localidad],
+          provincia: [this.newEmpleado.domicilio.provincia],
+          departamento: [this.newEmpleado.domicilio.departamento]
+        })
+      }
+    )
+  }
+  onUpdate(id?: number): void {
+    this.newEmpleado.correoPersonal = this.editEmpleadoForm.get('correoPersonal')?.value;
+    this.newEmpleado.nroTelefonoCelular = this.editEmpleadoForm.get('nroTelefonoCelular')?.value;
+    this.newEmpleado.domicilio.calle = this.editEmpleadoForm.get('calle')?.value;
+    this.newEmpleado.domicilio.nroCalle = this.editEmpleadoForm.get('nroCalle')?.value;
+    this.newEmpleado.domicilio.nroDepartamento = this.editEmpleadoForm.get('nroDepartamento')?.value;
+    this.newEmpleado.domicilio.localidad = this.editEmpleadoForm.get('localidad')?.value;
+    this.newEmpleado.domicilio.provincia = this.editEmpleadoForm.get('provincia')?.value;
+    this.newEmpleado.domicilio.departamento = this.editEmpleadoForm.get('departamento')?.value;
+
+    this._empleado.update(id, this.newEmpleado).subscribe(
+      data => {
+        Swal.fire({
+          title: "Éxito al actualizar",
+          icon: "success",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
+        this.cargarEmpleado();
+        this.testModal?.hide();
+      },
+      err => {
+        Swal.fire({
+          title: "Oops! hubo un problema",
+          icon: "error",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
+        console.log(err);
+        this.cargarEmpleado();
+        this.testModal?.hide();
+      }
+    );
+
   }
 
 }

@@ -24,7 +24,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let e of empleados">
+                        <tr *ngFor="let e of empleados | empleadoPipe:page:search">
                             <td style="display: none;">{{e.id}}</td>
                             <td>{{e.apellido}}, {{e.nombre}}</td>
                             <td>{{e.sector.denominacion}}</td>
