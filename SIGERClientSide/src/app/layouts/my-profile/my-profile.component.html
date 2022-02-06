@@ -29,6 +29,141 @@
             <h3 *ngIf="empleado.nroTelefonoCelular != null">Telefono de Contacto: {{empleado.nroTelefonoCelular}}
             </h3>
         </div>
+        <div class="col-12">
+            <button type="button" (click)="open(empleado.id)" class="btn btn-outline-success btn block"><b><fa-icon [icon]="faEdit"></fa-icon>
+                    Editar Datos Personales</b></button>
+        </div>
+    </div>
+
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">
+                    Editar Datos Personales: {{newEmpleado.apellido}}, {{newEmpleado.nombre}}
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="editEmpleadoForm" (ngSubmit)="onUpdate(newEmpleado.id)">
+
+                    <input type="hidden" formControlName="id" value="{{newEmpleado.id}}">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-end mt-2" for="correoPersonal"><b><i>E-mail personal:
+                                        </i></b></label>
+                                <div class="col-sm-4">
+                                    <input type="text" id="correoPersonal" class="form-control"
+                                        formControlName="correoPersonal">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-end mt-2" for="nroTelefonoCelular"><b><i>Telefono de
+                                            contacto:
+                                        </i></b></label>
+                                <div class="col-sm-4">
+                                    <input type="text" id="nroTelefonoCelular" class="form-control"
+                                        formControlName="nroTelefonoCelular">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row select-searcher">
+                        <label class="col-sm-3 text-end mt-2" for="provincia"><b><i>Provincia: </i></b></label>
+                        <div class="col-sm-4">
+                            <select class="form-control" formControlName="provincia">
+                                <option [ngValue]="0">Seleccione Provincia</option>
+                                <option *ngFor="let prov of provincias" [ngValue]="prov"
+                                    (click)="getDepartamentos(prov.id)">{{prov.nombre}}</option>
+                            </select>
+                            <div class="select-button"
+                                *ngIf="this.editEmpleadoForm.get('provincia')?.value != undefined">
+                                <button class="btn btn-primary"
+                                    (click)="getDepartamentos(this.editEmpleadoForm.get('provincia')?.value.id)">
+                                    <fa-icon [icon]="faSearch"></fa-icon> Buscar Departamentos
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row select-searcher">
+                        <label class="col-sm-3 text-end mt-2" for="departamento"><b><i>Departamentos: </i></b></label>
+                        <div class="col-sm-4">
+                            <select class="form-control" formControlName="departamento">
+                                <option [ngValue]="0">Seleccione Departamento</option>
+                                <option *ngFor="let prov of departamentos" [ngValue]="prov">{{prov.nombre}}</option>
+                            </select>
+                            <div class="select-button"
+                                *ngIf="this.editEmpleadoForm.get('departamento')?.value != undefined">
+                                <button class="btn btn-primary"
+                                    (click)="getLocalidades(this.editEmpleadoForm.get('departamento')?.value.id)">
+                                    <fa-icon [icon]="faSearch"></fa-icon> Buscar Localidades
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 text-end mt-2" for="localidad"><b><i>Localidad: </i></b></label>
+                        <div class="col-sm-4">
+                            <select class="form-control" formControlName="localidad">
+                                <option [ngValue]="0">Seleccione Localidad</option>
+                                <option *ngFor="let prov of localidades" [ngValue]="prov">{{prov.nombre}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 text-end mt-2" for="calle"><b><i>Calle: </i></b></label>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="text" id="calle" formControlName="calle">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 text-end mt-2" for="nroCalle"><b><i>Numeración: </i></b></label>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="text" id="nroCalle" formControlName="nroCalle">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 text-end mt-2" for="nroPiso"><b><i>Numero de Piso (opcional):
+                                </i></b></label>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="text" id="nroPiso" formControlName="nroPiso">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 text-end mt-2" for="nroDepartamento"><b><i>Numero de Departamento
+                                    (opcional): </i></b></label>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="text" id="nroDepartamento"
+                                formControlName="nroDepartamento">
+                        </div>
+                    </div>
+
+                        <div class="form-group">
+                            <div class="row justify-content-center mt-3">
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-outline-success btn block"><b>
+                                            Actualizar</b></button>
+                                </div>
+                            </div>
+                        </div>
+                </form>
+            </div>
+
+        </div>
     </div>
 
 </div>

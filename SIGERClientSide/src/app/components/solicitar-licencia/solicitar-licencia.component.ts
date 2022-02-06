@@ -93,15 +93,8 @@ export class SolicitarLicenciaComponent implements OnInit {
   cargarTipoLicencia(): void {
     this._tipoLicenciaService.list(this.searchPage).subscribe(
       data => {
-        const tip: TipoLicenciaDTO[] = [];
-        for(let t of data){
-          for(let s of t.tipoRequerimientoAprueban){
-            if(s.id == this.empleado.sector.id){
-              tip.push(t);
-            }
-          }
-        }
-        this.tipoLicenciaArray = tip;
+        
+        this.tipoLicenciaArray = data;
       },
       err => {
         console.log(err);

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+/*import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DocumentoIdentidad } from 'src/app/models/documentoidentidad';
 import { Domicilio } from 'src/app/models/domicilio';
@@ -99,24 +99,28 @@ export class EditUserProfileComponent implements OnInit {
         manzana: this.editEmployeeProfile.get('block').value,
         casa: this.editEmployeeProfile.get('house').value,
         localidad: this.editEmployeeProfile.get('locality').value,
-        provincia: this.editEmployeeProfile.get('province').value
+        provincia: this.editEmployeeProfile.get('province').value,
+        departamento: null
       };
 
-      const identityCard: DocumentoIdentidad[] = [{
+      const identityCard: DocumentoIdentidad = {
         nroIdentidad: this.editEmployeeProfile.get('IdentityCardNumber').value,
         tipoDocumento: this.editEmployeeProfile.get('typeOfIdentityCard').value
-      }];
+      };
 
       const dpvUser: Usuario = {
         username: this.employee.usuario.username,
         password: this.editEmployeeProfile.get('password').value,
         correoInstitucional: this.employee.usuario.correoInstitucional,
-        rolNecesario: '',
-        esPrimerInicio: false,
+        //rolNecesario: '',
+        //esPrimerInicio: false,
         enabled: true,
-        requiereAutorizacion: false,
+        //requiereAutorizacion: false,
         recordarme: false,
-        roles: []
+        roles: [],
+        nombre: '',
+        image: '',
+        isFirstSignin: false
       };
 
       // to do add number phone and identity card and its type
@@ -147,7 +151,7 @@ export class EditUserProfileComponent implements OnInit {
         planillas: null,
         computoDiasLicencia: null,
         remanenteDiasLicencia: null,
-        documentoIdentidad: identityCard
+        documentoIdentidad: null
       };
 
       console.log(employeeEdited);
@@ -173,4 +177,4 @@ export class EditUserProfileComponent implements OnInit {
   
 
 
-}
+}*/

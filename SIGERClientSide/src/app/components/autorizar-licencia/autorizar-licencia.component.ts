@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faEye, faCheck, faTimes, faArrowAltCircleLeft} from '@fortawesome/free-solid-svg-icons';
+import { faEye, faCheck, faTimes, faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons';
 import { TokenService } from 'src/app/services/token.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -21,13 +21,13 @@ export class AutorizarLicenciaComponent implements OnInit {
   faTimes = faTimes;
   faCheck = faCheck;
   faArrow = faArrowAltCircleLeft;
-  
+
   isAdmin = false;
 
   searchPage = 0;
   page = 0;
   search: string = '';
-  
+
   licenciaArray: Licencia[] = []
   id: number;
   empleado: Empleado = new Empleado();
@@ -49,12 +49,8 @@ export class AutorizarLicenciaComponent implements OnInit {
       data => {
         const lic: Licencia[] = [];
         for (let l of data) {
-          for (let e of l.tipoLicencia.tipoRequerimiento.aprobadores) {
-            if (e.id == this.empleado.id) {
-                if (l.empleado.sector.id == this.empleado.sector.id){
-                  lic.push(l);
-                }
-            }
+          if (l.empleado.sector.id == this.empleado.sector.id) {
+            lic.push(l);
           }
         }
         this.licenciaArray = lic;
@@ -97,46 +93,46 @@ export class AutorizarLicenciaComponent implements OnInit {
     this.search = search;
   }
 
-  onAuthorize(id?: number): void{
+  onAuthorize(id?: number): void {
     this._licenciaService.authorize(id).subscribe(
-      data=>{
-      Swal.fire({
-        title: "Licencia Autorizada",
-        icon: "success",
-        showCloseButton: false,
-        showConfirmButton: false
-      });
-      this.cargarLicencia();
-    },
-      err =>{
+      data => {
+        Swal.fire({
+          title: "Licencia Autorizada",
+          icon: "success",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
+        this.cargarLicencia();
+      },
+      err => {
         Swal.fire({
           title: "Oops! hubo un problema",
           icon: "error",
           showCloseButton: false,
           showConfirmButton: false
         });
-    })
+      })
   }
 
-  onReject(id: number): void{
+  onReject(id: number): void {
     this._licenciaService.reject(id).subscribe(
-      data=>{
-      Swal.fire({
-        title: "Licencia Rechazada",
-        icon: "success",
-        showCloseButton: false,
-        showConfirmButton: false
-      });
-      this.cargarLicencia();
-    },
-      err =>{
+      data => {
+        Swal.fire({
+          title: "Licencia Rechazada",
+          icon: "success",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
+        this.cargarLicencia();
+      },
+      err => {
         Swal.fire({
           title: "Oops! hubo un problema",
           icon: "error",
           showCloseButton: false,
           showConfirmButton: false
         });
-    })
+      })
   }
 
   openDetail(id?: number): void {

@@ -52,7 +52,7 @@ import { RemuneracionPipe } from './pipes/remuneracion.pipe';
 import { RemuneracionComponent } from './components/remuneracion/remuneracion.component';
 import { TipoSectorPipe } from './pipes/tipo-sector.pipe';
 import { TipoSectorComponent } from './components/tipo-sector/tipo-sector.component';
-import { EditUserProfileComponent } from './components/users/edit-user-profile.component';
+//import { EditUserProfileComponent } from './components/users/edit-user-profile.component';
 import { MatInputModule } from '@angular/material/input';
 import { MisAsistenciasComponent } from './components/mis-asistencias/mis-asistencias.component';
 import { SolicitarLicenciaComponent } from './components/solicitar-licencia/solicitar-licencia.component';
@@ -66,6 +66,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { AutorizarBoletaComponent } from './components/autorizar-boleta/autorizar-boleta.component';
 import { AutorizarLicenciaComponent } from './components/autorizar-licencia/autorizar-licencia.component';
 import { MyProfileComponent } from './layouts/my-profile/my-profile.component';
+import { ListUsersComponent } from './components/users/list-users.component';
+import { EmpleadoPipe } from './pipes/empleado.pipe';
 
 
 @NgModule({
@@ -118,7 +120,7 @@ import { MyProfileComponent } from './layouts/my-profile/my-profile.component';
     RemuneracionComponent,
     TipoSectorPipe,
     TipoSectorComponent,
-    EditUserProfileComponent,
+    //EditUserProfileComponent,
     MisAsistenciasComponent,
     SolicitarLicenciaComponent,
     LicenciaPipe,
@@ -127,7 +129,9 @@ import { MyProfileComponent } from './layouts/my-profile/my-profile.component';
     MisAsistenciasPipe,
     AutorizarBoletaComponent,
     AutorizarLicenciaComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    ListUsersComponent,
+    EmpleadoPipe
   ],
   imports: [
     BrowserModule,
@@ -150,6 +154,6 @@ import { MyProfileComponent } from './layouts/my-profile/my-profile.component';
     MatNativeDateModule
   ],
   providers: [interceptorProvider],
-  bootstrap: [AppComponent, EditUserProfileComponent]
+  bootstrap: [AppComponent/*, EditUserProfileComponent*/]
 })
 export class AppModule { }

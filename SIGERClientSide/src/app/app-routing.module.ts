@@ -39,7 +39,7 @@ import { RegimenHorarioComponent } from './components/regimen-horario/regimen-ho
 import { RemuneracionComponent } from './components/remuneracion/remuneracion.component';
 import { TipoSectorComponent } from './components/tipo-sector/tipo-sector.component';
 import { TipoSectorGuardService as TipoSectorGuard} from './guards/tipo-sector-guard.service';
-import { EditUserProfileComponent } from './components/users/edit-user-profile.component';
+//import { EditUserProfileComponent } from './components/users/edit-user-profile.component';
 import { SolicitarLicenciaComponent } from './components/solicitar-licencia/solicitar-licencia.component';
 import { SolicitarLicenciaGuardService as solicitarLicenciaGuard} from './guards/solicitar-licencia-guard.service';
 import { SolicitarBoletaComponent } from './components/solicitar-boleta/solicitar-boleta.component';
@@ -50,6 +50,7 @@ import { AutorizarLicenciaComponent } from './components/autorizar-licencia/auto
 import { AutorizarLicenciaGuardService as autorizarLicenciaGuard} from './guards/autorizar-licencia-guard.service';
 import { AutorizarBoletaGuardService as autorizarBoletaGuard} from './guards/autorizar-boleta-guard.service';
 import { MyProfileComponent } from './layouts/my-profile/my-profile.component';
+import { ListUsersComponent } from './components/users/list-users.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -74,7 +75,7 @@ const routes: Routes = [
   {path: 'remuneracion', component: RemuneracionComponent},
   {path: 'tipo-sector', component: TipoSectorComponent, canActivate: [TipoSectorGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'createEmployee', component: CreateUserRRHHComponent, canActivate: [EmpleadoGuard], data: {expectedRol: ['admin']}},
-  {path: 'editEmployeeProfile', component: EditUserProfileComponent},
+  //{path: 'editEmployeeProfile', component: EditUserProfileComponent},
   {path: 'altaEmpleado', component: CreateUserRRHHComponent, canActivate: [EmpleadoGuard], data: {expectedRol: ['admin']}},
   {path: 'asistencia', component: AsistenciaComponent, canActivate: [AsistenciaGuard], data: {expectedRol: ['admin']}},
   {path: 'mis-asistencias', component: MisAsistenciasComponent},
@@ -85,6 +86,7 @@ const routes: Routes = [
   {path: 'autorizar-licencia', component: AutorizarLicenciaComponent, canActivate: [autorizarLicenciaGuard], data: { expectedRol: ['admin', 'user'] }},
   {path: 'firstSignIn', component: FirstSigninComponent},
   {path: 'my-profile', component: MyProfileComponent},
+  {path: 'list-users', component: ListUsersComponent},
   {path: '**', component: ErrorsComponent}
 ];
 
