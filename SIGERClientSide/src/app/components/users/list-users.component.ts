@@ -11,9 +11,13 @@ import { SectorService } from 'src/app/services/sector.service';
 import { TokenService } from 'src/app/services/token.service';
 import * as bootstrap from 'bootstrap';
 import { Modal } from 'bootstrap';
-import { Empleado } from 'c:/Users/Franco/OneDrive/Documentos/SigerClientside/SIGER_Client_Side/SIGERClientSide/src/app/models/empleado';
+
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { Empleado } from 'src/app/models/empleado';
+import { Sector } from 'src/app/models/sector';
+import { RegimenHorario } from 'src/app/models/regimen-horario';
+import { Remuneracion } from 'src/app/models/remuneracion';
 
 @Component({
   selector: 'app-list-users',
@@ -21,9 +25,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./list-users.component.css']
 })
 export class ListUsersComponent implements OnInit {
-  sectores: import("c:/Users/Franco/OneDrive/Documentos/SigerClientside/SIGER_Client_Side/SIGERClientSide/src/app/models/sector").Sector[];
-  regimenesHorario: import("c:/Users/Franco/OneDrive/Documentos/SigerClientside/SIGER_Client_Side/SIGERClientSide/src/app/models/regimen-horario").RegimenHorario[];
-  remuneraciones: import("c:/Users/Franco/OneDrive/Documentos/SigerClientside/SIGER_Client_Side/SIGERClientSide/src/app/models/remuneracion").Remuneracion[];
+  sectores: Sector[];
+  regimenesHorario: RegimenHorario[];
+  remuneraciones: Remuneracion[];
   isAdmin = false;
 
   testModal: Modal | undefined;
@@ -37,7 +41,7 @@ export class ListUsersComponent implements OnInit {
   searchPage = 0;
   page = 0;
   search: string = '';
-  empleados: import("c:/Users/Franco/OneDrive/Documentos/SigerClientside/SIGER_Client_Side/SIGERClientSide/src/app/models/empleado").Empleado[];
+  empleados: Empleado[];
   newEmpleado: Empleado = new Empleado();
   editEmpleadoForm: FormGroup;
 
