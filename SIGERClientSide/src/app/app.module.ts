@@ -64,6 +64,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { AutorizarBoletaComponent } from './components/autorizar-boleta/autorizar-boleta.component';
 import { AutorizarLicenciaComponent } from './components/autorizar-licencia/autorizar-licencia.component';
 import { MyProfileComponent } from './layouts/my-profile/my-profile.component';
+import { ListUsersComponent } from './components/users/list-users.component';
+import { EmpleadoPipe } from './pipes/empleado.pipe';
 
 
 @NgModule({
@@ -124,7 +126,9 @@ import { MyProfileComponent } from './layouts/my-profile/my-profile.component';
     MisAsistenciasPipe,
     AutorizarBoletaComponent,
     AutorizarLicenciaComponent,
-    MyProfileComponent
+    MyProfileComponent,
+    ListUsersComponent,
+    EmpleadoPipe
   ],
   imports: [
     BrowserModule,

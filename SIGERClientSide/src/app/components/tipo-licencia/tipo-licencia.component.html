@@ -64,7 +64,7 @@
           <input formControlName="limiteRangoDias" type="number" id="limiteRangoDias">
         </div>
       </div>
-
+<!--
       <div class="form-group mt-4">
         <div class="row">
           <div class="col-12">
@@ -112,7 +112,7 @@
             </p>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="row mt-3">
         <div class="col-12">
           <textarea formControlName="observaciones" class="textarea" rows="5" cols="50"
@@ -210,14 +210,14 @@
             <li class="list-group-item" *ngIf="newTipoLicencia.goceSueldo==false"><b>Goce de Sueldo: </b>No</li>
             <li class="list-group-item"><b>Niveles de autorización: </b>{{newTipoLicencia.tipoRequerimientoCantNiveles}}
             </li>
-            <li class="list-group-item"><b>Sectores: </b>
+            <!--<li class="list-group-item"><b>Sectores: </b>
               <div *ngFor="let sector of newTipoLicencia.tipoRequerimientoAprueban">{{sector.denominacion}}
               </div>
             </li>
             <li class="list-group-item"><b>Aprobadores: </b>
               <div *ngFor="let em of newTipoLicencia.tipoRequerimientoAprobadores">{{em.apellido}}, {{em.nombre}}
               </div>
-            </li>
+            </li> -->
             <li class="list-group-item"><b>Observaciones: </b>{{newTipoLicencia.observaciones}}</li>
 
           </ul>
@@ -291,7 +291,7 @@
               <input formControlName="limiteRangoDias" type="number" id="limiteRangoDias">
             </div>
           </div>
-
+<!--
           <div class="form-group mt-4">
             <div class="row">
               <div class="col-12">
@@ -340,7 +340,7 @@
                 </p>
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="row mt-3">
             <div class="col-12">
               <textarea formControlName="observaciones" class="textarea" rows="5" cols="50"
