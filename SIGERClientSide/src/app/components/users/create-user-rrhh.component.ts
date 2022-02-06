@@ -105,7 +105,7 @@ export class CreateUserRRHHComponent implements OnInit {
       nroTelefonoCelular: ['']
     });
 
-   // this.newUserForm.get('specialRoleSelected').disable();
+    // this.newUserForm.get('specialRoleSelected').disable();
   }
 
   getSector(): void {
@@ -261,7 +261,7 @@ export class CreateUserRRHHComponent implements OnInit {
         password: '',
         image: "",
         recordarme: false,
-       // requiereAutorizacion: this.newUserForm.get('needSpecialRole')?.value,
+        // requiereAutorizacion: this.newUserForm.get('needSpecialRole')?.value,
         roles: this.newUserForm.get('specialRoleSelected')?.value,
         id: null
       }
@@ -270,26 +270,24 @@ export class CreateUserRRHHComponent implements OnInit {
         nombre: this.newUserForm.get('firstname')?.value,
         apellido: this.newUserForm.get('surname')?.value,
         nacionalidad: this.newUserForm.get('nationalitySelected')?.value,
-        nroIdentificacionPersonal: this.newUserForm.get('dni')?.value,
         correoPersonal: this.newUserForm.get('personalEmail')?.value,
         fechaIngreso: this.newUserForm.get('yearOfstarted')?.value,
         computoDiasLicencia: null,
-        cuil: null,
         diasLicenciaAnualFija: null,
         domicilio: {
           calle: this.newUserForm.get('calle')?.value,
           nroCalle: this.newUserForm.get('nroCalle')?.value,
           nroDepartamento: this.newUserForm.get('nroDepartamento')?.value,
           nroPiso: this.newUserForm.get('nroPiso')?.value,
-
+          barrio: '',
+          casa: '',
+          manzana: '',
           provincia: this.newUserForm.get('provincia')?.value,
           departamento: this.newUserForm.get('departamento')?.value,
           localidad: this.newUserForm.get('localidad')?.value
         },
         esEncargado: false,
         estadoCivil: null,
-        fechaAlta: null,
-        fechaBaja: null,
         fechaLimiteReemplazo: null,
         fechaNacimiento: this.newUserForm.get('fechaNacimiento')?.value,
         sector: this.newUserForm.get('sector')?.value,
@@ -306,10 +304,10 @@ export class CreateUserRRHHComponent implements OnInit {
         rompeReglaFichadaSupervisor: null,
         usuario: account,
         id: null,
-        documentoIdentidad: {
+        documentoIdentidad: [{
           nroIdentidad: this.newUserForm.get('dni')?.value,
           tipoDocumento: this.newUserForm.get('docType')?.value
-        }
+        }]
       }
       this._employee.save(employee).subscribe(data => {
 

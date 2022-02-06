@@ -12,10 +12,6 @@ import { DocumentoIdentidad } from "./documento-identidad";
 import { Sector } from "./sector";
 
 export class Empleado extends BaseEntity{
-
-    fechaAlta: Date;
-	
-	fechaBaja: Date;
 	
 	nombre: string;
 	
@@ -25,13 +21,7 @@ export class Empleado extends BaseEntity{
 	
 	estadoCivil: number;
 	
-	nacionalidad: Nacionalidad;
-	
 	legajo: number;
-	
-	cuil: string;
-	
-	nroIdentificacionPersonal: string;
 	
 	fechaLimiteReemplazo: Date;
 	
@@ -63,8 +53,6 @@ export class Empleado extends BaseEntity{
 
 	usuario: Usuario;
 
-	documentoIdentidad: DocumentoIdentidad;
-
 	domicilio: Domicilio;
 
 	//historialSectorEmpleado: Array<HistorialSectorEmpleado>;
@@ -77,9 +65,8 @@ export class Empleado extends BaseEntity{
 
 	remanenteDiasLicencia: Array<RemanenteDiasLicencia>;
 
-	constructor(id?: number){
-		super();
-		this.id = id;
-	}
+	nacionalidad: Nacionalidad;
+
+	documentoIdentidad: Array<DocumentoIdentidad>
 
 }

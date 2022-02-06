@@ -7,20 +7,17 @@ import { Provincia } from "./provincia";
 export class Domicilio extends BaseEntity{
 
     calle: string;
-	
-	nroCalle: number;
-	
-	nroDepartamento: string;
-	
+	nroCalle: number;	
+	nroDepartamento: string;	
 	nroPiso: string;
-
-	//Relation
-
+	barrio: string;
+	manzana: string;
+	casa: string;
 	localidad: Localidad;
 	provincia: Provincia;
+
+	//Relation
 	departamento: Departamento;
-	constructor(){
-		super();
-	}
+
 
 }
