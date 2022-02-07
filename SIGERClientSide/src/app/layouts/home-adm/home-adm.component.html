@@ -13,35 +13,39 @@
         <h3>Como usuario puedes realizar lo siguiente</h3>
         <div class="mini-container container">
             <p>Desde aquí podrás iniciar tus trámites para solicitar las boletas que necesites.</p>
-            <button type="submit">Trámites</button>
+            <button type="submit"><a class="nav-link" href="/solicitar-boleta">Solicitar Boletas</a></button>
         </div>
         <div class="mini-container container">
-            <p>Desde aquí podrás consultar tu asistencia al trabajo.</p>
-            <button type="submit">Asistencia</button>
+            <p>Desde aquí podrás iniciar tus trámites para solicitar las licencias que necesites.</p>
+            <button type="submit"><a class="nav-link" href="/solicitar-licencia">Solicitar Licencias</a></button>
+        </div>
+        <div class="mini-container container">
+            <p>Desde aquí podrás consultar sobre tu asistencia a tu lugar de trabajo.</p>
+            <button type="submit"><a class="nav-link" href="/mis-asistencias">Asistencias</a></button>
         </div>
     </div>
     <div class="admin-container container" *ngIf="isAdmin">
         <h3>¿Eres administrador? Entonces, intenta lo siguiente...</h3>
         <div class="contenedor">
             <div class="micro-container container">
-                <p>Como administrador podrás generar distintos reportes sobre la DPV. También podrás consultar por algún
-                    empleado en cuestión.
-
-                    Por otro lado, podrás consular informes sobre ti mismo, como si de un usuario de bajo privilegios se
-                    tratase.
+                <p>Como administrador tendrás la posibilidad de generar distintos reportes sobre la DPV.
 
                     Para estas tareas se ha provisto de filtros para una mejor experiencia.</p>
-                <button type="submit">Trámites</button>
+                <button type="submit"><a class="nav-link"
+                        href="">
+                        Informes</a></button>
             </div>
             <div class="sub-container">
                 <div class="c-container container">
-                    <p>Desde la sección podrás autorizar las licencias que te han solicitado.</p>
-                    <button type="submit">Consultar Licencias</button>
+                    <p>Desde aquí podrás autorizar o rechazar las licencias que ha solicitado el personal de tu sector.
+                    </p>
+                    <button type="submit"><a class="nav-link" href="/autorizar-licencia">Autorizar
+                            Licencias</a></button>
                 </div>
                 <div class="c-container container">
-                    <p>Las configuraciones permiten llevar a cabo la gestión de las licencias, de los niveles de
-                        autorización, del procesamiento de las fichadas, entre otros.</p>
-                    <button type="submit">Ir a configuraciones</button>
+                    <p>Desde aquí podrás autorizar o rechazar las boletas que ha solicitado el personal de tu sector.
+                    </p>
+                    <button type="submit"><a class="nav-link" href="/autorizar-boleta">Autorizar Boletas</a></button>
                 </div>
             </div>
             <div class="micro-container container">
@@ -52,11 +56,13 @@
                     tanto, es tu tarea administrarlos. Podrás darlos de alta, de baja e incluso editar su perfil si
                     fuera
                     necesario.</p>
-                <button type="submit">Personal</button>
+                <button type="submit"><a class="nav-link" href="/createEmployee">Crear Usuario</a></button>
+                <button type="submit" class="mt-4"><a class="nav-link" href="/list-users">Gestionar
+                        Usuarios</a></button>
             </div>
         </div>
     </div>
 </div>
 <footer>
     <app-footer></app-footer>
-  </footer>
+</footer>
