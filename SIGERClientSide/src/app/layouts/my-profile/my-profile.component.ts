@@ -150,6 +150,7 @@ export class MyProfileComponent implements OnInit {
     this.newEmpleado.nroTelefonoCelular = this.editEmpleadoForm.get('nroTelefonoCelular')?.value;
     this.newEmpleado.domicilio.calle = this.editEmpleadoForm.get('calle')?.value;
     this.newEmpleado.domicilio.nroCalle = this.editEmpleadoForm.get('nroCalle')?.value;
+    this.newEmpleado.domicilio.nroPiso=this.editEmpleadoForm.get('nroPiso')?.value;
     this.newEmpleado.domicilio.nroDepartamento = this.editEmpleadoForm.get('nroDepartamento')?.value;
     this.newEmpleado.domicilio.localidad = this.editEmpleadoForm.get('localidad')?.value;
     this.newEmpleado.domicilio.provincia = this.editEmpleadoForm.get('provincia')?.value;
