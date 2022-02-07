@@ -51,6 +51,10 @@ import { AutorizarLicenciaGuardService as autorizarLicenciaGuard} from './guards
 import { AutorizarBoletaGuardService as autorizarBoletaGuard} from './guards/autorizar-boleta-guard.service';
 import { MyProfileComponent } from './layouts/my-profile/my-profile.component';
 import { ListUsersComponent } from './components/users/list-users.component';
+import { BoletasComponent } from './components/reports/boletas/boletas.component';
+import { LicenciasComponent } from './components/reports/licencias/licencias.component';
+import { ReporteBoletaGuardService as autorizarReporteBoletaGuard } from './guards/reporte-boleta-guard.service';
+import { ReporteLicenciaGuardService as autorizarReporteLicenciaGuard } from './guards/reporte-licencia-guard.service';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -87,6 +91,8 @@ const routes: Routes = [
   {path: 'firstSignIn', component: FirstSigninComponent},
   {path: 'my-profile', component: MyProfileComponent},
   {path: 'list-users', component: ListUsersComponent},
+  {path: 'BallotsReport', component: BoletasComponent, canActivate: [autorizarReporteBoletaGuard], data: { expectedRol: ['admin'] }},
+  {path: 'PermissionsReport', component: LicenciasComponent, canActivate: [autorizarReporteLicenciaGuard], data: { expectedRol: ['admin'] }},
   {path: '**', component: ErrorsComponent}
 ];
 

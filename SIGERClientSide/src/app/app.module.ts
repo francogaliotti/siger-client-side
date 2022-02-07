@@ -68,6 +68,8 @@ import { AutorizarLicenciaComponent } from './components/autorizar-licencia/auto
 import { MyProfileComponent } from './layouts/my-profile/my-profile.component';
 import { ListUsersComponent } from './components/users/list-users.component';
 import { EmpleadoPipe } from './pipes/empleado.pipe';
+import { BoletasComponent } from './components/reports/boletas/boletas.component';
+import { LicenciasComponent } from './components/reports/licencias/licencias.component';
 
 
 @NgModule({
@@ -109,7 +111,6 @@ import { EmpleadoPipe } from './pipes/empleado.pipe';
     MovilidadPipe,
     SectorComponent,
     SectorPipe,
-
     CreateUserRRHHComponent,
     FirstSigninComponent,
     TipoRegimenHorarioComponent,
@@ -131,7 +132,9 @@ import { EmpleadoPipe } from './pipes/empleado.pipe';
     AutorizarLicenciaComponent,
     MyProfileComponent,
     ListUsersComponent,
-    EmpleadoPipe
+    EmpleadoPipe,
+    BoletasComponent,
+    LicenciasComponent
   ],
   imports: [
     BrowserModule,
