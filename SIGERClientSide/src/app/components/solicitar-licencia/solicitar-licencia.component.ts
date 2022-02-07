@@ -238,6 +238,7 @@ export class SolicitarLicenciaComponent implements OnInit {
             showCloseButton: false,
             showConfirmButton: false
           })
+          console.log(err);
         }
       );
     }
