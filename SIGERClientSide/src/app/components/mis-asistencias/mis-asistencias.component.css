@@ -1,0 +1,25 @@
+
+#search{
+    margin-bottom: 20px;
+    margin-left: 200px;
+    width: 450px;
+    height: 25px;
+}
+
+td:nth-child(4) > button{
+    width: fit-content;
+    color: white;
+}
+.modal-content{
+    background: #EBFFEC;
+    margin-top: 20px;
+    width: 600px;
+    height: 350px;
+    top: 2px;
+    border: 2px solid #333333;
+}
+.modal-title{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    margin-left: 150px;
+}

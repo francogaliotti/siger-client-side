@@ -17,3 +17,8 @@ img{
     border-radius: 200px;
     margin-top: 10px;
 }
+button{
+    font-size: 15px;
+    width: max-content;
+    box-shadow: #000 2px 2px 10px .5px;
+}

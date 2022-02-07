@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenService } from 'src/app/services/token.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-adm',
@@ -9,7 +10,7 @@ import { TokenService } from 'src/app/services/token.service';
 export class HomeAdmComponent implements OnInit {
   isAdmin = false;
 
-  constructor(private _tokenService: TokenService) {
+  constructor(private _tokenService: TokenService, private router: Router) {
     document.body.style.backgroundImage = null;
    }
 
