@@ -45,7 +45,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Informes</a>
+            <a class="nav-link" href="#" *ngIf="isAdmin">Informes</a>
             <ul>
               <li>
                 <a href="/BallotsReport" class="nav-link">Boletas</a>
@@ -124,9 +124,9 @@
                   </li>
                 </ul>
               </li>
-              <li>
+              <!--<li>
                 <a href="/permisos" class="nav-link">Permisos</a>
-              </li>
+              </li>-->
               <li>
                 <a href="/zona-inhospita" class="nav-link">Zonas Inhóspitas</a>
               </li>
