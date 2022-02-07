@@ -155,9 +155,21 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-body edit-form">
-                  <h5 class="text-center">Editar Viatico</h5>
+                  <h5 class="text-center">Editar Remuneracion</h5>
                   <form [formGroup]="editRemuneracionForm" (ngSubmit)="onUpdate(remuneracion.id)">
                     <input type="hidden" formControlName="id">
+                    <div class="row">
+                      <label class="col-md-3 offset-1 text-end mt-3">
+                        <b>Denominación *</b>
+                      </label>
+                      <input formControlName="denominacion" class="form-control valorHora-inputs mt-3" type="text"
+                        placeholder="Ingrese la denominacion" [class.validfield]="this.editRemuneracionForm.get('denominacion')?.valid"
+                        [class.invalidfield]="this.editRemuneracionForm.get('denominacion')?.invalid && this.editRemuneracionForm.get('denominacion')?.touched"
+                        (focusout)="checkEditRemuneracionForm()">
+                      <small class="text-danger"
+                        *ngIf="this.editRemuneracionForm.get('denominacion')?.touched && this.editRemuneracionForm.get('denominacion')?.invalid">El
+                        campo es obligatorio</small>
+                    </div>
                     <div class="form-group">
                       <div class="row">
                         <label class="col-md-3 offset-1 text-end mt-3" for="Codigo"><b>Código* </b></label>
@@ -175,7 +187,7 @@
                     </div>
                     <div class="form-group">
                       <div class="row">
-                        <label class="col-md-3 offset-1 text-end mt-3" for="Codigo"><b>Denominación* </b></label>
+                        <label class="col-md-3 offset-1 text-end mt-3" for="Codigo"><b>Valor Viatico dia* </b></label>
                         <div class="col-7">
                           <input formControlName="valorViaticoDia" (focusout)="checkEditRemuneracionForm()"
                             class="form-control valorViaticoDia-inputs mt-3"
@@ -190,7 +202,7 @@
                     </div>
                     <div class="form-group">
                       <div class="row">
-                        <label class="col-md-3 offset-1 text-end mt-3" for="Codigo"><b>Importe* </b></label>
+                        <label class="col-md-3 offset-1 text-end mt-3" for="Codigo"><b>Importe Horas Adicionales* </b></label>
                         <div class="col-7">
                           <input formControlName="importeHorasAdicionales" (focusout)="checkEditRemuneracionForm()"
                             class="form-control importeHorasAdicionales-inputs mt-3"
@@ -205,7 +217,7 @@
                     </div>
                     <div class="form-group">
                       <div class="row">
-                        <label class="col-md-3 offset-1 text-end mt-3" for="Codigo"><b>Importe* </b></label>
+                        <label class="col-md-3 offset-1 text-end mt-3" for="Codigo"><b>Importe Zona Desarraigo* </b></label>
                         <div class="col-7">
                           <input formControlName="importeZonaDesarraigo" (focusout)="checkEditRemuneracionForm()"
                             class="form-control importeZonaDesarraigo-inputs mt-3"
