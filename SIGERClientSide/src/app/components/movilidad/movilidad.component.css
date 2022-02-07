@@ -145,9 +145,12 @@ td:nth-child(4){
     width: 15%;
 }
 
-td:nth-child(4) > button{
+td:nth-child(5) > button{
     margin-left: 20px;
     color: white;
+}
+select{
+    width: 500px;
 }
 table > tbody > tr > td > button{
     font-size: 11px;
