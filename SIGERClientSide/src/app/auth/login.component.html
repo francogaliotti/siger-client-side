@@ -5,12 +5,22 @@
         <input formControlName="username" class="form-control login-inputs" 
          [class.validfield]="this.loginForm.get('username')?.valid"
          [class.invalidfield]="this.loginForm.get('username')?.invalid && this.loginForm.get('username')?.touched" type="text" placeholder="Ingrese su usuario o correo"/>
+         <div class="row mt-2">
+            <div class="col-12 text-warning">
+                <small *ngIf="this.loginForm.get('username')?.touched && this.loginForm.get('username')?.value.length == 0 " 
+                [hidden]="this.loginForm.get('username')?.touched && this.loginForm.get('username')?.value.length > 0">Debe ingresar un usuario</small>
+            </div>
+        </div>
     </div>
     <div class="form-group">
         <input formControlName="password" class="form-control login-inputs"
         [class.validfield]="this.loginForm.get('password')?.valid"
         [class.invalidfield]="this.loginForm.get('password')?.invalid && this.loginForm.get('password')?.touched" type="password" placeholder="Ingrese su contraseña"/>
         <div class="row mt-2">
+            <div class="col-12 text-warning">
+                <small *ngIf="this.loginForm.get('password')?.touched && this.loginForm.get('password')?.value.length < 8" 
+                [hidden]="this.loginForm.get('password')?.touched && this.loginForm.get('password')?.value.length >= 8">La contraseña debe tener como mínimo 8 caracteres</small>
+            </div>
             <div class="col-12">
                 <small><a class="forgot-password" href="/recoveryPassword/">Olvidé mi contraseña</a></small>
             </div>
