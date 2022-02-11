@@ -125,6 +125,7 @@ export class SolicitarBoletaComponent implements OnInit {
     this._boletaService.list(this.searchPage).subscribe(
       data => {
         const bol: Boleta[] = [];
+        console.log(data)
         for (let b of data) {
           if (b.empleado != null) {
             if (b.empleado.id == this.empleado.id) {
@@ -133,6 +134,7 @@ export class SolicitarBoletaComponent implements OnInit {
           }
         }
         this.boletaArray = bol;
+        console.log(bol)
         for (let tipo of this.boletaArray) {
           tipo.estadoActual = tipo.fechasCambioEstadoBoleta.find(e => e.fechaFinEstadoBoleta == null).estadoBoleta.nombreEstadoBoleta;
         }
