@@ -179,28 +179,31 @@ export class MovilidadComponent implements OnInit {
     this.newMovilidad.codigo = this.editmovilidadForm.get('codigo')?.value;
     this.newMovilidad.patente = this.editmovilidadForm.get('patente')?.value;
     this.newMovilidad.tipoMovilidad = this.editmovilidadForm.get('tipoMovilidad')?.value;
-    this._movilidadService.update(id, this.newMovilidad).subscribe(
-      data => {
-        Swal.fire({
-          title: "Éxito al actualizar",
-          icon: "success",
-          showCloseButton: false,
-          showConfirmButton: false
-        });
-        this.cargarMovilidad();
-        this.testModal?.hide();
-      },
-      err => {
-        Swal.fire({
-          title: "Oops! hubo un problema",
-          icon: "error",
-          showCloseButton: false,
-          showConfirmButton: false
-        });
-        console.log(err)
-        this.testModal?.hide();
-      }
-    );
+    if(this.editmovilidadForm.valid){
+      this._movilidadService.update(id, this.newMovilidad).subscribe(
+        data => {
+          Swal.fire({
+            title: "Éxito al actualizar",
+            icon: "success",
+            showCloseButton: false,
+            showConfirmButton: false
+          });
+          this.cargarMovilidad();
+          this.testModal?.hide();
+        },
+        err => {
+          Swal.fire({
+            title: "Oops! hubo un problema",
+            icon: "error",
+            showCloseButton: false,
+            showConfirmButton: false
+          });
+          console.log(err)
+          this.testModal?.hide();
+        }
+      );
+    }
+   
   }
   openDetail(id?: number): void {
     this.modal = new bootstrap.Modal(document.getElementById('detalleModal'), {
