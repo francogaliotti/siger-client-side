@@ -44,8 +44,8 @@ export class BoletaService extends connectionURL{
     return this.httpClient.put<any>(this.app_url + this.endpoint, null);
   }
 
-  public reject(id?: number): Observable<any>{
+  public reject(id: number, boleta: Boleta): Observable<any>{
     this.endpoint = 'boleta/reject/' + id;
-    return this.httpClient.put<any>(this.app_url + this.endpoint, null);
+    return this.httpClient.put<any>(this.app_url + this.endpoint, boleta);
   }
 }

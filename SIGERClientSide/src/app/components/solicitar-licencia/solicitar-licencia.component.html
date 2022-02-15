@@ -195,6 +195,9 @@
                     <li class="list-group-item"><b>Fecha Fin: </b>{{newLicencia.fechaFinLicencia}}</li>
                     <li class="list-group-item"><b>Observaciones: </b>{{newLicencia.observacionesLicencia}}</li>
                     <li class="list-group-item"><b>Estado: </b>{{newLicencia.estadoActual}}</li>
+                    <li class="list-group-item"><b>Motivo de Rechazo: </b>
+                        <div *ngIf="newLicencia.mensajeRechazo != null">{{newLicencia.mensajeRechazo}}</div>
+                      </li>
                   </ul>
             </div>
             <div class="modal-footer mt-4">

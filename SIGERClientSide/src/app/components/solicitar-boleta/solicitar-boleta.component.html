@@ -305,6 +305,9 @@ aria-hidden="true">
                   <li class="list-group-item" *ngIf="newBoleta.sinFichadaRetorno==false"><b>Sin fichada retorno: </b>No</li>
                   <li class="list-group-item" *ngIf="newBoleta.sinFichadaSalida==true"><b>Sin fichada salida: </b>Si</li>
                   <li class="list-group-item" *ngIf="newBoleta.sinFichadaSalida==false"><b>Sin fichada salida: </b>No</li>
+                  <li class="list-group-item"><b>Motivo de Rechazo: </b>
+                    <div *ngIf="newBoleta.mensajeRechazo != null">{{newBoleta.mensajeRechazo}}</div>
+                  </li>
                 </ul>
           </div>
           <div class="modal-footer mt-4">

@@ -13,6 +13,7 @@ import { TipoLicenciaService } from 'src/app/services/tipo-licencia.service';
 import { TipoLicenciaDTO } from 'src/app/dto/tipoLicenciaDTO';
 import { Empleado } from 'src/app/models/empleado';
 import { EmpleadoService } from 'src/app/services/empleado.service';
+import { dateInputsHaveChanged } from '@angular/material/datepicker/datepicker-input-base';
 
 @Component({
   selector: 'app-solicitar-licencia',
@@ -32,6 +33,7 @@ export class SolicitarLicenciaComponent implements OnInit {
 
   id: number;
   empleado: Empleado = new Empleado();
+  date: Date = new Date();
 
   faEdit = faEdit;
   faTrash = faTrash;
@@ -93,7 +95,7 @@ export class SolicitarLicenciaComponent implements OnInit {
   cargarTipoLicencia(): void {
     this._tipoLicenciaService.list(this.searchPage).subscribe(
       data => {
-        
+
         this.tipoLicenciaArray = data;
       },
       err => {
@@ -114,7 +116,7 @@ export class SolicitarLicenciaComponent implements OnInit {
           }
         }
         this.licenciaArray = bol;
-        for (let tipo of this.licenciaArray){
+        for (let tipo of this.licenciaArray) {
           tipo.estadoActual = tipo.fechasCambioEstadoLicencia.find(e => e.fechaFinEstadoLicencia == null).estadoLicencia.nombreEstadoLicencia;
         }
       },
@@ -128,6 +130,7 @@ export class SolicitarLicenciaComponent implements OnInit {
     this._empleadoService.getByUsuarioId(id).subscribe(
       data => {
         this.empleado = data;
+        console.log(this.empleado)
       },
       err => {
         console.log(err);
@@ -181,6 +184,24 @@ export class SolicitarLicenciaComponent implements OnInit {
     licencia.fechaFinLicencia = this.licenciaForm.get('fechaFinLicencia')?.value;
     licencia.observacionesLicencia = this.licenciaForm.get('observacionesLicencia')?.value;
     licencia.tipoLicencia = this.licenciaForm.get('tipoLicencia')?.value;
+    if (licencia.empleado.remanenteDiasLicencias != null) {
+      for (let [index, rem] of Object.entries(licencia.empleado.remanenteDiasLicencias)) {
+        if (rem.tipoLicencia.id == licencia.tipoLicencia.id) {
+          if (rem.anioRemanente == this.date.getFullYear()) {
+            if (((new Date(licencia.fechaFinLicencia)).getTime() - (new Date(licencia.fechaInicioLicencia)).getTime()) / (1000 * 60 * 60 * 24) > rem.diasSobrantes) {
+              Swal.fire({
+                title: "Cantidad de dias no disponibles",
+                icon: "error",
+                showCloseButton: false,
+                showConfirmButton: false
+              })
+              return this.success;
+            }
+          }
+        }
+      }
+    }
+
     if ((licencia.fechaFinLicencia && licencia.fechaInicioLicencia) == undefined) {
       Swal.fire({
         title: "Debe llevar un rango de fechas",
@@ -199,7 +220,7 @@ export class SolicitarLicenciaComponent implements OnInit {
       })
       return this.success;
     }
-    if ((new Date(licencia.fechaFinLicencia)).getTime() < (new Date(licencia.fechaInicioLicencia)).getTime()){
+    if ((new Date(licencia.fechaFinLicencia)).getTime() < (new Date(licencia.fechaInicioLicencia)).getTime()) {
       Swal.fire({
         title: "La fecha Fin debe ser posterior a la fecha Inicio",
         icon: "error",
@@ -273,8 +294,8 @@ export class SolicitarLicenciaComponent implements OnInit {
           fechasCambioEstadoLicencia: [[]],
           empleado: []
         });
-        
-        
+
+
       },
       err => {
         alert(err);
@@ -296,7 +317,7 @@ export class SolicitarLicenciaComponent implements OnInit {
       })
       return this.success;
     }
-    if ((new Date(this.newLicencia.fechaFinLicencia)).getTime() < (new Date(this.newLicencia.fechaInicioLicencia)).getTime()){
+    if ((new Date(this.newLicencia.fechaFinLicencia)).getTime() < (new Date(this.newLicencia.fechaInicioLicencia)).getTime()) {
       Swal.fire({
         title: "La fecha Fin debe ser posterior a la fecha Inicio",
         icon: "error",

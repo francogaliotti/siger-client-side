@@ -75,7 +75,7 @@ export class Empleado extends BaseEntity{
 
     computoDiasLicencia: Array<ComputoDiasLicencia>;
 
-    remanenteDiasLicencia: Array<RemanenteDiasLicencia>;
+    remanenteDiasLicencias: Array<RemanenteDiasLicencia>;
 
     constructor(id?: number){
         super();

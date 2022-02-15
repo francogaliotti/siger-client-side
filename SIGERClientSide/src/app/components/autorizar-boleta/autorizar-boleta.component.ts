@@ -9,6 +9,7 @@ import * as bootstrap from 'bootstrap';
 import { Modal } from 'bootstrap';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { Empleado } from 'src/app/models/empleado';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-autorizar-boleta',
@@ -31,11 +32,18 @@ export class AutorizarBoletaComponent implements OnInit {
   boletaArray: Boleta[] = [];
   id: number;
   modal: Modal | undefined;
+  rejectModal: Modal | undefined;
+  rejectForm: FormGroup;
   newBoleta: Boleta = new Boleta();
   empleado: Empleado = new Empleado()
 
   constructor(private _tokenService: TokenService, private _boletaService: BoletaService,
-    private router: Router, private _empleadoService: EmpleadoService) { }
+    private router: Router, private _empleadoService: EmpleadoService, private _reject: FormBuilder) {
+      this.rejectForm = this._reject.group({
+        id: [this.newBoleta.id, Validators.required],
+        mensajeRechazo: ['', Validators.required]
+      })
+    }
 
   ngOnInit(): void {
     this.cargarBoleta();
@@ -118,8 +126,33 @@ export class AutorizarBoletaComponent implements OnInit {
       })
   }
 
+  open(id?: number): void {
+    this.rejectModal = new bootstrap.Modal(document.getElementById('rejectModal'), {
+      keyboard: false
+    })
+    this.cargarBoletaForReject(id);
+    this.rejectModal?.show();
+  }
+
+  cargarBoletaForReject(id?: number): void{
+    this._boletaService.detail(id).subscribe(
+      data => {
+        this.newBoleta = data;
+        console.log(this.newBoleta);
+        this.rejectForm = this._reject.group({
+          id: [this.newBoleta.id, Validators.required],
+          mensajeRechazo: [this.newBoleta.mensajeRechazo, Validators.required]
+        })
+      },
+        err => {
+          console.log(err);
+        }
+    )
+  }
+
   onReject(id: number): void {
-    this._boletaService.reject(id).subscribe(
+    this.newBoleta.mensajeRechazo = this.rejectForm.get('mensajeRechazo')?.value;
+    this._boletaService.reject(id, this.newBoleta).subscribe(
       data => {
         Swal.fire({
           title: "Boleta Rechazada",
@@ -128,6 +161,7 @@ export class AutorizarBoletaComponent implements OnInit {
           showConfirmButton: false
         });
         this.cargarBoleta();
+        this.rejectModal?.hide();
       },
       err => {
         Swal.fire({

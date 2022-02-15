@@ -18,6 +18,11 @@ export class LicenciaService extends connectionURL{
     return this.httpClient.get<Licencia[]>(this.app_url + this.endpoint);
   }
 
+  public listAll(): Observable<Licencia[]>{
+    this.endpoint = 'licencia/list/';
+    return this.httpClient.get<Licencia[]>(this.app_url + this.endpoint);
+  }
+
   public detail(id: number): Observable<Licencia>{
     this.endpoint = 'licencia/' + id;
     return this.httpClient.get<Licencia>(this.app_url + this.endpoint);
@@ -48,8 +53,8 @@ export class LicenciaService extends connectionURL{
     return this.httpClient.put<any>(this.app_url + this.endpoint, null);
   }
 
-  public reject(id?: number): Observable<any>{
+  public reject(id: number, licencia: Licencia): Observable<any>{
     this.endpoint = 'licencia/reject/' + id;
-    return this.httpClient.put<any>(this.app_url + this.endpoint, null);
+    return this.httpClient.put<any>(this.app_url + this.endpoint, licencia);
   }
 }

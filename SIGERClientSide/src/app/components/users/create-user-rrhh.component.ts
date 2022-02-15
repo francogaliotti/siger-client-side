@@ -297,7 +297,7 @@ export class CreateUserRRHHComponent implements OnInit {
         planillas: null,
         puedeAprobarRequerimiento: null,
         regimenHorario: this.newUserForm.get('regimenesHorario')?.value,
-        remanenteDiasLicencia: null,
+        remanenteDiasLicencias: null,
         remuneracion: this.newUserForm.get('remuneraciones')?.value,
         rompeReglaComisionDia: null,
         rompeReglaFichadaReloj: null,

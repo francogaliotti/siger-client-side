@@ -9,6 +9,7 @@ import { Licencia } from 'src/app/models/licencia';
 import { LicenciaService } from 'src/app/services/licencia.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { Empleado } from 'src/app/models/empleado';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-autorizar-licencia',
@@ -27,15 +28,24 @@ export class AutorizarLicenciaComponent implements OnInit {
   searchPage = 0;
   page = 0;
   search: string = '';
+  success: boolean;
+  date: Date = new Date();
 
   licenciaArray: Licencia[] = []
   id: number;
   empleado: Empleado = new Empleado();
   modal: Modal | undefined;
+  rejectModal: Modal | undefined;
+  rejectForm: FormGroup;
   newLicencia: Licencia = new Licencia();
 
   constructor(private _tokenService: TokenService, private _licenciaService: LicenciaService,
-    private router: Router, private _empleadoService: EmpleadoService) { }
+    private router: Router, private _empleadoService: EmpleadoService, private _reject: FormBuilder) {
+    this.rejectForm = this._reject.group({
+      id: [this.newLicencia.id, Validators.required],
+      mensajeRechazo: ['', Validators.required]
+    })
+  }
 
   ngOnInit(): void {
     this.cargarLicencia();
@@ -93,29 +103,92 @@ export class AutorizarLicenciaComponent implements OnInit {
     this.search = search;
   }
 
-  onAuthorize(id?: number): void {
-    this._licenciaService.authorize(id).subscribe(
+
+  onAuthorize(id?: number): boolean {
+    this.success = false;
+    let flag: boolean = false;
+    this._licenciaService.detail(id).subscribe(
       data => {
-        Swal.fire({
-          title: "Licencia Autorizada",
-          icon: "success",
-          showCloseButton: false,
-          showConfirmButton: false
-        });
-        this.cargarLicencia();
+        this.newLicencia = data;
+        console.log(this.newLicencia);
+        if (this.newLicencia.empleado.remanenteDiasLicencias != undefined) {
+          for (let [index, rem] of Object.entries(this.newLicencia.empleado.remanenteDiasLicencias)) {
+            if (rem.tipoLicencia.id == this.newLicencia.tipoLicencia.id) {
+              if (rem.anioRemanente == this.date.getFullYear()) {
+                if (((new Date(this.newLicencia.fechaFinLicencia)).getTime() - (new Date(this.newLicencia.fechaInicioLicencia)).getTime()) / (1000 * 60 * 60 * 24) > rem.diasSobrantes) {
+                  Swal.fire({
+                    title: "El empleado no posee la cantidad de dias disponibles",
+                    icon: "error",
+                    showCloseButton: false,
+                    showConfirmButton: false
+                  })
+                  this.cargarLicencia();
+                } else {
+                  flag = true
+                }
+              }
+            }
+          }
+        }
+        if (flag) {
+          this._licenciaService.authorize(id).subscribe(
+            data => {
+              this.success = true;
+              Swal.fire({
+                title: "Licencia Autorizada",
+                icon: "success",
+                showCloseButton: false,
+                showConfirmButton: false
+              });
+              this.cargarLicencia();
+            },
+            err => {
+              Swal.fire({
+                title: "Oops! hubo un problema",
+                icon: "error",
+                showCloseButton: false,
+                showConfirmButton: false
+              });
+              console.log(err);
+              this.cargarLicencia();
+            })
+          this.newLicencia = null;
+        }
       },
       err => {
-        Swal.fire({
-          title: "Oops! hubo un problema",
-          icon: "error",
-          showCloseButton: false,
-          showConfirmButton: false
-        });
-      })
+        console.log(err);
+      }
+    );
+    return this.success;
+  }
+
+  open(id?: number): void {
+    this.rejectModal = new bootstrap.Modal(document.getElementById('rejectModal'), {
+      keyboard: false
+    })
+    this.cargarLicenciaForReject(id);
+    this.rejectModal?.show();
+  }
+
+  cargarLicenciaForReject(id?: number): void {
+    this._licenciaService.detail(id).subscribe(
+      data => {
+        this.newLicencia = data;
+        console.log(this.newLicencia);
+        this.rejectForm = this._reject.group({
+          id: [this.newLicencia.id, Validators.required],
+          mensajeRechazo: [this.newLicencia.mensajeRechazo, Validators.required]
+        })
+      },
+      err => {
+        console.log(err);
+      }
+    )
   }
 
   onReject(id: number): void {
-    this._licenciaService.reject(id).subscribe(
+    this.newLicencia.mensajeRechazo = this.rejectForm.get('mensajeRechazo')?.value;
+    this._licenciaService.reject(id, this.newLicencia).subscribe(
       data => {
         Swal.fire({
           title: "Licencia Rechazada",
@@ -133,6 +206,7 @@ export class AutorizarLicenciaComponent implements OnInit {
           showConfirmButton: false
         });
       })
+    this.rejectModal?.hide();
   }
 
   openDetail(id?: number): void {

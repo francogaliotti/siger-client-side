@@ -32,6 +32,8 @@ export class Boleta extends BaseEntity{
 	fechaControl: Date;
 	
 	observacionesBoleta: string;
+
+	mensajeRechazo: string;
 	
 	fechaSincronizacion: Date;
 	
