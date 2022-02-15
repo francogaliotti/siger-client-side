@@ -23,7 +23,7 @@
                 <a href="/mis-asistencias" class="nav-link">Ver Mis Asistencias</a>
               </li>
               <li>
-                <a href="/asistencia" class="nav-link">Cargar Asistencia</a>
+                <a href="/asistencia" class="nav-link" *ngIf="isAdmin">Cargar Asistencia</a>
               </li>
             </ul>
           </li>

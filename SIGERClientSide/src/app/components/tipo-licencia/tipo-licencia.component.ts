@@ -56,6 +56,7 @@ export class TipoLicenciaComponent implements OnInit {
       limiteRangoDias: [0],
       observaciones: [""],
       goceSueldo: [false],
+      cantidadMaximaAnual:[0],
       tipoRequerimientoCantNiveles: [0],
       tipoRequerimientoDenominacion: [""],
       tipoRequerimientoAprueban: [[]],
@@ -69,6 +70,7 @@ export class TipoLicenciaComponent implements OnInit {
       limiteRangoDias: [0],
       observaciones: [""],
       goceSueldo: [false],
+      cantidadMaximaAnual:[0],
       tipoRequerimientoCantNiveles: [0],
       tipoRequerimientoDenominacion: [""],
       tipoRequerimientoAprueban: [[]],
@@ -142,6 +144,7 @@ export class TipoLicenciaComponent implements OnInit {
       this.tipoLicenciaForm.get('limiteRangoDias')?.value,
       this.tipoLicenciaForm.get('goceSueldo')?.value,
       this.tipoLicenciaForm.get('observaciones')?.value,
+      this.tipoLicenciaForm.get('cantidadMaximaAnual')?.value,
       this.tipoLicenciaForm.get('tipoRequerimientoCantNiveles')?.value,
       this.tipoLicenciaForm.get('tipoRequerimientoDenominacion')?.value,
       this.tipoLicenciaForm.get('tipoRequerimientoAprueban')?.value,
@@ -229,6 +232,7 @@ export class TipoLicenciaComponent implements OnInit {
           limiteRangoDias: [this.newTipoLicencia.limiteRangoDias],
           observaciones: [this.newTipoLicencia.observaciones],
           goceSueldo: [this.newTipoLicencia.goceSueldo],
+          cantidadMaximaAnual: [this.newTipoLicencia.cantidadMaximaAnual],
           tipoRequerimientoCantNiveles: [this.newTipoLicencia.tipoRequerimientoCantNiveles],
           tipoRequerimientoDenominacion: [this.newTipoLicencia.tipoRequerimientoDenominacion],
           tipoRequerimientoAprueban: [this.newTipoLicencia.tipoRequerimientoAprueban],
@@ -250,6 +254,7 @@ export class TipoLicenciaComponent implements OnInit {
     this.newTipoLicencia.tipoRequerimientoAprueban = this.editTipoLicenciaForm.get('tipoRequerimientoAprueban')?.value;
     this.newTipoLicencia.limiteRangoDias = this.editTipoLicenciaForm.get('limiteRangoDias')?.value;
     this.newTipoLicencia.goceSueldo = this.editTipoLicenciaForm.get('goceSueldo')?.value;
+    this.newTipoLicencia.cantidadMaximaAnual = this.editTipoLicenciaForm.get('cantidadMaximaAnual')?.value;
     this.newTipoLicencia.tipoRequerimientoCantNiveles = this.editTipoLicenciaForm.get('tipoRequerimientoCantNiveles')?.value;
     this._tipoLicenciaService.update(id, this.newTipoLicencia).subscribe(
       data => {

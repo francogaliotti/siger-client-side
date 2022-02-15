@@ -25,6 +25,8 @@ export class Licencia extends BaseEntity{
 	
 	observacionesLicencia: string;
 
+	mensajeRechazo: string;
+
 	//Relations
 
 	comentarios: Array<Comentario>;

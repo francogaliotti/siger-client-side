@@ -8,6 +8,8 @@ export class TipoLicenciaDTO extends BaseEntity{
 	
 	denominacion: string;
 
+    cantidadMaximaAnual: number;
+
 	justificaPresentismo: boolean;
 
 	limiteRangoDias: number;
