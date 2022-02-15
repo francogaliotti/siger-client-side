@@ -43,7 +43,7 @@ export class MovilidadComponent implements OnInit {
     private router: Router, private _editMovilidad: FormBuilder, private _tokenService: TokenService) {
     this.movilidadForm = this._movilidad.group({
       codigo: ['', [Validators.required, Validators.maxLength(10)]],
-      patente: ['', Validators.required],
+      patente: ['', [Validators.required, Validators.pattern(/^[A-Z]{3,3}\d{3,3}$|[A-Z]{2,2}\d{3,3}[A-Z]{2,2}/)]],
       tipoMovilidad: ['', [Validators.required]]
     })
     this.editmovilidadForm = this._editMovilidad.group({
@@ -179,28 +179,31 @@ export class MovilidadComponent implements OnInit {
     this.newMovilidad.codigo = this.editmovilidadForm.get('codigo')?.value;
     this.newMovilidad.patente = this.editmovilidadForm.get('patente')?.value;
     this.newMovilidad.tipoMovilidad = this.editmovilidadForm.get('tipoMovilidad')?.value;
-    this._movilidadService.update(id, this.newMovilidad).subscribe(
-      data => {
-        Swal.fire({
-          title: "Éxito al actualizar",
-          icon: "success",
-          showCloseButton: false,
-          showConfirmButton: false
-        });
-        this.cargarMovilidad();
-        this.testModal?.hide();
-      },
-      err => {
-        Swal.fire({
-          title: "Oops! hubo un problema",
-          icon: "error",
-          showCloseButton: false,
-          showConfirmButton: false
-        });
-        console.log(err)
-        this.testModal?.hide();
-      }
-    );
+    if(this.editmovilidadForm.valid){
+      this._movilidadService.update(id, this.newMovilidad).subscribe(
+        data => {
+          Swal.fire({
+            title: "Éxito al actualizar",
+            icon: "success",
+            showCloseButton: false,
+            showConfirmButton: false
+          });
+          this.cargarMovilidad();
+          this.testModal?.hide();
+        },
+        err => {
+          Swal.fire({
+            title: "Oops! hubo un problema",
+            icon: "error",
+            showCloseButton: false,
+            showConfirmButton: false
+          });
+          console.log(err)
+          this.testModal?.hide();
+        }
+      );
+    }
+   
   }
   openDetail(id?: number): void {
     this.modal = new bootstrap.Modal(document.getElementById('detalleModal'), {

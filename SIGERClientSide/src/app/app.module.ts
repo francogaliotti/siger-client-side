@@ -151,10 +151,9 @@ import { LicenciasComponent } from './components/reports/licencias/licencias.com
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
-    
     MatDatepickerModule,
     MatFormFieldModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   providers: [interceptorProvider],
   bootstrap: [AppComponent/*, EditUserProfileComponent*/]
