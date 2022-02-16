@@ -53,4 +53,24 @@ export class EmpleadoService extends connectionURL{
     this.endpoint = 'empleado/' + id;
     return this.httpClient.delete<any>(this.app_url + this.endpoint);
   }
+
+  public alreadyExistPersonalEmail(personalEmail: string): Observable<any>{
+    this.endpoint = 'empleado/alreadyExistPersonalEmail/' + personalEmail;
+    return this.httpClient.get<boolean>(this.app_url + this.endpoint); 
+  }
+
+  public alreadyExistDPVEmail(dpvEmail: string): Observable<any>{
+    this.endpoint = 'empleado/alreadyExistDPVlEmail/' + dpvEmail;
+    return this.httpClient.get<boolean>(this.app_url + this.endpoint);
+  }
+
+  public alreadyExistDocumentNumber(documentNumber: string, docType: string): Observable<any>{
+    this.endpoint = 'empleado/alreadyExistDocumentNumber/' + documentNumber + "/" + docType;
+    return this.httpClient.get<boolean>(this.app_url + this.endpoint);
+  }
+
+  public alreadyExistUserName(username: string): Observable<any>{
+    this.endpoint = 'empleado/alreadyExistUserName/' + username;
+    return this.httpClient.get<boolean>(this.app_url + this.endpoint);
+  }
 }
