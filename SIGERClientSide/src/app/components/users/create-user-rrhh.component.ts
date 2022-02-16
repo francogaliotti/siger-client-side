@@ -46,6 +46,10 @@ export class CreateUserRRHHComponent implements OnInit {
   localidades: Localidad[];
   sectores: Sector[];
   faSearch = faSearch;
+  alreadyExistPersonalEmail: boolean;
+  alreadyExistDPVEmail: boolean;
+  alreadyExistUserName: boolean;
+  alreadyExistDocumentNumber: boolean;
 
   newUserForm: FormGroup;
 
@@ -88,7 +92,6 @@ export class CreateUserRRHHComponent implements OnInit {
       personalEmail: ['', [Validators.required, Validators.email]],
       DPVEmail: ['', [Validators.required, Validators.email]],
       username: ['', [Validators.required, Validators.maxLength(30)]],
-      //needSpecialRole: [false],
       nationalitySelected: [0, Validators.required],
       specialRoleSelected: [0, [Validators.required]],
       remuneraciones: [0, [Validators.required]],
@@ -105,7 +108,6 @@ export class CreateUserRRHHComponent implements OnInit {
       nroTelefonoCelular: ['']
     });
 
-    // this.newUserForm.get('specialRoleSelected').disable();
   }
 
   getSector(): void {
@@ -232,26 +234,11 @@ export class CreateUserRRHHComponent implements OnInit {
     })
   }
 
-  /*EnableSpecialRole(): void {
-    if ($('#needSpecialRole').is(':checked')) {
-      this.renderer.setProperty(this.specialRole.nativeElement, 'disabled', false);
-    } else {
-      this.renderer.setProperty(this.specialRole.nativeElement, 'disabled', true);
-    }
-  }*/
-
   OnCreate(): boolean {
 
     this.success = false;
 
-
-    if (this.newUserForm.valid) {
-
-      /*const nationality: Nacionalidad = {
-        id: this.newUserForm.get('nationalitySelected')?.value,
-        nombre: ''
-      }*/
-
+    if (this.newUserForm.valid && this.IsOlder()) {
       const account: Usuario = {
         nombre: this.newUserForm.get('username')?.value,
         username: this.newUserForm.get('username')?.value,
@@ -261,7 +248,6 @@ export class CreateUserRRHHComponent implements OnInit {
         password: '',
         image: "",
         recordarme: false,
-        // requiereAutorizacion: this.newUserForm.get('needSpecialRole')?.value,
         roles: this.newUserForm.get('specialRoleSelected')?.value,
         id: null
       }
@@ -338,5 +324,50 @@ export class CreateUserRRHHComponent implements OnInit {
     }
 
     return this.success;
+  }
+
+  IsOlder(): boolean {
+    var isOlder: boolean;
+    if(new Date().getFullYear() - new Date(this.newUserForm.get('fechaNacimiento')?.value).getFullYear() < 18){
+      isOlder = false;
+    }else{
+      isOlder = true;
+    }
+
+    return isOlder;
+  }
+
+ async AlreadyExistPersonalEmail(){
+    this.alreadyExistPersonalEmail = false;
+
+    if(this.newUserForm.get('personalEmail')?.valid){
+      this.alreadyExistPersonalEmail = await this._employee.alreadyExistPersonalEmail(this.newUserForm.get('personalEmail')?.value).toPromise();
+    }
+  }
+
+  async AlreadyExistDPVEmail(){
+
+    this.alreadyExistDPVEmail = false;
+
+    if(this.newUserForm.get('DPVEmail')?.valid){
+      this.alreadyExistDPVEmail = await this._employee.alreadyExistDPVEmail(this.newUserForm.get('DPVEmail')?.value).toPromise();
+    }
+  }
+
+  async AlreadyExistDocumentNumber(){
+
+    this.alreadyExistDocumentNumber = false;
+    if(this.newUserForm.get('dni')?.valid  && this.newUserForm.get('docType')?.value["id"] != 0){
+      this.alreadyExistDocumentNumber = await this._employee.alreadyExistDocumentNumber(this.newUserForm.get('dni')?.value, this.newUserForm.get('docType')?.value["id"]).toPromise();
+    }
+  }
+
+  async AlreadyExisUserName(){
+
+    this.alreadyExistUserName = false;
+
+    if(this.newUserForm.get('username')?.valid){
+      this.alreadyExistUserName = await this._employee.alreadyExistUserName(this.newUserForm.get('username')?.value).toPromise();
+    }
   }
 }
