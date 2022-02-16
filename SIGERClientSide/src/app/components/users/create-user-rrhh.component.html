@@ -23,9 +23,15 @@
                 <label class="col-sm-3 text-end mt-2" for="yearOfBirth"><b><i>Fecha de Nacimiento: </i></b></label>
                 <div class="col-sm-4">
                     <input type="date" id="yearOfEntry" class="form-control" formControlName="fechaNacimiento"
-                        [class.validfield]="this.newUserForm.get('fechaNacimiento')?.valid"
-                        [class.invalidfield]="this.newUserForm.get('fechaNacimiento')?.invalid && this.newUserForm.get('fechaNacimiento')?.touched">
+                        [class.validfield]="this.newUserForm.get('fechaNacimiento')?.valid && IsOlder()"
+                        [class.invalidfield]="!this.newUserForm.get('fechaNacimiento')?.invalid && this.newUserForm.get('fechaNacimiento')?.touched && !IsOlder()"
+                        (focusout)="IsOlder()">
                 </div>
+                <small class="text-danger text-center" style="margin-left: -70px;"
+                *ngIf="!this.newUserForm.get('fechaNacimiento')?.invalid && this.newUserForm.get('fechaNacimiento')?.touched && !IsOlder()"
+                [hidden]="this.newUserForm.get('fechaNacimiento')?.valid && IsOlder()">
+                    La persona debe ser mayor de edad.
+                </small>
             </div>
             <div class="row">
                 <label class="col-sm-3 text-end mt-2" for="nationality"><b><i>Nacionalidad: </i></b></label>
@@ -51,8 +57,16 @@
                 <label class="col-sm-3 text-end mt-2" for="identitycard"><b><i>Numero de documento: </i></b></label>
                 <div class="col-sm-4">
                     <input type="text" id="identitycard" class="form-control" formControlName="dni"
-                        [class.validfield]="this.newUserForm.get('dni')?.valid"
-                        [class.invalidfield]="this.newUserForm.get('dni')?.invalid && this.newUserForm.get('dni')?.touched">
+                        [class.validfield]="this.newUserForm.get('dni')?.valid && !alreadyExistDocumentNumber"
+                        [class.invalidfield]="(this.newUserForm.get('dni')?.invalid && this.newUserForm.get('dni')?.touched) ||
+                        (this.newUserForm.get('dni')?.invalid && this.newUserForm.get('dni')?.touched && alreadyExistDocumentNumber)"
+                        (focusout)="AlreadyExistDocumentNumber()">
+                        <small class="text-danger"
+                        *ngIf="!this.newUserForm.get('dni')?.invalid && this.newUserForm.get('dni')?.touched && alreadyExistDocumentNumber"
+                        [hidden]="this.newUserForm.get('dni')?.valid && !alreadyExistDocumentNumber"
+                        >
+                        El número de documento ingresado ya se encuentra registrado.
+                        </small>
                 </div>
             </div>
             <div class="form-group row">
@@ -166,27 +180,48 @@
                 <label class="col-sm-3 text-end mt-2" for="personalEmail"><b><i>E-mail personal: </i></b></label>
                 <div class="col-sm-4">
                     <input type="text" id="personalEmail" class="form-control" formControlName="personalEmail"
-                        [class.validfield]="this.newUserForm.get('personalEmail')?.valid"
-                        [class.invalidfield]="this.newUserForm.get('personalEmail')?.invalid && this.newUserForm.get('personalEmail')?.touched">
+                        [class.validfield]="this.newUserForm.get('personalEmail')?.valid && !alreadyExistPersonalEmail"
+                        [class.invalidfield]="(this.newUserForm.get('personalEmail')?.invalid && this.newUserForm.get('personalEmail')?.touched) ||
+                        (!this.newUserForm.get('personalEmail')?.invalid && this.newUserForm.get('personalEmail')?.touched && alreadyExistPersonalEmail)"
+                        (focusout)="AlreadyExistPersonalEmail()">
+                        <small class="text-danger"
+                        *ngIf="!this.newUserForm.get('personalEmail')?.invalid && this.newUserForm.get('personalEmail')?.touched && alreadyExistPersonalEmail"
+                        [hidden]="this.newUserForm.get('personalEmail')?.valid && !alreadyExistPersonalEmail"
+                        >
+                        El correo personal ingresado ya se encuentra registrado.
+                        </small>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-3 text-end mt-2" for="DPVemail"><b><i>E-mail DPV: </i></b></label>
                 <div class="col-sm-4">
                     <input type="text" id="DPVemail" class="form-control" formControlName="DPVEmail"
-                        [class.validfield]="this.newUserForm.get('DPVEmail')?.valid"
-                        [class.invalidfield]="this.newUserForm.get('DPVEmail')?.invalid && this.newUserForm.get('DPVEmail')?.touched">
+                        [class.validfield]="this.newUserForm.get('DPVEmail')?.valid && !alreadyExistDPVEmail"
+                        [class.invalidfield]="(this.newUserForm.get('DPVEmail')?.invalid && this.newUserForm.get('DPVEmail')?.touched) || 
+                        (!this.newUserForm.get('DPVEmail')?.invalid && this.newUserForm.get('DPVEmail')?.touched && alreadyExistDPVEmail)"
+                        (focusout)="AlreadyExistDPVEmail()">
+                        <small class="text-danger"
+                        *ngIf="!this.newUserForm.get('DPVEmail')?.invalid && this.newUserForm.get('DPVEmail')?.touched && alreadyExistDPVEmail"
+                        [hidden]="this.newUserForm.get('DPVEmail')?.valid && !alreadyExistDPVEmail"
+                        >
+                        El correo institucional ingresado ya se encuentra registrado.
+                        </small>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-3 text-end mt-2" for="username"><b><i>Usuario: </i></b></label>
                 <div class="col-sm-4">
                     <input type="text" id="username" class="form-control" formControlName="username"
-                        [class.validfield]="this.newUserForm.get('username')?.valid"
-                        [class.invalidfield]="this.newUserForm.get('username')?.invalid && this.newUserForm.get('username')?.touched">
-                        <div class="select-button" *ngIf="this.newUserForm.get('username')?.value != undefined">
-                            <button type="button" class= "btn btn-primary" (click)="existUsuario(this.newUserForm.get('username')?.value)">Validar nombre de usuario</button>
-                        </div>
+                        [class.validfield]="this.newUserForm.get('username')?.valid && !alreadyExistUserName"
+                        [class.invalidfield]="(this.newUserForm.get('username')?.invalid && this.newUserForm.get('username')?.touched) ||
+                        (!this.newUserForm.get('username')?.invalid && this.newUserForm.get('username')?.touched && alreadyExistUserName)"
+                        (focusout)="AlreadyExisUserName()">
+                        <small class="text-danger"
+                        *ngIf="!this.newUserForm.get('username')?.invalid && this.newUserForm.get('username')?.touched && alreadyExistUserName"
+                        [hidden]="this.newUserForm.get('username')?.valid && !alreadyExistUserName"
+                        >
+                        El usuario ingresado ya se encuentra registrado.
+                        </small>
                 </div>
 
                 
