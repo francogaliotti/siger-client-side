@@ -228,6 +228,15 @@ export class CreateUserRRHHComponent implements OnInit {
 
   getRoles(): void {
     this._role.list().subscribe(data => {
+      data.forEach(rol => {
+        if (rol.rolNombre.includes("ADMIN") || rol.rolNombre.includes("admin")) {
+          rol.rolNombre = "Administrador";
+        } else {
+          if (rol.rolNombre.includes("USER") || rol.rolNombre.includes("user")) {
+            rol.rolNombre = "Usuario";
+          }
+        }
+      });
       this.roles = data;
     }, error => {
       console.log(error);
@@ -238,7 +247,8 @@ export class CreateUserRRHHComponent implements OnInit {
 
     this.success = false;
 
-    if (this.newUserForm.valid && this.IsOlder()) {
+    if (this.newUserForm.valid && this.IsOlder() && !this.alreadyExistPersonalEmail && 
+    !this.alreadyExistDPVEmail && !this.alreadyExistUserName && !this.alreadyExistDocumentNumber && !this.YearOfstartedIsOlder()) {
       const account: Usuario = {
         nombre: this.newUserForm.get('username')?.value,
         username: this.newUserForm.get('username')?.value,
@@ -328,45 +338,57 @@ export class CreateUserRRHHComponent implements OnInit {
 
   IsOlder(): boolean {
     var isOlder: boolean;
-    if(new Date().getFullYear() - new Date(this.newUserForm.get('fechaNacimiento')?.value).getFullYear() < 18){
+    if (new Date().getFullYear() - new Date(this.newUserForm.get('fechaNacimiento')?.value).getFullYear() < 18) {
       isOlder = false;
-    }else{
+    } else {
       isOlder = true;
     }
 
     return isOlder;
   }
 
- async AlreadyExistPersonalEmail(){
+  YearOfstartedIsOlder(): boolean{
+    
+    var YearOfstartedIsOlder: boolean;
+    if (new Date() <= new Date(this.newUserForm.get('yearOfstarted')?.value)) {
+      YearOfstartedIsOlder = true;
+    } else {
+      YearOfstartedIsOlder = false;
+    }
+
+    return YearOfstartedIsOlder;
+  }
+
+  async AlreadyExistPersonalEmail() {
     this.alreadyExistPersonalEmail = false;
 
-    if(this.newUserForm.get('personalEmail')?.valid){
+    if (this.newUserForm.get('personalEmail')?.valid) {
       this.alreadyExistPersonalEmail = await this._employee.alreadyExistPersonalEmail(this.newUserForm.get('personalEmail')?.value).toPromise();
     }
   }
 
-  async AlreadyExistDPVEmail(){
+  async AlreadyExistDPVEmail() {
 
     this.alreadyExistDPVEmail = false;
 
-    if(this.newUserForm.get('DPVEmail')?.valid){
+    if (this.newUserForm.get('DPVEmail')?.valid) {
       this.alreadyExistDPVEmail = await this._employee.alreadyExistDPVEmail(this.newUserForm.get('DPVEmail')?.value).toPromise();
     }
   }
 
-  async AlreadyExistDocumentNumber(){
+  async AlreadyExistDocumentNumber() {
 
     this.alreadyExistDocumentNumber = false;
-    if(this.newUserForm.get('dni')?.valid  && this.newUserForm.get('docType')?.value["id"] != 0){
+    if (this.newUserForm.get('dni')?.valid && this.newUserForm.get('docType')?.value["id"] != 0) {
       this.alreadyExistDocumentNumber = await this._employee.alreadyExistDocumentNumber(this.newUserForm.get('dni')?.value, this.newUserForm.get('docType')?.value["id"]).toPromise();
     }
   }
 
-  async AlreadyExisUserName(){
+  async AlreadyExisUserName() {
 
     this.alreadyExistUserName = false;
 
-    if(this.newUserForm.get('username')?.valid){
+    if (this.newUserForm.get('username')?.valid) {
       this.alreadyExistUserName = await this._employee.alreadyExistUserName(this.newUserForm.get('username')?.value).toPromise();
     }
   }

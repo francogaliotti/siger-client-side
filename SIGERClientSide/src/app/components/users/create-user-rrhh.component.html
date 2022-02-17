@@ -159,8 +159,15 @@
                 <label class="col-sm-3 text-end mt-2" for="yearOfEntry"><b><i>Fecha de ingreso: </i></b></label>
                 <div class="col-sm-4">
                     <input type="date" id="yearOfEntry" class="form-control" formControlName="yearOfstarted"
-                        [class.validfield]="this.newUserForm.get('yearOfstarted')?.valid"
-                        [class.invalidfield]="this.newUserForm.get('yearOfstarted')?.invalid && this.newUserForm.get('yearOfstarted')?.touched">
+                        [class.validfield]="this.newUserForm.get('yearOfstarted')?.valid && !YearOfstartedIsOlder()"
+                        [class.invalidfield]="(this.newUserForm.get('yearOfstarted')?.invalid && this.newUserForm.get('yearOfstarted')?.touched) ||
+                        (!this.newUserForm.get('yearOfstarted')?.invalid && this.newUserForm.get('yearOfstarted')?.touched && YearOfstartedIsOlder())"
+                        (focusout)="YearOfstartedIsOlder()">
+                        <small class="text-danger text-center"
+                        *ngIf="!this.newUserForm.get('yearOfstarted')?.invalid && this.newUserForm.get('yearOfstarted')?.touched && YearOfstartedIsOlder()"
+                        [hidden]="this.newUserForm.get('yearOfstarted')?.valid && !YearOfstartedIsOlder()">
+                            La fecha no puede ser mayor a la actual.
+                        </small>
                 </div>
             </div>
             <div class="form-group row">
