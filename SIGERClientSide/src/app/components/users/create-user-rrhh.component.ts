@@ -203,7 +203,7 @@ export class CreateUserRRHHComponent implements OnInit {
       })
   }
   getRegimenHorario(): void {
-    this._regimenH.list().subscribe(data => {
+    this._regimenH.page(0).subscribe(data => {
       this.regimenesHorario = data;
     },
       err => {
@@ -228,6 +228,14 @@ export class CreateUserRRHHComponent implements OnInit {
 
   getRoles(): void {
     this._role.list().subscribe(data => {
+      this.roles = data;
+      for (let rol of data) {
+        if (rol.rolNombre == "ROLE_USER") {
+          rol.denominacion = "Usuario";
+        } else if (rol.rolNombre == "ROLE_ADMIN") {
+          rol.denominacion = "Administrador";
+        }
+      }
       this.roles = data;
     }, error => {
       console.log(error);
@@ -328,45 +336,45 @@ export class CreateUserRRHHComponent implements OnInit {
 
   IsOlder(): boolean {
     var isOlder: boolean;
-    if(new Date().getFullYear() - new Date(this.newUserForm.get('fechaNacimiento')?.value).getFullYear() < 18){
+    if (new Date().getFullYear() - new Date(this.newUserForm.get('fechaNacimiento')?.value).getFullYear() < 18) {
       isOlder = false;
-    }else{
+    } else {
       isOlder = true;
     }
 
     return isOlder;
   }
 
- async AlreadyExistPersonalEmail(){
+  async AlreadyExistPersonalEmail() {
     this.alreadyExistPersonalEmail = false;
 
-    if(this.newUserForm.get('personalEmail')?.valid){
+    if (this.newUserForm.get('personalEmail')?.valid) {
       this.alreadyExistPersonalEmail = await this._employee.alreadyExistPersonalEmail(this.newUserForm.get('personalEmail')?.value).toPromise();
     }
   }
 
-  async AlreadyExistDPVEmail(){
+  async AlreadyExistDPVEmail() {
 
     this.alreadyExistDPVEmail = false;
 
-    if(this.newUserForm.get('DPVEmail')?.valid){
+    if (this.newUserForm.get('DPVEmail')?.valid) {
       this.alreadyExistDPVEmail = await this._employee.alreadyExistDPVEmail(this.newUserForm.get('DPVEmail')?.value).toPromise();
     }
   }
 
-  async AlreadyExistDocumentNumber(){
+  async AlreadyExistDocumentNumber() {
 
     this.alreadyExistDocumentNumber = false;
-    if(this.newUserForm.get('dni')?.valid  && this.newUserForm.get('docType')?.value["id"] != 0){
+    if (this.newUserForm.get('dni')?.valid && this.newUserForm.get('docType')?.value["id"] != 0) {
       this.alreadyExistDocumentNumber = await this._employee.alreadyExistDocumentNumber(this.newUserForm.get('dni')?.value, this.newUserForm.get('docType')?.value["id"]).toPromise();
     }
   }
 
-  async AlreadyExisUserName(){
+  async AlreadyExisUserName() {
 
     this.alreadyExistUserName = false;
 
-    if(this.newUserForm.get('username')?.valid){
+    if (this.newUserForm.get('username')?.valid) {
       this.alreadyExistUserName = await this._employee.alreadyExistUserName(this.newUserForm.get('username')?.value).toPromise();
     }
   }

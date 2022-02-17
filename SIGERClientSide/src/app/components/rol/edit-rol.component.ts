@@ -115,7 +115,8 @@ export class EditRolComponent implements OnInit {
           nombreRol: this.editRolForm.get('rolName').value,
           rolNombre: this.editRolForm.get('rolName').value,
           permisos: permissions,
-          codigoRol: ''
+          codigoRol: '',
+          denominacion:""
         }
 
         this._rol.update(this.editRolForm.get('idRol').value, rol).subscribe(data =>{

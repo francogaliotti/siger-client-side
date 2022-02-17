@@ -25,7 +25,7 @@ export class RegimenHorarioComponent implements OnInit {
   faEye = faEye;
   faArrow = faArrowAltCircleLeft;
 
-  tipoRegimenHorario: TipoRegimenHorario=null;
+  tipoRegimenHorario: TipoRegimenHorario = null;
 
   regimenHorario: RegimenHorario = new RegimenHorario("", "", this.tipoRegimenHorario, 0);
 
@@ -38,6 +38,10 @@ export class RegimenHorarioComponent implements OnInit {
   editRegimenHorarioForm: FormGroup;
 
   success: boolean;
+
+  horaDesde: number;
+
+  horaHasta: number;
 
   modal: Modal | undefined
 
@@ -65,13 +69,13 @@ export class RegimenHorarioComponent implements OnInit {
     this.regimenHorarioForm = this._regimenHorario.group({
       horaMinutoInicioJornadaLaboral: ['', [Validators.required, Validators.maxLength(10)]],
       horaMinutoFinJornadaLaboral: ['', [Validators.required, Validators.maxLength(10)]],
-      tipoRegimenHorario:['', [Validators.required]]
+      tipoRegimenHorario: ['', [Validators.required]]
     });
     this.editRegimenHorarioForm = this._editRegimenHorario.group({
       id: ["", Validators.required],
       horaMinutoInicioJornadaLaboral: ['', [Validators.required, Validators.maxLength(10)]],
       horaMinutoFinJornadaLaboral: ['', [Validators.required, Validators.maxLength(10)]],
-      tipoRegimenHorario:['', [Validators.required]]
+      tipoRegimenHorario: ['', [Validators.required]]
     });
   }
 
@@ -98,12 +102,12 @@ export class RegimenHorarioComponent implements OnInit {
   }
 
   prevPage() {
-    if ( this.page > 0 )
+    if (this.page > 0)
       this.page -= 10;
-      this.searchPage = this.searchPage - 1;
+    this.searchPage = this.searchPage - 1;
   }
 
-  onSearch( search: string ) {
+  onSearch(search: string) {
     this.page = 0;
     this.search = search;
   }
@@ -136,8 +140,21 @@ export class RegimenHorarioComponent implements OnInit {
       this.regimenHorarioForm.get('horaMinutoInicioJornadaLaboral')?.value,
       this.regimenHorarioForm.get('horaMinutoFinJornadaLaboral')?.value,
       this.regimenHorarioForm.get('tipoRegimenHorario')?.value
-      );
-      
+    );
+    this.horaDesde = Number(regimenHorario.horaMinutoInicioJornadaLaboral[0] + regimenHorario.horaMinutoInicioJornadaLaboral[1])
+    this.horaHasta = Number(regimenHorario.horaMinutoFinJornadaLaboral[0] + regimenHorario.horaMinutoFinJornadaLaboral[1])
+    if (this.horaHasta <= this.horaDesde) {
+      this.horaHasta += 24;
+    }
+    if (this.horaHasta - this.horaDesde > 12) {
+      Swal.fire({
+        title: "No se permiten mas de 12 horas laborales",
+        icon: "error",
+        showCloseButton: false,
+        showConfirmButton: false
+      })
+      return this.success;
+    }
 
     if (this.regimenHorarioForm.valid == true) {
       console.log(regimenHorario);

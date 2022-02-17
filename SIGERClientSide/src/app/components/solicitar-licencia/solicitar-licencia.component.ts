@@ -189,7 +189,7 @@ export class SolicitarLicenciaComponent implements OnInit {
     if (licencia.empleado.remanenteDiasLicencias != null) {
       for (let [index, rem] of Object.entries(licencia.empleado.remanenteDiasLicencias)) {
         if (rem.tipoLicencia.id == licencia.tipoLicencia.id) {
-          if (rem.anioRemanente == this.date.getFullYear()) {
+          //if (rem.anioRemanente == this.date.getFullYear()) {
             if (((new Date(licencia.fechaFinLicencia)).getTime() - (new Date(licencia.fechaInicioLicencia)).getTime()) / (1000 * 60 * 60 * 24) > rem.diasSobrantes) {
               Swal.fire({
                 title: "Cantidad de dias no disponibles",
@@ -199,7 +199,7 @@ export class SolicitarLicenciaComponent implements OnInit {
               })
               return this.success;
             }
-          }
+          //}
         }
       }
     }

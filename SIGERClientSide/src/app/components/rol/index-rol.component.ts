@@ -78,7 +78,8 @@ export class IndexRolComponent implements OnInit {
           nombreRol: this.newRolForm.get('nameRol').value,
           rolNombre: this.newRolForm.get('nameRol').value,
           permisos: permissions,
-          id: null
+          id: null,
+          denominacion: ""
         }
 
         this._rol.save(rol).subscribe(data => {
