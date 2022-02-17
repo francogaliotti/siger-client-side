@@ -40,4 +40,9 @@ export class MovilidadService extends connectionURL{
     return this.httpClient.delete<any>(this.app_url + this.endpoint);
   }
 
+  public alreadyExistPatente(patente: string): Observable<boolean>
+  {
+    this.endpoint = 'movilidad/alreadyExistPatente/' + patente;
+    return this.httpClient.get<boolean>(this.app_url + this.endpoint);
+  }
 }
