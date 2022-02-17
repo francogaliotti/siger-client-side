@@ -8,6 +8,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TipoMovilidad } from 'src/app/models/tipo-movilidad';
 import { TipoMovilidadService } from 'src/app/services/tipo-movilidad.service';
+import { MovilidadService } from 'src/app/services/movilidad.service';
+import { Movilidad } from 'src/app/models/movilidad';
 
 @Component({
   selector: 'app-tipo-movilidad',
@@ -21,6 +23,7 @@ export class TipoMovilidadComponent implements OnInit {
   editTipoMovilidadForm: FormGroup;
   testModal: Modal | undefined;
   newTipoMovilidad: TipoMovilidad = new TipoMovilidad('', '');
+  movilidades: Movilidad[];
 
   faEdit = faEdit;
   faTrash = faTrash;
@@ -31,9 +34,11 @@ export class TipoMovilidadComponent implements OnInit {
   searchPage = 0;
   page = 0;
   search: string = '';
+  success: boolean;
 
   constructor(private _tipoMovilidad: FormBuilder, private _tipoMovilidadService: TipoMovilidadService,
-    private router: Router, private _editTipoMovilidad: FormBuilder, private _tokenService: TokenService) {
+    private router: Router, private _editTipoMovilidad: FormBuilder, private _tokenService: TokenService,
+    private _movilidadService: MovilidadService) {
     this.tipoMovilidadForm = this._tipoMovilidad.group({
       codigo: ['', [Validators.required, Validators.maxLength(10)]],
       denominacion: ['', Validators.required]
@@ -51,7 +56,7 @@ export class TipoMovilidadComponent implements OnInit {
   }
 
   cargarTipoMovilidad() {
-    this._tipoMovilidadService.list(this.searchPage).subscribe(
+    this._tipoMovilidadService.list(0).subscribe(
       data => {
         this.tipoMovilidad = data;
       },
@@ -76,15 +81,44 @@ export class TipoMovilidadComponent implements OnInit {
     this.search = search;
   }
   borrarTipoMovilidad(id?: number): void {
-    this._tipoMovilidadService.delete(id).subscribe(
-      data => {
-        Swal.fire({
-          title: "Éxito al eliminar",
-          icon: "success",
-          showCloseButton: false,
-          showConfirmButton: false
-        });
-        this.cargarTipoMovilidad();
+    this.success = false;
+    let flag: boolean = true;
+    this._movilidadService.list(0).subscribe(
+      data=>{
+        this.movilidades = data;
+        for(let mov of this.movilidades){
+          if(mov.tipoMovilidad.id == id){
+            Swal.fire({
+              title: "El tipo tiene movilidades asociadas",
+              icon: "error",
+              showCloseButton: false,
+              showConfirmButton: false
+            });
+            this.cargarTipoMovilidad();
+            flag = false;
+          }
+        }
+        if (flag){
+          this._tipoMovilidadService.delete(id).subscribe(
+            data => {
+              Swal.fire({
+                title: "Éxito al eliminar",
+                icon: "success",
+                showCloseButton: false,
+                showConfirmButton: false
+              });
+              this.cargarTipoMovilidad();
+            },
+            err => {
+              Swal.fire({
+                title: "Oops! hubo un problema",
+                icon: "error",
+                showCloseButton: false,
+                showConfirmButton: false
+              }
+              );
+            });
+        }
       },
       err => {
         Swal.fire({
@@ -92,9 +126,10 @@ export class TipoMovilidadComponent implements OnInit {
           icon: "error",
           showCloseButton: false,
           showConfirmButton: false
-        }
-        );
-      });
+        });
+        console.log(err);
+      }
+    )
   }
   onCreate(): void {
     const tipoMovilidad = new TipoMovilidad(this.tipoMovilidadForm.get('codigo')?.value, this.tipoMovilidadForm.get('denominacion')?.value);

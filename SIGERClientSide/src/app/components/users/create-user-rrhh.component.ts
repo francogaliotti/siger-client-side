@@ -229,14 +229,6 @@ export class CreateUserRRHHComponent implements OnInit {
   getRoles(): void {
     this._role.list().subscribe(data => {
       this.roles = data;
-      for (let rol of data) {
-        if (rol.rolNombre == "ROLE_USER") {
-          rol.denominacion = "Usuario";
-        } else if (rol.rolNombre == "ROLE_ADMIN") {
-          rol.denominacion = "Administrador";
-        }
-      }
-      this.roles = data;
     }, error => {
       console.log(error);
     })

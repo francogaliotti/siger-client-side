@@ -88,7 +88,7 @@ export class TipoLicenciaComponent implements OnInit {
   }
 
   cargarTipoLicencia(): void {
-    this._tipoLicenciaService.list(this.searchPage).subscribe(
+    this._tipoLicenciaService.list(0).subscribe(
       data => {
         this.tipoLicencia = data;
       },

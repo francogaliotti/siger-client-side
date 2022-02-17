@@ -229,7 +229,7 @@
             <div class="form-group row">
                 <label class="col-sm-3 text-end mt-2" for="username"><b><i>Seleccione Rol del usuario: </i></b></label>
                 <select multiple class="form-control text-center role-select" formControlName="specialRoleSelected">
-                    <option *ngFor="let role of roles" [ngValue]="role">{{role.denominacion}}</option>
+                    <option *ngFor="let role of roles" [ngValue]="role">{{role.rolNombre}}</option>
                 </select>
             </div>
         </div>

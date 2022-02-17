@@ -12,6 +12,8 @@ import Swal from 'sweetalert2';
 import { TipoSector } from 'src/app/models/tipo-sector';
 import { Domicilio } from 'src/app/models/domicilio';
 import { TipoSectorService } from 'src/app/services/tipo-sector.service';
+import { EmpleadoService } from 'src/app/services/empleado.service';
+import { Empleado } from 'src/app/models/empleado';
 
 
 @Component({
@@ -23,13 +25,14 @@ export class SectorComponent implements OnInit {
 
   sector: Sector[] = [];
   tipoSectorArray: TipoSector[] = [];
-  newSector: Sector = new Sector("", "", false, false, false, 0, 0, new TipoSector("", ""),null);
+  newSector: Sector = new Sector("", "", false, false, false, 0, 0, new TipoSector("", ""), null);
   sectorForm: FormGroup;
   editSectorForm: FormGroup;
   testModal: Modal | undefined;
   modal: Modal | undefined;
 
   success: boolean;
+  empleados: Empleado[];
 
   faEdit = faEdit;
   faTrash = faTrash;
@@ -44,7 +47,7 @@ export class SectorComponent implements OnInit {
   search: string = '';
 
   constructor(private _sector: FormBuilder, private _sectorService: SectorService, private tipoSectorService: TipoSectorService,
-    private router: Router, private _editSector: FormBuilder, private _tokenService: TokenService) {
+    private router: Router, private _editSector: FormBuilder, private _tokenService: TokenService, private _empleadoService: EmpleadoService) {
     this.sectorForm = this._sector.group({
       codigo: ['', [Validators.required, Validators.maxLength(10)]],
       denominacion: ['', Validators.required],
@@ -76,7 +79,7 @@ export class SectorComponent implements OnInit {
     this.tipoSectorList();
   }
   cargarSector(): void {
-    this._sectorService.list(this.searchPage).subscribe(
+    this._sectorService.list(0).subscribe(
       data => {
         this.sector = data;
       },
@@ -110,16 +113,46 @@ export class SectorComponent implements OnInit {
     this.page = 0;
     this.search = search;
   }
-  borrarSector(id?: number): void {
-    this._sectorService.delete(id).subscribe(
+  borrarSector(id?: number): boolean {
+    this.success = false;
+    let flag: boolean = true;
+    this._empleadoService.list(0).subscribe(
       data => {
-        Swal.fire({
-          title: "Éxito al eliminar",
-          icon: "success",
-          showCloseButton: false,
-          showConfirmButton: false
-        });
-        this.cargarSector();
+        this.empleados = data;
+        for (let em of this.empleados) {
+          if (em.sector.id == id) {
+            Swal.fire({
+              title: "El sector tiene empleados asociados",
+              icon: "error",
+              showCloseButton: false,
+              showConfirmButton: false
+            });
+            this.cargarSector();
+            flag = false;
+          }
+        }
+        if (flag) {
+          this._sectorService.delete(id).subscribe(
+            data => {
+              Swal.fire({
+                title: "Éxito al eliminar",
+                icon: "success",
+                showCloseButton: false,
+                showConfirmButton: false
+              });
+              this.cargarSector();
+              this.success = true;
+            },
+            err => {
+              Swal.fire({
+                title: "Oops! hubo un problema",
+                icon: "error",
+                showCloseButton: false,
+                showConfirmButton: false
+              });
+            }
+          );
+        }
       },
       err => {
         Swal.fire({
@@ -128,8 +161,10 @@ export class SectorComponent implements OnInit {
           showCloseButton: false,
           showConfirmButton: false
         });
+        console.log(err);
       }
-    );
+    )
+    return this.success;
   }
   onCreate(): boolean {
     this.success = false;

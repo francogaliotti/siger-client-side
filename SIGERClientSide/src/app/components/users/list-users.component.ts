@@ -70,7 +70,7 @@ export class ListUsersComponent implements OnInit {
     this.isAdmin = this._tokenService.IsAdmin();
   }
   getEmpleado(): void{
-    this._employee.list(this.searchPage).subscribe(
+    this._employee.list(0).subscribe(
       data=>{
         this.empleados = data;
       },
@@ -95,7 +95,7 @@ export class ListUsersComponent implements OnInit {
     this.search = search;
   }
   getSector(): void {
-    this._sector.listAll().subscribe(data => {
+    this._sector.list(0).subscribe(data => {
       this.sectores = data;
     }, err => {
       console.log(err);
@@ -110,7 +110,7 @@ export class ListUsersComponent implements OnInit {
       })
   }
   getRegimenHorario(): void {
-    this._regimenH.list().subscribe(data => {
+    this._regimenH.page(0).subscribe(data => {
       this.regimenesHorario = data;
     },
       err => {

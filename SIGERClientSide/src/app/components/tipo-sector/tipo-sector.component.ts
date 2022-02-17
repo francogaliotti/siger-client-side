@@ -8,6 +8,8 @@ import { TipoSector } from 'src/app/models/tipo-sector';
 import { TipoSectorService } from 'src/app/services/tipo-sector.service';
 import { TokenService } from 'src/app/services/token.service';
 import Swal from 'sweetalert2';
+import { SectorService } from 'src/app/services/sector.service';
+import { Sector } from 'src/app/models/sector';
 
 @Component({
   selector: 'app-tipo-sector',
@@ -21,9 +23,11 @@ export class TipoSectorComponent implements OnInit {
   faFileAlt = faFileAlt;
   faTrash = faTrash;
 
-  tipoSector: TipoSector = new TipoSector('','');
+  tipoSector: TipoSector = new TipoSector('', '');
 
   tipoSectorArray: TipoSector[] = [];
+
+  sectores: Sector[];
 
   tipoSectorForm: FormGroup;
 
@@ -33,9 +37,9 @@ export class TipoSectorComponent implements OnInit {
 
   modal: Modal | undefined
 
-  @ViewChild("CreatePermission")CreatePermission: ElementRef;
+  @ViewChild("CreatePermission") CreatePermission: ElementRef;
 
-  @ViewChild("EditPermission")EditPermission: ElementRef;
+  @ViewChild("EditPermission") EditPermission: ElementRef;
 
   isAdmin = false;
 
@@ -44,38 +48,39 @@ export class TipoSectorComponent implements OnInit {
   search: string = '';
 
   constructor(
-    private _tipoSector: FormBuilder, 
+    private _tipoSector: FormBuilder,
     private _editTipoSector: FormBuilder,
     private _tipoSectorService: TipoSectorService,
     private router: Router,
     private renderer: Renderer2,
-    private _tokenService: TokenService
-    ) {
-      this.tipoSectorForm = this._tipoSector.group({
-        codTipoSector: ['', [Validators.required, Validators.maxLength(10)] ],
-        nombreTipoSector: ['', Validators.required]
-      });
-      this.editTipoSectorForm = this._editTipoSector.group({
-        id: ["",Validators.required],
-        codTipoSector: ["", [Validators.required, Validators.maxLength(10)] ],
-        nombreTipoSector: ["", Validators.required]
-      });
-     }
+    private _tokenService: TokenService,
+    private _sectorService: SectorService
+  ) {
+    this.tipoSectorForm = this._tipoSector.group({
+      codTipoSector: ['', [Validators.required, Validators.maxLength(10)]],
+      nombreTipoSector: ['', Validators.required]
+    });
+    this.editTipoSectorForm = this._editTipoSector.group({
+      id: ["", Validators.required],
+      codTipoSector: ["", [Validators.required, Validators.maxLength(10)]],
+      nombreTipoSector: ["", Validators.required]
+    });
+  }
 
   ngOnInit(): void {
     this.cargarTipoSector();
     this.isAdmin = this._tokenService.IsAdmin();
   }
 
-  cargarTipoSector():void{
-    this._tipoSectorService.list(this.searchPage)
-    .subscribe( data => {
+  cargarTipoSector(): void {
+    this._tipoSectorService.list(0)
+      .subscribe(data => {
         this.tipoSectorArray = data;
       },
-      err => {
-        console.log(err);
-      }
-    );
+        err => {
+          console.log(err);
+        }
+      );
   }
 
   nextPage() {
@@ -84,70 +89,91 @@ export class TipoSectorComponent implements OnInit {
   }
 
   prevPage() {
-    if ( this.page > 0 )
+    if (this.page > 0)
       this.page -= 10;
-      this.searchPage = this.searchPage - 1;
+    this.searchPage = this.searchPage - 1;
   }
 
-  onSearch( search: string ) {
+  onSearch(search: string) {
     this.page = 0;
     this.search = search;
   }
 
-  borrarTipoSector(id?:number):void{
-    this._tipoSectorService.delete(id).subscribe(
+  borrarTipoSector(id?: number): void {
+    let flag: boolean = true;
+    this._sectorService.list(0).subscribe(
       data => {
-        Swal.fire({
-          title: "Éxito",
-          icon: "success",
-          showCloseButton: false,
-          showConfirmButton: false
-        });
-        this.cargarTipoSector();
-      },
-      err => {
-        Swal.fire({
-          title: "Oops! hubo un problema",
-          icon: "error",
-          showCloseButton: false,
-          showConfirmButton: false
-        });
+        this.sectores = data;
+        for (let sec of this.sectores) {
+          if (sec.tipoSector.id == id) {
+            Swal.fire({
+              title: "El tipo tiene sectores asociados",
+              icon: "error",
+              showCloseButton: false,
+              showConfirmButton: false
+            });
+            this.cargarTipoSector();
+            flag = false;
+          }
+        }
+        if (flag) {
+          this._tipoSectorService.delete(id).subscribe(
+            data => {
+              Swal.fire({
+                title: "Éxito",
+                icon: "success",
+                showCloseButton: false,
+                showConfirmButton: false
+              });
+              this.cargarTipoSector();
+            },
+            err => {
+              Swal.fire({
+                title: "Oops! hubo un problema",
+                icon: "error",
+                showCloseButton: false,
+                showConfirmButton: false
+              });
+            }
+          );
+        }
       }
-    );
+    )
+
   }
 
-  onCreate():boolean{
+  onCreate(): boolean {
     this.success = false;
     const tipoSector = new TipoSector(this.tipoSectorForm.get('codTipoSector')?.value,
-    this.tipoSectorForm.get('nombreTipoSector')?.value);
-    
+      this.tipoSectorForm.get('nombreTipoSector')?.value);
+
     if (this.tipoSectorForm.valid == true) {
-    this._tipoSectorService.save(tipoSector).subscribe(
-      data => {
-        this.success = true;
-        this.cargarTipoSector();
-        Swal.fire({
-          title: "Éxito",
-          icon: "success",
-          showCloseButton: false,
-          showConfirmButton: false
-        });
-      },
-      err => {
-        Swal.fire({
-          title: "Oops! hubo un problema",
-          icon: "error",
-          showCloseButton: false,
-          showConfirmButton: false
-        });
-      }
-    );
+      this._tipoSectorService.save(tipoSector).subscribe(
+        data => {
+          this.success = true;
+          this.cargarTipoSector();
+          Swal.fire({
+            title: "Éxito",
+            icon: "success",
+            showCloseButton: false,
+            showConfirmButton: false
+          });
+        },
+        err => {
+          Swal.fire({
+            title: "Oops! hubo un problema",
+            icon: "error",
+            showCloseButton: false,
+            showConfirmButton: false
+          });
+        }
+      );
     }
     return this.success;
   }
 
-  open(id?: number): void{
-    this.modal = new bootstrap.Modal(document.getElementById('editarModal'),{
+  open(id?: number): void {
+    this.modal = new bootstrap.Modal(document.getElementById('editarModal'), {
       keyboard: false
     })
     this.cargarTipoSectorForUpdate(id);
@@ -160,8 +186,8 @@ export class TipoSectorComponent implements OnInit {
         this.tipoSector = data;
         console.log(this.tipoSector);
         this.editTipoSectorForm = this._editTipoSector.group({
-          id: [this.tipoSector.id,Validators.required],
-          codTipoSector: [this.tipoSector.codTipoSector, [Validators.required, Validators.maxLength(10)] ],
+          id: [this.tipoSector.id, Validators.required],
+          codTipoSector: [this.tipoSector.codTipoSector, [Validators.required, Validators.maxLength(10)]],
           nombreTipoSector: [this.tipoSector.nombreTipoSector, Validators.required]
         });
       },
@@ -195,18 +221,18 @@ export class TipoSectorComponent implements OnInit {
         console.log(err);
       }
     );
-    
+
   }
 
-  openDetail(id?: number): void{
-    this.modal = new bootstrap.Modal(document.getElementById('detalleModal'),{
+  openDetail(id?: number): void {
+    this.modal = new bootstrap.Modal(document.getElementById('detalleModal'), {
       keyboard: false
     })
     this.cargarTipoSectorForDetail(id);
     this.modal?.show();
   }
 
-  cargarTipoSectorForDetail(id?: number): void{
+  cargarTipoSectorForDetail(id?: number): void {
     this._tipoSectorService.detail(id).subscribe(
       data => {
         this.tipoSector = data;
@@ -223,18 +249,18 @@ export class TipoSectorComponent implements OnInit {
     this.router.navigate(['tipo-sector']);
   }
 
-  checkTipoSectorForm(): void{
-    if(this.tipoSectorForm.get('codTipoSector')?.valid && this.tipoSectorForm.get('nombreTipoSector')?.valid){
+  checkTipoSectorForm(): void {
+    if (this.tipoSectorForm.get('codTipoSector')?.valid && this.tipoSectorForm.get('nombreTipoSector')?.valid) {
       this.renderer.setProperty(this.CreatePermission.nativeElement, 'disabled', false);
-    }else{
+    } else {
       this.renderer.setProperty(this.CreatePermission.nativeElement, 'disabled', true);
     }
   }
 
-  checkEditTipoSectorForm(): void{
-    if(this.editTipoSectorForm.get('codTipoSector')?.valid && this.editTipoSectorForm.get('nombreTipoSector')?.valid){
+  checkEditTipoSectorForm(): void {
+    if (this.editTipoSectorForm.get('codTipoSector')?.valid && this.editTipoSectorForm.get('nombreTipoSector')?.valid) {
       this.renderer.setProperty(this.EditPermission.nativeElement, 'disabled', false);
-    }else{
+    } else {
       this.renderer.setProperty(this.EditPermission.nativeElement, 'disabled', true);
     }
   }
