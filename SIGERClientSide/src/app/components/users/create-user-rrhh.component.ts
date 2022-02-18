@@ -195,7 +195,7 @@ export class CreateUserRRHHComponent implements OnInit {
     return this.success;
   }
   getRemuneracion(): void {
-    this._remun.list().subscribe(data => {
+    this._remun.page(0).subscribe(data => {
       this.remuneraciones = data;
     },
       err => {
@@ -228,6 +228,15 @@ export class CreateUserRRHHComponent implements OnInit {
 
   getRoles(): void {
     this._role.list().subscribe(data => {
+      data.forEach(rol => {
+        if (rol.rolNombre.includes("ADMIN") || rol.rolNombre.includes("admin")) {
+          rol.rolNombre = "Administrador";
+        } else {
+          if (rol.rolNombre.includes("USER") || rol.rolNombre.includes("user")) {
+            rol.rolNombre = "Usuario";
+          }
+        }
+      });
       this.roles = data;
     }, error => {
       console.log(error);
@@ -238,7 +247,8 @@ export class CreateUserRRHHComponent implements OnInit {
 
     this.success = false;
 
-    if (this.newUserForm.valid && this.IsOlder()) {
+    if (this.newUserForm.valid && this.IsOlder() && !this.alreadyExistPersonalEmail && 
+    !this.alreadyExistDPVEmail && !this.alreadyExistUserName && !this.alreadyExistDocumentNumber /*&& !this.YearOfstartedIsOlder()*/) {
       const account: Usuario = {
         nombre: this.newUserForm.get('username')?.value,
         username: this.newUserForm.get('username')?.value,
@@ -335,6 +345,18 @@ export class CreateUserRRHHComponent implements OnInit {
     }
 
     return isOlder;
+  }
+
+  YearOfstartedIsOlder(): boolean{
+    
+    var YearOfstartedIsOlder: boolean;
+    if (new Date() <= new Date(this.newUserForm.get('yearOfstarted')?.value)) {
+      YearOfstartedIsOlder = true;
+    } else {
+      YearOfstartedIsOlder = false;
+    }
+
+    return YearOfstartedIsOlder;
   }
 
   async AlreadyExistPersonalEmail() {

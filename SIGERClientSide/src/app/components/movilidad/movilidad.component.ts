@@ -37,6 +37,7 @@ export class MovilidadComponent implements OnInit {
   page = 0;
   search: string = '';
   success: boolean;
+  ExistPatente: boolean;
 
 
   constructor(private _movilidad: FormBuilder, private _movilidadService: MovilidadService, private _tipoMovilidadService: TipoMovilidadService,
@@ -124,7 +125,7 @@ export class MovilidadComponent implements OnInit {
     const movilidad = new Movilidad(this.movilidadForm.get('codigo')?.value, 
     this.movilidadForm.get('patente')?.value, 
     this.movilidadForm.get('tipoMovilidad')?.value);
-    if (this.movilidadForm.valid == true) {
+    if (this.movilidadForm.valid && !this.ExistPatente) {
       console.log(movilidad);
       this._movilidadService.save(movilidad).subscribe(
         data => {
@@ -179,7 +180,7 @@ export class MovilidadComponent implements OnInit {
     this.newMovilidad.codigo = this.editmovilidadForm.get('codigo')?.value;
     this.newMovilidad.patente = this.editmovilidadForm.get('patente')?.value;
     this.newMovilidad.tipoMovilidad = this.editmovilidadForm.get('tipoMovilidad')?.value;
-    if(this.editmovilidadForm.valid){
+    if(this.editmovilidadForm.valid && !this.ExistPatente){
       this._movilidadService.update(id, this.newMovilidad).subscribe(
         data => {
           Swal.fire({
@@ -228,4 +229,21 @@ export class MovilidadComponent implements OnInit {
     this.router.navigate(['/movilidad']);
   }
 
+  async alreadyExistPatente(){
+
+    this.ExistPatente = false;
+
+    if(this.movilidadForm.get('patente')?.valid){
+      this.ExistPatente = await this._movilidadService.alreadyExistPatente(this.movilidadForm.get('patente')?.value).toPromise();
+    }
+  }
+
+  async alreadyExistPatente_Modification(){
+
+    this.ExistPatente = false;
+
+    if(this.editmovilidadForm.get('patente')?.valid){
+      this.ExistPatente = await this._movilidadService.alreadyExistPatente(this.editmovilidadForm.get('patente')?.value).toPromise();
+    }
+  }
 }
