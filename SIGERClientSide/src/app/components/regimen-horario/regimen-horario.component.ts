@@ -10,6 +10,8 @@ import { TokenService } from 'src/app/services/token.service';
 import Swal from 'sweetalert2';
 import { TipoRegimenHorario } from 'src/app/models/tipo-regimen-horario';
 import { TipoRegimenHorarioService } from 'src/app/services/tipo-regimen-horario.service';
+import { Empleado } from 'src/app/models/empleado';
+import { EmpleadoService } from 'src/app/services/empleado.service';
 
 @Component({
   selector: 'app-regimen-horario',
@@ -51,6 +53,8 @@ export class RegimenHorarioComponent implements OnInit {
 
   isAdmin = false;
 
+  empleados: Empleado[];
+
   nivelesAutorizacionArray: number[] = [1, 2, 3, 4];
 
   searchPage = 0;
@@ -64,7 +68,8 @@ export class RegimenHorarioComponent implements OnInit {
     private _tipoRegimenHorarioService: TipoRegimenHorarioService,
     private router: Router,
     private renderer: Renderer2,
-    private _tokenService: TokenService
+    private _tokenService: TokenService,
+    private _empleadoService: EmpleadoService
   ) {
     this.regimenHorarioForm = this._regimenHorario.group({
       horaMinutoInicioJornadaLaboral: ['', [Validators.required, Validators.maxLength(10)]],
@@ -113,15 +118,43 @@ export class RegimenHorarioComponent implements OnInit {
   }
 
   borrarRegimenHorario(id?: number): void {
-    this._regimenHorarioService.delete(id).subscribe(
+    let flag: boolean = true;
+    this._empleadoService.list(0).subscribe(
       data => {
-        Swal.fire({
-          title: "Éxito al eliminar",
-          icon: "success",
-          showCloseButton: false,
-          showConfirmButton: false
-        });
-        this.cargarRegimenHorario();
+        this.empleados = data;
+        for (let em of this.empleados) {
+          if (em.regimenHorario.id == id) {
+            Swal.fire({
+              title: "El regimen tiene empleados asociados",
+              icon: "error",
+              showCloseButton: false,
+              showConfirmButton: false
+            });
+            this.cargarRegimenHorario();
+            flag = false;
+          }
+        }
+        if (flag) {
+          this._regimenHorarioService.delete(id).subscribe(
+            data => {
+              Swal.fire({
+                title: "Éxito al eliminar",
+                icon: "success",
+                showCloseButton: false,
+                showConfirmButton: false
+              });
+              this.cargarRegimenHorario();
+            },
+            err => {
+              Swal.fire({
+                title: "Oops! hubo un problema",
+                icon: "error",
+                showCloseButton: false,
+                showConfirmButton: false
+              });
+            }
+          );
+        }
       },
       err => {
         Swal.fire({
@@ -130,8 +163,10 @@ export class RegimenHorarioComponent implements OnInit {
           showCloseButton: false,
           showConfirmButton: false
         });
+        console.log(err);
       }
     );
+
   }
 
   onCreate(): boolean {
