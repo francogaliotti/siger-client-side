@@ -8,6 +8,8 @@ import { TipoRegimenHorario } from 'src/app/models/tipo-regimen-horario';
 import { TipoRegimenHorarioService } from 'src/app/services/tipo-regimen-horario.service';
 import { TokenService } from 'src/app/services/token.service';
 import Swal from 'sweetalert2';
+import { RegimenHorarioService } from 'src/app/services/regimen-horario.service';
+import { RegimenHorario } from 'src/app/models/regimen-horario';
 
 @Component({
   selector: 'app-tipo-regimen-horario',
@@ -24,6 +26,8 @@ export class TipoRegimenHorarioComponent implements OnInit {
   tipoRegimenHorario: TipoRegimenHorario = new TipoRegimenHorario('','');
 
   tipoRegimenHorarioArray: TipoRegimenHorario[] = [];
+
+  regimenes: RegimenHorario[];
 
   tipoRegimenHorarioForm: FormGroup;
 
@@ -49,7 +53,8 @@ export class TipoRegimenHorarioComponent implements OnInit {
     private _tipoRegimenHorarioService: TipoRegimenHorarioService,
     private router: Router,
     private renderer: Renderer2,
-    private _tokenService: TokenService
+    private _tokenService: TokenService,
+    private _regimenHorarioService: RegimenHorarioService
     ) {
       this.tipoRegimenHorarioForm = this._tipoRegimenHorario.group({
         codigoTipoRegimenHorario: ['', [Validators.required, Validators.maxLength(10)] ],
@@ -95,25 +100,46 @@ export class TipoRegimenHorarioComponent implements OnInit {
   }
 
   borrarTipoRegimenHorario(id?:number):void{
-    this._tipoRegimenHorarioService.delete(id).subscribe(
+    let flag: boolean = true;
+    this._regimenHorarioService.page(0).subscribe(
       data => {
-        Swal.fire({
-          title: "Éxito",
-          icon: "success",
-          showCloseButton: false,
-          showConfirmButton: false
-        });
-        this.cargarTipoRegimenHorario();
-      },
-      err => {
-        Swal.fire({
-          title: "Oops! hubo un problema",
-          icon: "error",
-          showCloseButton: false,
-          showConfirmButton: false
-        });
+        this.regimenes = data;
+        for (let reg of this.regimenes){
+          if(reg.tipoRegimenHorario.id == id){
+            Swal.fire({
+              title: "El tipo tiene regimenes asociados",
+              icon: "error",
+              showCloseButton: false,
+              showConfirmButton: false
+            });
+            this.cargarTipoRegimenHorario();
+            flag = false;
+          }
+        }
+        if (flag){
+          this._tipoRegimenHorarioService.delete(id).subscribe(
+            data => {
+              Swal.fire({
+                title: "Éxito",
+                icon: "success",
+                showCloseButton: false,
+                showConfirmButton: false
+              });
+              this.cargarTipoRegimenHorario();
+            },
+            err => {
+              Swal.fire({
+                title: "Oops! hubo un problema",
+                icon: "error",
+                showCloseButton: false,
+                showConfirmButton: false
+              });
+            }
+          );
+        }
       }
-    );
+    )
+    
   }
 
   onCreate():boolean{

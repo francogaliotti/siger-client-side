@@ -62,7 +62,7 @@ export class MovilidadComponent implements OnInit {
   }
 
   TipoMovilidadList() {
-    this._tipoMovilidadService.list(this.searchPage).subscribe(
+    this._tipoMovilidadService.list(0).subscribe(
       data => {
         this.tipoMovilidadArray = data;
       },
@@ -73,7 +73,7 @@ export class MovilidadComponent implements OnInit {
   }
 
   cargarMovilidad() {
-    this._movilidadService.list(this.searchPage).subscribe(
+    this._movilidadService.list(0).subscribe(
       data => {
         this.movilidad = data;
         

@@ -195,7 +195,7 @@ export class CreateUserRRHHComponent implements OnInit {
     return this.success;
   }
   getRemuneracion(): void {
-    this._remun.list().subscribe(data => {
+    this._remun.page(0).subscribe(data => {
       this.remuneraciones = data;
     },
       err => {
@@ -203,7 +203,7 @@ export class CreateUserRRHHComponent implements OnInit {
       })
   }
   getRegimenHorario(): void {
-    this._regimenH.list().subscribe(data => {
+    this._regimenH.page(0).subscribe(data => {
       this.regimenesHorario = data;
     },
       err => {
@@ -248,7 +248,7 @@ export class CreateUserRRHHComponent implements OnInit {
     this.success = false;
 
     if (this.newUserForm.valid && this.IsOlder() && !this.alreadyExistPersonalEmail && 
-    !this.alreadyExistDPVEmail && !this.alreadyExistUserName && !this.alreadyExistDocumentNumber && !this.YearOfstartedIsOlder()) {
+    !this.alreadyExistDPVEmail && !this.alreadyExistUserName && !this.alreadyExistDocumentNumber /*&& !this.YearOfstartedIsOlder()*/) {
       const account: Usuario = {
         nombre: this.newUserForm.get('username')?.value,
         username: this.newUserForm.get('username')?.value,

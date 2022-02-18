@@ -8,6 +8,8 @@ import { Remuneracion } from 'src/app/models/remuneracion';
 import { RemuneracionService } from 'src/app/services/remuneracion.service';
 import { TokenService } from 'src/app/services/token.service';
 import Swal from 'sweetalert2';
+import { Empleado } from 'src/app/models/empleado';
+import { EmpleadoService } from 'src/app/services/empleado.service';
 
 @Component({
   selector: 'app-remuneracion',
@@ -23,13 +25,15 @@ export class RemuneracionComponent implements OnInit {
   faArrow = faArrowAltCircleLeft;
   faEye = faEye;
 
-  remuneracion: Remuneracion = new Remuneracion("",0, 0, 0, 0);
+  remuneracion: Remuneracion = new Remuneracion("", 0, 0, 0, 0);
 
   remuneracionArray: Remuneracion[] = [];
 
   remuneracionForm: FormGroup;
 
   editRemuneracionForm: FormGroup;
+
+  empleados: Empleado[];
 
   success: boolean;
 
@@ -51,7 +55,8 @@ export class RemuneracionComponent implements OnInit {
     private _remuneracionService: RemuneracionService,
     private router: Router,
     private renderer: Renderer2,
-    private _tokenService: TokenService
+    private _tokenService: TokenService,
+    private _empleadoService: EmpleadoService
   ) {
     this.remuneracionForm = this._remuneracion.group({
       denominacion: ['', [Validators.required]],
@@ -103,15 +108,43 @@ export class RemuneracionComponent implements OnInit {
   }
 
   borrarRemuneracion(id?: number): void {
-    this._remuneracionService.delete(id).subscribe(
+    let flag: boolean = true;
+    this._empleadoService.list(0).subscribe(
       data => {
-        Swal.fire({
-          title: "Éxito",
-          icon: "success",
-          showCloseButton: false,
-          showConfirmButton: false
-        });
-        this.cargarRemuneraciones();
+        this.empleados = data;
+        for (let em of this.empleados) {
+          if (em.remuneracion.id == id) {
+            Swal.fire({
+              title: "La remuneracion tiene empleados asociados",
+              icon: "error",
+              showCloseButton: false,
+              showConfirmButton: false
+            });
+            this.cargarRemuneraciones();
+            flag = false;
+          }
+        }
+        if (flag) {
+          this._remuneracionService.delete(id).subscribe(
+            data => {
+              Swal.fire({
+                title: "Éxito",
+                icon: "success",
+                showCloseButton: false,
+                showConfirmButton: false
+              });
+              this.cargarRemuneraciones();
+            },
+            err => {
+              Swal.fire({
+                title: "Oops! hubo un problema",
+                icon: "error",
+                showCloseButton: false,
+                showConfirmButton: false
+              });
+            }
+          );
+        }
       },
       err => {
         Swal.fire({
@@ -120,8 +153,10 @@ export class RemuneracionComponent implements OnInit {
           showCloseButton: false,
           showConfirmButton: false
         });
+        console.log(err);
       }
     );
+
   }
 
   onCreate(): boolean {

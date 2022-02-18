@@ -64,6 +64,7 @@ export class ChangePasswordComponent implements OnInit {
         showCloseButton: false,
         showConfirmButton: false
       });
+      console.log(err);
     }
     );
   }

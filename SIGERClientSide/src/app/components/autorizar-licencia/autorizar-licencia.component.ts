@@ -55,7 +55,7 @@ export class AutorizarLicenciaComponent implements OnInit {
   }
 
   cargarLicencia(): void {
-    this._licenciaService.list(this.searchPage).subscribe(
+    this._licenciaService.list(0).subscribe(
       data => {
         const lic: Licencia[] = [];
         for (let l of data) {
@@ -114,7 +114,7 @@ export class AutorizarLicenciaComponent implements OnInit {
         if (this.newLicencia.empleado.remanenteDiasLicencias != undefined) {
           for (let [index, rem] of Object.entries(this.newLicencia.empleado.remanenteDiasLicencias)) {
             if (rem.tipoLicencia.id == this.newLicencia.tipoLicencia.id) {
-              if (rem.anioRemanente == this.date.getFullYear()) {
+              //if (rem.anioRemanente == this.date.getFullYear()) {
                 if (((new Date(this.newLicencia.fechaFinLicencia)).getTime() - (new Date(this.newLicencia.fechaInicioLicencia)).getTime()) / (1000 * 60 * 60 * 24) > rem.diasSobrantes) {
                   Swal.fire({
                     title: "El empleado no posee la cantidad de dias disponibles",
@@ -126,7 +126,7 @@ export class AutorizarLicenciaComponent implements OnInit {
                 } else {
                   flag = true
                 }
-              }
+              //}
             }
           }
         }

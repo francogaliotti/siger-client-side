@@ -40,9 +40,10 @@ td:nth-child(4) > button{
 }
 
 .create-form{
+    margin-top: 40px;
     background-color: #EBFFEC;
     width: 650px;
-    height: 200px;
+    height: 170px;
     border: 2px solid black;
     box-shadow: 5px 5px 15px 2px;
 }
@@ -70,7 +71,7 @@ small{
 }
 .modal-content{
     background: #EBFFEC;
-    margin-top: 20px;
+    margin-top: 200px;
     width: 600px;
     height: 250px;
     top: 2px;

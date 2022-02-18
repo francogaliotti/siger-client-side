@@ -88,6 +88,7 @@ export class AsistenciaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.cargarEmpleado();
     this.cargarAsistencia();
     this.SectoresList();
     this.EmpleadosList();
@@ -98,12 +99,48 @@ export class AsistenciaComponent implements OnInit {
     console.log(this.searchPage);
     this._asistenciaService.list(this.searchPage).subscribe(
       data => {
-        this.asistenciaArray = data;
+        const as: Asistencia[] =[];
+        for(let a of data){
+          if(a.empleado.sector.id == this.empleado.sector.id){
+            as.push(a);
+          }
+        }
+        this.asistenciaArray = as;
       },
       err => {
         console.log(err);
       }
     );
+  }
+
+  EmpleadosList(): void {
+    this._empleadoService.list(0).subscribe(
+      data => {
+        const em: Empleado[] =[];
+        for(let e of data){
+          if(e.sector.id == this.empleado.sector.id){
+            em.push(e);
+          }
+        }
+        this.empleadoArray = em;
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+  cargarEmpleado(): void {
+    const id = this._tokenService.getUserId();
+    this._empleadoService.getByUsuarioId(id).subscribe(
+      data => {
+        this.empleado = data;
+      },
+      err => {
+        console.log(err);
+      }
+    );
+
   }
 
   nextPage() {
@@ -186,16 +223,7 @@ export class AsistenciaComponent implements OnInit {
     );
   }
 
-  EmpleadosList(): void {
-    this._empleadoService.list(this.searchPage).subscribe(
-      data => {
-        this.empleadoArray = data;
-      },
-      err => {
-        console.log(err);
-      }
-    );
-  }
+  
 
   openEdit(id?: number): void {
     this.modal = new bootstrap.Modal(document.getElementById('editarModal'), {

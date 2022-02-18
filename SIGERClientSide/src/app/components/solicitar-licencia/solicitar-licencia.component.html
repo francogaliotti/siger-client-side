@@ -24,7 +24,9 @@
                     <div *ngFor="let rem of empleado.remanenteDiasLicencias">
                         <div *ngIf="rem.tipoLicencia.id == this.licenciaForm.get('tipoLicencia')?.value.id">
                             <div *ngIf="rem.diasSobrantes != null">
-                                <i>Dias disponibles: {{rem.diasSobrantes}}</i>
+                                
+                                    <i>Dias disponibles: {{rem.diasSobrantes}}</i>
+                                
                             </div>
                         </div>
                     </div>
