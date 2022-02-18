@@ -32,18 +32,26 @@
             <label class="mt-3" for="Patente"><b>Patente Movilidad</b></label>
           </div>
           <div class="col-7">
-            <input formControlName="patente" class="form-control patente-inputs mt-3" maxlength="30"
-              [class.validfield]="this.movilidadForm.get('patente')?.valid"
-              [class.invalidfield]="this.movilidadForm.get('patente')?.invalid && this.movilidadForm.get('patente')?.touched"
-              type="text" placeholder="Formato AAA111 o BB222BB"/>
+            <input formControlName="patente" class="form-control patente-inputs mt-3" maxlength="7" minlength="6"
+              [class.validfield]="this.movilidadForm.get('patente')?.valid && !ExistPatente"
+              [class.invalidfield]="(this.movilidadForm.get('patente')?.invalid && this.movilidadForm.get('patente')?.touched) || 
+              (!this.movilidadForm.get('patente')?.invalid && this.movilidadForm.get('patente')?.touched && ExistPatente)"
+              type="text" placeholder="Formato AAA111 o BB222BB"
+              (focusout)="alreadyExistPatente()"
+              />
             <small class="text-danger"
               *ngIf="!movilidadForm.get('patente').valid && movilidadForm.get('patente').touched && !movilidadForm.get('patente').errors?.pattern">
-              El campo es obligatorio
+              El campo es obligatorio.
             </small>
             <small class="text-danger"
               *ngIf="movilidadForm.get('patente').errors?.pattern && movilidadForm.get('patente').touched"
               [hidden]="!movilidadForm.get('patente').errors?.pattern && movilidadForm.get('patente').touched">
-              Formato de patente inválido
+              Formato de patente inválido.
+            </small>         
+            <small class="text-danger" style="margin-left: -135px; margin-right: 0px;"
+              *ngIf="!this.movilidadForm.get('patente')?.invalid && this.movilidadForm.get('patente')?.touched && ExistPatente"
+              [hidden]="this.movilidadForm.get('patente')?.valid && !ExistPatente">
+              La patente ya se encuentra registrada.
             </small>
           </div>
         </div>
@@ -158,7 +166,9 @@
                 <input formControlName="patente" class="form-control patente-inputs mt-3" maxlength="30"
                   [class.validfield]="this.editmovilidadForm.get('patente')?.valid"
                   [class.invalidfield]="this.editmovilidadForm.get('patente')?.invalid && this.editmovilidadForm.get('patente')?.touched"
-                  type="text" placeholder="Formato AAA111 o BB222BB" pattern="^[A-Z]{3,3}\d{3,3}$|[A-Z]{2,2}\d{3,3}[A-Z]{2,2}" />
+                  type="text" placeholder="Formato AAA111 o BB222BB" pattern="^[A-Z]{3,3}\d{3,3}$|[A-Z]{2,2}\d{3,3}[A-Z]{2,2}" 
+                  (focusout)="alreadyExistPatente_Modification()"
+                  />
                 <small class="text-danger"
                   *ngIf="!editmovilidadForm.get('patente').valid && editmovilidadForm.get('patente').touched && !editmovilidadForm.get('patente').errors?.pattern">
                   El campo es obligatorio
@@ -168,6 +178,11 @@
                 [hidden]="!editmovilidadForm.get('patente').errors?.pattern && editmovilidadForm.get('patente').touched">
                 Formato de patente inválido
                 </small>
+                <small class="text-danger" style="margin-left: -135px; margin-right: 0px;"
+                *ngIf="!this.editmovilidadForm.get('patente')?.invalid && this.editmovilidadForm.get('patente')?.touched && ExistPatente"
+                [hidden]="this.editmovilidadForm.get('patente')?.valid && !ExistPatente">
+                La patente ya se encuentra registrada.
+              </small>
               </div>
             </div>
             <div class="form-group mt-3">

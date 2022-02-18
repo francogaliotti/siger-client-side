@@ -158,9 +158,10 @@
             <div class="form-group row">
                 <label class="col-sm-3 text-end mt-2" for="yearOfEntry"><b><i>Fecha de ingreso: </i></b></label>
                 <div class="col-sm-4">
-                    <input type="date" id="yearOfEntry" class="form-control" formControlName="yearOfstarted"
+                    <input type="date" id="yearOfEntry" class="form-control" formControlName="yearOfstarted" min="01/01/1960"
                         [class.validfield]="this.newUserForm.get('yearOfstarted')?.valid"
-                        [class.invalidfield]="this.newUserForm.get('yearOfstarted')?.invalid && this.newUserForm.get('yearOfstarted')?.touched">
+                        [class.invalidfield]="this.newUserForm.get('yearOfstarted')?.invalid && this.newUserForm.get('yearOfstarted')?.touched"
+                        >
                 </div>
             </div>
             <div class="form-group row">

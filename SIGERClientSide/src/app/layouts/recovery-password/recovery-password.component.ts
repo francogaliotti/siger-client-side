@@ -44,6 +44,7 @@ export class RecoveryPasswordComponent implements OnInit {
           showCloseButton: false,
           showConfirmButton: false
         });
+        console.log(err);
       }
     );
   }

@@ -10,6 +10,8 @@ import { TokenService } from 'src/app/services/token.service';
 import Swal from 'sweetalert2';
 import { TipoRegimenHorario } from 'src/app/models/tipo-regimen-horario';
 import { TipoRegimenHorarioService } from 'src/app/services/tipo-regimen-horario.service';
+import { Empleado } from 'src/app/models/empleado';
+import { EmpleadoService } from 'src/app/services/empleado.service';
 
 @Component({
   selector: 'app-regimen-horario',
@@ -25,7 +27,7 @@ export class RegimenHorarioComponent implements OnInit {
   faEye = faEye;
   faArrow = faArrowAltCircleLeft;
 
-  tipoRegimenHorario: TipoRegimenHorario=null;
+  tipoRegimenHorario: TipoRegimenHorario = null;
 
   regimenHorario: RegimenHorario = new RegimenHorario("", "", this.tipoRegimenHorario, 0);
 
@@ -39,6 +41,10 @@ export class RegimenHorarioComponent implements OnInit {
 
   success: boolean;
 
+  horaDesde: number;
+
+  horaHasta: number;
+
   modal: Modal | undefined
 
   @ViewChild("CreatePermission") CreatePermission: ElementRef;
@@ -46,6 +52,8 @@ export class RegimenHorarioComponent implements OnInit {
   @ViewChild("EditPermission") EditPermission: ElementRef;
 
   isAdmin = false;
+
+  empleados: Empleado[];
 
   nivelesAutorizacionArray: number[] = [1, 2, 3, 4];
 
@@ -60,18 +68,19 @@ export class RegimenHorarioComponent implements OnInit {
     private _tipoRegimenHorarioService: TipoRegimenHorarioService,
     private router: Router,
     private renderer: Renderer2,
-    private _tokenService: TokenService
+    private _tokenService: TokenService,
+    private _empleadoService: EmpleadoService
   ) {
     this.regimenHorarioForm = this._regimenHorario.group({
       horaMinutoInicioJornadaLaboral: ['', [Validators.required, Validators.maxLength(10)]],
       horaMinutoFinJornadaLaboral: ['', [Validators.required, Validators.maxLength(10)]],
-      tipoRegimenHorario:['', [Validators.required]]
+      tipoRegimenHorario: ['', [Validators.required]]
     });
     this.editRegimenHorarioForm = this._editRegimenHorario.group({
       id: ["", Validators.required],
       horaMinutoInicioJornadaLaboral: ['', [Validators.required, Validators.maxLength(10)]],
       horaMinutoFinJornadaLaboral: ['', [Validators.required, Validators.maxLength(10)]],
-      tipoRegimenHorario:['', [Validators.required]]
+      tipoRegimenHorario: ['', [Validators.required]]
     });
   }
 
@@ -98,26 +107,54 @@ export class RegimenHorarioComponent implements OnInit {
   }
 
   prevPage() {
-    if ( this.page > 0 )
+    if (this.page > 0)
       this.page -= 10;
-      this.searchPage = this.searchPage - 1;
+    this.searchPage = this.searchPage - 1;
   }
 
-  onSearch( search: string ) {
+  onSearch(search: string) {
     this.page = 0;
     this.search = search;
   }
 
   borrarRegimenHorario(id?: number): void {
-    this._regimenHorarioService.delete(id).subscribe(
+    let flag: boolean = true;
+    this._empleadoService.list(0).subscribe(
       data => {
-        Swal.fire({
-          title: "Éxito al eliminar",
-          icon: "success",
-          showCloseButton: false,
-          showConfirmButton: false
-        });
-        this.cargarRegimenHorario();
+        this.empleados = data;
+        for (let em of this.empleados) {
+          if (em.regimenHorario.id == id) {
+            Swal.fire({
+              title: "El regimen tiene empleados asociados",
+              icon: "error",
+              showCloseButton: false,
+              showConfirmButton: false
+            });
+            this.cargarRegimenHorario();
+            flag = false;
+          }
+        }
+        if (flag) {
+          this._regimenHorarioService.delete(id).subscribe(
+            data => {
+              Swal.fire({
+                title: "Éxito al eliminar",
+                icon: "success",
+                showCloseButton: false,
+                showConfirmButton: false
+              });
+              this.cargarRegimenHorario();
+            },
+            err => {
+              Swal.fire({
+                title: "Oops! hubo un problema",
+                icon: "error",
+                showCloseButton: false,
+                showConfirmButton: false
+              });
+            }
+          );
+        }
       },
       err => {
         Swal.fire({
@@ -126,8 +163,10 @@ export class RegimenHorarioComponent implements OnInit {
           showCloseButton: false,
           showConfirmButton: false
         });
+        console.log(err);
       }
     );
+
   }
 
   onCreate(): boolean {
@@ -136,8 +175,21 @@ export class RegimenHorarioComponent implements OnInit {
       this.regimenHorarioForm.get('horaMinutoInicioJornadaLaboral')?.value,
       this.regimenHorarioForm.get('horaMinutoFinJornadaLaboral')?.value,
       this.regimenHorarioForm.get('tipoRegimenHorario')?.value
-      );
-      
+    );
+    this.horaDesde = Number(regimenHorario.horaMinutoInicioJornadaLaboral[0] + regimenHorario.horaMinutoInicioJornadaLaboral[1])
+    this.horaHasta = Number(regimenHorario.horaMinutoFinJornadaLaboral[0] + regimenHorario.horaMinutoFinJornadaLaboral[1])
+    if (this.horaHasta <= this.horaDesde) {
+      this.horaHasta += 24;
+    }
+    if (this.horaHasta - this.horaDesde > 12) {
+      Swal.fire({
+        title: "No se permiten mas de 12 horas laborales",
+        icon: "error",
+        showCloseButton: false,
+        showConfirmButton: false
+      })
+      return this.success;
+    }
 
     if (this.regimenHorarioForm.valid == true) {
       console.log(regimenHorario);

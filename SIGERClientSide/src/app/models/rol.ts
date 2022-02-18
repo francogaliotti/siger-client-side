@@ -13,6 +13,7 @@ export class Rol extends BaseEntity{
 
     constructor(){
         super();
+             
     }
 
 

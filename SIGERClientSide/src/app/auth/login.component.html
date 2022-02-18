@@ -20,6 +20,7 @@
             <div class="col-12 text-warning">
                 <small *ngIf="this.loginForm.get('password')?.touched && this.loginForm.get('password')?.value.length < 8" 
                 [hidden]="this.loginForm.get('password')?.touched && this.loginForm.get('password')?.value.length >= 8">La contraseña debe tener como mínimo 8 caracteres</small>
+                <small *ngIf="this.isLoginFail">Contraseña incorrecta</small>
             </div>
             <div class="col-12">
                 <small><a class="forgot-password" href="/recovery-password/">Olvidé mi contraseña</a></small>
