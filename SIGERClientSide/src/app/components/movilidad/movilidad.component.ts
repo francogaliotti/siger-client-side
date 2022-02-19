@@ -44,7 +44,7 @@ export class MovilidadComponent implements OnInit {
     private router: Router, private _editMovilidad: FormBuilder, private _tokenService: TokenService) {
     this.movilidadForm = this._movilidad.group({
       codigo: ['', [Validators.required, Validators.maxLength(10)]],
-      patente: ['', [Validators.required, Validators.pattern(/^[A-Z]{3,3}\d{3,3}$|[A-Z]{2,2}\d{3,3}[A-Z]{2,2}/)]],
+      patente: ['', [Validators.required, Validators.pattern(/^[A-Z]{3,3}\d{3,3}$|^[A-Z]{2,2}\d{3,3}[A-Z]{2,2}$/)]],
       tipoMovilidad: ['', [Validators.required]]
     })
     this.editmovilidadForm = this._editMovilidad.group({

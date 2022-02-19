@@ -166,7 +166,7 @@
                 <input formControlName="patente" class="form-control patente-inputs mt-3" maxlength="30"
                   [class.validfield]="this.editmovilidadForm.get('patente')?.valid"
                   [class.invalidfield]="this.editmovilidadForm.get('patente')?.invalid && this.editmovilidadForm.get('patente')?.touched"
-                  type="text" placeholder="Formato AAA111 o BB222BB" pattern="^[A-Z]{3,3}\d{3,3}$|[A-Z]{2,2}\d{3,3}[A-Z]{2,2}" 
+                  type="text" placeholder="Formato AAA111 o BB222BB" pattern="^[A-Z]{3,3}\d{3,3}$|^[A-Z]{2,2}\d{3,3}[A-Z]{2,2}$" 
                   (focusout)="alreadyExistPatente_Modification()"
                   />
                 <small class="text-danger"
