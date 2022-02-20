@@ -2,11 +2,6 @@
 
 
 <div class="container initial-position">
-  <header>
-    <div class="row justify-content-center mt-3">
-      <h1>Configure los tipos para las Licencias</h1>
-    </div>
-  </header>
   <div class="container altaTipoLicencia mt-4" *ngIf="isAdmin">
     <form [formGroup]="tipoLicenciaForm" (ngSubmit)="onCreate()">
       <header>
@@ -215,8 +210,6 @@
             <li class="list-group-item"><b>Cantidad Máxima Anual: </b>{{newTipoLicencia.cantidadMaximaAnual}}</li>
             <li class="list-group-item" *ngIf="newTipoLicencia.goceSueldo==true"><b>Goce de Sueldo: </b>Si</li>
             <li class="list-group-item" *ngIf="newTipoLicencia.goceSueldo==false"><b>Goce de Sueldo: </b>No</li>
-            <li class="list-group-item"><b>Niveles de autorización: </b>{{newTipoLicencia.tipoRequerimientoCantNiveles}}
-            </li>
             <!--<li class="list-group-item"><b>Sectores: </b>
               <div *ngFor="let sector of newTipoLicencia.tipoRequerimientoAprueban">{{sector.denominacion}}
               </div>

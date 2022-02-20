@@ -62,46 +62,21 @@
                 <a href="#" class="nav-link">Asignar Rol</a>
               </li>-->
               <li>
-                <a href="/list-users" class="nav-link">Gestionar Usuarios</a>
+                <!--Mostrar sólo esta sección si el rol es RRHH-->
+                <a href="/createEmployee" class="nav-link">Crear Empleado</a>
               </li>
               <li>
-                <!--Mostrar sólo esta sección si el rol es RRHH-->
-                <a href="/createEmployee" class="nav-link">Crear Usuario</a>
+                <a href="/list-users" class="nav-link">Gestionar Empleados</a>
               </li>
+
               <!--<li>
                 <a href="#" class="nav-link">Eliminar Usuario</a>
               </li>-->
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Configuración</a>
+            <a class="nav-link">Configuración</a>
             <ul id="config">
-              <li>
-                <a class="nav-link">Movilidad</a>
-                <ul>
-                  <li>
-                    <a href="/movilidad" class="nav-link">Movilidades</a>
-                  </li>
-                  <li>
-                    <a href="/tipo-movilidad" class="nav-link">Tipos</a>
-                  </li>
-                </ul>
-              </li>
-              <!--<li>
-                Mostrar sólo esta sección si el rol es RRHH
-                <a href="/roles" class="nav-link">Roles</a>
-              </li>-->
-              <li>
-                <a class="nav-link">Sectores</a>
-                <ul>
-                  <li>
-                    <a href="/sector" class="nav-link">Sectores</a>
-                  </li>
-                  <li>
-                    <a href="/tipo-sector" class="nav-link">Tipos</a>
-                  </li>
-                </ul>
-              </li>
               <li>
                 <a class="nav-link">Boletas</a>
                 <ul>
@@ -124,29 +99,59 @@
                   </li>
                 </ul>
               </li>
-              <!--<li>
-                <a href="/permisos" class="nav-link">Permisos</a>
-              </li>-->
               <li>
-                <a href="/zona-inhospita" class="nav-link">Zonas Inhóspitas</a>
+                <a class="nav-link">Movilidad</a>
+                <ul>
+                  <li>
+                    <a href="/movilidad" class="nav-link">Movilidades</a>
+                  </li>
+                  <li>
+                    <a href="/tipo-movilidad" class="nav-link">Tipos</a>
+                  </li>
+                </ul>
               </li>
               <li>
                 <a class="nav-link">Regimenes y Remuneraciones</a>
                 <ul id="regimenes">
                   <li>
-                    <a href="/tipo-regimen-horario" class="nav-link">Tipos de Regimenes</a>
-                  </li>
-                  <li>
                     <a href="/regimen-horario" class="nav-link">Regimenes Horarios</a>
                   </li>
+                  <li>
+                    <a href="/tipo-regimen-horario" class="nav-link">Tipos de Regimenes</a>
+                  </li>
+
                   <li>
                     <a href="/remuneracion" class="nav-link">Remuneraciones</a>
                   </li>
                 </ul>
               </li>
+              <!--<li>
+                Mostrar sólo esta sección si el rol es RRHH
+                <a href="/roles" class="nav-link">Roles</a>
+              </li>-->
+              <li>
+                <a class="nav-link">Sectores</a>
+                <ul>
+                  <li>
+                    <a href="/sector" class="nav-link">Sector</a>
+                  </li>
+                  <li>
+                    <a href="/tipo-sector" class="nav-link">Tipos</a>
+                  </li>
+                </ul>
+              </li>
+              
+              <!--<li>
+                <a href="/permisos" class="nav-link">Permisos</a>
+              </li>-->
               <li>
                 <a href="/viatico" class="nav-link">Viáticos</a>
               </li>
+              <li>
+                <a href="/zona-inhospita" class="nav-link">Zonas Inhóspitas</a>
+              </li>
+              
+              
           </ul>
           <li class="nav-item">
             <a class="nav-link" href="#" *ngIf="isAdmin">Herramientas</a>

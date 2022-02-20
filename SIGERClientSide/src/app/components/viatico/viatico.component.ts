@@ -104,7 +104,7 @@ export class ViaticoComponent implements OnInit {
     this._viaticoService.delete(id).subscribe(
       data => {
         Swal.fire({
-          title: "Éxito",
+          title: "Éxito al eliminar",
           icon: "success",
           showCloseButton: false,
           showConfirmButton: false

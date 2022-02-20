@@ -1,10 +1,5 @@
 <app-home></app-home>
 <div class="container initial-position">
-  <header>
-    <div class="row justify-content-center mt-3" *ngIf="isAdmin">
-      <h1>Configure los Tipos de Boletas</h1>
-    </div>
-  </header>
   <div class="container altaTipoBoleta mt-4" *ngIf="isAdmin">
     <form [formGroup]="tipoBoletaForm" (ngSubmit)="onCreate()">
       <header>

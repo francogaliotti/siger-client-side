@@ -122,7 +122,7 @@ export class SolicitarBoletaComponent implements OnInit {
 
   }
   cargarBoleta(): void {
-    this._boletaService.list(this.searchPage).subscribe(
+    this._boletaService.list(0).subscribe(
       data => {
         const bol: Boleta[] = [];
         console.log(data)

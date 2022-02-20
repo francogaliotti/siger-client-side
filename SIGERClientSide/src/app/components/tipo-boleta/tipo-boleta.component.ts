@@ -6,9 +6,11 @@ import * as bootstrap from 'bootstrap';
 import { Modal } from 'bootstrap';
 import * as $ from 'jquery';
 import { TipoBoletaDTO } from 'src/app/dto/tipo-boleta-dto';
+import { Boleta } from 'src/app/models/boleta';
 import { Empleado } from 'src/app/models/empleado';
 import { Sector } from 'src/app/models/sector';
 import { TipoBoleta } from 'src/app/models/tipo-boleta';
+import { BoletaService } from 'src/app/services/boleta.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { SectorService } from 'src/app/services/sector.service';
 import { TipoBoletaService } from 'src/app/services/tipo-boleta.service';
@@ -36,6 +38,8 @@ export class TipoBoletaComponent implements OnInit {
   sectorArray: Sector[] = [];
 
   empleadoArray: Empleado[] = [];
+
+  boletas: Boleta[];
 
   tipoBoletaForm: FormGroup;
 
@@ -65,7 +69,8 @@ export class TipoBoletaComponent implements OnInit {
     private _empleadoService: EmpleadoService,
     private router: Router,
     private renderer: Renderer2,
-    private _tokenService: TokenService
+    private _tokenService: TokenService,
+    private _boletaService: BoletaService
   ) {
     this.tipoBoletaForm = this._tipoBoleta.group({
       codigo: ['', [Validators.required, Validators.maxLength(10)]],
@@ -131,15 +136,43 @@ export class TipoBoletaComponent implements OnInit {
   }
 
   borrarTipoBoleta(id?: number): void {
-    this._tipoBoletaService.delete(id).subscribe(
+    let flag: boolean = true;
+    this._boletaService.list(0).subscribe(
       data => {
-        Swal.fire({
-          title: "Éxito al eliminar",
-          icon: "success",
-          showCloseButton: false,
-          showConfirmButton: false
-        });
-        this.cargarTipoBoleta();
+        this.boletas = data;
+        for(let bol of this.boletas){
+          if(bol.tipoBoleta.id == id){
+            Swal.fire({
+              title: "Existen boletas creadas de este tipo actualmente",
+              icon: "error",
+              showCloseButton: false,
+              showConfirmButton: false
+            });
+            this.cargarTipoBoleta();
+            flag = false;
+          }
+        }
+        if (flag){
+          this._tipoBoletaService.delete(id).subscribe(
+            data => {
+              Swal.fire({
+                title: "Éxito al eliminar",
+                icon: "success",
+                showCloseButton: false,
+                showConfirmButton: false
+              });
+              this.cargarTipoBoleta();
+            },
+            err => {
+              Swal.fire({
+                title: "Oops! hubo un problema",
+                icon: "error",
+                showCloseButton: false,
+                showConfirmButton: false
+              });
+            }
+          );
+        }
       },
       err => {
         Swal.fire({
@@ -148,8 +181,10 @@ export class TipoBoletaComponent implements OnInit {
           showCloseButton: false,
           showConfirmButton: false
         });
+        console.log(err);
       }
-    );
+    )
+    
   }
 
   onCreate(): boolean {
@@ -190,6 +225,7 @@ export class TipoBoletaComponent implements OnInit {
             showCloseButton: false,
             showConfirmButton: false
           });
+          console.log(err);
         }
       );
     }

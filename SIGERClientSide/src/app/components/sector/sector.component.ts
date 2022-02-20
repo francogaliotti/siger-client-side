@@ -224,7 +224,7 @@ export class SectorComponent implements OnInit {
         });
       },
       err => {
-        alert(err);
+        console.log(err);
       }
     );
   }
