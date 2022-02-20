@@ -42,9 +42,13 @@ td:nth-child(4) > button{
 .create-form{
     background-color: #EBFFEC;
     width: 650px;
-    height: 200px;
+    height: 250px;
     border: 2px solid black;
     box-shadow: 5px 5px 15px 2px;
+}
+
+h2{
+    margin-left: 500px;
 }
 
 .create-form > button{
@@ -72,7 +76,7 @@ small{
     background: #EBFFEC;
     margin-top: 20px;
     width: 600px;
-    height: 250px;
+    height: fit-content;
     top: 2px;
     border: 2px solid #333333;
 }

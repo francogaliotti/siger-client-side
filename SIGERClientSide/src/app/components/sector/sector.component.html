@@ -1,10 +1,5 @@
 <app-home></app-home>
 <div class="container initial-position">
-    <header>
-        <div class="row justify-content-center mt-3">
-            <h1>Configure los Sectores</h1>
-        </div>
-    </header>
     <div class="container altaSector mt-4" *ngIf="isAdmin">
         <form [formGroup]="sectorForm" (ngSubmit)="onCreate()">
             <header>

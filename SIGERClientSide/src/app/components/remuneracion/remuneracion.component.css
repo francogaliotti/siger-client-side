@@ -80,11 +80,14 @@ small{
     position: absolute;
     z-index: 1;
 }
+h2{
+    margin-left: 450px;
+}
 .modal-content{
     background: #EBFFEC;
     margin-top: 20px;
     width: 600px;
-    height: 250px;
+    height: fit-content;
     top: 2px;
     border: 2px solid #333333;
 }

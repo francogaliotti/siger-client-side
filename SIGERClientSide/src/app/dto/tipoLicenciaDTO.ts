@@ -33,10 +33,6 @@ export class TipoLicenciaDTO extends BaseEntity{
 	    limiteRangoDias: number,
         goceSueldo: boolean,
 	    observaciones: string,  
-        tipoRequerimientoCantNiveles: number,
-        tipoRequerimientoDenominacion: string, 
-        tipoRequerimientoAprueban: Array<Sector>,
-        tipoRequerimientoAprobadores: Array<Empleado>,
         id?: number){
             
         super();
@@ -47,9 +43,6 @@ export class TipoLicenciaDTO extends BaseEntity{
         this.justificaPresentismo=justificaPresentismo;
         this.limiteRangoDias=limiteRangoDias;
         this.observaciones=observaciones;
-        this.tipoRequerimientoCantNiveles=tipoRequerimientoCantNiveles;
-        this.tipoRequerimientoDenominacion=tipoRequerimientoDenominacion;
-        this.tipoRequerimientoAprobadores=tipoRequerimientoAprobadores;
-        this.tipoRequerimientoAprueban=tipoRequerimientoAprueban;
+
     }
 }

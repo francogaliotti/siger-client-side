@@ -3,6 +3,11 @@
   <div class="row justify-content-center" *ngIf="isAdmin">
     <div class="col-6 altaRemuneracion">
       <form [formGroup]="remuneracionForm" (ngSubmit)="onCreate()" class="create-form">
+      <header>
+        <div class="row justify-content-center mt-auto">
+          <h2>Crear Remuneración</h2>
+        </div>
+      </header>
         <div class="form-group">
           <div class="row">
             <label class="col-md-3 offset-1 text-end mt-3">
@@ -126,12 +131,12 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-body edit-form">
-                  <h5 class="text-center">Detalle de la Remuneració</h5>
+                  <h5 class="text-center">Detalle de la Remuneración</h5>
                   <div class="container">
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item"><b>Denominación: </b>{{remuneracion.denominacion}}</li>
-                      <li class="list-group-item"><b>Valor por Hora: </b>{{remuneracion.valorHora}}</li>
-                      <li class="list-group-item"><b>Valor de Viatico por Dia: </b>{{remuneracion.valorViaticoDia}}</li>
+                      <li class="list-group-item"><b>Valor por Hora: </b>${{remuneracion.valorHora}}</li>
+                      <li class="list-group-item"><b>Valor de Viatico por Dia: </b>${{remuneracion.valorViaticoDia}}</li>
                       <li class="list-group-item"><b>Importe por Horas Adicionales: </b>${{remuneracion.importeHorasAdicionales}}</li>
                       <li class="list-group-item"><b>Importe por Zona con Desarraigo: </b>${{remuneracion.importeZonaDesarraigo}}</li>
                     </ul>
@@ -172,7 +177,7 @@
                     </div>
                     <div class="form-group">
                       <div class="row">
-                        <label class="col-md-3 offset-1 text-end mt-3" for="Codigo"><b>Código* </b></label>
+                        <label class="col-md-3 offset-1 text-end mt-3" for="Codigo"><b>Valor Hora* </b></label>
                         <div class="col-7">
                           <input formControlName="valorHora" (focusout)="checkEditRemuneracionForm()"
                             class="form-control valorHora-inputs mt-3" maxlength="10"

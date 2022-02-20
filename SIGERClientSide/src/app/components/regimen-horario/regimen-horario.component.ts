@@ -257,11 +257,25 @@ export class RegimenHorarioComponent implements OnInit {
     );
   }
 
-  onUpdate(id?: number): void {
+  onUpdate(id?: number): boolean {
     this.regimenHorario.horaMinutoInicioJornadaLaboral = this.editRegimenHorarioForm.get('horaMinutoInicioJornadaLaboral')?.value;
     this.regimenHorario.horaMinutoFinJornadaLaboral = this.editRegimenHorarioForm.get('horaMinutoFinJornadaLaboral')?.value;
     this.regimenHorario.tipoRegimenHorario = this.editRegimenHorarioForm.get('tipoRegimenHorario')?.value;
     this.regimenHorario.isActive = this.editRegimenHorarioForm.get('isActive')?.value;
+    this.horaDesde = Number(this.regimenHorario.horaMinutoInicioJornadaLaboral[0] + this.regimenHorario.horaMinutoInicioJornadaLaboral[1])
+    this.horaHasta = Number(this.regimenHorario.horaMinutoFinJornadaLaboral[0] + this.regimenHorario.horaMinutoFinJornadaLaboral[1])
+    if (this.horaHasta <= this.horaDesde) {
+      this.horaHasta += 24;
+    }
+    if (this.horaHasta - this.horaDesde > 12) {
+      Swal.fire({
+        title: "No se permiten mas de 12 horas laborales",
+        icon: "error",
+        showCloseButton: false,
+        showConfirmButton: false
+      })
+      return this.success;
+    }
     this._regimenHorarioService.update(id, this.regimenHorario).subscribe(
       data => {
         Swal.fire({
@@ -282,6 +296,7 @@ export class RegimenHorarioComponent implements OnInit {
         });
       }
     );
+    return this.success;
 
   }
 

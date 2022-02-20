@@ -2,7 +2,7 @@
 <div class="container mt-5">
     <form [formGroup]="newUserForm" (ngSubmit)="OnCreate()">
         <div class="container-fluid create-form">
-            <h2 style="text-align: center;">Crear usuario</h2>
+            <h2 style="text-align: center;">Crear empleado</h2>
             <div class="form-group row">
                 <label class="col-sm-3 text-end mt-2" for="name"><b><i>Nombre: </i></b></label>
                 <div class="col-sm-4">
@@ -109,7 +109,7 @@
             </div>
 
             <div class="form-group row select-searcher">
-                <label class="col-sm-3 text-end mt-2" for="departamento"><b><i>Departamentos: </i></b></label>
+                <label class="col-sm-3 text-end mt-2" for="departamento"><b><i>Departamento: </i></b></label>
                 <div class="col-sm-4">
                     <select class="form-control" formControlName="departamento">
                         <option [ngValue]="0">Seleccione Departamento</option>
@@ -257,12 +257,12 @@
         <div class="row mt-5">
             <div class="col-sm-6 offset-sm-2">
                 <p style="text-align: justify; font-size: 13.5px;" class="offset-sm-1">
-                    Envíe los datos de acceso al usuario, antes asegúrese de que el email ingresado es correcto.
+                    Envíe los datos de acceso al empleado, antes asegúrese de que el email ingresado es correcto.
                     <!--El resto de datos personales lo completará el usuario en su primer inicio de sesión a SIGER.-->
                 </p>
             </div>
             <div class="col-sm-2 ">
-                <button type="submit" class="btn btn-primary">Enviar al usuario</button>
+                <button type="submit" class="btn btn-primary">Crear Empleado</button>
             </div>
         </div>
     </form>

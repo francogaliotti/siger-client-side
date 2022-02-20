@@ -1,11 +1,6 @@
 <app-home></app-home>
 
 <div class="container initial-position">
-    <header>
-        <div class="row justify-content-center mt-3">
-          Configure los tipos de Movilidad
-        </div>
-      </header>
       <div class="container altaTipoMovilidad mt-4" *ngIf="isAdmin">
         <form [formGroup]="tipoMovilidadForm" (ngSubmit)="onCreate()">
             <header>
@@ -161,7 +156,7 @@
                     <div class="row justify-content-center mt-3">
                       <div class="col-12">
                         <button type="submit" class="btn btn block btn-outline-success">
-                          <fa-icon [icon]="faPlusCircle"></fa-icon> Crear</button>
+                          <fa-icon [icon]="faPlusCircle"></fa-icon> Actualizar</button>
                       </div>
                     </div>
                   </div>

@@ -3,6 +3,11 @@
   <div class="row justify-content-center" *ngIf="isAdmin">
     <div class="col-6">
       <form [formGroup]="tipoSectorForm" (ngSubmit)="onCreate()" class="create-form">
+        <header>
+          <div class="row justify-content-center mt-3">
+              <h2>Crear Tipo de Sector</h2>
+          </div>
+      </header>
         <div class="form-group">
           <div class="row">
             <label class="col-md-3 offset-1 text-end mt-3">
