@@ -1,10 +1,5 @@
 <app-home></app-home>
 <div class="container initial-position">
-  <header>
-    <div class="row justify-content-center mt-3" *ngIf="isAdmin">
-      <h1>Configure los Regimenes Horarios</h1>
-    </div>
-  </header>
   <div class="container altaRegimenHorario mt-4" *ngIf="isAdmin">
     <form [formGroup]="regimenHorarioForm" (ngSubmit)="onCreate()">
       <header>
@@ -110,7 +105,7 @@
               <th scope="col" style="display: none;">ID</th>
               <th scope="col">Inicio Jornada Laboral</th>
               <th scope="col">Fin Joranada Laboral</th>
-              <th scope="col" *ngIf="isAdmin">Acciones</th>
+              <th scope="col">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -213,7 +208,7 @@
                   class="form-control horaMinutoInicioJornadaLaboral-inputs mt-3" maxlength="10"
                   [class.validfield]="this.regimenHorarioForm.get('horaMinutoInicioJornadaLaboral')?.valid"
                   [class.invalidfield]="this.regimenHorarioForm.get('horaMinutoInicioJornadaLaboral')?.invalid && this.regimenHorarioForm.get('horaMinutoInicioJornadaLaboral')?.touched"
-                  type="text" placeholder="Ingrese hora y minuto de Inicio de Jornada Laboral" />
+                  type="time" placeholder="Ingrese hora y minuto de Inicio de Jornada Laboral" />
                 <small class="text-danger"
                   *ngIf="!regimenHorarioForm.get('horaMinutoInicioJornadaLaboral').valid && regimenHorarioForm.get('horaMinutoInicioJornadaLaboral').touched">
                   El campo es obligatorio </small>
@@ -231,7 +226,7 @@
                   class="form-control horaMinutoFinJornadaLaboral-inputs mt-3"
                   [class.validfield]="this.regimenHorarioForm.get('horaMinutoFinJornadaLaboral')?.valid"
                   [class.invalidfield]="this.regimenHorarioForm.get('horaMinutoFinJornadaLaboral')?.invalid && this.regimenHorarioForm.get('horaMinutoFinJornadaLaboral')?.touched"
-                  type="text" placeholder="Ingrese hora y minuto de Finalización de Jornada Laboral" />
+                  type="time" placeholder="Ingrese hora y minuto de Finalización de Jornada Laboral" />
                 <small class="text-danger"
                   *ngIf="!regimenHorarioForm.get('horaMinutoFinJornadaLaboral').valid && regimenHorarioForm.get('horaMinutoFinJornadaLaboral').touched">
                   El campo es obligatorio </small>

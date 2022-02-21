@@ -107,7 +107,7 @@ export class SolicitarLicenciaComponent implements OnInit {
   }
 
   cargarLicencia(): void {
-    this._licenciaService.list(this.searchPage).subscribe(
+    this._licenciaService.list(0).subscribe(
       data => {
         const bol: Licencia[] = [];
         for (let b of data) {

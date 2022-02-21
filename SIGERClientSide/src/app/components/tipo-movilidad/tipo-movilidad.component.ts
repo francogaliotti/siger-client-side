@@ -192,7 +192,14 @@ export class TipoMovilidadComponent implements OnInit {
         this.testModal?.hide();
       },
       err => {
-        alert(err);
+        Swal.fire({
+          title: "Hubo un problema",
+          icon: "error",
+          showCloseButton: false,
+          showConfirmButton: false
+        });
+        this.cargarTipoMovilidad();
+        console.log(err);
       }
     );
   }

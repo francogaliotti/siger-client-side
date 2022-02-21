@@ -30,7 +30,7 @@ export class MyProfileComponent implements OnInit {
   success: boolean;
   departamentos: Departamento[];
   localidades: Localidad[];
-  newEmpleado: Empleado = new Empleado();;
+  newEmpleado: Empleado = new Empleado();
 
 
   constructor(
@@ -41,7 +41,7 @@ export class MyProfileComponent implements OnInit {
   ) {
     this.editEmpleadoForm = this._editForm.group({
       id: ['', Validators.required],
-      correoPersonal: [],
+      correoPersonal: ['', [Validators.required, Validators.email]],
       nroTelefonoCelular: [],
       calle: [""],
       nroCalle: [""],
@@ -145,7 +145,8 @@ export class MyProfileComponent implements OnInit {
       }
     )
   }
-  onUpdate(id?: number): void {
+  onUpdate(id?: number): boolean {
+    this.success = false;
     this.newEmpleado.correoPersonal = this.editEmpleadoForm.get('correoPersonal')?.value;
     this.newEmpleado.nroTelefonoCelular = this.editEmpleadoForm.get('nroTelefonoCelular')?.value;
     this.newEmpleado.domicilio.calle = this.editEmpleadoForm.get('calle')?.value;
@@ -155,6 +156,15 @@ export class MyProfileComponent implements OnInit {
     this.newEmpleado.domicilio.localidad = this.editEmpleadoForm.get('localidad')?.value;
     this.newEmpleado.domicilio.provincia = this.editEmpleadoForm.get('provincia')?.value;
     this.newEmpleado.domicilio.departamento = this.editEmpleadoForm.get('departamento')?.value;
+    if(!this.editEmpleadoForm.get('correoPersonal')?.value.includes("@")){
+      Swal.fire({
+        title: "Mail personal incorrecto",
+        icon: "error",
+        showCloseButton: false,
+        showConfirmButton: false
+      });
+      return this.success;
+    }
 
     this._empleado.update(id, this.newEmpleado).subscribe(
       data => {
@@ -166,6 +176,7 @@ export class MyProfileComponent implements OnInit {
         });
         this.cargarEmpleado();
         this.testModal?.hide();
+        this.success=true;
       },
       err => {
         Swal.fire({
@@ -179,6 +190,7 @@ export class MyProfileComponent implements OnInit {
         this.testModal?.hide();
       }
     );
+    return this.success;
 
   }
 

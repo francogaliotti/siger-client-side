@@ -15,6 +15,8 @@ import { Empleado } from 'src/app/models/empleado';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { SectorService } from 'src/app/services/sector.service';
 import Swal from 'sweetalert2';
+import { Licencia } from 'src/app/models/licencia';
+import { LicenciaService } from 'src/app/services/licencia.service';
 
 @Component({
   selector: 'tipo-licencia',
@@ -28,10 +30,11 @@ export class TipoLicenciaComponent implements OnInit {
   editTipoLicenciaForm: FormGroup;
   testModal: Modal | undefined;
   modal: Modal | undefined;
-  newTipoLicencia: TipoLicenciaDTO = new TipoLicenciaDTO("", "", false, 0, false, "", 0, "", [], []);
+  newTipoLicencia: TipoLicenciaDTO = new TipoLicenciaDTO("", "", false, 0, false, "", 0);
   sectorArray: Sector[] = [];
   empleadoArray: Empleado[] = [];
   nivelesAutorizacionArray: number[] = [0, 1, 2, 3, 4];
+  licencias: Licencia[];
   success: boolean;
 
   faEdit = faEdit;
@@ -48,7 +51,8 @@ export class TipoLicenciaComponent implements OnInit {
 
   constructor(private _tipoLicencia: FormBuilder, private _tipoLicenciaService: TipoLicenciaService,
     private router: Router, private _editTipoLicencia: FormBuilder, private _tokenService: TokenService,
-    private _empleadoService: EmpleadoService, private _sectorService: SectorService) {
+    private _empleadoService: EmpleadoService, private _sectorService: SectorService,
+    private _licenciaService: LicenciaService) {
     this.tipoLicenciaForm = this._tipoLicencia.group({
       codigo: ['', [Validators.required, Validators.maxLength(10)]],
       denominacion: ['', Validators.required],
@@ -115,15 +119,43 @@ export class TipoLicenciaComponent implements OnInit {
   }
 
   borrarTipoLicencia(id?: number): void {
-    this._tipoLicenciaService.delete(id).subscribe(
-      data => {
-        Swal.fire({
-          title: "Éxito al eliminar",
-          icon: "success",
-          showCloseButton: false,
-          showConfirmButton: false
-        });
-        this.cargarTipoLicencia();
+    let flag: boolean = true;
+    this._licenciaService.list(0).subscribe(
+      data=>{
+        this.licencias = data;
+        for(let lic of this.licencias){
+          if(lic.tipoLicencia.id == id){
+            Swal.fire({
+              title: "Existen licencias creadas de este tipo actualmente",
+              icon: "error",
+              showCloseButton: false,
+              showConfirmButton: false
+            });
+            this.cargarTipoLicencia();
+            flag = false;
+          }
+        }
+        if(flag){
+          this._tipoLicenciaService.delete(id).subscribe(
+            data => {
+              Swal.fire({
+                title: "Éxito al eliminar",
+                icon: "success",
+                showCloseButton: false,
+                showConfirmButton: false
+              });
+              this.cargarTipoLicencia();
+            },
+            err => {
+              Swal.fire({
+                title: "Oops! hubo un problema",
+                icon: "error",
+                showCloseButton: false,
+                showConfirmButton: false
+              });
+            }
+          );
+        }
       },
       err => {
         Swal.fire({
@@ -132,8 +164,10 @@ export class TipoLicenciaComponent implements OnInit {
           showCloseButton: false,
           showConfirmButton: false
         });
+        console.log(err);
       }
-    );
+    )
+    
   }
   onCreate(): boolean {
     this.success = false;
@@ -144,11 +178,7 @@ export class TipoLicenciaComponent implements OnInit {
       this.tipoLicenciaForm.get('limiteRangoDias')?.value,
       this.tipoLicenciaForm.get('goceSueldo')?.value,
       this.tipoLicenciaForm.get('observaciones')?.value,
-      this.tipoLicenciaForm.get('cantidadMaximaAnual')?.value,
-      this.tipoLicenciaForm.get('tipoRequerimientoCantNiveles')?.value,
-      this.tipoLicenciaForm.get('tipoRequerimientoDenominacion')?.value,
-      this.tipoLicenciaForm.get('tipoRequerimientoAprueban')?.value,
-      this.tipoLicenciaForm.get('tipoRequerimientoAprobadores')?.value);
+      this.tipoLicenciaForm.get('cantidadMaximaAnual')?.value);
     if (this.tipoLicenciaForm.valid == true) {
       console.log(tipoLicencia);
       this._tipoLicenciaService.save(tipoLicencia).subscribe(

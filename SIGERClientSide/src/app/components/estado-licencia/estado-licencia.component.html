@@ -2,11 +2,6 @@
 
 
 <div class="container initial-position">
-  <header>
-    <div class="row justify-content-center mt-3">
-      Configure los estados para las licencias
-    </div>
-  </header>
   <div class="container altaEstadoLicencia mt-4" *ngIf="isAdmin">
     <form [formGroup]="estadoLicenciaForm" (ngSubmit)="onCreate()">
       <header>

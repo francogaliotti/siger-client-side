@@ -111,7 +111,7 @@ export class CreateUserRRHHComponent implements OnInit {
   }
 
   getSector(): void {
-    this._sector.listAll().subscribe(data => {
+    this._sector.list(0).subscribe(data => {
       this.sectores = data;
     }, err => {
       console.log(err);
